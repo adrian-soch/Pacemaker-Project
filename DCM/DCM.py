@@ -44,7 +44,7 @@ class LoginFrame:
         self.add_userbtn = tk.Button(self.master, text="Add user",width =12, command=self._add_user_btn_clicked)
         self.add_userbtn.grid(columnspan =2,padx = 80, pady = 10)
 
-        self.login_successful = 000;
+        self.login_successful = 000
 
     def new_window(self,window):
         self.newWindow = tk.Toplevel(self.master)
@@ -65,7 +65,7 @@ class LoginFrame:
 
         for key in login_dict:
             if key == username and password == login_dict[key]:
-                self.login_successful = 111;
+                self.login_successful = 111
                 self.new_window(MainWindow)
                 break
 
