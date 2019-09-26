@@ -1,57 +1,82 @@
 import tkinter as tk
 from tkinter import messagebox
 
+login_dict = {'john':'password', 't':'t'}
+
 class LoginFrame:
     def __init__(self, master):
         self.master = master
+        self.master.configure(background='grey')
         self.frame = tk.Frame(self.master)
         self.master.title("DCM")
+        self.master.resizable(width=False, height=False)
 
-        self.master.geometry('320x200')
+        #self.master.geometry('300x200')
         self.label_username = tk.Label(self.master, text="Username")
+        self.label_username.configure(background='grey')
         self.label_password = tk.Label(self.master, text="Password")
+        self.label_password.configure(background='grey')
+        #self.label_spacer = tk.Label(self.master, text='')
+
+        self.master.columnconfigure(0, pad=20)
+        self.master.columnconfigure(1, pad=20)
+        self.master.columnconfigure(2, pad=20)
+        self.master.columnconfigure(3, pad=20)
+        #self.master.columnconfigure(4, pad=3)
+
+        self.master.rowconfigure(0, pad=3)
+        self.master.rowconfigure(1, pad=3)
+        self.master.rowconfigure(2, pad=3)
+        self.master.rowconfigure(3, pad=3)
+        self.master.rowconfigure(4, pad=3)
+        self.master.rowconfigure(5, pad=3)
 
         self.entry_username = tk.Entry(self.master)
         self.entry_password = tk.Entry(self.master, show="*")
+        self.entry_username.focus()
 
-        self.label_username.grid(row=0)
-        self.label_password.grid(row=1)
-        self.entry_username.grid(row=0, column=1)
-        self.entry_password.grid(row=1, column=1)
+        self.label_username.grid(row=0, sticky='e', pady=5)
+        self.label_password.grid(row=1, sticky='e', pady=10)
+        self.entry_username.grid(row=0, column=1, columnspan = 1,sticky='w')
+        self.entry_password.grid(row=1, column=1, columnspan = 1,sticky='w')
 
-        self.checkbox = tk.Checkbutton(self.master, text="Keep me logged in")
-        self.checkbox.grid(columnspan=2)
+        self.logbtn = tk.Button(self.master, text="Login", width=12, command=self._login_btn_clicked)
+        self.logbtn.grid(columnspan=2, padx = 80, pady = 0)
 
-        self.logbtn = tk.Button(self.master, text="Login", command=self._login_btn_clicked)
-        self.logbtn.grid(columnspan=2)
+        self.add_userbtn = tk.Button(self.master, text="Add user",width =12, command=self._add_user_btn_clicked)
+        self.add_userbtn.grid(columnspan =2,padx = 80, pady = 10)
 
-    def new_window(self):
+        #self.login_dict = {'john':'password', 't':'t'}
+        self.login_successful = 000;
+        #len(self.login_dict)
+
+    def new_window(self,window):
         self.newWindow = tk.Toplevel(self.master)
-        self.app = Demo2(self.newWindow)
+        self.app = window(self.newWindow)
+
+    def _add_user_btn_clicked(self):
+        self.entry_username.delete(0, 'end')
+        self.entry_password.delete(0, 'end')
+
+        self.new_window(AddUserWindow)
 
     def _login_btn_clicked(self):
-        # print("Clicked")
         username = self.entry_username.get()
         password = self.entry_password.get()
+        self.entry_username.delete(0, 'end')
+        self.entry_password.delete(0, 'end')
 
-        if username == "john" and password == "password":
-            self.new_window()
-        else:
+
+        for key in login_dict:
+            if key == username and password == login_dict[key]:
+                self.login_successful = 111;
+                self.new_window(MainWindow)
+                break
+
+        if self.login_successful != 111:
             messagebox.showerror("Login error", "Incorrect username/password")
 
-class Demo1:
-    def __init__(self, master):
-        self.master = master
-        self.master.title("3K04 DCM")
-        #self.master.geometry('500x280')
-        self.frame = tk.Frame(self.master)
-
-
-    def new_window(self):
-        self.newWindow = tk.Toplevel(self.master)
-        self.app = Demo2(self.newWindow)
-
-class Demo2:
+class MainWindow:
     def __init__(self, master):
         self.master = master
         self.master.geometry('500x280')
@@ -64,6 +89,43 @@ class Demo2:
         self.quitButton = tk.Button(self.frame, text = 'Quit', width = 25, command = self.close_windows)
         self.quitButton.pack()
         self.frame.pack()
+    def close_windows(self):
+        self.master.destroy()
+
+class AddUserWindow:
+    def __init__(self, master):
+        self.master = master
+        self.master.geometry('300x200')
+        self.quitButton = tk.Button(self.master, text = 'Quit', width = 12, command = self.close_windows)
+        self.label_username = tk.Label(self.master, text="Enter New Username")
+        self.label_password = tk.Label(self.master, text="Enter New Password")
+
+        self.entry_username = tk.Entry(self.master)
+        self.entry_password = tk.Entry(self.master, show="*")
+        self.entry_username.focus()
+
+        self.label_username.grid(row=0, sticky='e', pady=5)
+        self.label_password.grid(row=1, sticky='e', pady=10)
+        self.entry_username.grid(row=0, column=1, columnspan = 1,sticky='w')
+        self.entry_password.grid(row=1, column=1, columnspan = 1,sticky='w')
+
+        self.add_userbtn = tk.Button(self.master, text="Add user",width =12, command=self._add_user_btn_clicked)
+        self.add_userbtn.grid(row=2,pady=10)
+
+        self.quitButton = tk.Button(self.master, text = 'Quit', width = 12, command = self.close_windows)
+        self.quitButton.grid(row=3,pady=5)
+
+    def _add_user_btn_clicked(self):
+        username = self.entry_username.get()
+        password = self.entry_password.get()
+
+        self.entry_username.delete(0, 'end')
+        self.entry_password.delete(0, 'end')
+
+        if(len(username) and len(password) and len(login_dict)<10):
+            login_dict[username] = password
+        else:
+            messagebox.showerror("Error, Maximum allowed user limit reached")
     def close_windows(self):
         self.master.destroy()
 
