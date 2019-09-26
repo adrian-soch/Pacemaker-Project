@@ -1,8 +1,8 @@
 import tkinter as tk
 from tkinter import messagebox
+import json
 
-login_dict = {'john':'password', 't':'t'}
-
+login_dict = {}
 class LoginFrame:
     def __init__(self, master):
         self.master = master
@@ -16,13 +16,11 @@ class LoginFrame:
         self.label_username.configure(background='grey')
         self.label_password = tk.Label(self.master, text="Password")
         self.label_password.configure(background='grey')
-        #self.label_spacer = tk.Label(self.master, text='')
 
         self.master.columnconfigure(0, pad=20)
         self.master.columnconfigure(1, pad=20)
         self.master.columnconfigure(2, pad=20)
         self.master.columnconfigure(3, pad=20)
-        #self.master.columnconfigure(4, pad=3)
 
         self.master.rowconfigure(0, pad=3)
         self.master.rowconfigure(1, pad=3)
@@ -46,9 +44,7 @@ class LoginFrame:
         self.add_userbtn = tk.Button(self.master, text="Add user",width =12, command=self._add_user_btn_clicked)
         self.add_userbtn.grid(columnspan =2,padx = 80, pady = 10)
 
-        #self.login_dict = {'john':'password', 't':'t'}
         self.login_successful = 000;
-        #len(self.login_dict)
 
     def new_window(self,window):
         self.newWindow = tk.Toplevel(self.master)
@@ -124,12 +120,27 @@ class AddUserWindow:
 
         if(len(username) and len(password) and len(login_dict)<10):
             login_dict[username] = password
+            writeUsers()
+            messagebox.showinfo("Success", "User Added")
+            self.quitButton.focus()
         else:
-            messagebox.showerror("Error, Maximum allowed user limit reached")
+            messagebox.showerror("Error", "Maximum allowed user limit reached")
     def close_windows(self):
         self.master.destroy()
 
+def readUsers():
+    with open('HACKERS_DONT_LOOK_HERE.txt', 'r') as file:
+        list1 = file.read().replace('\n', '')
+        login_dict = list1
+        print(login_dict)
+
+def writeUsers():
+    print(login_dict)
+    with open('HACKERS_DONT_LOOK_HERE.txt', 'w') as file:
+        file.write(json.dumps(login_dict))
+
 def main():
+    readUsers()
     root = tk.Tk()
     app = LoginFrame(root)
     root.mainloop()
