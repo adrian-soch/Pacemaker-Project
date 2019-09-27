@@ -69,6 +69,7 @@ class LoginFrame:
             if key == username and password == login_dict[key]:
                 self.login_successful = 111
                 self.new_window(MainWindow)
+                self.master.withdraw()
                 break
 
         if self.login_successful != 111:
