@@ -1,8 +1,10 @@
 import tkinter as tk
 from tkinter import messagebox
-import json
+import pickle
 
-login_dict = {}
+
+login_dict = {'admin' : 'admin'}
+
 class LoginFrame:
     def __init__(self, master):
         self.master = master
@@ -57,11 +59,11 @@ class LoginFrame:
         self.new_window(AddUserWindow)
 
     def _login_btn_clicked(self):
+        global login_dict
         username = self.entry_username.get()
         password = self.entry_password.get()
         self.entry_username.delete(0, 'end')
         self.entry_password.delete(0, 'end')
-
 
         for key in login_dict:
             if key == username and password == login_dict[key]:
@@ -112,13 +114,15 @@ class AddUserWindow:
         self.quitButton.grid(row=3,pady=5)
 
     def _add_user_btn_clicked(self):
+        global login_dict
         username = self.entry_username.get()
         password = self.entry_password.get()
 
         self.entry_username.delete(0, 'end')
         self.entry_password.delete(0, 'end')
-
-        if(len(username) and len(password) and len(login_dict)<10):
+        
+        # 10 Users + admin
+        if(len(username) and len(password) and len(login_dict)<11):
             login_dict[username] = password
             writeUsers()
             messagebox.showinfo("Success", "User Added")
@@ -129,15 +133,16 @@ class AddUserWindow:
         self.master.destroy()
 
 def readUsers():
-    with open('HACKERS_DONT_LOOK_HERE.txt', 'r') as file:
-        list1 = file.read().replace('\n', '')
-        login_dict = list1
+    global login_dict
+    with open('DCM/HACKERS_DONT_LOOK_HERE.pickle', 'rb') as file:
+        login_dict =  pickle.load(file)
         print(login_dict)
 
 def writeUsers():
+    global login_dict
     print(login_dict)
-    with open('HACKERS_DONT_LOOK_HERE.txt', 'w') as file:
-        file.write(json.dumps(login_dict))
+    with open('DCM/HACKERS_DONT_LOOK_HERE.pickle', 'wb') as file:
+        pickle.dump(login_dict,file)
 
 def main():
     readUsers()
