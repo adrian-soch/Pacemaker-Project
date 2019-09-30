@@ -55,7 +55,6 @@ class LoginFrame:
     def _add_user_btn_clicked(self):
         self.entry_username.delete(0, 'end')
         self.entry_password.delete(0, 'end')
-
         self.new_window(AddUserWindow)
 
     def _login_btn_clicked(self):
@@ -122,7 +121,7 @@ class AddUserWindow:
         self.entry_username.delete(0, 'end')
         self.entry_password.delete(0, 'end')
         
-        # 10 Users + admin
+        # 10 Users
         if(len(username) and len(password) and len(login_dict)<11):
             login_dict[username] = password
             writeUsers()
