@@ -43,13 +43,6 @@ class LoginFrame:
         self.label_password = tk.Label(self.master, text="Password")
         self.label_password.configure(background='grey')
 
-        self.master.rowconfigure(0, pad=3)
-        self.master.rowconfigure(1, pad=3)
-        self.master.rowconfigure(2, pad=3)
-        self.master.rowconfigure(3, pad=3)
-        self.master.rowconfigure(4, pad=3)
-        self.master.rowconfigure(5, pad=3)
-
         self.entry_username = tk.Entry(self.master)
         self.entry_password = tk.Entry(self.master, show="*")
         self.entry_username.focus()
@@ -98,7 +91,6 @@ class LoginFrame:
 
         if self.login_successful != 111:
             messagebox.showerror("Login error", "Incorrect username/password")
-
 
 class MainWindow:
     def __init__(self, master):
@@ -261,7 +253,7 @@ class AddUserWindow:
         self.add_userbtn = tk.Button(self.master, text="Add user",width =12, command=self._add_user_btn_clicked)
         self.add_userbtn.grid(row=2,column=1,pady=10)
 
-        self.quitButton = tk.Button(self.master, text = 'Quit', width = 12, command = self.close_windows)
+        self.quitButton = tk.Button(self.master, text = 'Back', width = 12, command = self.close_windows)
         self.quitButton.grid(row=3,column=1,pady=5)
 
         self.master.protocol("WM_DELETE_WINDOW", self.on_exit)
