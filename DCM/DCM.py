@@ -3,7 +3,7 @@ from tkinter import messagebox
 import pickle
 
 
-login_dict = {'admin' : 'admin'}
+login_dict = {}
 
 class LoginFrame:
     def __init__(self, master):
@@ -135,18 +135,21 @@ class AddUserWindow:
 
 def readUsers():
     global login_dict
-    with open('DCM/HACKERS_DONT_LOOK_HERE.pickle', 'rb') as file:
+    with open('HACKERS_DONT_LOOK_HERE.pickle', 'rb') as file:
         login_dict =  pickle.load(file)
         print(login_dict)
 
 def writeUsers():
     global login_dict
     print(login_dict)
-    with open('DCM/HACKERS_DONT_LOOK_HERE.pickle', 'wb') as file:
+    with open('HACKERS_DONT_LOOK_HERE.pickle', 'wb') as file:
         pickle.dump(login_dict,file)
 
 def main():
-    readUsers()
+    try:
+        readUsers()
+    except (EOFError):
+        pass
     root = tk.Tk()
     app = LoginFrame(root)
     root.mainloop()
