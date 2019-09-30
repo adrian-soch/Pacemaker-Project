@@ -1,4 +1,5 @@
 import tkinter as tk
+from tkinter import ttk
 from tkinter import messagebox
 import pickle
 
@@ -25,8 +26,8 @@ class WelcomeFrame:
         self.app = window(self.newWindow)
 
     def _nxt_btn_clicked(self):
-        self.new_window(LoginFrame)
         self.master.withdraw()
+        self.new_window(LoginFrame)
 
 class LoginFrame:
     def __init__(self, master):
@@ -90,8 +91,8 @@ class LoginFrame:
         for key in login_dict:
             if key == username and password == login_dict[key]:
                 self.login_successful = 111
-                self.new_window(MainWindow)
                 self.master.withdraw()
+                self.new_window(MainWindow)
                 #self.close_windows()
                 break
 
@@ -110,11 +111,137 @@ class MainWindow:
         self.menubar = tk.Menu(self.master)
         self.filemenu = tk.Menu(self.menubar, tearoff=0)
         self.master.config(menu=self.menubar)
-
         self.frame = tk.Frame(self.master)
-        self.quitButton = tk.Button(self.frame, text = 'Quit', width = 25, command = self.close_windows)
-        self.quitButton.pack()
-        self.frame.pack()
+
+        # AOO, VOO, AAI, and VVI
+        self.tab_parent = ttk.Notebook(self.master)
+        self.aoo = ttk.Frame(self.tab_parent)
+        self.voo = ttk.Frame(self.tab_parent)
+        self.aai = ttk.Frame(self.tab_parent)
+        self.vvi = ttk.Frame(self.tab_parent)
+
+        self.tab_parent.add(self.aoo, text = "AOO")
+        self.tab_parent.add(self.voo, text = "VOO")
+        self.tab_parent.add(self.aai, text = "AAI")
+        self.tab_parent.add(self.vvi, text = "VVI")
+
+        #Put in attributes here
+        #AOO
+        self.aooLowerRateLimitButton = tk.Button(self.aoo, text = "Set")
+        self.aooUpperRateLimitButton = tk.Button(self.aoo, text = "Set")
+        self.aooAtrialAmplitudeButton = tk.Button(self.aoo, text = "Set")
+        self.aooAtrialPulseWidthButton = tk.Button(self.aoo, text = "Set")
+        self.aooLowerRateLimitLabel = tk.Label(self.aoo, text = "Lower Rate Limit")
+        self.aooUpperRateLimitLabel = tk.Label(self.aoo, text = "Upper Rate Limit ")
+        self.aooAtrialAmplitudeLabel = tk.Label(self.aoo, text = "Atrial Amplitude")
+        self.aooAtrialPulseWidthLabel = tk.Label(self.aoo, text = "Atrial Pulse Width")
+        self.aooLowerRateLimitEntry = tk.Entry(self.aoo)
+        self.aooUpperRateLimitEntry = tk.Entry(self.aoo)
+        self.aooAtrialAmplitudeEntry = tk.Entry(self.aoo)
+        self.aooAtrialPulseWidthEntry = tk.Entry(self.aoo)
+        self.aooLowerRateLimitLabel.grid(row=0, column=0, padx=15, pady=15)
+        self.aooLowerRateLimitEntry.grid(row=0, column=1, padx=15, pady=15)
+        self.aooLowerRateLimitButton.grid(row=0, column=2, padx=15, pady=15)
+        self.aooUpperRateLimitLabel.grid(row=1, column=0, padx=15, pady=15)
+        self.aooUpperRateLimitEntry.grid(row=1, column=1, padx=15, pady=15)
+        self.aooUpperRateLimitButton.grid(row=1, column=2, padx=15, pady=15)
+        self.aooAtrialAmplitudeLabel.grid(row=2, column=0, padx=15, pady=15)
+        self.aooAtrialAmplitudeEntry.grid(row=2, column=1, padx=15, pady=15)
+        self.aooAtrialAmplitudeButton.grid(row=2, column=2, padx=15, pady=15)
+        self.aooAtrialPulseWidthLabel.grid(row=3, column=0, padx=15, pady=15)
+        self.aooAtrialPulseWidthEntry.grid(row=3, column=1, padx=15, pady=15)
+        self.aooAtrialPulseWidthButton.grid(row=3, column=2, padx=15, pady=15)
+
+        #VOO
+        self.vooLowerRateLimitButton = tk.Button(self.voo, text = "Set")
+        self.vooUpperRateLimitButton = tk.Button(self.voo, text = "Set")
+        self.vooAtrialAmplitudeButton = tk.Button(self.voo, text = "Set")
+        self.vooAtrialPulseWidthButton = tk.Button(self.voo, text = "Set")
+        self.vooLowerRateLimitLabel = tk.Label(self.voo, text = "Lower Rate Limit")
+        self.vooUpperRateLimitLabel = tk.Label(self.voo, text = "Upper Rate Limit ")
+        self.vooAtrialAmplitudeLabel = tk.Label(self.voo, text = "Atrial Amplitude")
+        self.vooAtrialPulseWidthLabel = tk.Label(self.voo, text = "Atrial Pulse Width")
+        self.vooLowerRateLimitEntry = tk.Entry(self.voo)
+        self.vooUpperRateLimitEntry = tk.Entry(self.voo)
+        self.vooAtrialAmplitudeEntry = tk.Entry(self.voo)
+        self.vooAtrialPulseWidthEntry = tk.Entry(self.voo)
+        self.vooLowerRateLimitLabel.grid(row=0, column=0, padx=15, pady=15)
+        self.vooLowerRateLimitEntry.grid(row=0, column=1, padx=15, pady=15)
+        self.vooLowerRateLimitButton.grid(row=0, column=2, padx=15, pady=15)
+        self.vooUpperRateLimitLabel.grid(row=1, column=0, padx=15, pady=15)
+        self.vooUpperRateLimitEntry.grid(row=1, column=1, padx=15, pady=15)
+        self.vooUpperRateLimitButton.grid(row=1, column=2, padx=15, pady=15)
+        self.vooAtrialAmplitudeLabel.grid(row=2, column=0, padx=15, pady=15)
+        self.vooAtrialAmplitudeEntry.grid(row=2, column=1, padx=15, pady=15)
+        self.vooAtrialAmplitudeButton.grid(row=2, column=2, padx=15, pady=15)
+        self.vooAtrialPulseWidthLabel.grid(row=3, column=0, padx=15, pady=15)
+        self.vooAtrialPulseWidthEntry.grid(row=3, column=1, padx=15, pady=15)
+        self.vooAtrialPulseWidthButton.grid(row=3, column=2, padx=15, pady=15)
+
+        #AAI
+        self.aaiLowerRateLimitButton = tk.Button(self.aai, text = "Set")
+        self.aaiUpperRateLimitButton = tk.Button(self.aai, text = "Set")
+        self.aaiAtrialAmplitudeButton = tk.Button(self.aai, text = "Set")
+        self.aaiAtrialPulseWidthButton = tk.Button(self.aai, text = "Set")
+        self.aaiLowerRateLimitLabel = tk.Label(self.aai, text = "Lower Rate Limit")
+        self.aaiUpperRateLimitLabel = tk.Label(self.aai, text = "Upper Rate Limit ")
+        self.aaiAtrialAmplitudeLabel = tk.Label(self.aai, text = "Atrial Amplitude")
+        self.aaiAtrialPulseWidthLabel = tk.Label(self.aai, text = "Atrial Pulse Width")
+        self.aaiLowerRateLimitEntry = tk.Entry(self.aai)
+        self.aaiUpperRateLimitEntry = tk.Entry(self.aai)
+        self.aaiAtrialAmplitudeEntry = tk.Entry(self.aai)
+        self.aaiAtrialPulseWidthEntry = tk.Entry(self.aai)
+        self.aaiLowerRateLimitLabel.grid(row=0, column=0, padx=15, pady=15)
+        self.aaiLowerRateLimitEntry.grid(row=0, column=1, padx=15, pady=15)
+        self.aaiLowerRateLimitButton.grid(row=0, column=2, padx=15, pady=15)
+        self.aaiUpperRateLimitLabel.grid(row=1, column=0, padx=15, pady=15)
+        self.aaiUpperRateLimitEntry.grid(row=1, column=1, padx=15, pady=15)
+        self.aaiUpperRateLimitButton.grid(row=1, column=2, padx=15, pady=15)
+        self.aaiAtrialAmplitudeLabel.grid(row=2, column=0, padx=15, pady=15)
+        self.aaiAtrialAmplitudeEntry.grid(row=2, column=1, padx=15, pady=15)
+        self.aaiAtrialAmplitudeButton.grid(row=2, column=2, padx=15, pady=15)
+        self.aaiAtrialPulseWidthLabel.grid(row=3, column=0, padx=15, pady=15)
+        self.aaiAtrialPulseWidthEntry.grid(row=3, column=1, padx=15, pady=15)
+        self.aaiAtrialPulseWidthButton.grid(row=3, column=2, padx=15, pady=15)
+
+        #VVI
+        self.vviLowerRateLimitButton = tk.Button(self.vvi, text = "Set")
+        self.vviUpperRateLimitButton = tk.Button(self.vvi, text = "Set")
+        self.vviAtrialAmplitudeButton = tk.Button(self.vvi, text = "Set")
+        self.vviAtrialPulseWidthButton = tk.Button(self.vvi, text = "Set")
+        self.vviLowerRateLimitLabel = tk.Label(self.vvi, text = "Lower Rate Limit")
+        self.vviUpperRateLimitLabel = tk.Label(self.vvi, text = "Upper Rate Limit ")
+        self.vviAtrialAmplitudeLabel = tk.Label(self.vvi, text = "Atrial Amplitude")
+        self.vviAtrialPulseWidthLabel = tk.Label(self.vvi, text = "Atrial Pulse Width")
+        self.vviLowerRateLimitEntry = tk.Entry(self.vvi)
+        self.vviUpperRateLimitEntry = tk.Entry(self.vvi)
+        self.vviAtrialAmplitudeEntry = tk.Entry(self.vvi)
+        self.vviAtrialPulseWidthEntry = tk.Entry(self.vvi)
+        self.vviLowerRateLimitLabel.grid(row=0, column=0, padx=15, pady=15)
+        self.vviLowerRateLimitEntry.grid(row=0, column=1, padx=15, pady=15)
+        self.vviLowerRateLimitButton.grid(row=0, column=2, padx=15, pady=15)
+        self.vviUpperRateLimitLabel.grid(row=1, column=0, padx=15, pady=15)
+        self.vviUpperRateLimitEntry.grid(row=1, column=1, padx=15, pady=15)
+        self.vviUpperRateLimitButton.grid(row=1, column=2, padx=15, pady=15)
+        self.vviAtrialAmplitudeLabel.grid(row=2, column=0, padx=15, pady=15)
+        self.vviAtrialAmplitudeEntry.grid(row=2, column=1, padx=15, pady=15)
+        self.vviAtrialAmplitudeButton.grid(row=2, column=2, padx=15, pady=15)
+        self.vviAtrialPulseWidthLabel.grid(row=3, column=0, padx=15, pady=15)
+        self.vviAtrialPulseWidthEntry.grid(row=3, column=1, padx=15, pady=15)
+        self.vviAtrialPulseWidthButton.grid(row=3, column=2, padx=15, pady=15)
+
+        self.tab_parent.pack(expand = 1, fill='both')
+
+
+
+
+
+        #self.quitButton = tk.Button(self.frame, text = 'Quit', width = 25, command = self.close_windows)
+        #self.quitButton.pack()
+        #self.frame.pack()
+
+
+
     def close_windows(self):
         self.master.destroy()
         exit()
@@ -158,6 +285,7 @@ class AddUserWindow:
             self.quitButton.focus()
         else:
             messagebox.showerror("Error", "Maximum allowed user limit reached")
+
     def close_windows(self):
         self.master.destroy()
 
