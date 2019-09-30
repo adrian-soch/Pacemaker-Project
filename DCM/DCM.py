@@ -3,7 +3,30 @@ from tkinter import messagebox
 import pickle
 
 
-login_dict = {'admin' : 'admin'}
+login_dict = {}
+class WelcomeFrame:
+    def __init__(self, master):
+        self.master = master
+        self.master.configure(background='grey')
+        self.frame = tk.Frame(self.master)
+        self.master.title("DCM")
+        self.master.geometry('400x200')
+        self.master.resizable(width=False, height=False)
+        self.label_welcome = tk.Label(self.master, text="Welcome")
+        self.label_welcome.configure(background='grey')
+        self.label_welcome.grid(row=1,column=2,columnspan =1,padx = 80, pady = 10)
+
+        self.nxtbtn = tk.Button(self.master, text="Next", width=12, command=self._nxt_btn_clicked)
+        self.nxtbtn.grid(row=3,column=2,columnspan =1,padx = 80, pady = 10)
+        self.nxtbtn.focus()
+
+    def new_window(self,window):
+        self.newWindow = tk.Toplevel(self.master)
+        self.app = window(self.newWindow)
+
+    def _nxt_btn_clicked(self):
+        self.new_window(LoginFrame)
+        self.master.withdraw()
 
 class LoginFrame:
     def __init__(self, master):
@@ -55,7 +78,6 @@ class LoginFrame:
     def _add_user_btn_clicked(self):
         self.entry_username.delete(0, 'end')
         self.entry_password.delete(0, 'end')
-
         self.new_window(AddUserWindow)
 
     def _login_btn_clicked(self):
@@ -70,10 +92,15 @@ class LoginFrame:
                 self.login_successful = 111
                 self.new_window(MainWindow)
                 self.master.withdraw()
+                #self.close_windows()
                 break
 
         if self.login_successful != 111:
             messagebox.showerror("Login error", "Incorrect username/password")
+
+    def close_windows(self):
+        self.master.destroy()
+
 
 class MainWindow:
     def __init__(self, master):
@@ -90,6 +117,7 @@ class MainWindow:
         self.frame.pack()
     def close_windows(self):
         self.master.destroy()
+        exit()
 
 class AddUserWindow:
     def __init__(self, master):
@@ -109,10 +137,10 @@ class AddUserWindow:
         self.entry_password.grid(row=1, column=1, columnspan = 1,sticky='w')
 
         self.add_userbtn = tk.Button(self.master, text="Add user",width =12, command=self._add_user_btn_clicked)
-        self.add_userbtn.grid(row=2,pady=10)
+        self.add_userbtn.grid(row=2,column=1,pady=10)
 
         self.quitButton = tk.Button(self.master, text = 'Quit', width = 12, command = self.close_windows)
-        self.quitButton.grid(row=3,pady=5)
+        self.quitButton.grid(row=3,column=1,pady=5)
 
     def _add_user_btn_clicked(self):
         global login_dict
@@ -122,7 +150,7 @@ class AddUserWindow:
         self.entry_username.delete(0, 'end')
         self.entry_password.delete(0, 'end')
         
-        # 10 Users + admin
+        # 10 Users
         if(len(username) and len(password) and len(login_dict)<11):
             login_dict[username] = password
             writeUsers()
@@ -135,20 +163,34 @@ class AddUserWindow:
 
 def readUsers():
     global login_dict
-    with open('DCM/HACKERS_DONT_LOOK_HERE.pickle', 'rb') as file:
-        login_dict =  pickle.load(file)
-        print(login_dict)
+    try:
+        with open('HACKERS_DONT_LOOK_HERE.pickle', 'rb') as file:
+            login_dict =  pickle.load(file)
+            print(login_dict)
+    except(FileNotFoundError):
+        with open('DCM/HACKERS_DONT_LOOK_HERE.pickle', 'rb') as file:
+            login_dict =  pickle.load(file)
+            print(login_dict)
 
 def writeUsers():
     global login_dict
     print(login_dict)
-    with open('DCM/HACKERS_DONT_LOOK_HERE.pickle', 'wb') as file:
-        pickle.dump(login_dict,file)
+    try:
+        with open('HACKERS_DONT_LOOK_HERE.pickle', 'wb') as file:
+            pickle.dump(login_dict,file)
+    except(FileNotFoundError):
+        with open('DCM/HACKERS_DONT_LOOK_HERE.pickle', 'rb') as file:
+            login_dict =  pickle.load(file)
+            print(login_dict)
+
 
 def main():
-    readUsers()
+    try:
+        readUsers()
+    except (EOFError):
+        pass
     root = tk.Tk()
-    app = LoginFrame(root)
+    app = WelcomeFrame(root)
     root.mainloop()
 
 if __name__ == '__main__':
