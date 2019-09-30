@@ -117,7 +117,7 @@ class MainWindow:
         self.frame.pack()
     def close_windows(self):
         self.master.destroy()
-        sys.exit
+        exit()
 
 class AddUserWindow:
     def __init__(self, master):
@@ -163,15 +163,26 @@ class AddUserWindow:
 
 def readUsers():
     global login_dict
-    with open('DCM/HACKERS_DONT_LOOK_HERE.pickle', 'rb') as file:
-        login_dict =  pickle.load(file)
-        print(login_dict)
+    try:
+        with open('HACKERS_DONT_LOOK_HERE.pickle', 'rb') as file:
+            login_dict =  pickle.load(file)
+            print(login_dict)
+    except(FileNotFoundError):
+        with open('DCM/HACKERS_DONT_LOOK_HERE.pickle', 'rb') as file:
+            login_dict =  pickle.load(file)
+            print(login_dict)
 
 def writeUsers():
     global login_dict
     print(login_dict)
-    with open('DCM/HACKERS_DONT_LOOK_HERE.pickle', 'wb') as file:
-        pickle.dump(login_dict,file)
+    try:
+        with open('HACKERS_DONT_LOOK_HERE.pickle', 'wb') as file:
+            pickle.dump(login_dict,file)
+    except(FileNotFoundError):
+        with open('DCM/HACKERS_DONT_LOOK_HERE.pickle', 'rb') as file:
+            login_dict =  pickle.load(file)
+            print(login_dict)
+
 
 def main():
     try:
