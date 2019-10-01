@@ -21,6 +21,9 @@ class WelcomeFrame:
         self.nxtbtn.grid(row=3,column=2,columnspan =1,padx = 200, pady = 20)
         self.nxtbtn.focus()
 
+        #return button bind
+        self.master.bind('<Return>', self._nxt_btn_clicked)
+
     def new_window(self,window):
         self.newWindow = tk.Toplevel(self.master)
         self.app = window(self.newWindow)
@@ -28,6 +31,7 @@ class WelcomeFrame:
     def _nxt_btn_clicked(self):
         self.master.withdraw()
         self.new_window(LoginFrame)
+
 
 class LoginFrame:
     def __init__(self, master):
@@ -68,6 +72,9 @@ class LoginFrame:
         self.login_successful = 000
 
         self.master.protocol("WM_DELETE_WINDOW", self.on_exit)
+
+        #return button bind
+        self.master.bind('<Return>', self._login_btn_clicked)
 
     def on_exit(self):
         if messagebox.askyesno("Exit", "Do you want to quit the application?"):
