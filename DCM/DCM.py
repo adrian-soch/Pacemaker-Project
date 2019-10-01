@@ -279,7 +279,7 @@ class AddUserWindow:
         self.add_userbtn = tk.Button(self.master, text="Add user",width =12, command=self._add_user_btn_clicked)
         self.add_userbtn.grid(row=2,column=1,pady=10)
 
-        self.quitButton = tk.Button(self.master, text = 'Quit', width = 12, command = self.close_windows)
+        self.quitButton = tk.Button(self.master, text = 'Back', width = 12, command = self.close_windows)
         self.quitButton.grid(row=3,column=1,pady=5)
 
         self.master.protocol("WM_DELETE_WINDOW", self.on_exit)
