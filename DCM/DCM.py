@@ -11,15 +11,22 @@ class WelcomeFrame:
         self.master.configure(background='grey')
         self.frame = tk.Frame(self.master)
         self.master.title("DCM")
-        self.master.geometry('400x200')
         self.master.resizable(width=False, height=False)
         self.label_welcome = tk.Label(self.master, text="Welcome")
+        self.label_welcome.config(font=("Helvetica",34))
         self.label_welcome.configure(background='grey')
-        self.label_welcome.grid(row=1,column=2,columnspan =1,padx = 80, pady = 10)
+        self.label_welcome.grid(row=1,column=2,columnspan =1,padx = 200, pady = 20)
 
         self.nxtbtn = tk.Button(self.master, text="Next", width=12, command=self._nxt_btn_clicked)
-        self.nxtbtn.grid(row=3,column=2,columnspan =1,padx = 80, pady = 10)
+        self.nxtbtn.grid(row=3,column=2,columnspan =1,padx = 200, pady = 20)
         self.nxtbtn.focus()
+
+    #return button bind
+        self.master.bind('<Return>', self.return_bind)
+        
+    def return_bind(self, event):
+        self._nxt_btn_clicked()
+    #return button bind end
 
     def new_window(self,window):
         self.newWindow = tk.Toplevel(self.master)
@@ -28,6 +35,8 @@ class WelcomeFrame:
     def _nxt_btn_clicked(self):
         self.master.withdraw()
         self.new_window(LoginFrame)
+        
+
 
 class LoginFrame:
     def __init__(self, master):
@@ -42,11 +51,6 @@ class LoginFrame:
         self.label_username.configure(background='grey')
         self.label_password = tk.Label(self.master, text="Password")
         self.label_password.configure(background='grey')
-
-        self.master.columnconfigure(0, pad=20)
-        self.master.columnconfigure(1, pad=20)
-        self.master.columnconfigure(2, pad=20)
-        self.master.columnconfigure(3, pad=20)
 
         self.master.rowconfigure(0, pad=3)
         self.master.rowconfigure(1, pad=3)
@@ -72,6 +76,21 @@ class LoginFrame:
 
         self.login_successful = 000
 
+        self.master.protocol("WM_DELETE_WINDOW", self.on_exit)
+
+    #return button bind
+        self.master.bind('<Return>', self.return_bind)
+        
+    def return_bind(self, event):
+        self._login_btn_clicked()
+    #return button bind end
+
+
+
+    def on_exit(self):
+        if messagebox.askyesno("Exit", "Do you want to quit the application?"):
+            exit()
+
     def new_window(self,window):
         self.newWindow = tk.Toplevel(self.master)
         self.app = window(self.newWindow)
@@ -93,20 +112,17 @@ class LoginFrame:
                 self.login_successful = 111
                 self.master.withdraw()
                 self.new_window(MainWindow)
-                #self.close_windows()
                 break
 
         if self.login_successful != 111:
             messagebox.showerror("Login error", "Incorrect username/password")
-
-    def close_windows(self):
-        self.master.destroy()
 
 
 class MainWindow:
     def __init__(self, master):
         self.master = master
         self.master.geometry('500x280')
+        self.master.protocol("WM_DELETE_WINDOW", self.on_exit)
 
         self.menubar = tk.Menu(self.master)
         self.filemenu = tk.Menu(self.menubar, tearoff=0)
@@ -232,16 +248,13 @@ class MainWindow:
 
         self.tab_parent.pack(expand = 1, fill='both')
 
-
-
-
-
         #self.quitButton = tk.Button(self.frame, text = 'Quit', width = 25, command = self.close_windows)
         #self.quitButton.pack()
         #self.frame.pack()
 
-
-
+    def on_exit(self):
+        if messagebox.askyesno("Exit", "Do you want to quit the application?"):
+            exit()
     def close_windows(self):
         self.master.destroy()
         exit()
@@ -266,8 +279,14 @@ class AddUserWindow:
         self.add_userbtn = tk.Button(self.master, text="Add user",width =12, command=self._add_user_btn_clicked)
         self.add_userbtn.grid(row=2,column=1,pady=10)
 
-        self.quitButton = tk.Button(self.master, text = 'Quit', width = 12, command = self.close_windows)
+        self.quitButton = tk.Button(self.master, text = 'Back', width = 12, command = self.close_windows)
         self.quitButton.grid(row=3,column=1,pady=5)
+
+        self.master.protocol("WM_DELETE_WINDOW", self.on_exit)
+
+    def on_exit(self):
+        if messagebox.askyesno("Exit", "Do you want to quit the application?"):
+            exit()
 
     def _add_user_btn_clicked(self):
         global login_dict
@@ -307,9 +326,8 @@ def writeUsers():
         with open('HACKERS_DONT_LOOK_HERE.pickle', 'wb') as file:
             pickle.dump(login_dict,file)
     except(FileNotFoundError):
-        with open('DCM/HACKERS_DONT_LOOK_HERE.pickle', 'rb') as file:
-            login_dict =  pickle.load(file)
-            print(login_dict)
+        with open('DCM/HACKERS_DONT_LOOK_HERE.pickle', 'wb') as file:
+            pickle.dump(login_dict,file)
 
 
 def main():
