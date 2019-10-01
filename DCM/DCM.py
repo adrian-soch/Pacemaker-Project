@@ -284,14 +284,9 @@ class AddUserWindow:
 
 def readUsers():
     global login_dict
-    try:
-        with open('HACKERS_DONT_LOOK_HERE.pickle', 'rb') as file:
-            login_dict =  pickle.load(file)
-            print(login_dict)
-    except(FileNotFoundError):
-        with open('DCM/HACKERS_DONT_LOOK_HERE.pickle', 'rb') as file:
-            login_dict =  pickle.load(file)
-            print(login_dict)
+    with open('HACKERS_DONT_LOOK_HERE.pickle', 'rb') as file:
+        login_dict =  pickle.load(file)
+        print(login_dict)
 
 def writeUsers():
     global login_dict
