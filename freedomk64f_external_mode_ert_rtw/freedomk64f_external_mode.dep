@@ -1,0 +1,82 @@
+freedomk64f_external_mode.o: freedomk64f_external_mode.c \
+ freedomk64f_external_mode.h rtwtypes.h \
+ C:/Program\ Files/MATLAB/R2019a/extern/include/tmwtypes.h \
+ C:/Program\ Files/MATLAB/R2019a/simulink/include/simstruc_types.h \
+ C:/Users/adrso/Desktop/3K04/Files/freedomk64f_external_mode_ert_rtw/rtwtypes.h \
+ C:/Program\ Files/MATLAB/R2019a/simulink/include/sl_types_def.h \
+ C:/Program\ Files/MATLAB/R2019a/simulink/include/rtw_matlogging.h \
+ C:/Program\ Files/MATLAB/R2019a/simulink/include/rtw_extmode.h \
+ C:/Program\ Files/MATLAB/R2019a/simulink/include/rtw_continuous.h \
+ C:/Program\ Files/MATLAB/R2019a/simulink/include/rtw_solver.h \
+ C:/Program\ Files/MATLAB/R2019a/simulink/include/sysran_types.h \
+ C:/Program\ Files/MATLAB/R2019a/simulink/include/sl_sample_time_defs.h \
+ C:/Program\ Files/MATLAB/R2019a/simulink/include/rtw_extmode.h \
+ C:/Program\ Files/MATLAB/R2019a/simulink/include/sysran_types.h \
+ C:/Program\ Files/MATLAB/R2019a/simulink/include/rtw_continuous.h \
+ C:/Program\ Files/MATLAB/R2019a/simulink/include/rtw_solver.h \
+ C:/Program\ Files/MATLAB/R2019a/rtw/c/src/dt_info.h \
+ C:/Program\ Files/MATLAB/R2019a/rtw/c/src/ext_mode/common/ext_work.h \
+ C:/Program\ Files/MATLAB/R2019a/rtw/c/src/ext_mode/common/ext_types.h \
+ C:/ProgramData/MATLAB/SupportPackages/R2019a/toolbox/target/supportpackages/freedomk64f/include/MW_digitalIO.h \
+ C:/ProgramData/MATLAB/SupportPackages/R2019a/toolbox/target/supportpackages/freedomk64f/include/MW_SVD.h \
+ C:/ProgramData/MATLAB/SupportPackages/R2019a/toolbox/target/supportpackages/freedomk64f/include/MW_I2C.h \
+ freedomk64f_external_mode_types.h multiword_types.h \
+ C:/ProgramData/MATLAB/SupportPackages/R2019a/toolbox/target/supportpackages/freedomk64f/include/MW_SVD.h \
+ freedomk64f_external_mode_private.h freedomk64f_external_mode_dt.h \
+ C:/Program\ Files/MATLAB/R2019a/rtw/c/src/ext_mode/common/ext_types.h
+
+freedomk64f_external_mode.h:
+
+rtwtypes.h:
+
+C:/Program\ Files/MATLAB/R2019a/extern/include/tmwtypes.h:
+
+C:/Program\ Files/MATLAB/R2019a/simulink/include/simstruc_types.h:
+
+C:/Users/adrso/Desktop/3K04/Files/freedomk64f_external_mode_ert_rtw/rtwtypes.h:
+
+C:/Program\ Files/MATLAB/R2019a/simulink/include/sl_types_def.h:
+
+C:/Program\ Files/MATLAB/R2019a/simulink/include/rtw_matlogging.h:
+
+C:/Program\ Files/MATLAB/R2019a/simulink/include/rtw_extmode.h:
+
+C:/Program\ Files/MATLAB/R2019a/simulink/include/rtw_continuous.h:
+
+C:/Program\ Files/MATLAB/R2019a/simulink/include/rtw_solver.h:
+
+C:/Program\ Files/MATLAB/R2019a/simulink/include/sysran_types.h:
+
+C:/Program\ Files/MATLAB/R2019a/simulink/include/sl_sample_time_defs.h:
+
+C:/Program\ Files/MATLAB/R2019a/simulink/include/rtw_extmode.h:
+
+C:/Program\ Files/MATLAB/R2019a/simulink/include/sysran_types.h:
+
+C:/Program\ Files/MATLAB/R2019a/simulink/include/rtw_continuous.h:
+
+C:/Program\ Files/MATLAB/R2019a/simulink/include/rtw_solver.h:
+
+C:/Program\ Files/MATLAB/R2019a/rtw/c/src/dt_info.h:
+
+C:/Program\ Files/MATLAB/R2019a/rtw/c/src/ext_mode/common/ext_work.h:
+
+C:/Program\ Files/MATLAB/R2019a/rtw/c/src/ext_mode/common/ext_types.h:
+
+C:/ProgramData/MATLAB/SupportPackages/R2019a/toolbox/target/supportpackages/freedomk64f/include/MW_digitalIO.h:
+
+C:/ProgramData/MATLAB/SupportPackages/R2019a/toolbox/target/supportpackages/freedomk64f/include/MW_SVD.h:
+
+C:/ProgramData/MATLAB/SupportPackages/R2019a/toolbox/target/supportpackages/freedomk64f/include/MW_I2C.h:
+
+freedomk64f_external_mode_types.h:
+
+multiword_types.h:
+
+C:/ProgramData/MATLAB/SupportPackages/R2019a/toolbox/target/supportpackages/freedomk64f/include/MW_SVD.h:
+
+freedomk64f_external_mode_private.h:
+
+freedomk64f_external_mode_dt.h:
+
+C:/Program\ Files/MATLAB/R2019a/rtw/c/src/ext_mode/common/ext_types.h:

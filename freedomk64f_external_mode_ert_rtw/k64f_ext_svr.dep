@@ -1,0 +1,65 @@
+k64f_ext_svr.o: \
+ C:/ProgramData/MATLAB/SupportPackages/R2019a/toolbox/target/supportpackages/freedomk64f/src/k64f_ext_svr.c \
+ C:/Users/adrso/Desktop/3K04/Files/freedomk64f_external_mode_ert_rtw/rtwtypes.h \
+ C:/Program\ Files/MATLAB/R2019a/extern/include/tmwtypes.h \
+ C:/Program\ Files/MATLAB/R2019a/simulink/include/simstruc_types.h \
+ C:/Program\ Files/MATLAB/R2019a/simulink/include/sl_types_def.h \
+ C:/Program\ Files/MATLAB/R2019a/simulink/include/rtw_matlogging.h \
+ C:/Program\ Files/MATLAB/R2019a/simulink/include/rtw_extmode.h \
+ C:/Program\ Files/MATLAB/R2019a/simulink/include/rtw_continuous.h \
+ C:/Program\ Files/MATLAB/R2019a/simulink/include/rtw_solver.h \
+ C:/Program\ Files/MATLAB/R2019a/simulink/include/sysran_types.h \
+ C:/Program\ Files/MATLAB/R2019a/simulink/include/sl_sample_time_defs.h \
+ C:/Users/adrso/Desktop/3K04/Files/freedomk64f_external_mode_ert_rtw/multiword_types.h \
+ C:/Users/adrso/Desktop/3K04/Files/freedomk64f_external_mode_ert_rtw/rtwtypes.h \
+ C:/Program\ Files/MATLAB/R2019a/simulink/include/rtw_extmode.h \
+ C:/Program\ Files/MATLAB/R2019a/rtw/c/src/ext_mode/common/ext_types.h \
+ C:/Program\ Files/MATLAB/R2019a/rtw/c/src/ext_mode/common/ext_share.h \
+ C:/Program\ Files/MATLAB/R2019a/rtw/c/src/ext_mode/common/ext_test.h \
+ C:/Program\ Files/MATLAB/R2019a/rtw/c/src/ext_mode/common/ext_svr_transport.h \
+ C:/Program\ Files/MATLAB/R2019a/rtw/c/src/ext_mode/common/updown.h \
+ C:/Program\ Files/MATLAB/R2019a/rtw/c/src/ext_mode/common/upsup_public.h \
+ C:/Program\ Files/MATLAB/R2019a/rtw/c/src/ext_mode/common/updown_util.h \
+ C:/Program\ Files/MATLAB/R2019a/rtw/c/src/dt_info.h
+
+C:/Users/adrso/Desktop/3K04/Files/freedomk64f_external_mode_ert_rtw/rtwtypes.h:
+
+C:/Program\ Files/MATLAB/R2019a/extern/include/tmwtypes.h:
+
+C:/Program\ Files/MATLAB/R2019a/simulink/include/simstruc_types.h:
+
+C:/Program\ Files/MATLAB/R2019a/simulink/include/sl_types_def.h:
+
+C:/Program\ Files/MATLAB/R2019a/simulink/include/rtw_matlogging.h:
+
+C:/Program\ Files/MATLAB/R2019a/simulink/include/rtw_extmode.h:
+
+C:/Program\ Files/MATLAB/R2019a/simulink/include/rtw_continuous.h:
+
+C:/Program\ Files/MATLAB/R2019a/simulink/include/rtw_solver.h:
+
+C:/Program\ Files/MATLAB/R2019a/simulink/include/sysran_types.h:
+
+C:/Program\ Files/MATLAB/R2019a/simulink/include/sl_sample_time_defs.h:
+
+C:/Users/adrso/Desktop/3K04/Files/freedomk64f_external_mode_ert_rtw/multiword_types.h:
+
+C:/Users/adrso/Desktop/3K04/Files/freedomk64f_external_mode_ert_rtw/rtwtypes.h:
+
+C:/Program\ Files/MATLAB/R2019a/simulink/include/rtw_extmode.h:
+
+C:/Program\ Files/MATLAB/R2019a/rtw/c/src/ext_mode/common/ext_types.h:
+
+C:/Program\ Files/MATLAB/R2019a/rtw/c/src/ext_mode/common/ext_share.h:
+
+C:/Program\ Files/MATLAB/R2019a/rtw/c/src/ext_mode/common/ext_test.h:
+
+C:/Program\ Files/MATLAB/R2019a/rtw/c/src/ext_mode/common/ext_svr_transport.h:
+
+C:/Program\ Files/MATLAB/R2019a/rtw/c/src/ext_mode/common/updown.h:
+
+C:/Program\ Files/MATLAB/R2019a/rtw/c/src/ext_mode/common/upsup_public.h:
+
+C:/Program\ Files/MATLAB/R2019a/rtw/c/src/ext_mode/common/updown_util.h:
+
+C:/Program\ Files/MATLAB/R2019a/rtw/c/src/dt_info.h:
