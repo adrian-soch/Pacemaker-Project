@@ -34,7 +34,7 @@ class WelcomeFrame:
 
     def _nxt_btn_clicked(self):
         self.master.withdraw()
-        self.new_window(LoginFrame)
+        self.new_window(LoginFrame)                 
         
 
 
@@ -84,8 +84,6 @@ class LoginFrame:
     def return_bind(self, event):
         self._login_btn_clicked()
     #return button bind end
-
-
 
     def on_exit(self):
         if messagebox.askyesno("Exit", "Do you want to quit the application?"):
@@ -248,9 +246,21 @@ class MainWindow:
 
         self.tab_parent.pack(expand = 1, fill='both')
 
-        #self.quitButton = tk.Button(self.frame, text = 'Quit', width = 25, command = self.close_windows)
-        #self.quitButton.pack()
-        #self.frame.pack()
+        self.confirmButton = tk.Button(self.aoo, text = 'Confirm', width = 20, command = self.confirmChanges)
+        self.confirmButton.grid(row = 4, column = 1)
+
+        self.confirmButton = tk.Button(self.voo, text = 'Confirm', width = 20, command = self.confirmChanges)
+        self.confirmButton.grid(row = 4, column = 1)
+        
+        self.confirmButton = tk.Button(self.aai, text = 'Confirm', width = 20, command = self.confirmChanges)
+        self.confirmButton.grid(row = 4, column = 1)
+
+        self.confirmButton = tk.Button(self.vvi, text = 'Confirm', width = 20, command = self.confirmChanges)
+        self.confirmButton.grid(row = 4, column = 1)
+
+    def confirmChanges(self):
+        if messagebox.askyesno("Confirmation", "Upload these changes?"):
+            messagebox.showinfo("Done", "Success")
 
     def on_exit(self):
         if messagebox.askyesno("Exit", "Do you want to quit the application?"):
