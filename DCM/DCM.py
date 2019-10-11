@@ -43,7 +43,7 @@ class LoginFrame:
         self.master = master
         self.master.configure(background='grey')
         self.frame = tk.Frame(self.master)
-        self.master.title("DCM")
+        self.master.title("USER LOGIN")
         self.master.resizable(width=False, height=False)
 
         #self.master.geometry('300x200')
@@ -116,10 +116,71 @@ class LoginFrame:
             messagebox.showerror("Login error", "Incorrect username/password")
 
 
+class AddUserWindow:
+    def __init__(self, master):
+        self.master = master
+        self.master.geometry('300x300')
+        self.quitButton = tk.Button(self.master, text = 'Quit', width = 12, command = self.close_windows)
+        self.label_username = tk.Label(self.master, text="Enter New Username")
+        self.label_password = tk.Label(self.master, text="Enter New Password")
+        self.label_password2 = tk.Label(self.master, text="Confirm Password")
+
+        self.entry_username = tk.Entry(self.master)
+        self.entry_password = tk.Entry(self.master, show="*")
+        self.entry_password2 = tk.Entry(self.master, show="*")
+        self.entry_username.focus()
+
+        self.label_username.grid(row=0, sticky='e', pady=5)
+        self.label_password.grid(row=1, sticky='e', pady=10)
+        self.label_password2.grid(row=2, sticky='w', pady=10)
+        self.entry_username.grid(row=0, column=1, columnspan = 1,sticky='w')
+        self.entry_password.grid(row=1, column=1, columnspan = 1,sticky='w')
+        self.entry_password2.grid(row=2, column=1, columnspan = 1,sticky='w')
+
+        self.add_userbtn = tk.Button(self.master, text="Add user",width =12, command=self._add_user_btn_clicked)
+        self.add_userbtn.grid(row=3,column=1,pady=10)
+
+        self.quitButton = tk.Button(self.master, text = 'Back', width = 12, command = self.close_windows)
+        self.quitButton.grid(row=4,column=1,pady=5)
+
+        self.master.protocol("WM_DELETE_WINDOW", self.on_exit)
+
+    def on_exit(self):
+        if messagebox.askyesno("Exit", "Do you want to quit the application?"):
+            exit()
+
+    def _add_user_btn_clicked(self):
+        global login_dict
+        username = self.entry_username.get()
+        password = self.entry_password.get()
+        password2 = self.entry_password2.get()
+
+        self.entry_username.delete(0, 'end')
+        self.entry_password.delete(0, 'end')
+        self.entry_password2.delete(0, 'end')
+        
+        if(password == password2):
+            
+             # 10 Users
+            if(len(username) and len(password) and len(login_dict)<11):
+                login_dict[username] = password
+                writeUsers()
+                messagebox.showinfo("Success", "User Added")
+                self.quitButton.focus()
+            else:
+                messagebox.showerror("Error", "Maximum allowed user limit reached")
+        
+        else:
+            messagebox.showerror("Error", "Passwords do not match")
+
+    def close_windows(self):
+        self.master.destroy()
+
+
 class MainWindow:
     def __init__(self, master):
         self.master = master
-        self.master.geometry('500x280')
+        self.master.geometry('500x550')
         self.master.protocol("WM_DELETE_WINDOW", self.on_exit)
 
         self.menubar = tk.Menu(self.master)
@@ -146,9 +207,13 @@ class MainWindow:
         self.aooAtrialAmplitudeButton = tk.Button(self.aoo, text = "Set")
         self.aooAtrialPulseWidthButton = tk.Button(self.aoo, text = "Set")
         self.aooLowerRateLimitLabel = tk.Label(self.aoo, text = "Lower Rate Limit")
+        self.aooLowerRateLimitValue = tk.Label(self.aoo, text = "Current Value: "+"123")
         self.aooUpperRateLimitLabel = tk.Label(self.aoo, text = "Upper Rate Limit ")
+        self.aooUpperRateLimitValue = tk.Label(self.aoo, text = "Current Value: "+"123")
         self.aooAtrialAmplitudeLabel = tk.Label(self.aoo, text = "Atrial Amplitude")
+        self.aooAtrialAmplitudeValue = tk.Label(self.aoo, text = "Current Value: "+"123")
         self.aooAtrialPulseWidthLabel = tk.Label(self.aoo, text = "Atrial Pulse Width")
+        self.aooAtrialPulseWidthValue = tk.Label(self.aoo, text = "Current Value: "+"123")
         self.aooLowerRateLimitEntry = tk.Entry(self.aoo)
         self.aooUpperRateLimitEntry = tk.Entry(self.aoo)
         self.aooAtrialAmplitudeEntry = tk.Entry(self.aoo)
@@ -156,15 +221,20 @@ class MainWindow:
         self.aooLowerRateLimitLabel.grid(row=0, column=0, padx=15, pady=15)
         self.aooLowerRateLimitEntry.grid(row=0, column=1, padx=15, pady=15)
         self.aooLowerRateLimitButton.grid(row=0, column=2, padx=15, pady=15)
+        self.aooLowerRateLimitValue.grid(row=0, column=3, padx=15, pady=15)
         self.aooUpperRateLimitLabel.grid(row=1, column=0, padx=15, pady=15)
         self.aooUpperRateLimitEntry.grid(row=1, column=1, padx=15, pady=15)
         self.aooUpperRateLimitButton.grid(row=1, column=2, padx=15, pady=15)
+        self.aooUpperRateLimitValue.grid(row=1, column=3, padx=15, pady=15)
         self.aooAtrialAmplitudeLabel.grid(row=2, column=0, padx=15, pady=15)
         self.aooAtrialAmplitudeEntry.grid(row=2, column=1, padx=15, pady=15)
         self.aooAtrialAmplitudeButton.grid(row=2, column=2, padx=15, pady=15)
+        self.aooAtrialAmplitudeValue.grid(row=2, column=3, padx=15, pady=15)
         self.aooAtrialPulseWidthLabel.grid(row=3, column=0, padx=15, pady=15)
         self.aooAtrialPulseWidthEntry.grid(row=3, column=1, padx=15, pady=15)
         self.aooAtrialPulseWidthButton.grid(row=3, column=2, padx=15, pady=15)
+        self.aooAtrialPulseWidthValue.grid(row=3, column=3, padx=15, pady=15)
+
 
         #VOO
         self.vooLowerRateLimitButton = tk.Button(self.voo, text = "Set")
@@ -172,9 +242,13 @@ class MainWindow:
         self.vooAtrialAmplitudeButton = tk.Button(self.voo, text = "Set")
         self.vooAtrialPulseWidthButton = tk.Button(self.voo, text = "Set")
         self.vooLowerRateLimitLabel = tk.Label(self.voo, text = "Lower Rate Limit")
+        self.vooLowerRateLimitValue = tk.Label(self.voo, text = "Current Value: "+"123")
         self.vooUpperRateLimitLabel = tk.Label(self.voo, text = "Upper Rate Limit ")
-        self.vooAtrialAmplitudeLabel = tk.Label(self.voo, text = "Atrial Amplitude")
-        self.vooAtrialPulseWidthLabel = tk.Label(self.voo, text = "Atrial Pulse Width")
+        self.vooUpperRateLimitValue = tk.Label(self.voo, text = "Current Value: "+"123")
+        self.vooAtrialAmplitudeLabel = tk.Label(self.voo, text = "Ventricular Amplitude")
+        self.vooAtrialAmplitudeValue = tk.Label(self.voo, text = "Current Value: "+"123")
+        self.vooAtrialPulseWidthLabel = tk.Label(self.voo, text = "Ventricular Pulse Width")
+        self.vooAtrialPulseWidthValue = tk.Label(self.voo, text = "Current Value: "+"123")
         self.vooLowerRateLimitEntry = tk.Entry(self.voo)
         self.vooUpperRateLimitEntry = tk.Entry(self.voo)
         self.vooAtrialAmplitudeEntry = tk.Entry(self.voo)
@@ -182,29 +256,50 @@ class MainWindow:
         self.vooLowerRateLimitLabel.grid(row=0, column=0, padx=15, pady=15)
         self.vooLowerRateLimitEntry.grid(row=0, column=1, padx=15, pady=15)
         self.vooLowerRateLimitButton.grid(row=0, column=2, padx=15, pady=15)
+        self.vooLowerRateLimitValue.grid(row=0, column=3, padx=15, pady=15)
         self.vooUpperRateLimitLabel.grid(row=1, column=0, padx=15, pady=15)
         self.vooUpperRateLimitEntry.grid(row=1, column=1, padx=15, pady=15)
         self.vooUpperRateLimitButton.grid(row=1, column=2, padx=15, pady=15)
+        self.vooUpperRateLimitValue.grid(row=1, column=3, padx=15, pady=15)
         self.vooAtrialAmplitudeLabel.grid(row=2, column=0, padx=15, pady=15)
         self.vooAtrialAmplitudeEntry.grid(row=2, column=1, padx=15, pady=15)
         self.vooAtrialAmplitudeButton.grid(row=2, column=2, padx=15, pady=15)
+        self.vooAtrialAmplitudeValue.grid(row=2, column=3, padx=15, pady=15)
         self.vooAtrialPulseWidthLabel.grid(row=3, column=0, padx=15, pady=15)
         self.vooAtrialPulseWidthEntry.grid(row=3, column=1, padx=15, pady=15)
         self.vooAtrialPulseWidthButton.grid(row=3, column=2, padx=15, pady=15)
+        self.vooAtrialPulseWidthValue.grid(row=3, column=3, padx=15, pady=15)
+
 
         #AAI
         self.aaiLowerRateLimitButton = tk.Button(self.aai, text = "Set")
         self.aaiUpperRateLimitButton = tk.Button(self.aai, text = "Set")
         self.aaiAtrialAmplitudeButton = tk.Button(self.aai, text = "Set")
         self.aaiAtrialPulseWidthButton = tk.Button(self.aai, text = "Set")
+        self.aaiAtrialSensitivityButton = tk.Button(self.aai, text = "Set")
+        self.aaiARPButton = tk.Button(self.aai, text = "Set")
+        self.aaiAPVARPButton = tk.Button(self.aai, text = "Set")
+        self.aaiHysteresisButton = tk.Button(self.aai, text = "Set")
+        self.aaiRateSmoothingButton = tk.Button(self.aai, text = "Set")
         self.aaiLowerRateLimitLabel = tk.Label(self.aai, text = "Lower Rate Limit")
         self.aaiUpperRateLimitLabel = tk.Label(self.aai, text = "Upper Rate Limit ")
         self.aaiAtrialAmplitudeLabel = tk.Label(self.aai, text = "Atrial Amplitude")
         self.aaiAtrialPulseWidthLabel = tk.Label(self.aai, text = "Atrial Pulse Width")
+        self.aaiAtrialSensitivityLabel = tk.Label(self.aai, text = "Atrial Sensitivity")
+        self.aaiARPLabel = tk.Label(self.aai, text = "ARP")
+        self.aaiAPVARPLabel = tk.Label(self.aai, text = "APVARP")
+        self.aaiHysteresisLabel = tk.Label(self.aai, text = "Hysteresis")
+        self.aaiRateSmoothingLabel = tk.Label(self.aai, text = "Rate Smoothing")
         self.aaiLowerRateLimitEntry = tk.Entry(self.aai)
         self.aaiUpperRateLimitEntry = tk.Entry(self.aai)
         self.aaiAtrialAmplitudeEntry = tk.Entry(self.aai)
         self.aaiAtrialPulseWidthEntry = tk.Entry(self.aai)
+        self.aaiAtrialSensitivityEntry = tk.Entry(self.aai)
+        self.aaiARPEntry = tk.Entry(self.aai)
+        self.aaiAPVARPEntry = tk.Entry(self.aai)
+        self.aaiHysteresisEntry = tk.Entry(self.aai)
+        self.aaiRateSmoothingEntry = tk.Entry(self.aai)
+        
         self.aaiLowerRateLimitLabel.grid(row=0, column=0, padx=15, pady=15)
         self.aaiLowerRateLimitEntry.grid(row=0, column=1, padx=15, pady=15)
         self.aaiLowerRateLimitButton.grid(row=0, column=2, padx=15, pady=15)
@@ -217,20 +312,49 @@ class MainWindow:
         self.aaiAtrialPulseWidthLabel.grid(row=3, column=0, padx=15, pady=15)
         self.aaiAtrialPulseWidthEntry.grid(row=3, column=1, padx=15, pady=15)
         self.aaiAtrialPulseWidthButton.grid(row=3, column=2, padx=15, pady=15)
+        self.aaiAtrialSensitivityLabel.grid(row=4, column=0, padx=15, pady=15)
+        self.aaiAtrialSensitivityEntry.grid(row=4, column=1, padx=15, pady=15)
+        self.aaiAtrialSensitivityButton.grid(row=4, column=2, padx=15, pady=15)
+        self.aaiARPLabel.grid(row=5, column=0, padx=15, pady=15)
+        self.aaiARPEntry.grid(row=5, column=1, padx=15, pady=15)
+        self.aaiARPButton.grid(row=5, column=2, padx=15, pady=15)
+        self.aaiAPVARPLabel.grid(row=6, column=0, padx=15, pady=15)
+        self.aaiAPVARPEntry.grid(row=6, column=1, padx=15, pady=15)
+        self.aaiAPVARPButton.grid(row=6, column=2, padx=15, pady=15)
+        self.aaiHysteresisLabel.grid(row=7, column=0, padx=15, pady=15)
+        self.aaiHysteresisEntry.grid(row=7, column=1, padx=15, pady=15)
+        self.aaiHysteresisButton.grid(row=7, column=2, padx=15, pady=15)
+        self.aaiRateSmoothingLabel.grid(row=8, column=0, padx=15, pady=15)
+        self.aaiRateSmoothingEntry.grid(row=8, column=1, padx=15, pady=15)
+        self.aaiRateSmoothingButton.grid(row=8, column=2, padx=15, pady=15)
+        
 
         #VVI
         self.vviLowerRateLimitButton = tk.Button(self.vvi, text = "Set")
         self.vviUpperRateLimitButton = tk.Button(self.vvi, text = "Set")
         self.vviAtrialAmplitudeButton = tk.Button(self.vvi, text = "Set")
         self.vviAtrialPulseWidthButton = tk.Button(self.vvi, text = "Set")
+        self.vviAtrialSensitivityButton = tk.Button(self.vvi, text = "Set")
+        self.vviARPButton = tk.Button(self.vvi, text = "Set")
+        self.vviAPVARPButton = tk.Button(self.vvi, text = "Set")
+        self.vviHysteresisButton = tk.Button(self.vvi, text = "Set")
+        self.vviRateSmoothingButton = tk.Button(self.vvi, text = "Set")
         self.vviLowerRateLimitLabel = tk.Label(self.vvi, text = "Lower Rate Limit")
         self.vviUpperRateLimitLabel = tk.Label(self.vvi, text = "Upper Rate Limit ")
-        self.vviAtrialAmplitudeLabel = tk.Label(self.vvi, text = "Atrial Amplitude")
-        self.vviAtrialPulseWidthLabel = tk.Label(self.vvi, text = "Atrial Pulse Width")
+        self.vviAtrialAmplitudeLabel = tk.Label(self.vvi, text = "Ventricular Amplitude")
+        self.vviAtrialPulseWidthLabel = tk.Label(self.vvi, text = "Ventricular Pulse Width")
+        self.vviAtrialSensitivityLabel = tk.Label(self.vvi, text = "Ventricular Sensitivity")
+        self.vviARPLabel = tk.Label(self.vvi, text = "VRP")
+        self.vviHysteresisLabel = tk.Label(self.vvi, text = "Hysteresis")
+        self.vviRateSmoothingLabel = tk.Label(self.vvi, text = "Rate Smoothing")
         self.vviLowerRateLimitEntry = tk.Entry(self.vvi)
         self.vviUpperRateLimitEntry = tk.Entry(self.vvi)
         self.vviAtrialAmplitudeEntry = tk.Entry(self.vvi)
         self.vviAtrialPulseWidthEntry = tk.Entry(self.vvi)
+        self.vviAtrialSensitivityEntry = tk.Entry(self.vvi)
+        self.vviARPEntry = tk.Entry(self.vvi)
+        self.vviHysteresisEntry = tk.Entry(self.vvi)
+        self.vviRateSmoothingEntry = tk.Entry(self.vvi)
         self.vviLowerRateLimitLabel.grid(row=0, column=0, padx=15, pady=15)
         self.vviLowerRateLimitEntry.grid(row=0, column=1, padx=15, pady=15)
         self.vviLowerRateLimitButton.grid(row=0, column=2, padx=15, pady=15)
@@ -243,6 +367,18 @@ class MainWindow:
         self.vviAtrialPulseWidthLabel.grid(row=3, column=0, padx=15, pady=15)
         self.vviAtrialPulseWidthEntry.grid(row=3, column=1, padx=15, pady=15)
         self.vviAtrialPulseWidthButton.grid(row=3, column=2, padx=15, pady=15)
+        self.vviAtrialSensitivityLabel.grid(row=4, column=0, padx=15, pady=15)
+        self.vviAtrialSensitivityEntry.grid(row=4, column=1, padx=15, pady=15)
+        self.vviAtrialSensitivityButton.grid(row=4, column=2, padx=15, pady=15)
+        self.vviARPLabel.grid(row=5, column=0, padx=15, pady=15)
+        self.vviARPEntry.grid(row=5, column=1, padx=15, pady=15)
+        self.vviARPButton.grid(row=5, column=2, padx=15, pady=15)
+        self.vviHysteresisLabel.grid(row=6, column=0, padx=15, pady=15)
+        self.vviHysteresisEntry.grid(row=6, column=1, padx=15, pady=15)
+        self.vviHysteresisButton.grid(row=6, column=2, padx=15, pady=15)
+        self.vviRateSmoothingLabel.grid(row=7, column=0, padx=15, pady=15)
+        self.vviRateSmoothingEntry.grid(row=7, column=1, padx=15, pady=15)
+        self.vviRateSmoothingButton.grid(row=7, column=2, padx=15, pady=15)
 
         self.tab_parent.pack(expand = 1, fill='both')
 
@@ -253,10 +389,10 @@ class MainWindow:
         self.confirmButton.grid(row = 4, column = 1)
         
         self.confirmButton = tk.Button(self.aai, text = 'Confirm', width = 20, command = self.confirmChanges)
-        self.confirmButton.grid(row = 4, column = 1)
+        self.confirmButton.grid(row = 9, column = 1)
 
         self.confirmButton = tk.Button(self.vvi, text = 'Confirm', width = 20, command = self.confirmChanges)
-        self.confirmButton.grid(row = 4, column = 1)
+        self.confirmButton.grid(row = 8, column = 1)
 
     def confirmChanges(self):
         if messagebox.askyesno("Confirmation", "Upload these changes?"):
@@ -269,54 +405,18 @@ class MainWindow:
         self.master.destroy()
         exit()
 
-class AddUserWindow:
-    def __init__(self, master):
-        self.master = master
-        self.master.geometry('300x200')
-        self.quitButton = tk.Button(self.master, text = 'Quit', width = 12, command = self.close_windows)
-        self.label_username = tk.Label(self.master, text="Enter New Username")
-        self.label_password = tk.Label(self.master, text="Enter New Password")
 
-        self.entry_username = tk.Entry(self.master)
-        self.entry_password = tk.Entry(self.master, show="*")
-        self.entry_username.focus()
 
-        self.label_username.grid(row=0, sticky='e', pady=5)
-        self.label_password.grid(row=1, sticky='e', pady=10)
-        self.entry_username.grid(row=0, column=1, columnspan = 1,sticky='w')
-        self.entry_password.grid(row=1, column=1, columnspan = 1,sticky='w')
-
-        self.add_userbtn = tk.Button(self.master, text="Add user",width =12, command=self._add_user_btn_clicked)
-        self.add_userbtn.grid(row=2,column=1,pady=10)
-
-        self.quitButton = tk.Button(self.master, text = 'Back', width = 12, command = self.close_windows)
-        self.quitButton.grid(row=3,column=1,pady=5)
-
-        self.master.protocol("WM_DELETE_WINDOW", self.on_exit)
-
-    def on_exit(self):
-        if messagebox.askyesno("Exit", "Do you want to quit the application?"):
-            exit()
-
-    def _add_user_btn_clicked(self):
-        global login_dict
-        username = self.entry_username.get()
-        password = self.entry_password.get()
-
-        self.entry_username.delete(0, 'end')
-        self.entry_password.delete(0, 'end')
-        
-        # 10 Users
-        if(len(username) and len(password) and len(login_dict)<11):
-            login_dict[username] = password
-            writeUsers()
-            messagebox.showinfo("Success", "User Added")
-            self.quitButton.focus()
-        else:
-            messagebox.showerror("Error", "Maximum allowed user limit reached")
-
-    def close_windows(self):
-        self.master.destroy()
+def readUsers():
+    global login_dict
+    try:
+        with open('HACKERS_DONT_LOOK_HERE.pickle', 'rb') as file:
+            login_dict =  pickle.load(file)
+            print(login_dict)
+    except(FileNotFoundError):
+        with open('DCM/HACKERS_DONT_LOOK_HERE.pickle', 'rb') as file:
+            login_dict =  pickle.load(file)
+            print(login_dict)
 
 def readUsers():
     global login_dict
