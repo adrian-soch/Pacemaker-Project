@@ -5,6 +5,12 @@ import pickle
 
 
 login_dict = {}
+aooLowerRateLimit = "123"
+aooUpperRateLimit = "123"
+aooAtrialAmplitude = "123"
+aooAtrialPulseWidth = "123"
+
+
 class WelcomeFrame:
     def __init__(self, master):
         self.master = master
@@ -207,13 +213,15 @@ class MainWindow:
         self.aooAtrialAmplitudeButton = tk.Button(self.aoo, text = "Set")
         self.aooAtrialPulseWidthButton = tk.Button(self.aoo, text = "Set")
         self.aooLowerRateLimitLabel = tk.Label(self.aoo, text = "Lower Rate Limit")
-        self.aooLowerRateLimitValue = tk.Label(self.aoo, text = "Current Value: "+"123")
-        self.aooUpperRateLimitLabel = tk.Label(self.aoo, text = "Upper Rate Limit ")
-        self.aooUpperRateLimitValue = tk.Label(self.aoo, text = "Current Value: "+"123")
+        
+        self.aooLowerRateLimitValue = tk.Label(self.aoo, text = "Current Value: " + aooLowerRateLimit)
+        self.aooUpperRateLimitLabel = tk.Label(self.aoo, text = "Upper Rate Limit")
+        self.aooUpperRateLimitValue = tk.Label(self.aoo, text = "Current Value: " + aooUpperRateLimit)
         self.aooAtrialAmplitudeLabel = tk.Label(self.aoo, text = "Atrial Amplitude")
-        self.aooAtrialAmplitudeValue = tk.Label(self.aoo, text = "Current Value: "+"123")
+        self.aooAtrialAmplitudeValue = tk.Label(self.aoo, text = "Current Value: " + aooAtrialAmplitude)
         self.aooAtrialPulseWidthLabel = tk.Label(self.aoo, text = "Atrial Pulse Width")
-        self.aooAtrialPulseWidthValue = tk.Label(self.aoo, text = "Current Value: "+"123")
+        self.aooAtrialPulseWidthValue = tk.Label(self.aoo, text = "Current Value: " + aooAtrialPulseWidth)
+    
         self.aooLowerRateLimitEntry = tk.Entry(self.aoo)
         self.aooUpperRateLimitEntry = tk.Entry(self.aoo)
         self.aooAtrialAmplitudeEntry = tk.Entry(self.aoo)
@@ -395,6 +403,11 @@ class MainWindow:
         self.confirmButton.grid(row = 8, column = 1)
 
     def confirmChanges(self):
+        global aooLowerRateLimit, aooUpperRateLimit, aooAtrialAmplitude, aooAtrialPulseWidth
+        aooLowerRateLimit = str(self.aooLowerRateLimitEntry.get())
+        aooUpperRateLimit = str(self.aooUpperRateLimitEntry.get())
+        aooAtrialAmplitude = str(self.aooAtrialAmplitudeEntry.get())
+        aooAtrialPulseWidth = str(self.aooAtrialPulseWidth.get())
         if messagebox.askyesno("Confirmation", "Upload these changes?"):
             messagebox.showinfo("Done", "Success")
 
