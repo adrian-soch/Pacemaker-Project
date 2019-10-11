@@ -3,7 +3,6 @@ from tkinter import ttk
 from tkinter import messagebox
 import pickle
 
-
 login_dict = {}
 aooLowerRateLimit = "123"
 aooUpperRateLimit = "123"
@@ -125,8 +124,7 @@ class LoginFrame:
 class AddUserWindow:
     def __init__(self, master):
         self.master = master
-        self.master.geometry('300x300')
-        self.quitButton = tk.Button(self.master, text = 'Quit', width = 12, command = self.close_windows)
+        self.master.geometry('300x250')
         self.label_username = tk.Label(self.master, text="Enter New Username")
         self.label_password = tk.Label(self.master, text="Enter New Password")
         self.label_password2 = tk.Label(self.master, text="Confirm Password")
@@ -146,14 +144,13 @@ class AddUserWindow:
         self.add_userbtn = tk.Button(self.master, text="Add user",width =12, command=self._add_user_btn_clicked)
         self.add_userbtn.grid(row=3,column=1,pady=10)
 
-        self.quitButton = tk.Button(self.master, text = 'Back', width = 12, command = self.close_windows)
-        self.quitButton.grid(row=4,column=1,pady=5)
+        #self.quitButton = tk.Button(self.master, text = 'Back', width = 12, command = self.close_windows)
+        #self.quitButton.grid(row=4,column=1,pady=5)
 
         self.master.protocol("WM_DELETE_WINDOW", self.on_exit)
 
     def on_exit(self):
-        if messagebox.askyesno("Exit", "Do you want to quit the application?"):
-            exit()
+        self.master.destroy()
 
     def _add_user_btn_clicked(self):
         global login_dict
@@ -172,7 +169,7 @@ class AddUserWindow:
                 login_dict[username] = password
                 writeUsers()
                 messagebox.showinfo("Success", "User Added")
-                self.quitButton.focus()
+                self.master.destroy()
             else:
                 messagebox.showerror("Error", "Maximum allowed user limit reached")
         
@@ -186,7 +183,7 @@ class AddUserWindow:
 class MainWindow:
     def __init__(self, master):
         self.master = master
-        self.master.geometry('500x550')
+        self.master.geometry('500x570')
         self.master.protocol("WM_DELETE_WINDOW", self.on_exit)
 
         self.menubar = tk.Menu(self.master)
@@ -408,8 +405,19 @@ class MainWindow:
         self.confirmButton.grid(row = 9, column = 1)
 
         self.confirmButton = tk.Button(self.vvi, text = 'Confirm', width = 20, command = self.confirmChanges)
-        self.confirmButton.grid(row = 8, column = 1)
+        self.confirmButton.grid(row = 9, column = 1)
+        
+        self.quitButton = tk.Button(self.aoo, text = 'LogOff', width = 12, command = self.logOff)
+        self.quitButton.grid(row=5,column=1,pady=5)
 
+        self.quitButton = tk.Button(self.voo, text = 'LogOff', width = 12, command = self.logOff)
+        self.quitButton.grid(row=5,column=1,pady=5)
+
+        self.quitButton = tk.Button(self.aai, text = 'LogOff', width = 12, command = self.logOff)
+        self.quitButton.grid(row=10,column=1,pady=5)
+
+        self.quitButton = tk.Button(self.vvi, text = 'LogOff', width = 12, command = self.logOff)
+        self.quitButton.grid(row=10,column=1,pady=5)
     def confirmChanges(self):
         if messagebox.askyesno("Confirmation", "Upload these changes?"):
             messagebox.showinfo("Done", "Success")
@@ -417,6 +425,11 @@ class MainWindow:
     def confirmSet(self):
         if messagebox.askyesno("Confirmation", "Upload a new set?"):
             messagebox.showinfo("Done", "Success")
+    
+    def logOff(self):
+        if messagebox.askyesno("LogOff", "Do you want to log off?"):
+            self.master.destroy()
+            main()
         
     def on_exit(self):
         if messagebox.askyesno("Exit", "Do you want to quit the application?"):
