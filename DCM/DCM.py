@@ -160,21 +160,28 @@ class AddUserWindow:
         username = self.entry_username.get()
         password = self.entry_password.get()
         password2 = self.entry_password2.get()
-
+        userExists = False
         self.entry_username.delete(0, 'end')
         self.entry_password.delete(0, 'end')
         self.entry_password2.delete(0, 'end')
         
         if(password == password2):
-            
+            for key in login_dict:
+                if(key == username):
+                    userExists = True
              # 10 Users
-            if(len(username) and len(password) and len(login_dict)<11):
+            if(not(userExists) and len(username) and len(password) and len(login_dict)<11):
                 login_dict[username] = password
                 writeUsers()
                 messagebox.showinfo("Success", "User Added")
                 self.quitButton.focus()
             else:
-                messagebox.showerror("Error", "Maximum allowed user limit reached")
+                if(not(len(username) and len(password))):
+                    messagebox.showerror("Error", "Missing Username and/or Password")
+                elif(userExists):
+                    messagebox.showerror("Error", "User exists")
+                else:
+                    messagebox.showerror("Error", "Maximum allowed user limit reached")
         
         else:
             messagebox.showerror("Error", "Passwords do not match")
