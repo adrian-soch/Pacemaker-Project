@@ -1,2 +1,0 @@
-  freedomk64f_external_mode.c
-
