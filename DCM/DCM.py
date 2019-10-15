@@ -486,6 +486,40 @@ class MainWindow:
         if messagebox.askyesno("Confirmation", "Upload these changes?"):
             messagebox.showinfo("Done", "Success")
 
+        #Variables for Entry Boxes
+        #AOO
+        aoo_lowerRateEntry = self.aooLowerRateLimitEntry.get()
+        aoo_upperRateEntry = self.aooUpperRateLimitEntry.get()
+        aoo_atrialAmplitudeEntry = self.aooAtrialAmplitudeEntry.get()
+        aoo_atrialPulseWidthEntry = self.aooAtrialPulseWidthEntry.get()
+
+        #VOO
+        voo_lowerRateLimitEntry = self.vooLowerRateLimitEntry.get()
+        voo_upperRateLimitEntry = self.vooUpperRateLimitEntry.get()
+        voo_atrialAmplitudeEntry = self.vooAtrialAmplitudeEntry.get()
+        voo_atrialPulseWidthEntry = self.vooAtrialPulseWidthEntry.get()
+
+        #AAI
+        aai_lowerRateLimitEntry = self.aaiLowerRateLimitEntry.get()
+        aai_upperRateLimitEntry = self.aaiUpperRateLimitEntry.get() 
+        aai_atrialAmplitudeEntry = self.aaiAtrialAmplitudeEntry.get() 
+        aai_atrialPulseWidthEntry = self.aaiAtrialPulseWidthEntry.get() 
+        aai_atrialSensitivityEntry = self.aaiAtrialSensitivityEntry.get() 
+        aai_aRPEntry = self.aaiARPEntry.get() 
+        aai_aPVARPEntry = self.aaiAPVARPEntry.get() 
+        aai_hysteresisEntry = self.aaiHysteresisEntry.get()
+        aai_rateSmoothingEntry = self.aaiRateSmoothingEntry.get()
+
+        #VVI
+        vvi_lowerRateLimitEntry = self.vviLowerRateLimitEntry.get()
+        vvi_upperRateLimitEntry = self.vviUpperRateLimitEntry.get() 
+        vvi_atrialAmplitudeEntry = self.vviAtrialAmplitudeEntry.get() 
+        vvi_atrialPulseWidthEntry = self.vviAtrialPulseWidthEntry.get() 
+        vvi_atrialSensitivityEntry = self.vviAtrialSensitivityEntry.get() 
+        vvi_aRPEntry = self.vviARPEntry.get() 
+        vvi_hysteresisEntry = self.vviHysteresisEntry.get() 
+        vvi_rateSmoothingEntry = self.vviRateSmoothingEntry.get() 
+
     def logOff(self):
         if messagebox.askyesno("LogOff", "Do you want to log off?"):
             self.master.destroy()
