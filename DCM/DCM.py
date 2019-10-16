@@ -189,13 +189,46 @@ class AddUserWindow:
     def close_windows(self):
         self.master.destroy()
 
+#Initializing all global variables with "0"
+#aoo_lowerRateEntry, aoo_upperRateEntry, aoo_atrialAmplitudeEntry, aooAtrialPulseWidth, voo_lowerRateLimitEntry, voo_upperRateLimitEntry, voo_atrialAmplitudeEntry, voo_atrialPulseWidthEntry, aai_lowerRateLimitEntry, aai_upperRateLimitEntry, aai_atrialAmplitudeEntry, aai_atrialPulseWidthEntry, aai_atrialSensitivityEntry, aai_ARPEntry, aai_APVARPEntry, aai_hysteresisEntry, aai_rateSmoothingEntry, vvi_lowerRateLimitEntry, vvi_upperRateLimitEntry, vvi_atrialAmplitudeEntry, vvi_atrialPulseWidthEntry, vvi_atrialSensitivityEntry, vvi_ARPEntry, vvi_hysteresisEntry, vvi_rateSmoothingEntry = ("0",)*25
+
+#AOO
+aoo_lowerRateLimitEntry = "0"
+aoo_upperRateLimitEntry = "0"
+aoo_atrialAmplitudeEntry = "0"
+aoo_atrialPulseWidthEntry = "0"
+
+#VOO
+voo_lowerRateLimitEntry = "0"
+voo_upperRateLimitEntry = "0"
+voo_atrialAmplitudeEntry = "0"
+voo_atrialPulseWidthEntry = "0"
+
+#AAI
+aai_lowerRateLimitEntry = "0"
+aai_upperRateLimitEntry = "0"
+aai_atrialAmplitudeEntry = "0"
+aai_atrialPulseWidthEntry = "0"
+aai_atrialSensitivityEntry = "0"
+aai_ARPEntry = "0"
+aai_APVARPEntry = "0"
+aai_hysteresisEntry = "0"
+aai_rateSmoothingEntry = "0"
+
+#VVI
+vvi_lowerRateLimitEntry = "0"
+vvi_upperRateLimitEntry = "0"
+vvi_atrialAmplitudeEntry = "0"
+vvi_atrialPulseWidthEntry = "0"
+vvi_atrialSensitivityEntry = "0"
+vvi_ARPEntry = "0"
+vvi_hysteresisEntry = "0"
+vvi_rateSmoothingEntry = "0"   
 
 class MainWindow:
     def __init__(self, master):
         
         #Initalizing Current state to "0"
-        aoo_lowerRateEntry, aoo_upperRateEntry, aoo_atrialAmplitudeEntry, aooAtrialPulseWidth, voo_lowerRateLimitEntry, voo_upperRateLimitEntry, voo_atrialAmplitudeEntry, voo_atrialPulseWidthEntry, aai_lowerRateLimitEntry, aai_upperRateLimitEntry, aai_atrialAmplitudeEntry, aai_atrialPulseWidthEntry, aai_atrialSensitivityEntry, aai_ARPEntry, aai_APVARPEntry, aai_hysteresisEntry, aai_rateSmoothingEntry, vvi_lowerRateLimitEntry, vvi_upperRateLimitEntry, vvi_atrialAmplitudeEntry, vvi_atrialPulseWidthEntry, vvi_atrialSensitivityEntry, vvi_ARPEntry, vvi_hysteresisEntry, vvi_rateSmoothingEntry = ("0",)*25
-
         
         self.content = tk.Entry()
         self.master = master
@@ -231,10 +264,10 @@ class MainWindow:
         self.aooAtrialAmplitudeLabel = tk.Label(self.aoo, text = "Atrial Amplitude")
         self.aooAtrialPulseWidthLabel = tk.Label(self.aoo, text = "Atrial Pulse Width")
 
-        self.aooLowerRateLimitValue = tk.Label(self.aoo, text = "Current Value: " + aooLowerRateLimit)
-        self.aooUpperRateLimitValue = tk.Label(self.aoo, text = "Current Value: " + aooUpperRateLimit)
-        self.aooAtrialAmplitudeValue = tk.Label(self.aoo, text = "Current Value: " + aooAtrialAmplitude)
-        self.aooAtrialPulseWidthValue = tk.Label(self.aoo, text = "Current Value: " + aooAtrialPulseWidth)
+        self.aooLowerRateLimitValue = tk.Label(self.aoo, text = "Current Value: " + aoo_lowerRateLimitEntry)
+        self.aooUpperRateLimitValue = tk.Label(self.aoo, text = "Current Value: " + aoo_upperRateLimitEntry)
+        self.aooAtrialAmplitudeValue = tk.Label(self.aoo, text = "Current Value: " + aoo_atrialAmplitudeEntry)
+        self.aooAtrialPulseWidthValue = tk.Label(self.aoo, text = "Current Value: " + aoo_atrialPulseWidthEntry)
     
         self.aooLowerRateLimitEntry = tk.Entry(self.aoo)
         self.aooUpperRateLimitEntry = tk.Entry(self.aoo)
@@ -270,10 +303,10 @@ class MainWindow:
         self.vooAtrialAmplitudeLabel = tk.Label(self.voo, text = "Ventricular Amplitude")
         self.vooAtrialPulseWidthLabel = tk.Label(self.voo, text = "Ventricular Pulse Width")
 
-        self.vooLowerRateLimitValue = tk.Label(self.voo, text = "Current Value: "+"123")
-        self.vooUpperRateLimitValue = tk.Label(self.voo, text = "Current Value: "+"123")
-        self.vooAtrialAmplitudeValue = tk.Label(self.voo, text = "Current Value: "+"123")
-        self.vooAtrialPulseWidthValue = tk.Label(self.voo, text = "Current Value: "+"123")
+        self.vooLowerRateLimitValue = tk.Label(self.voo, text = "Current Value: "+ voo_lowerRateLimitEntry)
+        self.vooUpperRateLimitValue = tk.Label(self.voo, text = "Current Value: "+ voo_upperRateLimitEntry)
+        self.vooAtrialAmplitudeValue = tk.Label(self.voo, text = "Current Value: "+ voo_atrialAmplitudeEntry)
+        self.vooAtrialPulseWidthValue = tk.Label(self.voo, text = "Current Value: "+ voo_atrialPulseWidthEntry)
 
         self.vooLowerRateLimitEntry = tk.Entry(self.voo)
         self.vooUpperRateLimitEntry = tk.Entry(self.voo)
@@ -319,15 +352,15 @@ class MainWindow:
         self.aaiHysteresisLabel = tk.Label(self.aai, text = "Hysteresis")
         self.aaiRateSmoothingLabel = tk.Label(self.aai, text = "Rate Smoothing")
 
-        self.aaiLowerRateLimitValue = tk.Label(self.aai, text = "Current Value: "+"123")
-        self.aaiUpperRateLimitValue = tk.Label(self.aai, text = "Current Value: "+"123")
-        self.aaiAtrialAmplitudeValue = tk.Label(self.aai, text = "Current Value: "+"123")
-        self.aaiAtrialPulseWidthValue = tk.Label(self.aai, text = "Current Value: "+"123")
-        self.aaiAtrialSensitivityValue = tk.Label(self.aai, text = "Current Value: "+"123")
-        self.aaiARPValue = tk.Label(self.aai, text = "Current Value: "+"123")
-        self.aaiAPVARPValue = tk.Label(self.aai, text = "Current Value: "+"123")
-        self.aaiHysteresisValue = tk.Label(self.aai, text = "Current Value: "+"123")
-        self.aaiRateSmoothingValue = tk.Label(self.aai, text = "Current Value: "+"123")
+        self.aaiLowerRateLimitValue = tk.Label(self.aai, text = "Current Value: "+ aai_lowerRateLimitEntry)
+        self.aaiUpperRateLimitValue = tk.Label(self.aai, text = "Current Value: "+ aai_upperRateLimitEntry)
+        self.aaiAtrialAmplitudeValue = tk.Label(self.aai, text = "Current Value: "+ aai_atrialAmplitudeEntry)
+        self.aaiAtrialPulseWidthValue = tk.Label(self.aai, text = "Current Value: "+ aai_atrialPulseWidthEntry)
+        self.aaiAtrialSensitivityValue = tk.Label(self.aai, text = "Current Value: "+ aai_atrialSensitivityEntry)
+        self.aaiARPValue = tk.Label(self.aai, text = "Current Value: "+ aai_ARPEntry)
+        self.aaiAPVARPValue = tk.Label(self.aai, text = "Current Value: "+ aai_APVARPEntry)
+        self.aaiHysteresisValue = tk.Label(self.aai, text = "Current Value: "+ aai_hysteresisEntry)
+        self.aaiRateSmoothingValue = tk.Label(self.aai, text = "Current Value: "+ aai_rateSmoothingEntry)
 
         self.aaiLowerRateLimitEntry = tk.Entry(self.aai)
         self.aaiUpperRateLimitEntry = tk.Entry(self.aai)
@@ -398,14 +431,14 @@ class MainWindow:
         self.vviHysteresisLabel = tk.Label(self.vvi, text = "Hysteresis")
         self.vviRateSmoothingLabel = tk.Label(self.vvi, text = "Rate Smoothing")
 
-        self.vviLowerRateLimitValue = tk.Label(self.vvi, text = "Current Value: "+"123")
-        self.vviUpperRateLimitValue = tk.Label(self.vvi, text = "Current Value: "+"123")
-        self.vviAtrialAmplitudeValue = tk.Label(self.vvi, text = "Current Value: "+"123")
-        self.vviAtrialPulseWidthValue = tk.Label(self.vvi, text = "Current Value: "+"123")
-        self.vviAtrialSensitivityValue = tk.Label(self.vvi, text = "Current Value: "+"123")
-        self.vviARPValue = tk.Label(self.vvi, text = "Current Value: "+"123")
-        self.vviHysteresisValue = tk.Label(self.vvi, text = "Current Value: "+"123")
-        self.vviRateSmoothingValue = tk.Label(self.vvi, text = "Current Value: "+"123")
+        self.vviLowerRateLimitValue = tk.Label(self.vvi, text = "Current Value: "+ vvi_lowerRateLimitEntry)
+        self.vviUpperRateLimitValue = tk.Label(self.vvi, text = "Current Value: "+ vvi_upperRateLimitEntry)
+        self.vviAtrialAmplitudeValue = tk.Label(self.vvi, text = "Current Value: "+ vvi_atrialAmplitudeEntry)
+        self.vviAtrialPulseWidthValue = tk.Label(self.vvi, text = "Current Value: "+ vvi_atrialPulseWidthEntry)
+        self.vviAtrialSensitivityValue = tk.Label(self.vvi, text = "Current Value: "+ vvi_atrialSensitivityEntry)
+        self.vviARPValue = tk.Label(self.vvi, text = "Current Value: "+ vvi_ARPEntry)
+        self.vviHysteresisValue = tk.Label(self.vvi, text = "Current Value: "+ vvi_hysteresisEntry)
+        self.vviRateSmoothingValue = tk.Label(self.vvi, text = "Current Value: "+ vvi_rateSmoothingEntry)
 
         self.vviLowerRateLimitEntry = tk.Entry(self.vvi)
         self.vviUpperRateLimitEntry = tk.Entry(self.vvi)
@@ -484,6 +517,7 @@ class MainWindow:
             messagebox.showinfo("Done", "Success")
 
 
+
     def setValue(self):
         '''a = self.aooLowerRateLimitEntry.get()
         print(a)
@@ -493,37 +527,64 @@ class MainWindow:
 
         #Variables for Entry Boxes
         #AOO
-        global aoo_lowerRateEntry = self.aooLowerRateLimitEntry.get()
-        global aoo_upperRateEntry = self.aooUpperRateLimitEntry.get()
-        global aoo_atrialAmplitudeEntry = self.aooAtrialAmplitudeEntry.get()
-        global aoo_atrialPulseWidthEntry = self.aooAtrialPulseWidthEntry.get()
+        global aoo_lowerRateLimitEntry
+        aoo_lowerRateEntry = self.aooLowerRateLimitEntry.get()
+        global aoo_upperRateLimitEntry
+        aoo_upperRateEntry = self.aooUpperRateLimitEntry.get()
+        global aoo_atrialAmplitudeEntry 
+        aoo_atrialAmplitudeEntry = self.aooAtrialAmplitudeEntry.get()
+        global aoo_atrialPulseWidthEntry 
+        aoo_atrialPulseWidthEntry = self.aooAtrialPulseWidthEntry.get()
 
         #VOO
-        global voo_lowerRateLimitEntry = self.vooLowerRateLimitEntry.get()
-        global voo_upperRateLimitEntry = self.vooUpperRateLimitEntry.get()
-        global voo_atrialAmplitudeEntry = self.vooAtrialAmplitudeEntry.get()
-        global voo_atrialPulseWidthEntry = self.vooAtrialPulseWidthEntry.get()
+        global voo_lowerRateLimitEntry
+        voo_lowerRateLimitEntry = self.vooLowerRateLimitEntry.get()
+        global voo_upperRateLimitEntry 
+        voo_upperRateLimitEntry = self.vooUpperRateLimitEntry.get()
+        global voo_atrialAmplitudeEntry
+        voo_atrialAmplitudeEntry = self.vooAtrialAmplitudeEntry.get()
+        global voo_atrialPulseWidthEntry
+        voo_atrialPulseWidthEntry = self.vooAtrialPulseWidthEntry.get()
 
         #AAI
-        global aai_lowerRateLimitEntry = self.aaiLowerRateLimitEntry.get()
-        global aai_upperRateLimitEntry = self.aaiUpperRateLimitEntry.get() 
-        global aai_atrialAmplitudeEntry = self.aaiAtrialAmplitudeEntry.get() 
-        global aai_atrialPulseWidthEntry = self.aaiAtrialPulseWidthEntry.get() 
-        global aai_atrialSensitivityEntry = self.aaiAtrialSensitivityEntry.get() 
-        global aai_ARPEntry = self.aaiARPEntry.get() 
-        global aai_APVARPEntry = self.aaiAPVARPEntry.get() 
-        global aai_hysteresisEntry = self.aaiHysteresisEntry.get()
-        global aai_rateSmoothingEntry = self.aaiRateSmoothingEntry.get()
+        global aai_lowerRateLimitEntry
+        aai_lowerRateLimitEntry = self.aaiLowerRateLimitEntry.get()
+        global aai_upperRateLimitEntry 
+        aai_upperRateLimitEntry = self.aaiUpperRateLimitEntry.get() 
+        global aai_atrialAmplitudeEntry 
+        aai_atrialAmplitudeEntry = self.aaiAtrialAmplitudeEntry.get() 
+        global aai_atrialPulseWidthEntry
+        aai_atrialPulseWidthEntry = self.aaiAtrialPulseWidthEntry.get() 
+        global aai_atrialSensitivityEntry
+        aai_atrialSensitivityEntry = self.aaiAtrialSensitivityEntry.get() 
+        global aai_ARPEntry 
+        aai_ARPEntry = self.aaiARPEntry.get() 
+        global aai_APVARPEntry
+        aai_APVARPEntry = self.aaiAPVARPEntry.get() 
+        global aai_hysteresisEntry 
+        aai_hysteresisEntry = self.aaiHysteresisEntry.get()
+        global aai_rateSmoothingEntry
+        aai_rateSmoothingEntry = self.aaiRateSmoothingEntry.get()
 
         #VVI
-        global vvi_lowerRateLimitEntry = self.vviLowerRateLimitEntry.get()
-        global vvi_upperRateLimitEntry = self.vviUpperRateLimitEntry.get() 
-        global vvi_atrialAmplitudeEntry = self.vviAtrialAmplitudeEntry.get() 
-        global vvi_atrialPulseWidthEntry = self.vviAtrialPulseWidthEntry.get() 
-        global vvi_atrialSensitivityEntry = self.vviAtrialSensitivityEntry.get() 
-        global vvi_ARPEntry = self.vviARPEntry.get() 
-        global vvi_hysteresisEntry = self.vviHysteresisEntry.get() 
-        global vvi_rateSmoothingEntry = self.vviRateSmoothingEntry.get() 
+        global vvi_lowerRateLimitEntry
+        vvi_lowerRateLimitEntry = self.vviLowerRateLimitEntry.get()
+        global vvi_upperRateLimitEntry
+        vvi_upperRateLimitEntry = self.vviUpperRateLimitEntry.get() 
+        global vvi_atrialAmplitudeEntry
+        vvi_atrialAmplitudeEntry = self.vviAtrialAmplitudeEntry.get() 
+        global vvi_atrialPulseWidthEntry 
+        vvi_atrialPulseWidthEntry = self.vviAtrialPulseWidthEntry.get() 
+        global vvi_atrialSensitivityEntry
+        vvi_atrialSensitivityEntry = self.vviAtrialSensitivityEntry.get() 
+        global vvi_ARPEntry
+        vvi_ARPEntry = self.vviARPEntry.get() 
+        global vvi_hysteresisEntry 
+        vvi_hysteresisEntry = self.vviHysteresisEntry.get() 
+        global vvi_rateSmoothingEntry
+        vvi_rateSmoothingEntry = self.vviRateSmoothingEntry.get() 
+
+        #self.tk.update(self)
 
     def logOff(self):
         if messagebox.askyesno("LogOff", "Do you want to log off?"):
