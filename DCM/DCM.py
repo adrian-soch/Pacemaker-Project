@@ -190,7 +190,6 @@ class AddUserWindow:
         self.master.destroy()
 
 #Initializing all global variables with "0"
-#aoo_lowerRateEntry, aoo_upperRateEntry, aoo_atrialAmplitudeEntry, aooAtrialPulseWidth, voo_lowerRateLimitEntry, voo_upperRateLimitEntry, voo_atrialAmplitudeEntry, voo_atrialPulseWidthEntry, aai_lowerRateLimitEntry, aai_upperRateLimitEntry, aai_atrialAmplitudeEntry, aai_atrialPulseWidthEntry, aai_atrialSensitivityEntry, aai_ARPEntry, aai_APVARPEntry, aai_hysteresisEntry, aai_rateSmoothingEntry, vvi_lowerRateLimitEntry, vvi_upperRateLimitEntry, vvi_atrialAmplitudeEntry, vvi_atrialPulseWidthEntry, vvi_atrialSensitivityEntry, vvi_ARPEntry, vvi_hysteresisEntry, vvi_rateSmoothingEntry = ("0",)*25
 
 #AOO
 aoo_lowerRateLimitEntry = "0"
@@ -354,6 +353,7 @@ class MainWindow:
         self.aaiHysteresisLabel = tk.Label(self.aai, text = "Hysteresis")
         self.aaiRateSmoothingLabel = tk.Label(self.aai, text = "Rate Smoothing")
 
+        global aai_lowerRateLimitEntry, aai_upperRateLimitEntry, aai_atrialAmplitudeEntry, aai_atrialPulseWidthEntry, aai_atrialSensitivityEntry, aai_ARPEntry, aai_APVARPEntry, aai_hysteresisEntry, aai_rateSmoothingEntry 
         self.aaiLowerRateLimitValue = tk.Label(self.aai, text = "Current Value: "+ aai_lowerRateLimitEntry)
         self.aaiUpperRateLimitValue = tk.Label(self.aai, text = "Current Value: "+ aai_upperRateLimitEntry)
         self.aaiAtrialAmplitudeValue = tk.Label(self.aai, text = "Current Value: "+ aai_atrialAmplitudeEntry)
@@ -526,81 +526,191 @@ class MainWindow:
         '''a = self.aooLowerRateLimitEntry.get()
         print(a)
         currentValue.set(a)'''
-        if messagebox.askyesno("Confirmation", "Upload these changes?"):
+        if messagebox.askyesno("Confirmation", "Replace current values?"):
             messagebox.showinfo("Done", "Success")
 
         #Variables for Entry Boxes
         #AOO
         global aoo_lowerRateLimitEntry
         temp = self.aooLowerRateLimitEntry.get()
-        if (temp == ''):
+        try:
+            int(temp)
+            if (temp == '' or int(temp)<0):
+                pass
+            else:
+                aoo_lowerRateLimitEntry = temp
+        except:
             pass
-        else:
-            aoo_lowerRateLimitEntry = temp
+
         global aoo_upperRateLimitEntry
         temp = self.aooUpperRateLimitEntry.get()
-        if (temp == ''):
+        try:
+            int(temp)
+            if (temp == '' or int(temp)<0):
+                pass
+            else:
+                aoo_upperRateLimitEntry = temp
+        except:
             pass
-        else:
-            aoo_upperRateLimitEntry = temp
+
         global aoo_atrialAmplitudeEntry 
         temp = self.aooAtrialAmplitudeEntry.get()
-        if (temp == ''):
+        try:
+            int(temp)
+            if (temp == '' or int(temp)<0):
+                pass
+            else:
+                aoo_atrialAmplitudeEntry = temp
+        except:
             pass
-        else:
-            aoo_atrialAmplitudeEntry = temp
+
         global aoo_atrialPulseWidthEntry 
         temp = self.aooAtrialPulseWidthEntry.get()
-        if (temp == ''):
+        try:
+            int(temp)
+            if (temp == '' or int(temp)<0):
+                pass
+            else:
+                aoo_atrialPulseWidthEntry = temp
+        except:
             pass
-        else:
-            aoo_atrialPulseWidthEntry = temp
 
         #VOO
         global voo_lowerRateLimitEntry
         temp = self.vooLowerRateLimitEntry.get()
-        if (temp == ''):
+        try:
+            int(temp)
+            if (temp == '' or int(temp)<0):
+                pass
+            else:
+                voo_lowerRateLimitEntry = temp
+        except:
             pass
-        else:
-            voo_lowerRateLimitEntry = temp
+
         global voo_upperRateLimitEntry 
         temp = self.vooUpperRateLimitEntry.get()
-        if (temp == ''):
+        try:
+            int(temp)
+            if (temp == '' or int(temp)<0):
+                pass
+            else:
+                voo_upperRateLimitEntry = temp
+        except:
             pass
-        else:
-            voo_upperRateLimitEntry = temp
+
         global voo_atrialAmplitudeEntry
         temp = self.vooAtrialAmplitudeEntry.get()
-        if (temp == ''):
+        try:
+            int(temp)
+            if (temp == '' or int(temp)<0):
+                pass
+            else:
+                vooAtrialAmplitudeEntry = temp
+        except:
             pass
-        else:
-            voo_atrialAmplitudeEntry = temp
+
         global voo_atrialPulseWidthEntry
         temp = self.vooAtrialPulseWidthEntry.get()
-        if (temp == ''):
+        try:
+            int(temp)
+            if (temp == '' or int(temp)<0):
+                pass
+            else:
+                voo_atrialPulseWidthEntry = temp
+        except:
             pass
-        else:
-            voo_atrialPulseWidthEntry = temp
 
         #AAI
         global aai_lowerRateLimitEntry
-        aai_lowerRateLimitEntry = self.aaiLowerRateLimitEntry.get()
+        temp = self.aaiLowerRateLimitEntry.get()
+        try:
+            int(temp)
+            if (temp == '' or int(temp)<0):
+                pass
+            else:
+                aai_lowerRateLimitEntry = temp
+        except:
+            pass
         global aai_upperRateLimitEntry 
-        aai_upperRateLimitEntry = self.aaiUpperRateLimitEntry.get() 
+        temp = self.aaiUpperRateLimitEntry.get()
+        try:
+            int(temp)
+            if (temp == '' or int(temp)<0):
+                pass
+            else:
+                aai_upperRateLimitEntry = temp
+        except:
+            pass
         global aai_atrialAmplitudeEntry 
-        aai_atrialAmplitudeEntry = self.aaiAtrialAmplitudeEntry.get() 
+        temp = self.aaiAtrialAmplitudeEntry .get()
+        try:
+            int(temp)
+            if (temp == '' or int(temp)<0):
+                pass
+            else:
+                aai_atrialAmplitudeEntry  = temp
+        except:
+            pass
         global aai_atrialPulseWidthEntry
-        aai_atrialPulseWidthEntry = self.aaiAtrialPulseWidthEntry.get() 
+        temp = self.aaiAtrialPulseWidthEntry.get()
+        try:
+            int(temp)
+            if (temp == '' or int(temp)<0):
+                pass
+            else:
+                aai_atrialPulseWidthEntry = temp
+        except:
+            pass
         global aai_atrialSensitivityEntry
-        aai_atrialSensitivityEntry = self.aaiAtrialSensitivityEntry.get() 
+        temp = self.aaiAtrialSensitivityEntry.get()
+        try:
+            int(temp)
+            if (temp == '' or int(temp)<0):
+                pass
+            else:
+                aai_atrialSensitivityEntry = temp
+        except:
+            pass
         global aai_ARPEntry 
-        aai_ARPEntry = self.aaiARPEntry.get() 
+        temp = self.aaiARPEntry.get()
+        try:
+            int(temp)
+            if (temp == '' or int(temp)<0):
+                pass
+            else:
+                aai_ARPEntry = temp
+        except:
+            pass
         global aai_APVARPEntry
-        aai_APVARPEntry = self.aaiAPVARPEntry.get() 
+        temp = self.aaiAPVARPEntry.get()
+        try:
+            int(temp)
+            if (temp == '' or int(temp)<0):
+                pass
+            else:
+                aai_APVARPEntry = temp
+        except:
+            pass
         global aai_hysteresisEntry 
-        aai_hysteresisEntry = self.aaiHysteresisEntry.get()
+        temp = self.aaiHysteresisEntry.get()
+        try:
+            int(temp)
+            if (temp == '' or int(temp)<0):
+                pass
+            else:
+                aai_hysteresisEntry = temp
+        except:
+            pass
         global aai_rateSmoothingEntry
-        aai_rateSmoothingEntry = self.aaiRateSmoothingEntry.get()
+        temp = self.aaiRateSmoothingEntry.get()
+        try:
+            int(temp)
+            if (temp == '' or int(temp)<0):
+                pass
+            else:
+                aai_rateSmoothingEntry = temp
+        except:
+            pass
 
         #VVI
         global vvi_lowerRateLimitEntry
