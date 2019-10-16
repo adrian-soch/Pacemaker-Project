@@ -433,6 +433,7 @@ class MainWindow:
         self.vviHysteresisLabel = tk.Label(self.vvi, text = "Hysteresis")
         self.vviRateSmoothingLabel = tk.Label(self.vvi, text = "Rate Smoothing")
 
+        global vvi_lowerRateLimitEntry, vvi_upperRateLimitEntry, vvi_atrialAmplitudeEntry, vvi_atrialPulseWidthEntry, vvi_atrialSensitivityEntry, vvi_ARPEntry, vvi_hysteresisEntry, vvi_rateSmoothingEntry
         self.vviLowerRateLimitValue = tk.Label(self.vvi, text = "Current Value: "+ vvi_lowerRateLimitEntry)
         self.vviUpperRateLimitValue = tk.Label(self.vvi, text = "Current Value: "+ vvi_upperRateLimitEntry)
         self.vviAtrialAmplitudeValue = tk.Label(self.vvi, text = "Current Value: "+ vvi_atrialAmplitudeEntry)
@@ -714,21 +715,85 @@ class MainWindow:
 
         #VVI
         global vvi_lowerRateLimitEntry
-        vvi_lowerRateLimitEntry = self.vviLowerRateLimitEntry.get()
+        temp = self.vviLowerRateLimitEntry.get()
+        try:
+            int(temp)
+            if (temp == '' or int(temp)<0):
+                pass
+            else:
+                vvi_lowerRateLimitEntry = temp
+        except:
+            pass
         global vvi_upperRateLimitEntry
-        vvi_upperRateLimitEntry = self.vviUpperRateLimitEntry.get() 
+        temp = self.vviUpperRateLimitEntry.get() 
+        try:
+            int(temp)
+            if (temp == '' or int(temp)<0):
+                pass
+            else:
+                vvi_upperRateLimitEntry = temp
+        except:
+            pass
         global vvi_atrialAmplitudeEntry
-        vvi_atrialAmplitudeEntry = self.vviAtrialAmplitudeEntry.get() 
+        temp = self.vviAtrialAmplitudeEntry.get() 
+        try:
+            int(temp)
+            if (temp == '' or int(temp)<0):
+                pass
+            else:
+                vvi_atrialAmplitudeEntry = temp
+        except:
+            pass
         global vvi_atrialPulseWidthEntry 
-        vvi_atrialPulseWidthEntry = self.vviAtrialPulseWidthEntry.get() 
+        temp = self.vviAtrialPulseWidthEntry.get() 
+        try:
+            int(temp)
+            if (temp == '' or int(temp)<0):
+                pass
+            else:
+                vvi_atrialPulseWidthEntry = temp
+        except:
+            pass
         global vvi_atrialSensitivityEntry
-        vvi_atrialSensitivityEntry = self.vviAtrialSensitivityEntry.get() 
+        temp = self.vviAtrialSensitivityEntry.get()
+        try:
+            int(temp)
+            if (temp == '' or int(temp)<0):
+                pass
+            else:
+                vvi_atrialSensitivityEntry = temp
+        except:
+            pass 
         global vvi_ARPEntry
-        vvi_ARPEntry = self.vviARPEntry.get() 
+        temp = self.vviARPEntry.get() 
+        try:
+            int(temp)
+            if (temp == '' or int(temp)<0):
+                pass
+            else:
+                vvi_ARPEntry = temp
+        except:
+            pass
         global vvi_hysteresisEntry 
-        vvi_hysteresisEntry = self.vviHysteresisEntry.get() 
+        temp = self.vviHysteresisEntry.get() 
+        try:
+            int(temp)
+            if (temp == '' or int(temp)<0):
+                pass
+            else:
+                vvi_hysteresisEntry = temp
+        except:
+            pass
         global vvi_rateSmoothingEntry
-        vvi_rateSmoothingEntry = self.vviRateSmoothingEntry.get() 
+        temp = self.vviRateSmoothingEntry.get()
+        try:
+            int(temp)
+            if (temp == '' or int(temp)<0):
+                pass
+            else:
+                vvi_rateSmoothingEntry = temp
+        except:
+            pass
 
         #self.tk.update(self)
         self.master.withdraw()
