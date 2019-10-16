@@ -264,6 +264,7 @@ class MainWindow:
         self.aooAtrialAmplitudeLabel = tk.Label(self.aoo, text = "Atrial Amplitude")
         self.aooAtrialPulseWidthLabel = tk.Label(self.aoo, text = "Atrial Pulse Width")
 
+        global aoo_lowerRateLimitEntry, aoo_upperRateLimitEntry, aoo_atrialAmplitudeEntry, aoo_atrialPulseWidthEntry
         self.aooLowerRateLimitValue = tk.Label(self.aoo, text = "Current Value: " + aoo_lowerRateLimitEntry)
         self.aooUpperRateLimitValue = tk.Label(self.aoo, text = "Current Value: " + aoo_upperRateLimitEntry)
         self.aooAtrialAmplitudeValue = tk.Label(self.aoo, text = "Current Value: " + aoo_atrialAmplitudeEntry)
@@ -292,7 +293,7 @@ class MainWindow:
         self.aooAtrialPulseWidthValue.grid(row=3, column=3, padx=15, pady=15)
 
 
-        #VOO
+        #VOO 
         self.vooLowerRateLimitButton = tk.Button(self.voo, text = "Set", command=self.setValue)
         self.vooUpperRateLimitButton = tk.Button(self.voo, text = "Set", command=self.setValue)
         self.vooAtrialAmplitudeButton = tk.Button(self.voo, text = "Set", command=self.setValue)
@@ -303,6 +304,7 @@ class MainWindow:
         self.vooAtrialAmplitudeLabel = tk.Label(self.voo, text = "Ventricular Amplitude")
         self.vooAtrialPulseWidthLabel = tk.Label(self.voo, text = "Ventricular Pulse Width")
 
+        global voo_lowerRateLimitEntry, voo_upperRateLimitEntry, voo_atrialAmplitudeEntry, voo_atrialPulseWidthEntry
         self.vooLowerRateLimitValue = tk.Label(self.voo, text = "Current Value: "+ voo_lowerRateLimitEntry)
         self.vooUpperRateLimitValue = tk.Label(self.voo, text = "Current Value: "+ voo_upperRateLimitEntry)
         self.vooAtrialAmplitudeValue = tk.Label(self.voo, text = "Current Value: "+ voo_atrialAmplitudeEntry)
@@ -516,7 +518,9 @@ class MainWindow:
         if messagebox.askyesno("Confirmation", "Upload these changes?"):
             messagebox.showinfo("Done", "Success")
 
-
+    def new_window(self,window):
+        self.newWindow = tk.Toplevel(self.master)
+        self.app = window(self.newWindow)
 
     def setValue(self):
         '''a = self.aooLowerRateLimitEntry.get()
@@ -528,23 +532,55 @@ class MainWindow:
         #Variables for Entry Boxes
         #AOO
         global aoo_lowerRateLimitEntry
-        aoo_lowerRateEntry = self.aooLowerRateLimitEntry.get()
+        temp = self.aooLowerRateLimitEntry.get()
+        if (temp == ''):
+            pass
+        else:
+            aoo_lowerRateLimitEntry = temp
         global aoo_upperRateLimitEntry
-        aoo_upperRateEntry = self.aooUpperRateLimitEntry.get()
+        temp = self.aooUpperRateLimitEntry.get()
+        if (temp == ''):
+            pass
+        else:
+            aoo_upperRateLimitEntry = temp
         global aoo_atrialAmplitudeEntry 
-        aoo_atrialAmplitudeEntry = self.aooAtrialAmplitudeEntry.get()
+        temp = self.aooAtrialAmplitudeEntry.get()
+        if (temp == ''):
+            pass
+        else:
+            aoo_atrialAmplitudeEntry = temp
         global aoo_atrialPulseWidthEntry 
-        aoo_atrialPulseWidthEntry = self.aooAtrialPulseWidthEntry.get()
+        temp = self.aooAtrialPulseWidthEntry.get()
+        if (temp == ''):
+            pass
+        else:
+            aoo_atrialPulseWidthEntry = temp
 
         #VOO
         global voo_lowerRateLimitEntry
-        voo_lowerRateLimitEntry = self.vooLowerRateLimitEntry.get()
+        temp = self.vooLowerRateLimitEntry.get()
+        if (temp == ''):
+            pass
+        else:
+            voo_lowerRateLimitEntry = temp
         global voo_upperRateLimitEntry 
-        voo_upperRateLimitEntry = self.vooUpperRateLimitEntry.get()
+        temp = self.vooUpperRateLimitEntry.get()
+        if (temp == ''):
+            pass
+        else:
+            voo_upperRateLimitEntry = temp
         global voo_atrialAmplitudeEntry
-        voo_atrialAmplitudeEntry = self.vooAtrialAmplitudeEntry.get()
+        temp = self.vooAtrialAmplitudeEntry.get()
+        if (temp == ''):
+            pass
+        else:
+            voo_atrialAmplitudeEntry = temp
         global voo_atrialPulseWidthEntry
-        voo_atrialPulseWidthEntry = self.vooAtrialPulseWidthEntry.get()
+        temp = self.vooAtrialPulseWidthEntry.get()
+        if (temp == ''):
+            pass
+        else:
+            voo_atrialPulseWidthEntry = temp
 
         #AAI
         global aai_lowerRateLimitEntry
@@ -585,6 +621,8 @@ class MainWindow:
         vvi_rateSmoothingEntry = self.vviRateSmoothingEntry.get() 
 
         #self.tk.update(self)
+        self.master.withdraw()
+        self.new_window(MainWindow)
 
     def logOff(self):
         if messagebox.askyesno("LogOff", "Do you want to log off?"):
