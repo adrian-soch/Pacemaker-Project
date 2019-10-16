@@ -192,6 +192,11 @@ class AddUserWindow:
 
 class MainWindow:
     def __init__(self, master):
+        
+        #Initalizing Current state to "0"
+        aoo_lowerRateEntry, aoo_upperRateEntry, aoo_atrialAmplitudeEntry, aooAtrialPulseWidth, voo_lowerRateLimitEntry, voo_upperRateLimitEntry, voo_atrialAmplitudeEntry, voo_atrialPulseWidthEntry, aai_lowerRateLimitEntry, aai_upperRateLimitEntry, aai_atrialAmplitudeEntry, aai_atrialPulseWidthEntry, aai_atrialSensitivityEntry, aai_ARPEntry, aai_APVARPEntry, aai_hysteresisEntry, aai_rateSmoothingEntry, vvi_lowerRateLimitEntry, vvi_upperRateLimitEntry, vvi_atrialAmplitudeEntry, vvi_atrialPulseWidthEntry, vvi_atrialSensitivityEntry, vvi_ARPEntry, vvi_hysteresisEntry, vvi_rateSmoothingEntry = ("0",)*25
+
+        
         self.content = tk.Entry()
         self.master = master
         self.master.geometry('500x570')
@@ -478,7 +483,7 @@ class MainWindow:
         if messagebox.askyesno("Confirmation", "Upload these changes?"):
             messagebox.showinfo("Done", "Success")
 
-    
+
     def setValue(self):
         '''a = self.aooLowerRateLimitEntry.get()
         print(a)
@@ -488,37 +493,37 @@ class MainWindow:
 
         #Variables for Entry Boxes
         #AOO
-        aoo_lowerRateEntry = self.aooLowerRateLimitEntry.get()
-        aoo_upperRateEntry = self.aooUpperRateLimitEntry.get()
-        aoo_atrialAmplitudeEntry = self.aooAtrialAmplitudeEntry.get()
-        aoo_atrialPulseWidthEntry = self.aooAtrialPulseWidthEntry.get()
+        global aoo_lowerRateEntry = self.aooLowerRateLimitEntry.get()
+        global aoo_upperRateEntry = self.aooUpperRateLimitEntry.get()
+        global aoo_atrialAmplitudeEntry = self.aooAtrialAmplitudeEntry.get()
+        global aoo_atrialPulseWidthEntry = self.aooAtrialPulseWidthEntry.get()
 
         #VOO
-        voo_lowerRateLimitEntry = self.vooLowerRateLimitEntry.get()
-        voo_upperRateLimitEntry = self.vooUpperRateLimitEntry.get()
-        voo_atrialAmplitudeEntry = self.vooAtrialAmplitudeEntry.get()
-        voo_atrialPulseWidthEntry = self.vooAtrialPulseWidthEntry.get()
+        global voo_lowerRateLimitEntry = self.vooLowerRateLimitEntry.get()
+        global voo_upperRateLimitEntry = self.vooUpperRateLimitEntry.get()
+        global voo_atrialAmplitudeEntry = self.vooAtrialAmplitudeEntry.get()
+        global voo_atrialPulseWidthEntry = self.vooAtrialPulseWidthEntry.get()
 
         #AAI
-        aai_lowerRateLimitEntry = self.aaiLowerRateLimitEntry.get()
-        aai_upperRateLimitEntry = self.aaiUpperRateLimitEntry.get() 
-        aai_atrialAmplitudeEntry = self.aaiAtrialAmplitudeEntry.get() 
-        aai_atrialPulseWidthEntry = self.aaiAtrialPulseWidthEntry.get() 
-        aai_atrialSensitivityEntry = self.aaiAtrialSensitivityEntry.get() 
-        aai_aRPEntry = self.aaiARPEntry.get() 
-        aai_aPVARPEntry = self.aaiAPVARPEntry.get() 
-        aai_hysteresisEntry = self.aaiHysteresisEntry.get()
-        aai_rateSmoothingEntry = self.aaiRateSmoothingEntry.get()
+        global aai_lowerRateLimitEntry = self.aaiLowerRateLimitEntry.get()
+        global aai_upperRateLimitEntry = self.aaiUpperRateLimitEntry.get() 
+        global aai_atrialAmplitudeEntry = self.aaiAtrialAmplitudeEntry.get() 
+        global aai_atrialPulseWidthEntry = self.aaiAtrialPulseWidthEntry.get() 
+        global aai_atrialSensitivityEntry = self.aaiAtrialSensitivityEntry.get() 
+        global aai_ARPEntry = self.aaiARPEntry.get() 
+        global aai_APVARPEntry = self.aaiAPVARPEntry.get() 
+        global aai_hysteresisEntry = self.aaiHysteresisEntry.get()
+        global aai_rateSmoothingEntry = self.aaiRateSmoothingEntry.get()
 
         #VVI
-        vvi_lowerRateLimitEntry = self.vviLowerRateLimitEntry.get()
-        vvi_upperRateLimitEntry = self.vviUpperRateLimitEntry.get() 
-        vvi_atrialAmplitudeEntry = self.vviAtrialAmplitudeEntry.get() 
-        vvi_atrialPulseWidthEntry = self.vviAtrialPulseWidthEntry.get() 
-        vvi_atrialSensitivityEntry = self.vviAtrialSensitivityEntry.get() 
-        vvi_aRPEntry = self.vviARPEntry.get() 
-        vvi_hysteresisEntry = self.vviHysteresisEntry.get() 
-        vvi_rateSmoothingEntry = self.vviRateSmoothingEntry.get() 
+        global vvi_lowerRateLimitEntry = self.vviLowerRateLimitEntry.get()
+        global vvi_upperRateLimitEntry = self.vviUpperRateLimitEntry.get() 
+        global vvi_atrialAmplitudeEntry = self.vviAtrialAmplitudeEntry.get() 
+        global vvi_atrialPulseWidthEntry = self.vviAtrialPulseWidthEntry.get() 
+        global vvi_atrialSensitivityEntry = self.vviAtrialSensitivityEntry.get() 
+        global vvi_ARPEntry = self.vviARPEntry.get() 
+        global vvi_hysteresisEntry = self.vviHysteresisEntry.get() 
+        global vvi_rateSmoothingEntry = self.vviRateSmoothingEntry.get() 
 
     def logOff(self):
         if messagebox.askyesno("LogOff", "Do you want to log off?"):
