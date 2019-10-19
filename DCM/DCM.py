@@ -126,6 +126,7 @@ class AddUserWindow:
     def __init__(self, master):
         self.master = master
         self.master.geometry('300x200')
+        self.master.title("SIGN UP")
         self.quitButton = tk.Button(self.master, text = 'Quit', width = 12, command = self.close_windows)
         self.label_username = tk.Label(self.master, text="Enter New Username")
         self.label_password = tk.Label(self.master, text="Enter New Password")
@@ -233,6 +234,7 @@ class MainWindow:
         self.content = tk.Entry()
         self.master = master
         self.master.geometry('500x570')
+        self.master.title("PACEMAKER")
         self.master.protocol("WM_DELETE_WINDOW", self.on_exit)
 
         self.menubar = tk.Menu(self.master)
