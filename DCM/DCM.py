@@ -217,53 +217,56 @@ class AddUserWindow:
     def close_windows(self):
         self.master.destroy()
 
-
+#Class for main window
 class MainWindow:
     def __init__(self, master):
+        #General window setup
         self.content = tk.Entry()
         self.master = master
         self.master.geometry('500x570')
         self.master.protocol("WM_DELETE_WINDOW", self.on_exit)
-
         self.menubar = tk.Menu(self.master)
         self.filemenu = tk.Menu(self.menubar, tearoff=0)
         self.master.config(menu=self.menubar)
         self.frame = tk.Frame(self.master)
 
-        # AOO, VOO, AAI, and VVI
+        # Tabs created for AOO, VOO, AAI, and VVI 
         self.tab_parent = ttk.Notebook(self.master)
         self.aoo = ttk.Frame(self.tab_parent)
         self.voo = ttk.Frame(self.tab_parent)
         self.aai = ttk.Frame(self.tab_parent)
         self.vvi = ttk.Frame(self.tab_parent)
-
         self.tab_parent.add(self.aoo, text = "AOO")
         self.tab_parent.add(self.voo, text = "VOO")
         self.tab_parent.add(self.aai, text = "AAI")
         self.tab_parent.add(self.vvi, text = "VVI")
 
-        #Put in attributes here
-        #AOO
+        #AOO BEGIN-----------------------------------------------------------------------------------------------------------------------------
+        #Setup buttons
         self.aooLowerRateLimitButton = tk.Button(self.aoo, text = "Set", command= lambda: self.setValue("aooLowerRateLimit"))
         self.aooUpperRateLimitButton = tk.Button(self.aoo, text = "Set", command= lambda: self.setValue("aooUpperRateLimit"))
         self.aooAtrialAmplitudeButton = tk.Button(self.aoo, text = "Set", command= lambda: self.setValue("aooAtrialAmplitude"))
         self.aooAtrialPulseWidthButton = tk.Button(self.aoo, text = "Set", command= lambda: self.setValue("aooAtrialPulseWidth"))
 
+        #Setup labels for inputs
         self.aooLowerRateLimitLabel = tk.Label(self.aoo, text = "Lower Rate Limit")
         self.aooUpperRateLimitLabel = tk.Label(self.aoo, text = "Upper Rate Limit")
         self.aooAtrialAmplitudeLabel = tk.Label(self.aoo, text = "Atrial Amplitude")
         self.aooAtrialPulseWidthLabel = tk.Label(self.aoo, text = "Atrial Pulse Width")
 
+        #Setup  labels to display values
         self.aooLowerRateLimitValue = tk.Label(self.aoo, text = "Current Value: " + aoo_lowerRateLimitEntry)
         self.aooUpperRateLimitValue = tk.Label(self.aoo, text = "Current Value: " + aoo_upperRateLimitEntry)
         self.aooAtrialAmplitudeValue = tk.Label(self.aoo, text = "Current Value: " + aoo_atrialAmplitudeEntry)
         self.aooAtrialPulseWidthValue = tk.Label(self.aoo, text = "Current Value: " + aoo_atrialPulseWidthEntry)
     
+        #Setup entry field
         self.aooLowerRateLimitEntry = tk.Entry(self.aoo)
         self.aooUpperRateLimitEntry = tk.Entry(self.aoo)
         self.aooAtrialAmplitudeEntry = tk.Entry(self.aoo)
         self.aooAtrialPulseWidthEntry = tk.Entry(self.aoo)
 
+        #Adjust positioning
         self.aooLowerRateLimitLabel.grid(row=0, column=0, padx=15, pady=15)
         self.aooLowerRateLimitEntry.grid(row=0, column=1, padx=15, pady=15)
         self.aooLowerRateLimitButton.grid(row=0, column=2, padx=15, pady=15)
@@ -280,29 +283,34 @@ class MainWindow:
         self.aooAtrialPulseWidthEntry.grid(row=3, column=1, padx=15, pady=15)
         self.aooAtrialPulseWidthButton.grid(row=3, column=2, padx=15, pady=15)
         self.aooAtrialPulseWidthValue.grid(row=3, column=3, padx=15, pady=15)
+        #AOO END-------------------------------------------------------------------------------------------------------------------------------
 
-
-        #VOO 
+        #VOO BEGIN-----------------------------------------------------------------------------------------------------------------------------
+        #Setup buttons
         self.vooLowerRateLimitButton = tk.Button(self.voo, text = "Set", command= lambda: self.setValue("vooLowerRateLimit"))
         self.vooUpperRateLimitButton = tk.Button(self.voo, text = "Set", command= lambda: self.setValue("vooUpperRateLimit"))
         self.vooAtrialAmplitudeButton = tk.Button(self.voo, text = "Set", command= lambda: self.setValue("vooAtrialAmplitude"))
         self.vooAtrialPulseWidthButton = tk.Button(self.voo, text = "Set", command= lambda: self.setValue("vooAtrialPulseWidth"))
-
+        
+        #Setup labels for inputs
         self.vooLowerRateLimitLabel = tk.Label(self.voo, text = "Lower Rate Limit")
         self.vooUpperRateLimitLabel = tk.Label(self.voo, text = "Upper Rate Limit ")
         self.vooAtrialAmplitudeLabel = tk.Label(self.voo, text = "Ventricular Amplitude")
         self.vooAtrialPulseWidthLabel = tk.Label(self.voo, text = "Ventricular Pulse Width")
 
+        #Setup  labels to display values
         self.vooLowerRateLimitValue = tk.Label(self.voo, text = "Current Value: "+ voo_lowerRateLimitEntry)
         self.vooUpperRateLimitValue = tk.Label(self.voo, text = "Current Value: "+ voo_upperRateLimitEntry)
         self.vooAtrialAmplitudeValue = tk.Label(self.voo, text = "Current Value: "+ voo_atrialAmplitudeEntry)
         self.vooAtrialPulseWidthValue = tk.Label(self.voo, text = "Current Value: "+ voo_atrialPulseWidthEntry)
 
+        #Setup entry field
         self.vooLowerRateLimitEntry = tk.Entry(self.voo)
         self.vooUpperRateLimitEntry = tk.Entry(self.voo)
         self.vooAtrialAmplitudeEntry = tk.Entry(self.voo)
         self.vooAtrialPulseWidthEntry = tk.Entry(self.voo)
 
+        #Adjust positioning
         self.vooLowerRateLimitLabel.grid(row=0, column=0, padx=15, pady=15)
         self.vooLowerRateLimitEntry.grid(row=0, column=1, padx=15, pady=15)
         self.vooLowerRateLimitButton.grid(row=0, column=2, padx=15, pady=15)
@@ -319,9 +327,10 @@ class MainWindow:
         self.vooAtrialPulseWidthEntry.grid(row=3, column=1, padx=15, pady=15)
         self.vooAtrialPulseWidthButton.grid(row=3, column=2, padx=15, pady=15)
         self.vooAtrialPulseWidthValue.grid(row=3, column=3, padx=15, pady=15)
+        #VOO END-------------------------------------------------------------------------------------------------------------------------------
 
-
-        #AAI
+        #AAI BEGIN-----------------------------------------------------------------------------------------------------------------------------
+        #Setup buttons
         self.aaiLowerRateLimitButton = tk.Button(self.aai, text = "Set", command= lambda: self.setValue("aaiLowerRateLimit"))
         self.aaiUpperRateLimitButton = tk.Button(self.aai, text = "Set", command= lambda: self.setValue("aaiUpperRateLimit"))
         self.aaiAtrialAmplitudeButton = tk.Button(self.aai, text = "Set", command= lambda: self.setValue("aaiAtrialAmplitude"))
@@ -332,6 +341,7 @@ class MainWindow:
         self.aaiHysteresisButton = tk.Button(self.aai, text = "Set", command= lambda: self.setValue("aaiHysteresis"))
         self.aaiRateSmoothingButton = tk.Button(self.aai, text = "Set", command= lambda: self.setValue("aaiRateSmoothing"))
 
+        #Setup labels for inputs
         self.aaiLowerRateLimitLabel = tk.Label(self.aai, text = "Lower Rate Limit")
         self.aaiUpperRateLimitLabel = tk.Label(self.aai, text = "Upper Rate Limit ")
         self.aaiAtrialAmplitudeLabel = tk.Label(self.aai, text = "Atrial Amplitude")
@@ -342,6 +352,7 @@ class MainWindow:
         self.aaiHysteresisLabel = tk.Label(self.aai, text = "Hysteresis")
         self.aaiRateSmoothingLabel = tk.Label(self.aai, text = "Rate Smoothing")
 
+        #Setup  labels to display values
         self.aaiLowerRateLimitValue = tk.Label(self.aai, text = "Current Value: "+ aai_lowerRateLimitEntry)
         self.aaiUpperRateLimitValue = tk.Label(self.aai, text = "Current Value: "+ aai_upperRateLimitEntry)
         self.aaiAtrialAmplitudeValue = tk.Label(self.aai, text = "Current Value: "+ aai_atrialAmplitudeEntry)
@@ -352,6 +363,7 @@ class MainWindow:
         self.aaiHysteresisValue = tk.Label(self.aai, text = "Current Value: "+ aai_hysteresisEntry)
         self.aaiRateSmoothingValue = tk.Label(self.aai, text = "Current Value: "+ aai_rateSmoothingEntry)
 
+        #Setup entry field
         self.aaiLowerRateLimitEntry = tk.Entry(self.aai)
         self.aaiUpperRateLimitEntry = tk.Entry(self.aai)
         self.aaiAtrialAmplitudeEntry = tk.Entry(self.aai)
@@ -361,7 +373,8 @@ class MainWindow:
         self.aaiAPVARPEntry = tk.Entry(self.aai)
         self.aaiHysteresisEntry = tk.Entry(self.aai)
         self.aaiRateSmoothingEntry = tk.Entry(self.aai)
-        
+
+        #Adjust positioning
         self.aaiLowerRateLimitLabel.grid(row=0, column=0, padx=15, pady=15)
         self.aaiLowerRateLimitEntry.grid(row=0, column=1, padx=15, pady=15)
         self.aaiLowerRateLimitButton.grid(row=0, column=2, padx=15, pady=15)
@@ -389,7 +402,6 @@ class MainWindow:
         self.aaiRateSmoothingLabel.grid(row=8, column=0, padx=15, pady=15)
         self.aaiRateSmoothingEntry.grid(row=8, column=1, padx=15, pady=15)
         self.aaiRateSmoothingButton.grid(row=8, column=2, padx=15, pady=15)
-
         self.aaiLowerRateLimitValue.grid(row=0, column=3, padx=15, pady=15)
         self.aaiUpperRateLimitValue.grid(row=1, column=3, padx=15, pady=15)
         self.aaiAtrialAmplitudeValue.grid(row=2, column=3, padx=15, pady=15)
@@ -399,9 +411,11 @@ class MainWindow:
         self.aaiAPVARPValue.grid(row=6, column=3, padx=15, pady=15)
         self.aaiHysteresisValue.grid(row=7, column=3, padx=15, pady=15)
         self.aaiRateSmoothingValue.grid(row=8, column=3, padx=15, pady=15)
-        
+        #AAI END-------------------------------------------------------------------------------------------------------------------------------
 
-        #VVI
+
+        #VVI BEGIN-----------------------------------------------------------------------------------------------------------------------------
+        #Setup buttons
         self.vviLowerRateLimitButton = tk.Button(self.vvi, text = "Set", command= lambda: self.setValue("vviLowerRateLimit"))
         self.vviUpperRateLimitButton = tk.Button(self.vvi, text = "Set", command= lambda: self.setValue("vviUpperRateLimit"))
         self.vviAtrialAmplitudeButton = tk.Button(self.vvi, text = "Set", command= lambda: self.setValue("vviAtrialAmplitude"))
@@ -411,6 +425,7 @@ class MainWindow:
         self.vviHysteresisButton = tk.Button(self.vvi, text = "Set", command= lambda: self.setValue("vviHysteresis"))
         self.vviRateSmoothingButton = tk.Button(self.vvi, text = "Set", command= lambda: self.setValue("vviRateSmoothing"))
 
+        #Setup labels for inputs
         self.vviLowerRateLimitLabel = tk.Label(self.vvi, text = "Lower Rate Limit")
         self.vviUpperRateLimitLabel = tk.Label(self.vvi, text = "Upper Rate Limit ")
         self.vviAtrialAmplitudeLabel = tk.Label(self.vvi, text = "Ventricular Amplitude")
@@ -420,6 +435,7 @@ class MainWindow:
         self.vviHysteresisLabel = tk.Label(self.vvi, text = "Hysteresis")
         self.vviRateSmoothingLabel = tk.Label(self.vvi, text = "Rate Smoothing")
 
+        #Setup  labels to display values
         self.vviLowerRateLimitValue = tk.Label(self.vvi, text = "Current Value: "+ vvi_lowerRateLimitEntry)
         self.vviUpperRateLimitValue = tk.Label(self.vvi, text = "Current Value: "+ vvi_upperRateLimitEntry)
         self.vviAtrialAmplitudeValue = tk.Label(self.vvi, text = "Current Value: "+ vvi_atrialAmplitudeEntry)
@@ -429,6 +445,7 @@ class MainWindow:
         self.vviHysteresisValue = tk.Label(self.vvi, text = "Current Value: "+ vvi_hysteresisEntry)
         self.vviRateSmoothingValue = tk.Label(self.vvi, text = "Current Value: "+ vvi_rateSmoothingEntry)
 
+        #Setup entry field
         self.vviLowerRateLimitEntry = tk.Entry(self.vvi)
         self.vviUpperRateLimitEntry = tk.Entry(self.vvi)
         self.vviAtrialAmplitudeEntry = tk.Entry(self.vvi)
@@ -438,6 +455,7 @@ class MainWindow:
         self.vviHysteresisEntry = tk.Entry(self.vvi)
         self.vviRateSmoothingEntry = tk.Entry(self.vvi)
 
+        #Adjust positioning
         self.vviLowerRateLimitLabel.grid(row=0, column=0, padx=15, pady=15)
         self.vviLowerRateLimitEntry.grid(row=0, column=1, padx=15, pady=15)
         self.vviLowerRateLimitButton.grid(row=0, column=2, padx=15, pady=15)
@@ -462,7 +480,6 @@ class MainWindow:
         self.vviRateSmoothingLabel.grid(row=7, column=0, padx=15, pady=15)
         self.vviRateSmoothingEntry.grid(row=7, column=1, padx=15, pady=15)
         self.vviRateSmoothingButton.grid(row=7, column=2, padx=15, pady=15)
-
         self.vviLowerRateLimitValue.grid(row=0, column=3, padx=15, pady=15)
         self.vviUpperRateLimitValue.grid(row=1, column=3, padx=15, pady=15)
         self.vviAtrialAmplitudeValue.grid(row=2, column=3, padx=15, pady=15)
@@ -471,22 +488,22 @@ class MainWindow:
         self.vviARPValue.grid(row=5, column=3, padx=15, pady=15)
         self.vviHysteresisValue.grid(row=6, column=3, padx=15, pady=15)
         self.vviRateSmoothingValue.grid(row=7, column=3, padx=15, pady=15)
+        #VVI END-------------------------------------------------------------------------------------------------------------------------------
 
-
+        #Position tabs properly
         self.tab_parent.pack(expand = 1, fill='both')
 
+        #Setup confirm buttons
         self.confirmButton = tk.Button(self.aoo, text = 'Confirm', width = 20, command = self.confirmChanges)
         self.confirmButton.grid(row = 4, column = 1)
-
         self.confirmButton = tk.Button(self.voo, text = 'Confirm', width = 20, command = self.confirmChanges)
         self.confirmButton.grid(row = 4, column = 1)
-        
         self.confirmButton = tk.Button(self.aai, text = 'Confirm', width = 20, command = self.confirmChanges)
         self.confirmButton.grid(row = 9, column = 1)
-
         self.confirmButton = tk.Button(self.vvi, text = 'Confirm', width = 20, command = self.confirmChanges)
         self.confirmButton.grid(row = 8, column = 1)
 
+        #Setup logoff button
         self.quitButton = tk.Button(self.aoo, text = 'LogOff', width = 12, command = self.logOff)
         self.quitButton.grid(row=5,column=1,pady=5)
         self.quitButton = tk.Button(self.voo, text = 'LogOff', width = 12, command = self.logOff)
@@ -496,16 +513,19 @@ class MainWindow:
         self.quitButton = tk.Button(self.vvi, text = 'LogOff', width = 12, command = self.logOff)
         self.quitButton.grid(row=10,column=1,pady=5)
 
+    #Confirm changes method
     def confirmChanges(self):
         if messagebox.askyesno("Confirmation", "Upload these changes?"):
             messagebox.showinfo("Done", "Success")
 
+    #New window method
     def new_window(self,window):
         self.newWindow = tk.Toplevel(self.master)
         self.app = window(self.newWindow)
 
+    #Method to set value
     def setValue(self,value):
-        #Variables for Entry Boxes
+
         #AOO
         if(value == "aooLowerRateLimit"):
             global aoo_lowerRateLimitEntry
@@ -914,15 +934,18 @@ class MainWindow:
                 messagebox.showinfo("Error","Please enter a valid value")
                 pass
 
+    #Method used to log off user
     def logOff(self):
         if messagebox.askyesno("LogOff", "Do you want to log off?"):
             self.master.destroy()
             main()  
 
+    #Method to exit application
     def on_exit(self):
         if messagebox.askyesno("Exit", "Do you want to quit the application?"):
             exit()
-            
+    
+    #Method for closing windows
     def close_windows(self):
         self.master.destroy()
         exit()
