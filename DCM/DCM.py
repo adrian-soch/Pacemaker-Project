@@ -4,10 +4,6 @@ from tkinter import messagebox
 import pickle
 
 login_dict = {}
-aooLowerRateLimit = "123"
-aooUpperRateLimit = "123"
-aooAtrialAmplitude = "123"
-aooAtrialPulseWidth = "123"
 
 class WelcomeFrame:
     def __init__(self, master):
@@ -292,10 +288,10 @@ class MainWindow:
 
 
         #VOO 
-        self.vooLowerRateLimitButton = tk.Button(self.voo, text = "Set", command=self.setValue)
-        self.vooUpperRateLimitButton = tk.Button(self.voo, text = "Set", command=self.setValue)
-        self.vooAtrialAmplitudeButton = tk.Button(self.voo, text = "Set", command=self.setValue)
-        self.vooAtrialPulseWidthButton = tk.Button(self.voo, text = "Set", command=self.setValue)
+        self.vooLowerRateLimitButton = tk.Button(self.voo, text = "Set", command= lambda: self.setValue("vooLowerRateLimit"))
+        self.vooUpperRateLimitButton = tk.Button(self.voo, text = "Set", command= lambda: self.setValue("vooUpperRateLimit"))
+        self.vooAtrialAmplitudeButton = tk.Button(self.voo, text = "Set", command= lambda: self.setValue("vooAtrialAmplitude"))
+        self.vooAtrialPulseWidthButton = tk.Button(self.voo, text = "Set", command= lambda: self.setValue("vooAtrialPulseWidth"))
 
         self.vooLowerRateLimitLabel = tk.Label(self.voo, text = "Lower Rate Limit")
         self.vooUpperRateLimitLabel = tk.Label(self.voo, text = "Upper Rate Limit ")
@@ -825,9 +821,6 @@ class MainWindow:
                 self.vviRateSmoothingValue.config(text="Current Value: " + vvi_rateSmoothingEntry)
         except:
             pass
-
-        """self.master.withdraw()
-        self.new_window(MainWindow)"""
 
     def logOff(self):
         if messagebox.askyesno("LogOff", "Do you want to log off?"):
