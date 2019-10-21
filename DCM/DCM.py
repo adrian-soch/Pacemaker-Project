@@ -328,15 +328,15 @@ class MainWindow:
 
 
         #AAI
-        self.aaiLowerRateLimitButton = tk.Button(self.aai, text = "Set", command=self.setValue)
-        self.aaiUpperRateLimitButton = tk.Button(self.aai, text = "Set", command=self.setValue)
-        self.aaiAtrialAmplitudeButton = tk.Button(self.aai, text = "Set", command=self.setValue)
-        self.aaiAtrialPulseWidthButton = tk.Button(self.aai, text = "Set", command=self.setValue)
-        self.aaiAtrialSensitivityButton = tk.Button(self.aai, text = "Set", command=self.setValue)
-        self.aaiARPButton = tk.Button(self.aai, text = "Set", command=self.setValue)
-        self.aaiAPVARPButton = tk.Button(self.aai, text = "Set", command=self.setValue)
-        self.aaiHysteresisButton = tk.Button(self.aai, text = "Set", command=self.setValue)
-        self.aaiRateSmoothingButton = tk.Button(self.aai, text = "Set", command=self.setValue)
+        self.aaiLowerRateLimitButton = tk.Button(self.aai, text = "Set", command= lambda: self.setValue("aaiLowerRateLimit"))
+        self.aaiUpperRateLimitButton = tk.Button(self.aai, text = "Set", command= lambda: self.setValue("aaiUpperRateLimit"))
+        self.aaiAtrialAmplitudeButton = tk.Button(self.aai, text = "Set", command= lambda: self.setValue("aaiAtrialAmplitude"))
+        self.aaiAtrialPulseWidthButton = tk.Button(self.aai, text = "Set", command= lambda: self.setValue("aaiAtrialPulseWidth"))
+        self.aaiAtrialSensitivityButton = tk.Button(self.aai, text = "Set", command= lambda: self.setValue("aaiAtrialSensitivity"))
+        self.aaiARPButton = tk.Button(self.aai, text = "Set", command= lambda: self.setValue("aaiARP"))
+        self.aaiAPVARPButton = tk.Button(self.aai, text = "Set", command= lambda: self.setValue("aaiAPVARP"))
+        self.aaiHysteresisButton = tk.Button(self.aai, text = "Set", command= lambda: self.setValue("aaiHysteresis"))
+        self.aaiRateSmoothingButton = tk.Button(self.aai, text = "Set", command= lambda: self.setValue("aaiRateSmoothing"))
 
         self.aaiLowerRateLimitLabel = tk.Label(self.aai, text = "Lower Rate Limit")
         self.aaiUpperRateLimitLabel = tk.Label(self.aai, text = "Upper Rate Limit ")
@@ -409,15 +409,14 @@ class MainWindow:
         
 
         #VVI
-        self.vviLowerRateLimitButton = tk.Button(self.vvi, text = "Set", command=self.setValue)
-        self.vviUpperRateLimitButton = tk.Button(self.vvi, text = "Set", command=self.setValue)
-        self.vviAtrialAmplitudeButton = tk.Button(self.vvi, text = "Set", command=self.setValue)
-        self.vviAtrialPulseWidthButton = tk.Button(self.vvi, text = "Set", command=self.setValue)
-        self.vviAtrialSensitivityButton = tk.Button(self.vvi, text = "Set", command=self.setValue)
-        self.vviARPButton = tk.Button(self.vvi, text = "Set", command=self.setValue)
-        self.vviAPVARPButton = tk.Button(self.vvi, text = "Set", command=self.setValue)
-        self.vviHysteresisButton = tk.Button(self.vvi, text = "Set", command=self.setValue)
-        self.vviRateSmoothingButton = tk.Button(self.vvi, text = "Set", command=self.setValue)
+        self.vviLowerRateLimitButton = tk.Button(self.vvi, text = "Set", command= lambda: self.setValue("vviLowerRateLimit"))
+        self.vviUpperRateLimitButton = tk.Button(self.vvi, text = "Set", command= lambda: self.setValue("vviUpperRateLimit"))
+        self.vviAtrialAmplitudeButton = tk.Button(self.vvi, text = "Set", command= lambda: self.setValue("vviAtrialAmplitude"))
+        self.vviAtrialPulseWidthButton = tk.Button(self.vvi, text = "Set", command= lambda: self.setValue("vviAtrialPulseWidth"))
+        self.vviAtrialSensitivityButton = tk.Button(self.vvi, text = "Set", command= lambda: self.setValue("vviAtrialSensitivity"))
+        self.vviARPButton = tk.Button(self.vvi, text = "Set", command= lambda: self.setValue("vviARP"))
+        self.vviHysteresisButton = tk.Button(self.vvi, text = "Set", command= lambda: self.setValue("vviHysteresis"))
+        self.vviRateSmoothingButton = tk.Button(self.vvi, text = "Set", command= lambda: self.setValue("vviRateSmoothing"))
 
         self.vviLowerRateLimitLabel = tk.Label(self.vvi, text = "Lower Rate Limit")
         self.vviUpperRateLimitLabel = tk.Label(self.vvi, text = "Upper Rate Limit ")
@@ -588,11 +587,15 @@ class MainWindow:
             try:
                 int(temp)
                 if (temp == '' or int(temp)<0):
+                    messagebox.showinfo("Error","Please enter a valid value")
                     pass
                 else:
-                    voo_lowerRateLimitEntry = temp
-                    self.vooLowerRateLimitValue.config(text="Current Value: " + voo_lowerRateLimitEntry)
+                    if messagebox.askyesno("Confirmation", "Replace current values?"):
+                        messagebox.showinfo("Done", "Success")
+                        voo_lowerRateLimitEntry = temp
+                        self.vooLowerRateLimitValue.config(text="Current Value: " + voo_lowerRateLimitEntry)
             except:
+                messagebox.showinfo("Error","Please enter a valid value")
                 pass
         if(value == "vooUpperRateLimit"):
             global voo_upperRateLimitEntry 
@@ -600,11 +603,15 @@ class MainWindow:
             try:
                 int(temp)
                 if (temp == '' or int(temp)<0):
+                    messagebox.showinfo("Error","Please enter a valid value")
                     pass
                 else:
-                    voo_upperRateLimitEntry = temp
-                    self.vooUpperRateLimitValue.config(text="Current Value: " + voo_upperRateLimitEntry)
+                    if messagebox.askyesno("Confirmation", "Replace current values?"):
+                        messagebox.showinfo("Done", "Success")
+                        voo_upperRateLimitEntry = temp
+                        self.vooUpperRateLimitValue.config(text="Current Value: " + voo_upperRateLimitEntry)
             except:
+                messagebox.showinfo("Error","Please enter a valid value")
                 pass
         if(value == "vooAtrialAmplitude"):
             global voo_atrialAmplitudeEntry
@@ -612,11 +619,15 @@ class MainWindow:
             try:
                 int(temp)
                 if (temp == '' or int(temp)<0):
+                    messagebox.showinfo("Error","Please enter a valid value")
                     pass
                 else:
-                    voo_atrialAmplitudeEntry = temp
-                    self.vooAtrialAmplitudeValue.config(text="Current Value: " + voo_atrialAmplitudeEntry)
+                    if messagebox.askyesno("Confirmation", "Replace current values?"):
+                        messagebox.showinfo("Done", "Success")
+                        voo_atrialAmplitudeEntry = temp
+                        self.vooAtrialAmplitudeValue.config(text="Current Value: " + voo_atrialAmplitudeEntry)
             except:
+                messagebox.showinfo("Error","Please enter a valid value")
                 pass
         if(value == "vooAtrialPulseWidth"):
             global voo_atrialPulseWidthEntry
@@ -624,203 +635,292 @@ class MainWindow:
             try:
                 int(temp)
                 if (temp == '' or int(temp)<0):
+                    messagebox.showinfo("Error","Please enter a valid value")
                     pass
                 else:
-                    voo_atrialPulseWidthEntry = temp
-                    self.vooAtrialPulseWidthValue.config(text="Current Value: " + voo_atrialPulseWidthEntry)
+                    if messagebox.askyesno("Confirmation", "Replace current values?"):
+                        messagebox.showinfo("Done", "Success")
+                        voo_atrialPulseWidthEntry = temp
+                        self.vooAtrialPulseWidthValue.config(text="Current Value: " + voo_atrialPulseWidthEntry)
             except:
+                messagebox.showinfo("Error","Please enter a valid value")
                 pass
 
         #AAI
-        global aai_lowerRateLimitEntry
-        temp = self.aaiLowerRateLimitEntry.get()
-        try:
-            int(temp)
-            if (temp == '' or int(temp)<0):
+        if(value == "aaiLowerRateLimit"):
+            global aai_lowerRateLimitEntry
+            temp = self.aaiLowerRateLimitEntry.get()
+            try:
+                int(temp)
+                if (temp == '' or int(temp)<0):
+                    messagebox.showinfo("Error","Please enter a valid value")
+                    pass
+                else:
+                    if messagebox.askyesno("Confirmation", "Replace current values?"):
+                        messagebox.showinfo("Done", "Success")
+                        aai_lowerRateLimitEntry = temp
+                        self.aaiLowerRateLimitValue.config(text="Current Value: " + aai_lowerRateLimitEntry)
+            except:
+                messagebox.showinfo("Error","Please enter a valid value")
                 pass
-            else:
-                aai_lowerRateLimitEntry = temp
-                self.aaiLowerRateLimitValue.config(text="Current Value: " + aai_lowerRateLimitEntry)
-        except:
-            pass
-        global aai_upperRateLimitEntry 
-        temp = self.aaiUpperRateLimitEntry.get()
-        try:
-            int(temp)
-            if (temp == '' or int(temp)<0):
+        if(value == "aaiUpperRateLimit"):
+            global aai_upperRateLimitEntry 
+            temp = self.aaiUpperRateLimitEntry.get()
+            try:
+                int(temp)
+                if (temp == '' or int(temp)<0):
+                    messagebox.showinfo("Error","Please enter a valid value")
+                    pass
+                else:
+                    if messagebox.askyesno("Confirmation", "Replace current values?"):
+                        messagebox.showinfo("Done", "Success")
+                        aai_upperRateLimitEntry = temp
+                        self.aaiUpperRateLimitValue.config(text="Current Value: " + aai_upperRateLimitEntry)
+            except:
+                messagebox.showinfo("Error","Please enter a valid value")
                 pass
-            else:
-                aai_upperRateLimitEntry = temp
-                self.aaiUpperRateLimitValue.config(text="Current Value: " + aai_upperRateLimitEntry)
-        except:
-            pass
-        global aai_atrialAmplitudeEntry 
-        temp = self.aaiAtrialAmplitudeEntry .get()
-        try:
-            int(temp)
-            if (temp == '' or int(temp)<0):
+        if(value == "aaiAtrialAmplitude"):
+            global aai_atrialAmplitudeEntry 
+            temp = self.aaiAtrialAmplitudeEntry .get()
+            try:
+                int(temp)
+                if (temp == '' or int(temp)<0):
+                    messagebox.showinfo("Error","Please enter a valid value")
+                    pass
+                else:
+                    if messagebox.askyesno("Confirmation", "Replace current values?"):
+                        messagebox.showinfo("Done", "Success")
+                        aai_atrialAmplitudeEntry  = temp
+                        self.aaiAtrialAmplitudeValue.config(text="Current Value: " + aai_atrialAmplitudeEntry)
+            except:
+                messagebox.showinfo("Error","Please enter a valid value")
                 pass
-            else:
-                aai_atrialAmplitudeEntry  = temp
-                self.aaiAtrialAmplitudeValue.config(text="Current Value: " + aai_atrialAmplitudeEntry)
-        except:
-            pass
-        global aai_atrialPulseWidthEntry
-        temp = self.aaiAtrialPulseWidthEntry.get()
-        try:
-            int(temp)
-            if (temp == '' or int(temp)<0):
+        if(value == "aaiAtrialPulseWidth"):
+            global aai_atrialPulseWidthEntry
+            temp = self.aaiAtrialPulseWidthEntry.get()
+            try:
+                int(temp)
+                if (temp == '' or int(temp)<0):
+                    messagebox.showinfo("Error","Please enter a valid value")
+                    pass
+                else:
+                    if messagebox.askyesno("Confirmation", "Replace current values?"):
+                        messagebox.showinfo("Done", "Success")
+                        aai_atrialPulseWidthEntry = temp
+                        self.aaiAtrialPulseWidthValue.config(text="Current Value: " + aai_atrialPulseWidthEntry)
+            except:
+                messagebox.showinfo("Error","Please enter a valid value")
                 pass
-            else:
-                aai_atrialPulseWidthEntry = temp
-                self.aaiAtrialPulseWidthValue.config(text="Current Value: " + aai_atrialPulseWidthEntry)
-        except:
-            pass
-        global aai_atrialSensitivityEntry
-        temp = self.aaiAtrialSensitivityEntry.get()
-        try:
-            int(temp)
-            if (temp == '' or int(temp)<0):
+        if(value == "aaiAtrialSensitivity"):
+            global aai_atrialSensitivityEntry
+            temp = self.aaiAtrialSensitivityEntry.get()
+            try:
+                int(temp)
+                if (temp == '' or int(temp)<0):
+                    messagebox.showinfo("Error","Please enter a valid value")
+                    pass
+                else:
+                    if messagebox.askyesno("Confirmation", "Replace current values?"):
+                        messagebox.showinfo("Done", "Success")
+                        aai_atrialSensitivityEntry = temp
+                        self.aaiAtrialSensitivityValue.config(text="Current Value: " + aai_atrialSensitivityEntry)
+            except:
+                messagebox.showinfo("Error","Please enter a valid value")
                 pass
-            else:
-                aai_atrialSensitivityEntry = temp
-                self.aaiAtrialSensitivityValue.config(text="Current Value: " + aai_atrialSensitivityEntry)
-        except:
-            pass
-        global aai_ARPEntry 
-        temp = self.aaiARPEntry.get()
-        try:
-            int(temp)
-            if (temp == '' or int(temp)<0):
+        if(value == "aaiARP"):
+            global aai_ARPEntry 
+            temp = self.aaiARPEntry.get()
+            try:
+                int(temp)
+                if (temp == '' or int(temp)<0):
+                    messagebox.showinfo("Error","Please enter a valid value")
+                    pass
+                else:
+                    if messagebox.askyesno("Confirmation", "Replace current values?"):
+                        messagebox.showinfo("Done", "Success")
+                        aai_ARPEntry = temp
+                        self.aaiARPValue.config(text="Current Value: " + aai_ARPEntry)
+            except:
+                messagebox.showinfo("Error","Please enter a valid value")
                 pass
-            else:
-                aai_ARPEntry = temp
-                self.aaiARPValue.config(text="Current Value: " + aai_ARPEntry)
-        except:
-            pass
-        global aai_APVARPEntry
-        temp = self.aaiAPVARPEntry.get()
-        try:
-            int(temp)
-            if (temp == '' or int(temp)<0):
+        if(value == "aaiAPVARP"):
+            global aai_APVARPEntry
+            temp = self.aaiAPVARPEntry.get()
+            try:
+                int(temp)
+                if (temp == '' or int(temp)<0):
+                    messagebox.showinfo("Error","Please enter a valid value")
+                    pass
+                else:
+                    if messagebox.askyesno("Confirmation", "Replace current values?"):
+                        messagebox.showinfo("Done", "Success")
+                        aai_APVARPEntry = temp
+                        self.aaiAPVARPValue.config(text="Current Value: " + aai_APVARPEntry)
+            except:
+                messagebox.showinfo("Error","Please enter a valid value")
                 pass
-            else:
-                aai_APVARPEntry = temp
-                self.aaiAPVARPValue.config(text="Current Value: " + aai_APVARPEntry)
-        except:
-            pass
-        global aai_hysteresisEntry 
-        temp = self.aaiHysteresisEntry.get()
-        try:
-            int(temp)
-            if (temp == '' or int(temp)<0):
+        if(value == "aaiHysteresis"):
+            global aai_hysteresisEntry 
+            temp = self.aaiHysteresisEntry.get()
+            try:
+                int(temp)
+                if (temp == '' or int(temp)<0):
+                    messagebox.showinfo("Error","Please enter a valid value")
+                    pass
+                else:
+                    if messagebox.askyesno("Confirmation", "Replace current values?"):
+                        messagebox.showinfo("Done", "Success")
+                        aai_hysteresisEntry = temp
+                        self.aaiHysteresisValue.config(text="Current Value: " + aai_hysteresisEntry)
+            except:
+                messagebox.showinfo("Error","Please enter a valid value")
                 pass
-            else:
-                aai_hysteresisEntry = temp
-                self.aaiHysteresisValue.config(text="Current Value: " + aai_hysteresisEntry)
-        except:
-            pass
-        global aai_rateSmoothingEntry
-        temp = self.aaiRateSmoothingEntry.get()
-        try:
-            int(temp)
-            if (temp == '' or int(temp)<0):
+        if(value == "aaiRateSmoothing"):
+            global aai_rateSmoothingEntry
+            temp = self.aaiRateSmoothingEntry.get()
+            try:
+                int(temp)
+                if (temp == '' or int(temp)<0):
+                    messagebox.showinfo("Error","Please enter a valid value")
+                    pass
+                else:
+                    if messagebox.askyesno("Confirmation", "Replace current values?"):
+                        messagebox.showinfo("Done", "Success")
+                        aai_rateSmoothingEntry = temp
+                        self.aaiRateSmoothingValue.config(text="Current Value: " + aai_rateSmoothingEntry)
+            except:
+                messagebox.showinfo("Error","Please enter a valid value")
                 pass
-            else:
-                aai_rateSmoothingEntry = temp
-                self.aaiRateSmoothingValue.config(text="Current Value: " + aai_rateSmoothingEntry)
-        except:
-            pass
 
         #VVI
-        global vvi_lowerRateLimitEntry
-        temp = self.vviLowerRateLimitEntry.get()
-        try:
-            int(temp)
-            if (temp == '' or int(temp)<0):
+        if(value == "vviLowerRateLimit"):
+            global vvi_lowerRateLimitEntry
+            temp = self.vviLowerRateLimitEntry.get()
+            try:
+                int(temp)
+                if (temp == '' or int(temp)<0):
+                    messagebox.showinfo("Error","Please enter a valid value")
+                    pass
+                else:
+                    if messagebox.askyesno("Confirmation", "Replace current values?"):
+                        messagebox.showinfo("Done", "Success")
+                        vvi_lowerRateLimitEntry = temp
+                        self.vviLowerRateLimitValue.config(text="Current Value: " + vvi_lowerRateLimitEntry)
+            except:
+                messagebox.showinfo("Error","Please enter a valid value")
                 pass
-            else:
-                vvi_lowerRateLimitEntry = temp
-                self.vviLowerRateLimitValue.config(text="Current Value: " + vvi_lowerRateLimitEntry)
-        except:
-            pass
-        global vvi_upperRateLimitEntry
-        temp = self.vviUpperRateLimitEntry.get() 
-        try:
-            int(temp)
-            if (temp == '' or int(temp)<0):
+        if(value == "vviUpperRateLimit"):
+            global vvi_upperRateLimitEntry
+            temp = self.vviUpperRateLimitEntry.get() 
+            try:
+                int(temp)
+                if (temp == '' or int(temp)<0):
+                    messagebox.showinfo("Error","Please enter a valid value")
+                    pass
+                else:
+                    if messagebox.askyesno("Confirmation", "Replace current values?"):
+                        messagebox.showinfo("Done", "Success")
+                        vvi_upperRateLimitEntry = temp
+                        self.vviUpperRateLimitValue.config(text="Current Value: " + vvi_upperRateLimitEntry)
+            except:
+                messagebox.showinfo("Error","Please enter a valid value")
                 pass
-            else:
-                vvi_upperRateLimitEntry = temp
-                self.vviUpperRateLimitValue.config(text="Current Value: " + vvi_upperRateLimitEntry)
-        except:
-            pass
-        global vvi_atrialAmplitudeEntry
-        temp = self.vviAtrialAmplitudeEntry.get() 
-        try:
-            int(temp)
-            if (temp == '' or int(temp)<0):
+        if(value == "vviAtrialAmplitude"):
+            global vvi_atrialAmplitudeEntry
+            temp = self.vviAtrialAmplitudeEntry.get() 
+            try:
+                int(temp)
+                if (temp == '' or int(temp)<0):
+                    messagebox.showinfo("Error","Please enter a valid value")
+                    pass
+                else:
+                    if messagebox.askyesno("Confirmation", "Replace current values?"):
+                        messagebox.showinfo("Done", "Success")
+                        vvi_atrialAmplitudeEntry = temp
+                        self.vviAtrialAmplitudeValue.config(text="Current Value: " + vvi_atrialAmplitudeEntry)
+            except:
+                messagebox.showinfo("Error","Please enter a valid value")
                 pass
-            else:
-                vvi_atrialAmplitudeEntry = temp
-                self.vviAtrialAmplitudeValue.config(text="Current Value: " + vvi_atrialAmplitudeEntry)
-        except:
-            pass
-        global vvi_atrialPulseWidthEntry 
-        temp = self.vviAtrialPulseWidthEntry.get() 
-        try:
-            int(temp)
-            if (temp == '' or int(temp)<0):
+        if(value == "vviAtrialPulseWidth"):
+            global vvi_atrialPulseWidthEntry 
+            temp = self.vviAtrialPulseWidthEntry.get() 
+            try:
+                int(temp)
+                if (temp == '' or int(temp)<0):
+                    messagebox.showinfo("Error","Please enter a valid value")
+                    pass
+                else:
+                    if messagebox.askyesno("Confirmation", "Replace current values?"):
+                        messagebox.showinfo("Done", "Success")
+                        vvi_atrialPulseWidthEntry = temp
+                        self.vviAtrialPulseWidthValue.config(text="Current Value: " + vvi_atrialPulseWidthEntry)
+            except:
+                messagebox.showinfo("Error","Please enter a valid value")
                 pass
-            else:
-                vvi_atrialPulseWidthEntry = temp
-                self.vviAtrialPulseWidthValue.config(text="Current Value: " + vvi_atrialPulseWidthEntry)
-        except:
-            pass
-        global vvi_atrialSensitivityEntry
-        temp = self.vviAtrialSensitivityEntry.get()
-        try:
-            int(temp)
-            if (temp == '' or int(temp)<0):
+        if(value == "vviAtrialSensitivity"):
+            global vvi_atrialSensitivityEntry
+            temp = self.vviAtrialSensitivityEntry.get()
+            try:
+                int(temp)
+                if (temp == '' or int(temp)<0):
+                    messagebox.showinfo("Error","Please enter a valid value")
+                    pass
+                else:
+                    if messagebox.askyesno("Confirmation", "Replace current values?"):
+                        messagebox.showinfo("Done", "Success")
+                        vvi_atrialSensitivityEntry = temp
+                        self.vviAtrialSensitivityValue.config(text="Current Value: " + vvi_atrialSensitivityEntry)
+            except:
+                messagebox.showinfo("Error","Please enter a valid value")
                 pass
-            else:
-                vvi_atrialSensitivityEntry = temp
-                self.vviAtrialSensitivityValue.config(text="Current Value: " + vvi_atrialSensitivityEntry)
-        except:
-            pass 
-        global vvi_ARPEntry
-        temp = self.vviARPEntry.get() 
-        try:
-            int(temp)
-            if (temp == '' or int(temp)<0):
+        if(value == "vviARP"):
+            global vvi_ARPEntry
+            temp = self.vviARPEntry.get() 
+            try:
+                int(temp)
+                if (temp == '' or int(temp)<0):
+                    messagebox.showinfo("Error","Please enter a valid value")
+                    pass
+                else:
+                    if messagebox.askyesno("Confirmation", "Replace current values?"):
+                        messagebox.showinfo("Done", "Success")
+                        vvi_ARPEntry = temp
+                        self.vviARPValue.config(text="Current Value: " + vvi_ARPEntry)
+            except:
+                messagebox.showinfo("Error","Please enter a valid value")
                 pass
-            else:
-                vvi_ARPEntry = temp
-                self.vviARPValue.config(text="Current Value: " + vvi_ARPEntry)
-        except:
-            pass
-        global vvi_hysteresisEntry 
-        temp = self.vviHysteresisEntry.get() 
-        try:
-            int(temp)
-            if (temp == '' or int(temp)<0):
+        if(value == "vviHysteresis"):
+            global vvi_hysteresisEntry 
+            temp = self.vviHysteresisEntry.get() 
+            try:
+                int(temp)
+                if (temp == '' or int(temp)<0):
+                    messagebox.showinfo("Error","Please enter a valid value")
+                    pass
+                else:
+                    if messagebox.askyesno("Confirmation", "Replace current values?"):
+                        messagebox.showinfo("Done", "Success")
+                        vvi_hysteresisEntry = temp
+                        self.vviHysteresisValue.config(text="Current Value: " + vvi_hysteresisEntry)
+            except:
+                messagebox.showinfo("Error","Please enter a valid value")
                 pass
-            else:
-                vvi_hysteresisEntry = temp
-                self.vviHysteresisValue.config(text="Current Value: " + vvi_hysteresisEntry)
-        except:
-            pass
-        global vvi_rateSmoothingEntry
-        temp = self.vviRateSmoothingEntry.get()
-        try:
-            int(temp)
-            if (temp == '' or int(temp)<0):
+        if(value == "vviRateSmoothing"):
+            global vvi_rateSmoothingEntry
+            temp = self.vviRateSmoothingEntry.get()
+            try:
+                int(temp)
+                if (temp == '' or int(temp)<0):
+                    messagebox.showinfo("Error","Please enter a valid value")
+                    pass
+                else:
+                    if messagebox.askyesno("Confirmation", "Replace current values?"):
+                        messagebox.showinfo("Done", "Success")
+                        vvi_rateSmoothingEntry = temp
+                        self.vviRateSmoothingValue.config(text="Current Value: " + vvi_rateSmoothingEntry)
+            except:
+                messagebox.showinfo("Error","Please enter a valid value")
                 pass
-            else:
-                vvi_rateSmoothingEntry = temp
-                self.vviRateSmoothingValue.config(text="Current Value: " + vvi_rateSmoothingEntry)
-        except:
-            pass
 
     def logOff(self):
         if messagebox.askyesno("LogOff", "Do you want to log off?"):
@@ -870,3 +970,4 @@ def main():
 
 
 if __name__ == '__main__':
+    main()
