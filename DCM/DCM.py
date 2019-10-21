@@ -190,6 +190,7 @@ class AddUserWindow:
         self.entry_password.delete(0, 'end')
         self.entry_password2.delete(0, 'end')
         
+        #Password verification
         if(password == password2):
             for key in login_dict:
                 if(key == username):
@@ -526,10 +527,12 @@ class MainWindow:
     #Method to set value
     def setValue(self,value):
 
-        #AOO
+        #AAI
+        #aooLowerRateLimit
         if(value == "aooLowerRateLimit"):
             global aoo_lowerRateLimitEntry
             temp = self.aooLowerRateLimitEntry.get()
+            #Try/access to sanitize user input and ask for confirmation if there are no errors
             try:
                 int(temp)
                 if (temp == '' or int(temp)<0):
@@ -543,9 +546,12 @@ class MainWindow:
             except:
                 messagebox.showinfo("Error","Please enter a valid value")
                 pass
+
+        #aooUpperRateLimit
         if(value == "aooUpperRateLimit"):
             global aoo_upperRateLimitEntry
             temp = self.aooUpperRateLimitEntry.get()
+            #Try/access to sanitize user input and ask for confirmation if there are no errors
             try:
                 int(temp)
                 if (temp == '' or int(temp)<0):
@@ -559,9 +565,12 @@ class MainWindow:
             except:
                 messagebox.showinfo("Error","Please enter a valid value")
                 pass
+
+        #aooAtrialAmplitude
         if(value == "aooAtrialAmplitude"):
             global aoo_atrialAmplitudeEntry 
             temp = self.aooAtrialAmplitudeEntry.get()
+            #Try/access to sanitize user input and ask for confirmation if there are no errors
             try:
                 int(temp)
                 if (temp == '' or int(temp)<0):
@@ -575,9 +584,12 @@ class MainWindow:
             except:
                 messagebox.showinfo("Error","Please enter a valid value")
                 pass
+
+        #aooAtrialPulseWidth
         if(value == "aooAtrialPulseWidth"):
             global aoo_atrialPulseWidthEntry 
             temp = self.aooAtrialPulseWidthEntry.get()
+            #Try/access to sanitize user input and ask for confirmation if there are no errors
             try:
                 int(temp)
                 if (temp == '' or int(temp)<0):
@@ -593,9 +605,11 @@ class MainWindow:
                 pass
 
         #VOO
+        #vooLowerRateLimit
         if(value == "vooLowerRateLimit"):
             global voo_lowerRateLimitEntry
             temp = self.vooLowerRateLimitEntry.get()
+            #Try/access to sanitize user input and ask for confirmation if there are no errors
             try:
                 int(temp)
                 if (temp == '' or int(temp)<0):
@@ -609,9 +623,12 @@ class MainWindow:
             except:
                 messagebox.showinfo("Error","Please enter a valid value")
                 pass
+        
+        #vooUpperRateLimit
         if(value == "vooUpperRateLimit"):
             global voo_upperRateLimitEntry 
             temp = self.vooUpperRateLimitEntry.get()
+            #Try/access to sanitize user input and ask for confirmation if there are no errors
             try:
                 int(temp)
                 if (temp == '' or int(temp)<0):
@@ -625,9 +642,12 @@ class MainWindow:
             except:
                 messagebox.showinfo("Error","Please enter a valid value")
                 pass
+
+        #vooAtrialAmplitude
         if(value == "vooAtrialAmplitude"):
             global voo_atrialAmplitudeEntry
             temp = self.vooAtrialAmplitudeEntry.get()
+            #Try/access to sanitize user input and ask for confirmation if there are no errors
             try:
                 int(temp)
                 if (temp == '' or int(temp)<0):
@@ -641,9 +661,12 @@ class MainWindow:
             except:
                 messagebox.showinfo("Error","Please enter a valid value")
                 pass
+
+        #vooAtrialPulseWidth
         if(value == "vooAtrialPulseWidth"):
             global voo_atrialPulseWidthEntry
             temp = self.vooAtrialPulseWidthEntry.get()
+            #Try/access to sanitize user input and ask for confirmation if there are no errors
             try:
                 int(temp)
                 if (temp == '' or int(temp)<0):
@@ -659,9 +682,11 @@ class MainWindow:
                 pass
 
         #AAI
+        #aaiLowerRateLimit
         if(value == "aaiLowerRateLimit"):
             global aai_lowerRateLimitEntry
             temp = self.aaiLowerRateLimitEntry.get()
+            #Try/access to sanitize user input and ask for confirmation if there are no errors
             try:
                 int(temp)
                 if (temp == '' or int(temp)<0):
@@ -675,9 +700,12 @@ class MainWindow:
             except:
                 messagebox.showinfo("Error","Please enter a valid value")
                 pass
+
+        #aaiUpperRateLimit
         if(value == "aaiUpperRateLimit"):
             global aai_upperRateLimitEntry 
             temp = self.aaiUpperRateLimitEntry.get()
+            #Try/access to sanitize user input and ask for confirmation if there are no errors
             try:
                 int(temp)
                 if (temp == '' or int(temp)<0):
@@ -691,9 +719,12 @@ class MainWindow:
             except:
                 messagebox.showinfo("Error","Please enter a valid value")
                 pass
+
+        #aaiAtrialAmplitude
         if(value == "aaiAtrialAmplitude"):
             global aai_atrialAmplitudeEntry 
             temp = self.aaiAtrialAmplitudeEntry .get()
+            #Try/access to sanitize user input and ask for confirmation if there are no errors
             try:
                 int(temp)
                 if (temp == '' or int(temp)<0):
@@ -707,9 +738,12 @@ class MainWindow:
             except:
                 messagebox.showinfo("Error","Please enter a valid value")
                 pass
+
+        #aaiAtrialPulseWidth
         if(value == "aaiAtrialPulseWidth"):
             global aai_atrialPulseWidthEntry
             temp = self.aaiAtrialPulseWidthEntry.get()
+            #Try/access to sanitize user input and ask for confirmation if there are no errors
             try:
                 int(temp)
                 if (temp == '' or int(temp)<0):
@@ -723,9 +757,12 @@ class MainWindow:
             except:
                 messagebox.showinfo("Error","Please enter a valid value")
                 pass
+
+        #aaiAtrialSensitivity
         if(value == "aaiAtrialSensitivity"):
             global aai_atrialSensitivityEntry
             temp = self.aaiAtrialSensitivityEntry.get()
+            #Try/access to sanitize user input and ask for confirmation if there are no errors
             try:
                 int(temp)
                 if (temp == '' or int(temp)<0):
@@ -739,9 +776,12 @@ class MainWindow:
             except:
                 messagebox.showinfo("Error","Please enter a valid value")
                 pass
+
+        #aaiARP
         if(value == "aaiARP"):
             global aai_ARPEntry 
             temp = self.aaiARPEntry.get()
+            #Try/access to sanitize user input and ask for confirmation if there are no errors
             try:
                 int(temp)
                 if (temp == '' or int(temp)<0):
@@ -755,9 +795,12 @@ class MainWindow:
             except:
                 messagebox.showinfo("Error","Please enter a valid value")
                 pass
+
+        #aaiAPVARP
         if(value == "aaiAPVARP"):
             global aai_APVARPEntry
             temp = self.aaiAPVARPEntry.get()
+            #Try/access to sanitize user input and ask for confirmation if there are no errors
             try:
                 int(temp)
                 if (temp == '' or int(temp)<0):
@@ -771,9 +814,12 @@ class MainWindow:
             except:
                 messagebox.showinfo("Error","Please enter a valid value")
                 pass
+
+        #aaiHysteresis
         if(value == "aaiHysteresis"):
             global aai_hysteresisEntry 
             temp = self.aaiHysteresisEntry.get()
+            #Try/access to sanitize user input and ask for confirmation if there are no errors
             try:
                 int(temp)
                 if (temp == '' or int(temp)<0):
@@ -787,9 +833,12 @@ class MainWindow:
             except:
                 messagebox.showinfo("Error","Please enter a valid value")
                 pass
+
+        #aaiRateSmoothing
         if(value == "aaiRateSmoothing"):
             global aai_rateSmoothingEntry
             temp = self.aaiRateSmoothingEntry.get()
+            #Try/access to sanitize user input and ask for confirmation if there are no errors
             try:
                 int(temp)
                 if (temp == '' or int(temp)<0):
@@ -805,9 +854,11 @@ class MainWindow:
                 pass
 
         #VVI
+        #vviLowerRateLimit
         if(value == "vviLowerRateLimit"):
             global vvi_lowerRateLimitEntry
             temp = self.vviLowerRateLimitEntry.get()
+            #Try/access to sanitize user input and ask for confirmation if there are no errors
             try:
                 int(temp)
                 if (temp == '' or int(temp)<0):
@@ -821,9 +872,12 @@ class MainWindow:
             except:
                 messagebox.showinfo("Error","Please enter a valid value")
                 pass
+
+        #vviUpperRateLimit
         if(value == "vviUpperRateLimit"):
             global vvi_upperRateLimitEntry
             temp = self.vviUpperRateLimitEntry.get() 
+            #Try/access to sanitize user input and ask for confirmation if there are no errors
             try:
                 int(temp)
                 if (temp == '' or int(temp)<0):
@@ -837,9 +891,12 @@ class MainWindow:
             except:
                 messagebox.showinfo("Error","Please enter a valid value")
                 pass
+
+        #vviAtrialAmplitude
         if(value == "vviAtrialAmplitude"):
             global vvi_atrialAmplitudeEntry
             temp = self.vviAtrialAmplitudeEntry.get() 
+            #Try/access to sanitize user input and ask for confirmation if there are no errors
             try:
                 int(temp)
                 if (temp == '' or int(temp)<0):
@@ -853,9 +910,12 @@ class MainWindow:
             except:
                 messagebox.showinfo("Error","Please enter a valid value")
                 pass
+
+        #vviAtrialPulseWidth
         if(value == "vviAtrialPulseWidth"):
             global vvi_atrialPulseWidthEntry 
             temp = self.vviAtrialPulseWidthEntry.get() 
+            #Try/access to sanitize user input and ask for confirmation if there are no errors
             try:
                 int(temp)
                 if (temp == '' or int(temp)<0):
@@ -869,9 +929,12 @@ class MainWindow:
             except:
                 messagebox.showinfo("Error","Please enter a valid value")
                 pass
+
+        #vviAtrialSensitivity
         if(value == "vviAtrialSensitivity"):
             global vvi_atrialSensitivityEntry
             temp = self.vviAtrialSensitivityEntry.get()
+            #Try/access to sanitize user input and ask for confirmation if there are no errors
             try:
                 int(temp)
                 if (temp == '' or int(temp)<0):
@@ -885,9 +948,12 @@ class MainWindow:
             except:
                 messagebox.showinfo("Error","Please enter a valid value")
                 pass
+
+        #vviARP
         if(value == "vviARP"):
             global vvi_ARPEntry
             temp = self.vviARPEntry.get() 
+            #Try/access to sanitize user input and ask for confirmation if there are no errors
             try:
                 int(temp)
                 if (temp == '' or int(temp)<0):
@@ -901,9 +967,12 @@ class MainWindow:
             except:
                 messagebox.showinfo("Error","Please enter a valid value")
                 pass
+
+        #vviHysteresis
         if(value == "vviHysteresis"):
             global vvi_hysteresisEntry 
             temp = self.vviHysteresisEntry.get() 
+            #Try/access to sanitize user input and ask for confirmation if there are no errors
             try:
                 int(temp)
                 if (temp == '' or int(temp)<0):
@@ -917,9 +986,12 @@ class MainWindow:
             except:
                 messagebox.showinfo("Error","Please enter a valid value")
                 pass
+
+        #vviRateSmoothing
         if(value == "vviRateSmoothing"):
             global vvi_rateSmoothingEntry
             temp = self.vviRateSmoothingEntry.get()
+            #Try/access to sanitize user input and ask for confirmation if there are no errors
             try:
                 int(temp)
                 if (temp == '' or int(temp)<0):
