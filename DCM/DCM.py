@@ -126,7 +126,6 @@ class AddUserWindow:
     def __init__(self, master):
         self.master = master
         self.master.geometry('300x200')
-        self.master.title("SIGN UP")
         self.quitButton = tk.Button(self.master, text = 'Quit', width = 12, command = self.close_windows)
         self.label_username = tk.Label(self.master, text="Enter New Username")
         self.label_password = tk.Label(self.master, text="Enter New Password")
@@ -233,7 +232,6 @@ class MainWindow:
         self.content = tk.Entry()
         self.master = master
         self.master.geometry('500x570')
-        self.master.title("PACEMAKER")
         self.master.protocol("WM_DELETE_WINDOW", self.on_exit)
 
         self.menubar = tk.Menu(self.master)
@@ -542,6 +540,7 @@ class MainWindow:
                 pass
             else:
                 aoo_lowerRateLimitEntry = temp
+                self.aooLowerRateLimitValue.config(text="Current Value: " + aoo_lowerRateLimitEntry)
         except:
             pass
 
@@ -553,6 +552,7 @@ class MainWindow:
                 pass
             else:
                 aoo_upperRateLimitEntry = temp
+                self.aooUpperRateLimitValue.config(text="Current Value: " + aoo_upperRateLimitEntry)
         except:
             pass
 
@@ -564,6 +564,7 @@ class MainWindow:
                 pass
             else:
                 aoo_atrialAmplitudeEntry = temp
+                self.aooAtrialAmplitudeValue.config(text="Current Value: " + aoo_atrialAmplitudeEntry)
         except:
             pass
 
@@ -575,6 +576,7 @@ class MainWindow:
                 pass
             else:
                 aoo_atrialPulseWidthEntry = temp
+                self.aooAtrialPulseWidthValue.config(text="Current Value: " + aoo_atrialPulseWidthEntry)
         except:
             pass
 
@@ -587,6 +589,7 @@ class MainWindow:
                 pass
             else:
                 voo_lowerRateLimitEntry = temp
+                self.vooLowerRateLimitValue.config(text="Current Value: " + voo_lowerRateLimitEntry)
         except:
             pass
 
@@ -598,6 +601,7 @@ class MainWindow:
                 pass
             else:
                 voo_upperRateLimitEntry = temp
+                self.vooUpperRateLimitValue.config(text="Current Value: " + voo_upperRateLimitEntry)
         except:
             pass
 
@@ -608,7 +612,8 @@ class MainWindow:
             if (temp == '' or int(temp)<0):
                 pass
             else:
-                vooAtrialAmplitudeEntry = temp
+                voo_atrialAmplitudeEntry = temp
+                self.vooAtrialAmplitudeValue.config(text="Current Value: " + voo_atrialAmplitudeEntry)
         except:
             pass
 
@@ -620,6 +625,7 @@ class MainWindow:
                 pass
             else:
                 voo_atrialPulseWidthEntry = temp
+                self.vooAtrialPulseWidthValue.config(text="Current Value: " + voo_atrialPulseWidthEntry)
         except:
             pass
 
@@ -632,6 +638,7 @@ class MainWindow:
                 pass
             else:
                 aai_lowerRateLimitEntry = temp
+                self.aaiLowerRateLimitValue.config(text="Current Value: " + aai_lowerRateLimitEntry)
         except:
             pass
         global aai_upperRateLimitEntry 
@@ -642,6 +649,7 @@ class MainWindow:
                 pass
             else:
                 aai_upperRateLimitEntry = temp
+                self.aaiUpperRateLimitValue.config(text="Current Value: " + aai_upperRateLimitEntry)
         except:
             pass
         global aai_atrialAmplitudeEntry 
@@ -652,6 +660,7 @@ class MainWindow:
                 pass
             else:
                 aai_atrialAmplitudeEntry  = temp
+                self.aaiAtrialAmplitudeValue.config(text="Current Value: " + aai_atrialAmplitudeEntry)
         except:
             pass
         global aai_atrialPulseWidthEntry
@@ -662,6 +671,7 @@ class MainWindow:
                 pass
             else:
                 aai_atrialPulseWidthEntry = temp
+                self.aaiAtrialPulseWidthValue.config(text="Current Value: " + aai_atrialPulseWidthEntry)
         except:
             pass
         global aai_atrialSensitivityEntry
@@ -672,6 +682,7 @@ class MainWindow:
                 pass
             else:
                 aai_atrialSensitivityEntry = temp
+                self.aaiAtrialSensitivityValue.config(text="Current Value: " + aai_atrialSensitivityEntry)
         except:
             pass
         global aai_ARPEntry 
@@ -682,6 +693,7 @@ class MainWindow:
                 pass
             else:
                 aai_ARPEntry = temp
+                self.aaiARPValue.config(text="Current Value: " + aai_ARPEntry)
         except:
             pass
         global aai_APVARPEntry
@@ -692,6 +704,7 @@ class MainWindow:
                 pass
             else:
                 aai_APVARPEntry = temp
+                self.aaiAPVARPValue.config(text="Current Value: " + aai_APVARPEntry)
         except:
             pass
         global aai_hysteresisEntry 
@@ -702,6 +715,7 @@ class MainWindow:
                 pass
             else:
                 aai_hysteresisEntry = temp
+                self.aaiHysteresisValue.config(text="Current Value: " + aai_hysteresisEntry)
         except:
             pass
         global aai_rateSmoothingEntry
@@ -712,6 +726,7 @@ class MainWindow:
                 pass
             else:
                 aai_rateSmoothingEntry = temp
+                self.aaiRateSmoothingValue.config(text="Current Value: " + aai_rateSmoothingEntry)
         except:
             pass
 
@@ -724,6 +739,7 @@ class MainWindow:
                 pass
             else:
                 vvi_lowerRateLimitEntry = temp
+                self.vviLowerRateLimitValue.config(text="Current Value: " + vvi_lowerRateLimitEntry)
         except:
             pass
         global vvi_upperRateLimitEntry
@@ -734,6 +750,7 @@ class MainWindow:
                 pass
             else:
                 vvi_upperRateLimitEntry = temp
+                self.vviUpperRateLimitValue.config(text="Current Value: " + vvi_upperRateLimitEntry)
         except:
             pass
         global vvi_atrialAmplitudeEntry
@@ -744,6 +761,7 @@ class MainWindow:
                 pass
             else:
                 vvi_atrialAmplitudeEntry = temp
+                self.vviAtrialAmplitudeValue.config(text="Current Value: " + vvi_atrialAmplitudeEntry)
         except:
             pass
         global vvi_atrialPulseWidthEntry 
@@ -754,6 +772,7 @@ class MainWindow:
                 pass
             else:
                 vvi_atrialPulseWidthEntry = temp
+                self.vviAtrialPulseWidthValue.config(text="Current Value: " + vvi_atrialPulseWidthEntry)
         except:
             pass
         global vvi_atrialSensitivityEntry
@@ -764,6 +783,7 @@ class MainWindow:
                 pass
             else:
                 vvi_atrialSensitivityEntry = temp
+                self.vviAtrialSensitivityValue.config(text="Current Value: " + vvi_atrialSensitivityEntry)
         except:
             pass 
         global vvi_ARPEntry
@@ -774,6 +794,7 @@ class MainWindow:
                 pass
             else:
                 vvi_ARPEntry = temp
+                self.vviARPValue.config(text="Current Value: " + vvi_ARPEntry)
         except:
             pass
         global vvi_hysteresisEntry 
@@ -784,6 +805,7 @@ class MainWindow:
                 pass
             else:
                 vvi_hysteresisEntry = temp
+                self.vviHysteresisValue.config(text="Current Value: " + vvi_hysteresisEntry)
         except:
             pass
         global vvi_rateSmoothingEntry
@@ -794,12 +816,12 @@ class MainWindow:
                 pass
             else:
                 vvi_rateSmoothingEntry = temp
+                self.vviRateSmoothingValue.config(text="Current Value: " + vvi_rateSmoothingEntry)
         except:
             pass
 
-        #self.tk.update(self)
-        self.master.withdraw()
-        self.new_window(MainWindow)
+        """self.master.withdraw()
+        self.new_window(MainWindow)"""
 
     def logOff(self):
         if messagebox.askyesno("LogOff", "Do you want to log off?"):
