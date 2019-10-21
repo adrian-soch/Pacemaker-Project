@@ -547,6 +547,7 @@ class MainWindow:
                 if (temp == '' or int(temp)<0):
                     messagebox.showinfo("Error","Please enter a valid value")
                     pass
+                #Ensure upper limit is larger than lower limit
                 elif(int(self.aooLowerRateLimitEntry.get()) >= int(aoo_upperRateLimitEntry) and int(aoo_upperRateLimitEntry) != 0 ):
                     messagebox.showinfo("Error","Please ensure your lower rate limit is lower than your upper rate limit")
                     pass
@@ -568,6 +569,7 @@ class MainWindow:
                 if (temp == '' or int(temp)<0):
                     messagebox.showinfo("Error","Please enter a valid value")
                     pass
+                #Ensure upper limit is larger than lower limit
                 elif(int(aoo_lowerRateLimitEntry) >= int(self.aooUpperRateLimitEntry.get()) and int(aoo_lowerRateLimitEntry) != 0 ):
                     messagebox.showinfo("Error","Please ensure your lower rate limit is lower than your upper rate limit")
                     pass
@@ -626,6 +628,7 @@ class MainWindow:
                 if (temp == '' or int(temp)<0):
                     messagebox.showinfo("Error","Please enter a valid value")
                     pass
+                #Ensure upper limit is larger than lower limit
                 elif(int(self.vooLowerRateLimitEntry.get()) >= int(voo_upperRateLimitEntry) and int(voo_upperRateLimitEntry) != 0 ):
                     messagebox.showinfo("Error","Please ensure your lower rate limit is lower than your upper rate limit")
                     pass
@@ -647,6 +650,7 @@ class MainWindow:
                 if (temp == '' or int(temp)<0):
                     messagebox.showinfo("Error","Please enter a valid value")
                     pass
+                #Ensure upper limit is larger than lower limit
                 elif(int(voo_lowerRateLimitEntry) >= int(self.vooUpperRateLimitEntry.get()) and int(voo_lowerRateLimitEntry) != 0 ):
                     messagebox.showinfo("Error","Please ensure your lower rate limit is lower than your upper rate limit")
                     pass
@@ -705,6 +709,7 @@ class MainWindow:
                 if (temp == '' or int(temp)<0):
                     messagebox.showinfo("Error","Please enter a valid value")
                     pass
+                #Ensure upper limit is larger than lower limit
                 elif(int(self.aaiLowerRateLimitEntry.get()) >= int(aai_upperRateLimitEntry) and int(aai_upperRateLimitEntry) != 0 ):
                     messagebox.showinfo("Error","Please ensure your lower rate limit is lower than your upper rate limit")
                     pass
@@ -726,6 +731,7 @@ class MainWindow:
                 if (temp == '' or int(temp)<0):
                     messagebox.showinfo("Error","Please enter a valid value")
                     pass
+                #Ensure upper limit is larger than lower limit
                 elif(int(aai_lowerRateLimitEntry) >= int(self.aaiUpperRateLimitEntry.get()) and int(aai_lowerRateLimitEntry) != 0 ):
                     messagebox.showinfo("Error","Please ensure your lower rate limit is lower than your upper rate limit")
                     pass
@@ -874,6 +880,7 @@ class MainWindow:
                 if (temp == '' or int(temp)<0):
                     messagebox.showinfo("Error","Please enter a valid value")
                     pass
+                #Ensure upper limit is larger than lower limit
                 elif(int(self.vviLowerRateLimitEntry.get()) >= int(vvi_upperRateLimitEntry) and int(vvi_upperRateLimitEntry) != 0 ):
                     messagebox.showinfo("Error","Please ensure your lower rate limit is lower than your upper rate limit")
                     pass
@@ -895,6 +902,7 @@ class MainWindow:
                 if (temp == '' or int(temp)<0):
                     messagebox.showinfo("Error","Please enter a valid value")
                     pass
+                #Ensure upper limit is larger than lower limit
                 elif(int(vvi_lowerRateLimitEntry) >= int(self.vviUpperRateLimitEntry.get()) and int(vvi_lowerRateLimitEntry) != 0 ):
                     messagebox.showinfo("Error","Please ensure your lower rate limit is lower than your upper rate limit")
                     pass
