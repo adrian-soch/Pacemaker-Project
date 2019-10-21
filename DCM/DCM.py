@@ -1,59 +1,86 @@
+#Imports
 import tkinter as tk
 from tkinter import ttk
 from tkinter import messagebox
 import pickle
 
+#Creating empty dictionary to later load users into
 login_dict = {}
 
+#Initializing all global variables with "0"
+#AOO
+aoo_lowerRateLimitEntry,aoo_upperRateLimitEntry,aoo_atrialAmplitudeEntry,aoo_atrialPulseWidthEntry = "0","0","0","0"
+ 
+#VOO
+voo_lowerRateLimitEntry,voo_upperRateLimitEntry,voo_atrialAmplitudeEntry,voo_atrialPulseWidthEntry = "0","0","0","0"
+
+#AAI
+aai_lowerRateLimitEntry,aai_upperRateLimitEntry,aai_atrialAmplitudeEntry,aai_atrialPulseWidthEntry,aai_atrialSensitivityEntry,aai_ARPEntry,aai_APVARPEntry,aai_hysteresisEntry,aai_rateSmoothingEntry = "0","0","0","0","0","0","0","0","0"
+
+#VVI
+vvi_lowerRateLimitEntry,vvi_upperRateLimitEntry,vvi_atrialAmplitudeEntry,vvi_atrialPulseWidthEntry,vvi_atrialSensitivityEntry,vvi_ARPEntry,vvi_hysteresisEntry,vvi_rateSmoothingEntry = "0","0","0","0","0","0","0","0"
+
+#Creating Initial Welcome Frame
 class WelcomeFrame:
     def __init__(self, master):
+        
+        #General paramters
         self.master = master
         self.master.configure(background='grey')
         self.frame = tk.Frame(self.master)
         self.master.title("DCM")
         self.master.resizable(width=False, height=False)
+
+        #Label details
         self.label_welcome = tk.Label(self.master, text="Welcome")
         self.label_welcome.config(font=("Helvetica",34))
         self.label_welcome.configure(background='grey')
         self.label_welcome.grid(row=1,column=2,columnspan =1,padx = 200, pady = 20)
 
+        #Next window button
         self.nxtbtn = tk.Button(self.master, text="Next", width=12, command=self._nxt_btn_clicked)
         self.nxtbtn.grid(row=3,column=2,columnspan =1,padx = 200, pady = 20)
         self.nxtbtn.focus()
 
-    #return button bind
+        #Return button binding
         self.master.bind('<Return>', self.return_bind)
-        
+    
+    #Return Button method
     def return_bind(self, event):
         self._nxt_btn_clicked()
-    #return button bind end
 
+    #Method to create new window
     def new_window(self,window):
         self.newWindow = tk.Toplevel(self.master)
         self.app = window(self.newWindow)
 
+    #Method to transition to loginframe
     def _nxt_btn_clicked(self):
         self.master.withdraw()
         self.new_window(LoginFrame)     
-        
+    
+    #Method to cleanup closing window
     def on_exit(self):
         exit()
 
-
+#Login Frame window
 class LoginFrame:
     def __init__(self, master):
+
+        #General parameters
         self.master = master
         self.master.configure(background='grey')
         self.frame = tk.Frame(self.master)
         self.master.title("USER LOGIN")
         self.master.resizable(width=False, height=False)
 
-        #self.master.geometry('300x200')
+        #Label details
         self.label_username = tk.Label(self.master, text="Username")
         self.label_username.configure(background='grey')
         self.label_password = tk.Label(self.master, text="Password")
         self.label_password.configure(background='grey')
 
+        #Window positioning
         self.master.rowconfigure(0, pad=3)
         self.master.rowconfigure(1, pad=3)
         self.master.rowconfigure(2, pad=3)
@@ -61,45 +88,47 @@ class LoginFrame:
         self.master.rowconfigure(4, pad=3)
         self.master.rowconfigure(5, pad=3)
 
+        #Enter username/password details
         self.entry_username = tk.Entry(self.master)
         self.entry_password = tk.Entry(self.master, show="*")
         self.entry_username.focus()
-
         self.label_username.grid(row=0, sticky='e', pady=5)
         self.label_password.grid(row=1, sticky='e', pady=10)
         self.entry_username.grid(row=0, column=1, columnspan = 1,sticky='w')
         self.entry_password.grid(row=1, column=1, columnspan = 1,sticky='w')
 
+        #Add user and login button details
         self.logbtn = tk.Button(self.master, text="Login", width=12, command=self._login_btn_clicked)
         self.logbtn.grid(columnspan=2, padx = 80, pady = 0)
-
         self.add_userbtn = tk.Button(self.master, text="Add user",width =12, command=self._add_user_btn_clicked)
         self.add_userbtn.grid(columnspan =2,padx = 80, pady = 10)
-
         self.login_successful = False
-
         self.master.protocol("WM_DELETE_WINDOW", self.on_exit)
 
-    #return button bind
+        #Return button bind
         self.master.bind('<Return>', self.return_bind)
-        
+
+    #Return button method  
     def return_bind(self, event):
         self._login_btn_clicked()
-    #return button bind end
 
+    #Method to cleanup closing application
     def on_exit(self):
         if messagebox.askyesno("Exit", "Do you want to quit the application?"):
             exit()
 
+    #Method to create new window
     def new_window(self,window):
         self.newWindow = tk.Toplevel(self.master)
         self.app = window(self.newWindow)
 
+    #Method to add transition to add new user screen
     def _add_user_btn_clicked(self):
         self.entry_username.delete(0, 'end')
         self.entry_password.delete(0, 'end')
         self.new_window(AddUserWindow)
 
+    #Method to for login button
     def _login_btn_clicked(self):
         global login_dict
         username = self.entry_username.get()
@@ -117,40 +146,40 @@ class LoginFrame:
         if self.login_successful != True:
             messagebox.showerror("Login error", "Incorrect username/password")
 
-
+#Add new user class window
 class AddUserWindow:
     def __init__(self, master):
+        #Setting default window parameters
         self.master = master
         self.master.geometry('300x200')
         self.quitButton = tk.Button(self.master, text = 'Quit', width = 12, command = self.close_windows)
         self.label_username = tk.Label(self.master, text="Enter New Username")
         self.label_password = tk.Label(self.master, text="Enter New Password")
         self.label_password2 = tk.Label(self.master, text="Confirm Password")
-
         self.entry_username = tk.Entry(self.master)
         self.entry_password = tk.Entry(self.master, show="*")
         self.entry_password2 = tk.Entry(self.master, show="*")
         self.entry_username.focus()
 
+        #Adjusting window and button spacing
         self.label_username.grid(row=0, sticky='e', pady=5)
         self.label_password.grid(row=1, sticky='e', pady=10)
         self.label_password2.grid(row=2, sticky='w', pady=10)
         self.entry_username.grid(row=0, column=1, columnspan = 1,sticky='w')
         self.entry_password.grid(row=1, column=1, columnspan = 1,sticky='w')
         self.entry_password2.grid(row=2, column=1, columnspan = 1,sticky='w')
-
         self.add_userbtn = tk.Button(self.master, text="Add user",width =12, command=self._add_user_btn_clicked)
         self.add_userbtn.grid(row=3,column=1,pady=10)
-
         self.quitButton = tk.Button(self.master, text = 'Back', width = 12, command = self.close_windows)
         self.quitButton.grid(row=4,column=1,pady=5)
 
         self.master.protocol("WM_DELETE_WINDOW", self.on_exit)
 
+    #Method for clean exit 
     def on_exit(self):
         self.master.destroy()
-        #changed here: press quit wont close the program but close the window
 
+    #Method for clicking add user
     def _add_user_btn_clicked(self):
         global login_dict
         username = self.entry_username.get()
@@ -165,13 +194,15 @@ class AddUserWindow:
             for key in login_dict:
                 if(key == username):
                     userExists = True
-             # 10 Users
+            
+            #Ensures only 10 users can be added
             if(not(userExists) and len(username) and len(password) and len(login_dict)<11):
                 login_dict[username] = password
                 writeUsers()
                 messagebox.showinfo("Success", "User Added")
                 self.quitButton.focus()
             else:
+                #Ensures user parameters are valid
                 if(not(len(username) and len(password))):
                     messagebox.showerror("Error", "Missing Username and/or Password")
                 elif(userExists):
@@ -182,48 +213,13 @@ class AddUserWindow:
         else:
             messagebox.showerror("Error", "Passwords do not match")
 
+    #Method for closing window
     def close_windows(self):
         self.master.destroy()
 
-#Initializing all global variables with "0"
-#AOO
-aoo_lowerRateLimitEntry = "0"
-aoo_upperRateLimitEntry = "0"
-aoo_atrialAmplitudeEntry = "0"
-aoo_atrialPulseWidthEntry = "0"
-
-#VOO
-voo_lowerRateLimitEntry = "0"
-voo_upperRateLimitEntry = "0"
-voo_atrialAmplitudeEntry = "0"
-voo_atrialPulseWidthEntry = "0"
-
-#AAI
-aai_lowerRateLimitEntry = "0"
-aai_upperRateLimitEntry = "0"
-aai_atrialAmplitudeEntry = "0"
-aai_atrialPulseWidthEntry = "0"
-aai_atrialSensitivityEntry = "0"
-aai_ARPEntry = "0"
-aai_APVARPEntry = "0"
-aai_hysteresisEntry = "0"
-aai_rateSmoothingEntry = "0"
-
-#VVI
-vvi_lowerRateLimitEntry = "0"
-vvi_upperRateLimitEntry = "0"
-vvi_atrialAmplitudeEntry = "0"
-vvi_atrialPulseWidthEntry = "0"
-vvi_atrialSensitivityEntry = "0"
-vvi_ARPEntry = "0"
-vvi_hysteresisEntry = "0"
-vvi_rateSmoothingEntry = "0" 
 
 class MainWindow:
     def __init__(self, master):
-        
-        #Initalizing Current state to "0"
-
         self.content = tk.Entry()
         self.master = master
         self.master.geometry('500x570')
@@ -258,7 +254,6 @@ class MainWindow:
         self.aooAtrialAmplitudeLabel = tk.Label(self.aoo, text = "Atrial Amplitude")
         self.aooAtrialPulseWidthLabel = tk.Label(self.aoo, text = "Atrial Pulse Width")
 
-        #global aoo_lowerRateLimitEntry, aoo_upperRateLimitEntry, aoo_atrialAmplitudeEntry, aoo_atrialPulseWidthEntry
         self.aooLowerRateLimitValue = tk.Label(self.aoo, text = "Current Value: " + aoo_lowerRateLimitEntry)
         self.aooUpperRateLimitValue = tk.Label(self.aoo, text = "Current Value: " + aoo_upperRateLimitEntry)
         self.aooAtrialAmplitudeValue = tk.Label(self.aoo, text = "Current Value: " + aoo_atrialAmplitudeEntry)
@@ -298,7 +293,6 @@ class MainWindow:
         self.vooAtrialAmplitudeLabel = tk.Label(self.voo, text = "Ventricular Amplitude")
         self.vooAtrialPulseWidthLabel = tk.Label(self.voo, text = "Ventricular Pulse Width")
 
-        #global voo_lowerRateLimitEntry, voo_upperRateLimitEntry, voo_atrialAmplitudeEntry, voo_atrialPulseWidthEntry
         self.vooLowerRateLimitValue = tk.Label(self.voo, text = "Current Value: "+ voo_lowerRateLimitEntry)
         self.vooUpperRateLimitValue = tk.Label(self.voo, text = "Current Value: "+ voo_upperRateLimitEntry)
         self.vooAtrialAmplitudeValue = tk.Label(self.voo, text = "Current Value: "+ voo_atrialAmplitudeEntry)
@@ -348,7 +342,6 @@ class MainWindow:
         self.aaiHysteresisLabel = tk.Label(self.aai, text = "Hysteresis")
         self.aaiRateSmoothingLabel = tk.Label(self.aai, text = "Rate Smoothing")
 
-        #global aai_lowerRateLimitEntry, aai_upperRateLimitEntry, aai_atrialAmplitudeEntry, aai_atrialPulseWidthEntry, aai_atrialSensitivityEntry, aai_ARPEntry, aai_APVARPEntry, aai_hysteresisEntry, aai_rateSmoothingEntry 
         self.aaiLowerRateLimitValue = tk.Label(self.aai, text = "Current Value: "+ aai_lowerRateLimitEntry)
         self.aaiUpperRateLimitValue = tk.Label(self.aai, text = "Current Value: "+ aai_upperRateLimitEntry)
         self.aaiAtrialAmplitudeValue = tk.Label(self.aai, text = "Current Value: "+ aai_atrialAmplitudeEntry)
@@ -427,7 +420,6 @@ class MainWindow:
         self.vviHysteresisLabel = tk.Label(self.vvi, text = "Hysteresis")
         self.vviRateSmoothingLabel = tk.Label(self.vvi, text = "Rate Smoothing")
 
-        #global vvi_lowerRateLimitEntry, vvi_upperRateLimitEntry, vvi_atrialAmplitudeEntry, vvi_atrialPulseWidthEntry, vvi_atrialSensitivityEntry, vvi_ARPEntry, vvi_hysteresisEntry, vvi_rateSmoothingEntry
         self.vviLowerRateLimitValue = tk.Label(self.vvi, text = "Current Value: "+ vvi_lowerRateLimitEntry)
         self.vviUpperRateLimitValue = tk.Label(self.vvi, text = "Current Value: "+ vvi_upperRateLimitEntry)
         self.vviAtrialAmplitudeValue = tk.Label(self.vvi, text = "Current Value: "+ vvi_atrialAmplitudeEntry)
@@ -524,7 +516,7 @@ class MainWindow:
                     messagebox.showinfo("Error","Please enter a valid value")
                     pass
                 else:
-                    if messagebox.askyesno("Confirmation", "Replace current values?"):
+                    if messagebox.askyesno("Confirmation", "Replace current value?"):
                         messagebox.showinfo("Done", "Success")
                         aoo_lowerRateLimitEntry = temp
                         self.aooLowerRateLimitValue.config(text="Current Value: " + aoo_lowerRateLimitEntry)
@@ -540,7 +532,7 @@ class MainWindow:
                     messagebox.showinfo("Error","Please enter a valid value")
                     pass
                 else:
-                    if messagebox.askyesno("Confirmation", "Replace current values?"):
+                    if messagebox.askyesno("Confirmation", "Replace current value?"):
                         messagebox.showinfo("Done", "Success")
                         aoo_upperRateLimitEntry = temp
                         self.aooUpperRateLimitValue.config(text="Current Value: " + aoo_upperRateLimitEntry)
@@ -556,7 +548,7 @@ class MainWindow:
                     messagebox.showinfo("Error","Please enter a valid value")
                     pass
                 else:
-                    if messagebox.askyesno("Confirmation", "Replace current values?"):
+                    if messagebox.askyesno("Confirmation", "Replace current value?"):
                         messagebox.showinfo("Done", "Success")
                         aoo_atrialAmplitudeEntry = temp
                         self.aooAtrialAmplitudeValue.config(text="Current Value: " + aoo_atrialAmplitudeEntry)
@@ -572,7 +564,7 @@ class MainWindow:
                     messagebox.showinfo("Error","Please enter a valid value")
                     pass
                 else:
-                    if messagebox.askyesno("Confirmation", "Replace current values?"):
+                    if messagebox.askyesno("Confirmation", "Replace current value?"):
                         messagebox.showinfo("Done", "Success")
                         aoo_atrialPulseWidthEntry = temp
                         self.aooAtrialPulseWidthValue.config(text="Current Value: " + aoo_atrialPulseWidthEntry)
@@ -590,7 +582,7 @@ class MainWindow:
                     messagebox.showinfo("Error","Please enter a valid value")
                     pass
                 else:
-                    if messagebox.askyesno("Confirmation", "Replace current values?"):
+                    if messagebox.askyesno("Confirmation", "Replace current value?"):
                         messagebox.showinfo("Done", "Success")
                         voo_lowerRateLimitEntry = temp
                         self.vooLowerRateLimitValue.config(text="Current Value: " + voo_lowerRateLimitEntry)
@@ -606,7 +598,7 @@ class MainWindow:
                     messagebox.showinfo("Error","Please enter a valid value")
                     pass
                 else:
-                    if messagebox.askyesno("Confirmation", "Replace current values?"):
+                    if messagebox.askyesno("Confirmation", "Replace current value?"):
                         messagebox.showinfo("Done", "Success")
                         voo_upperRateLimitEntry = temp
                         self.vooUpperRateLimitValue.config(text="Current Value: " + voo_upperRateLimitEntry)
@@ -622,7 +614,7 @@ class MainWindow:
                     messagebox.showinfo("Error","Please enter a valid value")
                     pass
                 else:
-                    if messagebox.askyesno("Confirmation", "Replace current values?"):
+                    if messagebox.askyesno("Confirmation", "Replace current value?"):
                         messagebox.showinfo("Done", "Success")
                         voo_atrialAmplitudeEntry = temp
                         self.vooAtrialAmplitudeValue.config(text="Current Value: " + voo_atrialAmplitudeEntry)
@@ -638,7 +630,7 @@ class MainWindow:
                     messagebox.showinfo("Error","Please enter a valid value")
                     pass
                 else:
-                    if messagebox.askyesno("Confirmation", "Replace current values?"):
+                    if messagebox.askyesno("Confirmation", "Replace current value?"):
                         messagebox.showinfo("Done", "Success")
                         voo_atrialPulseWidthEntry = temp
                         self.vooAtrialPulseWidthValue.config(text="Current Value: " + voo_atrialPulseWidthEntry)
@@ -656,7 +648,7 @@ class MainWindow:
                     messagebox.showinfo("Error","Please enter a valid value")
                     pass
                 else:
-                    if messagebox.askyesno("Confirmation", "Replace current values?"):
+                    if messagebox.askyesno("Confirmation", "Replace current value?"):
                         messagebox.showinfo("Done", "Success")
                         aai_lowerRateLimitEntry = temp
                         self.aaiLowerRateLimitValue.config(text="Current Value: " + aai_lowerRateLimitEntry)
@@ -672,7 +664,7 @@ class MainWindow:
                     messagebox.showinfo("Error","Please enter a valid value")
                     pass
                 else:
-                    if messagebox.askyesno("Confirmation", "Replace current values?"):
+                    if messagebox.askyesno("Confirmation", "Replace current value?"):
                         messagebox.showinfo("Done", "Success")
                         aai_upperRateLimitEntry = temp
                         self.aaiUpperRateLimitValue.config(text="Current Value: " + aai_upperRateLimitEntry)
@@ -688,7 +680,7 @@ class MainWindow:
                     messagebox.showinfo("Error","Please enter a valid value")
                     pass
                 else:
-                    if messagebox.askyesno("Confirmation", "Replace current values?"):
+                    if messagebox.askyesno("Confirmation", "Replace current value?"):
                         messagebox.showinfo("Done", "Success")
                         aai_atrialAmplitudeEntry  = temp
                         self.aaiAtrialAmplitudeValue.config(text="Current Value: " + aai_atrialAmplitudeEntry)
@@ -704,7 +696,7 @@ class MainWindow:
                     messagebox.showinfo("Error","Please enter a valid value")
                     pass
                 else:
-                    if messagebox.askyesno("Confirmation", "Replace current values?"):
+                    if messagebox.askyesno("Confirmation", "Replace current value?"):
                         messagebox.showinfo("Done", "Success")
                         aai_atrialPulseWidthEntry = temp
                         self.aaiAtrialPulseWidthValue.config(text="Current Value: " + aai_atrialPulseWidthEntry)
@@ -720,7 +712,7 @@ class MainWindow:
                     messagebox.showinfo("Error","Please enter a valid value")
                     pass
                 else:
-                    if messagebox.askyesno("Confirmation", "Replace current values?"):
+                    if messagebox.askyesno("Confirmation", "Replace current value?"):
                         messagebox.showinfo("Done", "Success")
                         aai_atrialSensitivityEntry = temp
                         self.aaiAtrialSensitivityValue.config(text="Current Value: " + aai_atrialSensitivityEntry)
@@ -736,7 +728,7 @@ class MainWindow:
                     messagebox.showinfo("Error","Please enter a valid value")
                     pass
                 else:
-                    if messagebox.askyesno("Confirmation", "Replace current values?"):
+                    if messagebox.askyesno("Confirmation", "Replace current value?"):
                         messagebox.showinfo("Done", "Success")
                         aai_ARPEntry = temp
                         self.aaiARPValue.config(text="Current Value: " + aai_ARPEntry)
@@ -752,7 +744,7 @@ class MainWindow:
                     messagebox.showinfo("Error","Please enter a valid value")
                     pass
                 else:
-                    if messagebox.askyesno("Confirmation", "Replace current values?"):
+                    if messagebox.askyesno("Confirmation", "Replace current value?"):
                         messagebox.showinfo("Done", "Success")
                         aai_APVARPEntry = temp
                         self.aaiAPVARPValue.config(text="Current Value: " + aai_APVARPEntry)
@@ -768,7 +760,7 @@ class MainWindow:
                     messagebox.showinfo("Error","Please enter a valid value")
                     pass
                 else:
-                    if messagebox.askyesno("Confirmation", "Replace current values?"):
+                    if messagebox.askyesno("Confirmation", "Replace current value?"):
                         messagebox.showinfo("Done", "Success")
                         aai_hysteresisEntry = temp
                         self.aaiHysteresisValue.config(text="Current Value: " + aai_hysteresisEntry)
@@ -784,7 +776,7 @@ class MainWindow:
                     messagebox.showinfo("Error","Please enter a valid value")
                     pass
                 else:
-                    if messagebox.askyesno("Confirmation", "Replace current values?"):
+                    if messagebox.askyesno("Confirmation", "Replace current value?"):
                         messagebox.showinfo("Done", "Success")
                         aai_rateSmoothingEntry = temp
                         self.aaiRateSmoothingValue.config(text="Current Value: " + aai_rateSmoothingEntry)
@@ -802,7 +794,7 @@ class MainWindow:
                     messagebox.showinfo("Error","Please enter a valid value")
                     pass
                 else:
-                    if messagebox.askyesno("Confirmation", "Replace current values?"):
+                    if messagebox.askyesno("Confirmation", "Replace current value?"):
                         messagebox.showinfo("Done", "Success")
                         vvi_lowerRateLimitEntry = temp
                         self.vviLowerRateLimitValue.config(text="Current Value: " + vvi_lowerRateLimitEntry)
@@ -818,7 +810,7 @@ class MainWindow:
                     messagebox.showinfo("Error","Please enter a valid value")
                     pass
                 else:
-                    if messagebox.askyesno("Confirmation", "Replace current values?"):
+                    if messagebox.askyesno("Confirmation", "Replace current value?"):
                         messagebox.showinfo("Done", "Success")
                         vvi_upperRateLimitEntry = temp
                         self.vviUpperRateLimitValue.config(text="Current Value: " + vvi_upperRateLimitEntry)
@@ -834,7 +826,7 @@ class MainWindow:
                     messagebox.showinfo("Error","Please enter a valid value")
                     pass
                 else:
-                    if messagebox.askyesno("Confirmation", "Replace current values?"):
+                    if messagebox.askyesno("Confirmation", "Replace current value?"):
                         messagebox.showinfo("Done", "Success")
                         vvi_atrialAmplitudeEntry = temp
                         self.vviAtrialAmplitudeValue.config(text="Current Value: " + vvi_atrialAmplitudeEntry)
@@ -850,7 +842,7 @@ class MainWindow:
                     messagebox.showinfo("Error","Please enter a valid value")
                     pass
                 else:
-                    if messagebox.askyesno("Confirmation", "Replace current values?"):
+                    if messagebox.askyesno("Confirmation", "Replace current value?"):
                         messagebox.showinfo("Done", "Success")
                         vvi_atrialPulseWidthEntry = temp
                         self.vviAtrialPulseWidthValue.config(text="Current Value: " + vvi_atrialPulseWidthEntry)
@@ -866,7 +858,7 @@ class MainWindow:
                     messagebox.showinfo("Error","Please enter a valid value")
                     pass
                 else:
-                    if messagebox.askyesno("Confirmation", "Replace current values?"):
+                    if messagebox.askyesno("Confirmation", "Replace current value?"):
                         messagebox.showinfo("Done", "Success")
                         vvi_atrialSensitivityEntry = temp
                         self.vviAtrialSensitivityValue.config(text="Current Value: " + vvi_atrialSensitivityEntry)
@@ -882,7 +874,7 @@ class MainWindow:
                     messagebox.showinfo("Error","Please enter a valid value")
                     pass
                 else:
-                    if messagebox.askyesno("Confirmation", "Replace current values?"):
+                    if messagebox.askyesno("Confirmation", "Replace current value?"):
                         messagebox.showinfo("Done", "Success")
                         vvi_ARPEntry = temp
                         self.vviARPValue.config(text="Current Value: " + vvi_ARPEntry)
@@ -898,7 +890,7 @@ class MainWindow:
                     messagebox.showinfo("Error","Please enter a valid value")
                     pass
                 else:
-                    if messagebox.askyesno("Confirmation", "Replace current values?"):
+                    if messagebox.askyesno("Confirmation", "Replace current value?"):
                         messagebox.showinfo("Done", "Success")
                         vvi_hysteresisEntry = temp
                         self.vviHysteresisValue.config(text="Current Value: " + vvi_hysteresisEntry)
@@ -914,7 +906,7 @@ class MainWindow:
                     messagebox.showinfo("Error","Please enter a valid value")
                     pass
                 else:
-                    if messagebox.askyesno("Confirmation", "Replace current values?"):
+                    if messagebox.askyesno("Confirmation", "Replace current value?"):
                         messagebox.showinfo("Done", "Success")
                         vvi_rateSmoothingEntry = temp
                         self.vviRateSmoothingValue.config(text="Current Value: " + vvi_rateSmoothingEntry)
@@ -935,9 +927,10 @@ class MainWindow:
         self.master.destroy()
         exit()
 
-
+#Access pickle file to read current users
 def readUsers():
     global login_dict
+    #Try/except is used to check for two different paths
     try:
         with open('HACKERS_DONT_LOOK_HERE.pickle', 'rb') as file:
             login_dict =  pickle.load(file)
@@ -947,10 +940,10 @@ def readUsers():
             login_dict =  pickle.load(file)
             print(login_dict)
 
-
+#Write new users to the picle file
 def writeUsers():
     global login_dict
-    print(login_dict)
+    #Try/except is used to check for two different paths
     try:
         with open('HACKERS_DONT_LOOK_HERE.pickle', 'wb') as file:
             pickle.dump(login_dict,file)
@@ -958,12 +951,13 @@ def writeUsers():
         with open('DCM/HACKERS_DONT_LOOK_HERE.pickle', 'wb') as file:
             pickle.dump(login_dict,file)
 
-
+#Main function that runs everything
 def main():
     try:
         readUsers()
     except (EOFError):
         pass
+    #Run Tkinter
     root = tk.Tk()
     app = WelcomeFrame(root)
     root.mainloop()
