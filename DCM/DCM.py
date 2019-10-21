@@ -293,10 +293,10 @@ class MainWindow:
 
 
         #VOO 
-        self.vooLowerRateLimitButton = tk.Button(self.voo, text = "Set", command=self.setValue)
-        self.vooUpperRateLimitButton = tk.Button(self.voo, text = "Set", command=self.setValue)
-        self.vooAtrialAmplitudeButton = tk.Button(self.voo, text = "Set", command=self.setValue)
-        self.vooAtrialPulseWidthButton = tk.Button(self.voo, text = "Set", command=self.setValue)
+        self.vooLowerRateLimitButton = tk.Button(self.voo, text = "Set", command= lambda: self.setValue("vooLowerRateLimit"))
+        self.vooUpperRateLimitButton = tk.Button(self.voo, text = "Set", command= lambda: self.setValue("vooUpperRateLimit"))
+        self.vooAtrialAmplitudeButton = tk.Button(self.voo, text = "Set", command= lambda: self.setValue("vooAtrialAmplitude"))
+        self.vooAtrialPulseWidthButton = tk.Button(self.voo, text = "Set", command= lambda: self.setValue("vooAtrialPulseWidth"))
 
         self.vooLowerRateLimitLabel = tk.Label(self.voo, text = "Lower Rate Limit")
         self.vooUpperRateLimitLabel = tk.Label(self.voo, text = "Upper Rate Limit ")
@@ -577,53 +577,57 @@ class MainWindow:
                 pass
 
         #VOO
-        global voo_lowerRateLimitEntry
-        temp = self.vooLowerRateLimitEntry.get()
-        try:
-            int(temp)
-            if (temp == '' or int(temp)<0):
+        if(value == "vooLowerRateLimit"):
+            global voo_lowerRateLimitEntry
+            temp = self.vooLowerRateLimitEntry.get()
+            try:
+                int(temp)
+                if (temp == '' or int(temp)<0):
+                    pass
+                else:
+                    voo_lowerRateLimitEntry = temp
+                    self.vooLowerRateLimitValue.config(text="Current Value: " + voo_lowerRateLimitEntry)
+            except:
                 pass
-            else:
-                voo_lowerRateLimitEntry = temp
-                self.vooLowerRateLimitValue.config(text="Current Value: " + voo_lowerRateLimitEntry)
-        except:
-            pass
 
-        global voo_upperRateLimitEntry 
-        temp = self.vooUpperRateLimitEntry.get()
-        try:
-            int(temp)
-            if (temp == '' or int(temp)<0):
+        if(value == "vooUpperRateLimit"):
+            global voo_upperRateLimitEntry 
+            temp = self.vooUpperRateLimitEntry.get()
+            try:
+                int(temp)
+                if (temp == '' or int(temp)<0):
+                    pass
+                else:
+                    voo_upperRateLimitEntry = temp
+                    self.vooUpperRateLimitValue.config(text="Current Value: " + voo_upperRateLimitEntry)
+            except:
                 pass
-            else:
-                voo_upperRateLimitEntry = temp
-                self.vooUpperRateLimitValue.config(text="Current Value: " + voo_upperRateLimitEntry)
-        except:
-            pass
 
-        global voo_atrialAmplitudeEntry
-        temp = self.vooAtrialAmplitudeEntry.get()
-        try:
-            int(temp)
-            if (temp == '' or int(temp)<0):
+        if(value == "vooAtrialAmplitude"):
+            global voo_atrialAmplitudeEntry
+            temp = self.vooAtrialAmplitudeEntry.get()
+            try:
+                int(temp)
+                if (temp == '' or int(temp)<0):
+                    pass
+                else:
+                    voo_atrialAmplitudeEntry = temp
+                    self.vooAtrialAmplitudeValue.config(text="Current Value: " + voo_atrialAmplitudeEntry)
+            except:
                 pass
-            else:
-                voo_atrialAmplitudeEntry = temp
-                self.vooAtrialAmplitudeValue.config(text="Current Value: " + voo_atrialAmplitudeEntry)
-        except:
-            pass
 
-        global voo_atrialPulseWidthEntry
-        temp = self.vooAtrialPulseWidthEntry.get()
-        try:
-            int(temp)
-            if (temp == '' or int(temp)<0):
+        if(value == "vooAtrialPulseWidth"):
+            global voo_atrialPulseWidthEntry
+            temp = self.vooAtrialPulseWidthEntry.get()
+            try:
+                int(temp)
+                if (temp == '' or int(temp)<0):
+                    pass
+                else:
+                    voo_atrialPulseWidthEntry = temp
+                    self.vooAtrialPulseWidthValue.config(text="Current Value: " + voo_atrialPulseWidthEntry)
+            except:
                 pass
-            else:
-                voo_atrialPulseWidthEntry = temp
-                self.vooAtrialPulseWidthValue.config(text="Current Value: " + voo_atrialPulseWidthEntry)
-        except:
-            pass
 
         #AAI
         global aai_lowerRateLimitEntry
