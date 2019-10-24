@@ -6,6 +6,7 @@ import pickle
 
 #Creating empty dictionary to later load users into
 login_dict = {}
+user0, user1, user2, user3, user4, user5, user6, user7, user8, user9 = {}, {}, {}, {}, {}, {}, {}, {}, {}, {}
 
 #Initializing all global variables with "0"
 #AOO
@@ -1052,7 +1053,7 @@ def readUsers():
             login_dict =  pickle.load(file)
             print(login_dict)
 
-#Write new users to the picle file
+#Write new users to the pickle file
 def writeUsers():
     global login_dict
     #Try/except is used to check for two different paths
@@ -1062,6 +1063,38 @@ def writeUsers():
     except(FileNotFoundError):
         with open('DCM/HACKERS_DONT_LOOK_HERE.pickle', 'wb') as file:
             pickle.dump(login_dict,file)
+
+#Access pickle file to read values from each user
+def readValues():
+    global user0, user1, user2, user3, user4, user5, user6, user7, user8, user9
+    userList = [user0, user1, user2, user3, user4, user5, user6, user7, user8, user9]
+    try:
+        for i in range(10):
+            with open('user' + i + '.pickle', 'rb') as file:
+                userList[i] = pickle.load(file)
+                print(userList[i])
+    except(FileNotFoundError):
+        for i in range(10):
+            with open('DCM/user' + i + '.pickle', 'rb') as file:
+                userList[i] = pickle.load(file)
+                print(userList[i])
+
+
+#Write new user values to pickle file
+def writeValues():
+    global user0, user1, user2, user3, user4, user5, user6, user7, user8, user9
+    userList = [user0, user1, user2, user3, user4, user5, user6, user7, user8, user9]
+    try:
+        for i in range(10):
+            with open('user' + i + '.pickle', 'wb') as file:
+                pickle.dump(userList[i], file)
+    except(FileNotFoundError):
+        for i in range(10):
+            with open('DCM/user' + i + '.pickle', 'wb') as file:
+                pickle.dump(userList[i], file)
+        
+
+
 
 #Main function that runs everything
 def main():
