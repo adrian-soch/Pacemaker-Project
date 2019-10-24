@@ -4,7 +4,7 @@ from tkinter import ttk
 from tkinter import messagebox
 import pickle
 
-#Creating empty dictionary to later load users into
+#Creating empty dictionaries to later load users and values into
 login_dict = {}
 user0, user1, user2, user3, user4, user5, user6, user7, user8, user9 = {}, {}, {}, {}, {}, {}, {}, {}, {}, {}
 
