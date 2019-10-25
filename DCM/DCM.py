@@ -266,17 +266,17 @@ class MainWindow:
         self.aooAtrialAmplitudeValue = tk.Label(self.aoo, text = "Current Value: " + aoo_atrialAmplitudeEntry)
         self.aooAtrialPulseWidthValue = tk.Label(self.aoo, text = "Current Value: " + aoo_atrialPulseWidthEntry)
     
-        #Setup entry field
-        #self.aooLowerRateLimitEntry = tk.Entry(self.aoo)
-        #self.aooUpperRateLimitEntry = tk.Entry(self.aoo)
-        #self.aooAtrialAmplitudeEntry = tk.Entry(self.aoo)
-        #self.aooAtrialPulseWidthEntry = tk.Entry(self.aoo)
+        """#Setup entry field
+        self.aooLowerRateLimitEntry = tk.Entry(self.aoo)
+        self.aooUpperRateLimitEntry = tk.Entry(self.aoo)
+        self.aooAtrialAmplitudeEntry = tk.Entry(self.aoo)
+        self.aooAtrialPulseWidthEntry = tk.Entry(self.aoo)"""
 
         #Spinbox
         self.aooLowerRateLimitEntry = tk.Spinbox(self.aoo,from_=30,to=50,increment=5)
-        self.aooUpperRateLimitEntry = tk.Spinbox(self.aoo,from_=50,to=175)
+        self.aooUpperRateLimitEntry = tk.Spinbox(self.aoo,from_=50,to=175,increment=5)
         self.aooAtrialAmplitudeEntry = tk.Spinbox(self.aoo,from_=0.5,to=7.0,format="%.1f",increment=0.1)
-        self.aooAtrialPulseWidthEntry = tk.Spinbox(self.aoo,from_=0.1,to=1.9,format="%.1f",increment=0.1)
+        self.aooAtrialPulseWidthEntry = tk.Spinbox(self.aoo,from_=0.05,to=1.9,format="%.2f",increment=0.1)
 
         #Adjust positioning
         self.aooLowerRateLimitLabel.grid(row=0, column=0, padx=15, pady=15)
@@ -604,9 +604,12 @@ class MainWindow:
             temp = self.aooAtrialAmplitudeEntry.get()
             #Try/access to sanitize user input and ask for confirmation if there are no errors
             try:
-                int(temp)
-                if (temp == '' or int(temp)<0):
+                float(temp)
+                if (temp == '' or float(temp)<0):
                     messagebox.showinfo("Error","Please enter a valid value")
+                    pass
+                elif(float(temp)<0 or float(temp)>7):
+                    messagebox.showinfo("Error","Out of range")
                     pass
                 else:
                     if messagebox.askyesno("Confirmation", "Replace current value?"):
@@ -622,9 +625,12 @@ class MainWindow:
             temp = self.aooAtrialPulseWidthEntry.get()
             #Try/access to sanitize user input and ask for confirmation if there are no errors
             try:
-                int(temp)
-                if (temp == '' or int(temp)<0):
+                float(temp)
+                if (temp == '' or float(temp)<0):
                     messagebox.showinfo("Error","Please enter a valid value")
+                    pass
+                elif(float(temp)<0.05 or float(temp)>1.9):
+                    messagebox.showinfo("Error","Out of range")
                     pass
                 else:
                     if messagebox.askyesno("Confirmation", "Replace current value?"):
@@ -691,9 +697,12 @@ class MainWindow:
             temp = self.vooAtrialAmplitudeEntry.get()
             #Try/access to sanitize user input and ask for confirmation if there are no errors
             try:
-                int(temp)
-                if (temp == '' or int(temp)<0):
+                float(temp)
+                if (temp == '' or float(temp)<0):
                     messagebox.showinfo("Error","Please enter a valid value")
+                    pass
+                elif(float(temp)<0 or float(temp)>7):
+                    messagebox.showinfo("Error","Out of range")
                     pass
                 else:
                     if messagebox.askyesno("Confirmation", "Replace current value?"):
@@ -709,9 +718,12 @@ class MainWindow:
             temp = self.vooAtrialPulseWidthEntry.get()
             #Try/access to sanitize user input and ask for confirmation if there are no errors
             try:
-                int(temp)
-                if (temp == '' or int(temp)<0):
+                float(temp)
+                if (temp == '' or float(temp)<0):
                     messagebox.showinfo("Error","Please enter a valid value")
+                    pass
+                elif(float(temp)<0.05 or float(temp)>1.9):
+                    messagebox.showinfo("Error","Out of range")
                     pass
                 else:
                     if messagebox.askyesno("Confirmation", "Replace current value?"):
@@ -778,9 +790,12 @@ class MainWindow:
             temp = self.aaiAtrialAmplitudeEntry .get()
             #Try/access to sanitize user input and ask for confirmation if there are no errors
             try:
-                int(temp)
-                if (temp == '' or int(temp)<0):
+                float(temp)
+                if (temp == '' or float(temp)<0):
                     messagebox.showinfo("Error","Please enter a valid value")
+                    pass
+                elif(float(temp)<0 or float(temp)>7):
+                    messagebox.showinfo("Error","Out of range")
                     pass
                 else:
                     if messagebox.askyesno("Confirmation", "Replace current value?"):
@@ -796,9 +811,12 @@ class MainWindow:
             temp = self.aaiAtrialPulseWidthEntry.get()
             #Try/access to sanitize user input and ask for confirmation if there are no errors
             try:
-                int(temp)
-                if (temp == '' or int(temp)<0):
+                float(temp)
+                if (temp == '' or float(temp)<0):
                     messagebox.showinfo("Error","Please enter a valid value")
+                    pass
+                elif(float(temp)<0.05 or float(temp)>1.9):
+                    messagebox.showinfo("Error","Out of range")
                     pass
                 else:
                     if messagebox.askyesno("Confirmation", "Replace current value?"):
@@ -814,8 +832,8 @@ class MainWindow:
             temp = self.aaiAtrialSensitivityEntry.get()
             #Try/access to sanitize user input and ask for confirmation if there are no errors
             try:
-                int(temp)
-                if (temp == '' or int(temp)<0):
+                float(temp)
+                if (temp == '' or float(temp)<0):
                     messagebox.showinfo("Error","Please enter a valid value")
                     pass
                 else:
@@ -955,9 +973,12 @@ class MainWindow:
             temp = self.vviAtrialAmplitudeEntry.get() 
             #Try/access to sanitize user input and ask for confirmation if there are no errors
             try:
-                int(temp)
-                if (temp == '' or int(temp)<0):
+                float(temp)
+                if (temp == '' or float(temp)<0):
                     messagebox.showinfo("Error","Please enter a valid value")
+                    pass
+                elif(float(temp)<0 or float(temp)>7):
+                    messagebox.showinfo("Error","Out of range")
                     pass
                 else:
                     if messagebox.askyesno("Confirmation", "Replace current value?"):
@@ -973,9 +994,12 @@ class MainWindow:
             temp = self.vviAtrialPulseWidthEntry.get() 
             #Try/access to sanitize user input and ask for confirmation if there are no errors
             try:
-                int(temp)
-                if (temp == '' or int(temp)<0):
+                float(temp)
+                if (temp == '' or float(temp)<0):
                     messagebox.showinfo("Error","Please enter a valid value")
+                    pass
+                elif(float(temp)<0.05 or float(temp)>1.9):
+                    messagebox.showinfo("Error","Out of range")
                     pass
                 else:
                     if messagebox.askyesno("Confirmation", "Replace current value?"):
