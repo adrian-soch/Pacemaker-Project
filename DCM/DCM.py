@@ -10,23 +10,21 @@ login_dict = {}
 user0, user1, user2, user3, user4, user5, user6, user7, user8, user9 = {}, {}, {}, {}, {}, {}, {}, {}, {}, {}
 
 #Initializing all global variables with "0"
-#AOO
+#AOOvvi_ventricularAmplitudeEntry
 aoo_lowerRateLimitEntry,aoo_upperRateLimitEntry,aoo_atrialAmplitudeEntry,aoo_atrialPulseWidthEntry = "0","0","0","0"
 
 #VOO
-voo_lowerRateLimitEntry,voo_upperRateLimitEntry,voo_atrialAmplitudeEntry,voo_atrialPulseWidthEntry = "0","0","0","0"
+voo_lowerRateLimitEntry,voo_upperRateLimitEntry,voo_ventricularAmplitudeEntry,voo_ventricularPulseWidthEntry = "0","0","0","0"
 
 #AAI
 aai_lowerRateLimitEntry,aai_upperRateLimitEntry,aai_atrialAmplitudeEntry,aai_atrialPulseWidthEntry,aai_atrialSensitivityEntry,aai_ARPEntry,aai_APVARPEntry,aai_hysteresisEntry,aai_rateSmoothingEntry = "0","0","0","0","0","0","0","0","0"
 
 #VVI
-vvi_lowerRateLimitEntry,vvi_upperRateLimitEntry,vvi_atrialAmplitudeEntry,vvi_atrialPulseWidthEntry,vvi_atrialSensitivityEntry,vvi_ARPEntry,vvi_hysteresisEntry,vvi_rateSmoothingEntry = "0","0","0","0","0","0","0","0"
-
-
+vvi_lowerRateLimitEntry,vvi_upperRateLimitEntry,vvi_ventricularAmplitudeEntry,vvi_ventricularPulseWidthEntry,vvi_ventricularSensitivityEntry,vvi_ARPEntry,vvi_hysteresisEntry,vvi_rateSmoothingEntry = "0","0","0","0","0","0","0","0"
 
 #Variable List in string form used for user dictionarys (can be removed for final release)
-variableStringList = ['aoo_lowerRateLimitEntry','aoo_upperRateLimitEntry','aoo_atrialAmplitudeEntry','aoo_atrialPulseWidthEntry','voo_lowerRateLimitEntry','voo_upperRateLimitEntry','voo_atrialAmplitudeEntry','voo_atrialPulseWidthEntry','aai_lowerRateLimitEntry','aai_upperRateLimitEntry','aai_atrialAmplitudeEntry','aai_atrialPulseWidthEntry','aai_atrialSensitivityEntry','aai_ARPEntry','aai_APVARPEntry','aai_hysteresisEntry','aai_rateSmoothingEntry','vvi_lowerRateLimitEntry','vvi_upperRateLimitEntry','vvi_atrialAmplitudeEntry','vvi_atrialPulseWidthEntry','vvi_atrialSensitivityEntry','vvi_ARPEntry','vvi_hysteresisEntry','vvi_rateSmoothingEntry']
-variableList= [aoo_lowerRateLimitEntry,aoo_upperRateLimitEntry,aoo_atrialAmplitudeEntry,aoo_atrialPulseWidthEntry,voo_lowerRateLimitEntry,voo_upperRateLimitEntry,voo_atrialAmplitudeEntry,voo_atrialPulseWidthEntry,aai_lowerRateLimitEntry,aai_upperRateLimitEntry,aai_atrialAmplitudeEntry,aai_atrialPulseWidthEntry,aai_atrialSensitivityEntry,aai_ARPEntry,aai_APVARPEntry,aai_hysteresisEntry,aai_rateSmoothingEntry,vvi_lowerRateLimitEntry,vvi_upperRateLimitEntry,vvi_atrialAmplitudeEntry,vvi_atrialPulseWidthEntry,vvi_atrialSensitivityEntry,vvi_ARPEntry,vvi_hysteresisEntry,vvi_rateSmoothingEntry]
+variableStringList = ['aoo_lowerRateLimitEntry','aoo_upperRateLimitEntry','aoo_atrialAmplitudeEntry','aoo_atrialPulseWidthEntry','voo_lowerRateLimitEntry','voo_upperRateLimitEntry','voo_ventricularAmplitudeEntry','voo_ventricularPulseWidthEntry','aai_lowerRateLimitEntry','aai_upperRateLimitEntry','aai_atrialAmplitudeEntry','aai_atrialPulseWidthEntry','aai_atrialSensitivityEntry','aai_ARPEntry','aai_APVARPEntry','aai_hysteresisEntry','aai_rateSmoothingEntry','vvi_lowerRateLimitEntry','vvi_upperRateLimitEntry','vvi_ventricularAmplitudeEntry','vvi_ventricularPulseWidthEntry','vvi_ventricularSensitivityEntry','vvi_ARPEntry','vvi_hysteresisEntry','vvi_rateSmoothingEntry']
+variableList= [aoo_lowerRateLimitEntry,aoo_upperRateLimitEntry,aoo_atrialAmplitudeEntry,aoo_atrialPulseWidthEntry,voo_lowerRateLimitEntry,voo_upperRateLimitEntry,voo_ventricularAmplitudeEntry,voo_ventricularPulseWidthEntry,aai_lowerRateLimitEntry,aai_upperRateLimitEntry,aai_atrialAmplitudeEntry,aai_atrialPulseWidthEntry,aai_atrialSensitivityEntry,aai_ARPEntry,aai_APVARPEntry,aai_hysteresisEntry,aai_rateSmoothingEntry,vvi_lowerRateLimitEntry,vvi_upperRateLimitEntry,vvi_ventricularAmplitudeEntry,vvi_ventricularPulseWidthEntry,vvi_ventricularSensitivityEntry,vvi_ARPEntry,vvi_hysteresisEntry,vvi_rateSmoothingEntry]
 
 #Creating Initial Welcome Frame
 class WelcomeFrame:
@@ -321,8 +319,8 @@ class MainWindow:
         #Setup  labels to display values
         self.vooLowerRateLimitValue = tk.Label(self.voo, text = "Current Value: "+ voo_lowerRateLimitEntry)
         self.vooUpperRateLimitValue = tk.Label(self.voo, text = "Current Value: "+ voo_upperRateLimitEntry)
-        self.vooAtrialAmplitudeValue = tk.Label(self.voo, text = "Current Value: "+ voo_atrialAmplitudeEntry)
-        self.vooAtrialPulseWidthValue = tk.Label(self.voo, text = "Current Value: "+ voo_atrialPulseWidthEntry)
+        self.vooAtrialAmplitudeValue = tk.Label(self.voo, text = "Current Value: "+ voo_ventricularAmplitudeEntry)
+        self.vooAtrialPulseWidthValue = tk.Label(self.voo, text = "Current Value: "+ voo_ventricularPulseWidthEntry)
 
         #Setup entry field
         self.vooLowerRateLimitEntry = tk.Entry(self.voo)
@@ -458,9 +456,9 @@ class MainWindow:
         #Setup  labels to display values
         self.vviLowerRateLimitValue = tk.Label(self.vvi, text = "Current Value: "+ vvi_lowerRateLimitEntry)
         self.vviUpperRateLimitValue = tk.Label(self.vvi, text = "Current Value: "+ vvi_upperRateLimitEntry)
-        self.vviAtrialAmplitudeValue = tk.Label(self.vvi, text = "Current Value: "+ vvi_atrialAmplitudeEntry)
-        self.vviAtrialPulseWidthValue = tk.Label(self.vvi, text = "Current Value: "+ vvi_atrialPulseWidthEntry)
-        self.vviAtrialSensitivityValue = tk.Label(self.vvi, text = "Current Value: "+ vvi_atrialSensitivityEntry)
+        self.vviAtrialAmplitudeValue = tk.Label(self.vvi, text = "Current Value: "+ vvi_ventricularAmplitudeEntry)
+        self.vviAtrialPulseWidthValue = tk.Label(self.vvi, text = "Current Value: "+ vvi_ventricularPulseWidthEntry)
+        self.vviAtrialSensitivityValue = tk.Label(self.vvi, text = "Current Value: "+ vvi_ventricularSensitivityEntry)
         self.vviARPValue = tk.Label(self.vvi, text = "Current Value: "+ vvi_ARPEntry)
         self.vviHysteresisValue = tk.Label(self.vvi, text = "Current Value: "+ vvi_hysteresisEntry)
         self.vviRateSmoothingValue = tk.Label(self.vvi, text = "Current Value: "+ vvi_rateSmoothingEntry)
@@ -552,11 +550,11 @@ class MainWindow:
         #AOO
         global aoo_lowerRateLimitEntry,aoo_upperRateLimitEntry,aoo_atrialAmplitudeEntry,aoo_atrialPulseWidthEntry 
         #VOO
-        global voo_lowerRateLimitEntry,voo_upperRateLimitEntry,voo_atrialAmplitudeEntry,voo_atrialPulseWidthEntry
+        global voo_lowerRateLimitEntry,voo_upperRateLimitEntry,voo_ventricularAmplitudeEntry,voo_ventricularPulseWidthEntry
         #AAI
         global aai_lowerRateLimitEntry,aai_upperRateLimitEntry,aai_atrialAmplitudeEntry,aai_atrialPulseWidthEntry,aai_atrialSensitivityEntry,aai_ARPEntry,aai_APVARPEntry,aai_hysteresisEntry,aai_rateSmoothingEntry
         #VVI
-        global vvi_lowerRateLimitEntry,vvi_upperRateLimitEntry,vvi_atrialAmplitudeEntry,vvi_atrialPulseWidthEntry,vvi_atrialSensitivityEntry,vvi_ARPEntry,vvi_hysteresisEntry,vvi_rateSmoothingEntry
+        global vvi_lowerRateLimitEntry,vvi_upperRateLimitEntry,vvi_ventricularAmplitudeEntry,vvi_ventricularPulseWidthEntry,vvi_ventricularSensitivityEntry,vvi_ARPEntry,vvi_hysteresisEntry,vvi_rateSmoothingEntry
         global user, user0, user1, user2, user3, user4, user5, user6, user7, user8, user9
         #AOO
         #aooLowerRateLimit
@@ -832,28 +830,28 @@ class MainWindow:
                 else:
                     if messagebox.askyesno("Confirmation", "Replace current value?"):
                         messagebox.showinfo("Done", "Success")
-                        voo_atrialAmplitudeEntry = temp
-                        self.vooAtrialAmplitudeValue.config(text="Current Value: " + voo_atrialAmplitudeEntry)
-                                                if(user == 0):
-                            user0['voo_atrialAmplitudeEntry'] = str(temp)
+                        voo_ventricularAmplitudeEntry = temp
+                        self.vooAtrialAmplitudeValue.config(text="Current Value: " + voo_ventricularAmplitudeEntry)
+                        if(user == 0):
+                            user0['voo_ventricularAmplitudeEntry'] = str(temp)
                         elif(user == 1):
-                            user1['voo_atrialAmplitudeEntry'] = str(temp)
+                            user1['voo_ventricularAmplitudeEntry'] = str(temp)
                         elif(user == 2):
-                            user1['voo_atrialAmplitudeEntry'] = str(temp)
+                            user1['voo_ventricularAmplitudeEntry'] = str(temp)
                         elif(user == 3):
-                            user1['voo_atrialAmplitudeEntry'] = str(temp)
+                            user1['voo_ventricularAmplitudeEntry'] = str(temp)
                         elif(user == 4):
-                            user1['voo_atrialAmplitudeEntry'] = str(temp)
+                            user1['voo_ventricularAmplitudeEntry'] = str(temp)
                         elif(user == 5):
-                            user1['voo_atrialAmplitudeEntry'] = str(temp)
+                            user1['voo_ventricularAmplitudeEntry'] = str(temp)
                         elif(user == 6):
-                            user1['voo_atrialAmplitudeEntry'] = str(temp)
+                            user1['voo_ventricularAmplitudeEntry'] = str(temp)
                         elif(user == 7):
-                            user1['voo_atrialAmplitudeEntry'] = str(temp)
+                            user1['voo_ventricularAmplitudeEntry'] = str(temp)
                         elif(user == 8):
-                            user1['voo_atrialAmplitudeEntry'] = str(temp)
+                            user1['voo_ventricularAmplitudeEntry'] = str(temp)
                         elif(user == 9):
-                            user1['voo_atrialAmplitudeEntry'] = str(temp)
+                            user1['voo_ventricularAmplitudeEntry'] = str(temp)
                         else:
                             pass
             except:
@@ -872,27 +870,29 @@ class MainWindow:
                 else:
                     if messagebox.askyesno("Confirmation", "Replace current value?"):
                         messagebox.showinfo("Done", "Success")
-                        voo_atrialPulseWidthEntry = temp
-                        self.vooAtrialPulseWidthValue.config(text="Current Value: " + voo_atrialPulseWidthEntry)
-                            user0['voo_atrialPulseWidthEntry'] = str(temp)
+                        voo_ventricularPulseWidthEntry = temp
+                        self.vooAtrialPulseWidthValue.config(text="Current Value: " + voo_ventricularPulseWidthEntry)
+                            
+                        if(user == 0):    
+                            user0['voo_ventricularPulseWidthEntry'] = str(temp)
                         elif(user == 1):
-                            user1['voo_atrialPulseWidthEntry'] = str(temp)
+                            user1['voo_ventricularPulseWidthEntry'] = str(temp)
                         elif(user == 2):
-                            user1['voo_atrialPulseWidthEntry'] = str(temp)
+                            user1['voo_ventricularPulseWidthEntry'] = str(temp)
                         elif(user == 3):
-                            user1['voo_atrialPulseWidthEntry'] = str(temp)
+                            user1['voo_ventricularPulseWidthEntry'] = str(temp)
                         elif(user == 4):
-                            user1['voo_atrialPulseWidthEntry'] = str(temp)
+                            user1['voo_ventricularPulseWidthEntry'] = str(temp)
                         elif(user == 5):
-                            user1['voo_atrialPulseWidthEntry'] = str(temp)
+                            user1['voo_ventricularPulseWidthEntry'] = str(temp)
                         elif(user == 6):
-                            user1['voo_atrialPulseWidthEntry'] = str(temp)
+                            user1['voo_ventricularPulseWidthEntry'] = str(temp)
                         elif(user == 7):
-                            user1['voo_atrialPulseWidthEntry'] = str(temp)
+                            user1['voo_ventricularPulseWidthEntry'] = str(temp)
                         elif(user == 8):
-                            user1['voo_atrialPulseWidthEntry'] = str(temp)
+                            user1['voo_ventricularPulseWidthEntry'] = str(temp)
                         elif(user == 9):
-                            user1['voo_atrialPulseWidthEntry'] = str(temp)
+                            user1['voo_ventricularPulseWidthEntry'] = str(temp)
                         else:
                             pass
             except:
@@ -918,6 +918,8 @@ class MainWindow:
                         messagebox.showinfo("Done", "Success")
                         aai_lowerRateLimitEntry = temp
                         self.aaiLowerRateLimitValue.config(text="Current Value: " + aai_lowerRateLimitEntry)
+                        
+                        if(user == 0):
                             user0['aai_lowerRateLimitEntry'] = str(temp)
                         elif(user == 1):
                             user1['aai_lowerRateLimitEntry'] = str(temp)
@@ -961,6 +963,8 @@ class MainWindow:
                         messagebox.showinfo("Done", "Success")
                         aai_upperRateLimitEntry = temp
                         self.aaiUpperRateLimitValue.config(text="Current Value: " + aai_upperRateLimitEntry)
+                            
+                        if(user == 0):
                             user0['aai_upperRateLimitEntry'] = str(temp)
                         elif(user == 1):
                             user1['aai_upperRateLimitEntry'] = str(temp)
@@ -1000,6 +1004,8 @@ class MainWindow:
                         messagebox.showinfo("Done", "Success")
                         aai_atrialAmplitudeEntry  = temp
                         self.aaiAtrialAmplitudeValue.config(text="Current Value: " + aai_atrialAmplitudeEntry)
+                            
+                        if(user == 0):    
                             user0['aai_atrialAmplitudeEntry'] = str(temp)
                         elif(user == 1):
                             user1['aai_atrialAmplitudeEntry'] = str(temp)
@@ -1040,6 +1046,7 @@ class MainWindow:
                         aai_atrialPulseWidthEntry = temp
                         self.aaiAtrialPulseWidthValue.config(text="Current Value: " + aai_atrialPulseWidthEntry)
 
+                        if(user == 0):
                             user0['aai_atrialPulseWidthEntry'] = str(temp)
                         elif(user == 1):
                             user1['aai_atrialPulseWidthEntry'] = str(temp)
@@ -1080,6 +1087,7 @@ class MainWindow:
                         aai_atrialSensitivityEntry = temp
                         self.aaiAtrialSensitivityValue.config(text="Current Value: " + aai_atrialSensitivityEntry)
 
+                        if(user == 0):
                             user0['aai_atrialSensitivityEntry'] = str(temp)
                         elif(user == 1):
                             user1['aai_atrialSensitivityEntry'] = str(temp)
@@ -1120,6 +1128,7 @@ class MainWindow:
                         aai_ARPEntry = temp
                         self.aaiARPValue.config(text="Current Value: " + aai_ARPEntry)
 
+                        if(user == 0):    
                             user0['aai_ARPEntry'] = str(temp)
                         elif(user == 1):
                             user1['aai_ARPEntry'] = str(temp)
@@ -1160,6 +1169,7 @@ class MainWindow:
                         aai_APVARPEntry = temp
                         self.aaiAPVARPValue.config(text="Current Value: " + aai_APVARPEntry)
 
+                        if(user == 0):    
                             user0['aai_APVARPEntry'] = str(temp)
                         elif(user == 1):
                             user1['aai_APVARPEntry'] = str(temp)
@@ -1199,8 +1209,9 @@ class MainWindow:
                         messagebox.showinfo("Done", "Success")
                         aai_hysteresisEntry = temp
                         self.aaiHysteresisValue.config(text="Current Value: " + aai_hysteresisEntry)
-
-                        user0['aai_hysteresisEntry'] = str(temp)
+                        
+                        if(user == 0):
+                            user0['aai_hysteresisEntry'] = str(temp)
                         elif(user == 1):
                             user1['aai_hysteresisEntry'] = str(temp)
                         elif(user == 2):
@@ -1239,7 +1250,8 @@ class MainWindow:
                         messagebox.showinfo("Done", "Success")
                         aai_rateSmoothingEntry = temp
                         self.aaiRateSmoothingValue.config(text="Current Value: " + aai_rateSmoothingEntry)
-
+                        
+                        if(user == 0):
                             user0['aai_rateSmoothingEntry'] = str(temp)
                         elif(user == 1):
                             user1['aai_rateSmoothingEntry'] = str(temp)
@@ -1285,6 +1297,7 @@ class MainWindow:
                         vvi_lowerRateLimitEntry = temp
                         self.vviLowerRateLimitValue.config(text="Current Value: " + vvi_lowerRateLimitEntry)
 
+                        if(user == 0):
                             user0['vvi_lowerRateLimitEntry'] = str(temp)
                         elif(user == 1):
                             user1['vvi_lowerRateLimitEntry'] = str(temp)
@@ -1329,6 +1342,7 @@ class MainWindow:
                         vvi_upperRateLimitEntry = temp
                         self.vviUpperRateLimitValue.config(text="Current Value: " + vvi_upperRateLimitEntry)
 
+                        if(user == 0):    
                             user0['vvi_upperRateLimitEntry'] = str(temp)
                         elif(user == 1):
                             user1['vvi_upperRateLimitEntry'] = str(temp)
@@ -1366,28 +1380,29 @@ class MainWindow:
                 else:
                     if messagebox.askyesno("Confirmation", "Replace current value?"):
                         messagebox.showinfo("Done", "Success")
-                        vvi_atrialAmplitudeEntry = temp
-                        self.vviAtrialAmplitudeValue.config(text="Current Value: " + vvi_atrialAmplitudeEntry)
+                        vvi_ventricularAmplitudeEntry = temp
+                        self.vviAtrialAmplitudeValue.config(text="Current Value: " + vvi_ventricularAmplitudeEntry)
 
-                            user0['vvi_atrialAmplitudeEntry'] = str(temp)
+                        if(user == 0):    
+                            user0['vvi_ventricularAmplitudeEntry'] = str(temp)
                         elif(user == 1):
-                            user1['vvi_atrialAmplitudeEntry'] = str(temp)
+                            user1['vvi_ventricularAmplitudeEntry'] = str(temp)
                         elif(user == 2):
-                            user1['vvi_atrialAmplitudeEntry'] = str(temp)
+                            user1['vvi_ventricularAmplitudeEntry'] = str(temp)
                         elif(user == 3):
-                            user1['vvi_atrialAmplitudeEntry'] = str(temp)
+                            user1['vvi_ventricularAmplitudeEntry'] = str(temp)
                         elif(user == 4):
-                            user1['vvi_atrialAmplitudeEntry'] = str(temp)
+                            user1['vvi_ventricularAmplitudeEntry'] = str(temp)
                         elif(user == 5):
-                            user1['vvi_atrialAmplitudeEntry'] = str(temp)
+                            user1['vvi_ventricularAmplitudeEntry'] = str(temp)
                         elif(user == 6):
-                            user1['vvi_atrialAmplitudeEntry'] = str(temp)
+                            user1['vvi_ventricularAmplitudeEntry'] = str(temp)
                         elif(user == 7):
-                            user1['vvi_atrialAmplitudeEntry'] = str(temp)
+                            user1['vvi_ventricularAmplitudeEntry'] = str(temp)
                         elif(user == 8):
-                            user1['vvi_atrialAmplitudeEntry'] = str(temp)
+                            user1['vvi_ventricularAmplitudeEntry'] = str(temp)
                         elif(user == 9):
-                            user1['vvi_atrialAmplitudeEntry'] = str(temp)
+                            user1['vvi_ventricularAmplitudeEntry'] = str(temp)
                         else:
                             pass
             except:
@@ -1406,28 +1421,29 @@ class MainWindow:
                 else:
                     if messagebox.askyesno("Confirmation", "Replace current value?"):
                         messagebox.showinfo("Done", "Success")
-                        vvi_atrialPulseWidthEntry = temp
-                        self.vviAtrialPulseWidthValue.config(text="Current Value: " + vvi_atrialPulseWidthEntry)
+                        vvi_ventricularPulseWidthEntry = temp
+                        self.vviAtrialPulseWidthValue.config(text="Current Value: " + vvi_ventricularPulseWidthEntry)
 
-                            user0['vvi_atrialPulseWidthEntry'] = str(temp)
+                        if(user == 0):    
+                            user0['vvi_ventricularPulseWidthEntry'] = str(temp)
                         elif(user == 1):
-                            user1['vvi_atrialPulseWidthEntry'] = str(temp)
+                            user1['vvi_ventricularPulseWidthEntry'] = str(temp)
                         elif(user == 2):
-                            user1['vvi_atrialPulseWidthEntry'] = str(temp)
+                            user1['vvi_ventricularPulseWidthEntry'] = str(temp)
                         elif(user == 3):
-                            user1['vvi_atrialPulseWidthEntry'] = str(temp)
+                            user1['vvi_ventricularPulseWidthEntry'] = str(temp)
                         elif(user == 4):
-                            user1['vvi_atrialPulseWidthEntry'] = str(temp)
+                            user1['vvi_ventricularPulseWidthEntry'] = str(temp)
                         elif(user == 5):
-                            user1['vvi_atrialPulseWidthEntry'] = str(temp)
+                            user1['vvi_ventricularPulseWidthEntry'] = str(temp)
                         elif(user == 6):
-                            user1['vvi_atrialPulseWidthEntry'] = str(temp)
+                            user1['vvi_ventricularPulseWidthEntry'] = str(temp)
                         elif(user == 7):
-                            user1['vvi_atrialPulseWidthEntry'] = str(temp)
+                            user1['vvi_ventricularPulseWidthEntry'] = str(temp)
                         elif(user == 8):
-                            user1['vvi_atrialPulseWidthEntry'] = str(temp)
+                            user1['vvi_ventricularPulseWidthEntry'] = str(temp)
                         elif(user == 9):
-                            user1['vvi_atrialPulseWidthEntry'] = str(temp)
+                            user1['vvi_ventricularPulseWidthEntry'] = str(temp)
                         else:
                             pass
             except:
@@ -1446,28 +1462,29 @@ class MainWindow:
                 else:
                     if messagebox.askyesno("Confirmation", "Replace current value?"):
                         messagebox.showinfo("Done", "Success")
-                        vvi_atrialSensitivityEntry = temp
-                        self.vviAtrialSensitivityValue.config(text="Current Value: " + vvi_atrialSensitivityEntry)
+                        vvi_ventricularSensitivityEntry = temp
+                        self.vviAtrialSensitivityValue.config(text="Current Value: " + vvi_ventricularSensitivityEntry)
 
-                            user0['vvi_atrialSensitivityEntry'] = str(temp)
+                        if(user == 0):    
+                            user0['vvi_ventricularSensitivityEntry'] = str(temp)
                         elif(user == 1):
-                            user1['vvi_atrialSensitivityEntry'] = str(temp)
+                            user1['vvi_ventricularSensitivityEntry'] = str(temp)
                         elif(user == 2):
-                            user1['vvi_atrialSensitivityEntry'] = str(temp)
+                            user1['vvi_ventricularSensitivityEntry'] = str(temp)
                         elif(user == 3):
-                            user1['vvi_atrialSensitivityEntry'] = str(temp)
+                            user1['vvi_ventricularSensitivityEntry'] = str(temp)
                         elif(user == 4):
-                            user1['vvi_atrialSensitivityEntry'] = str(temp)
+                            user1['vvi_ventricularSensitivityEntry'] = str(temp)
                         elif(user == 5):
-                            user1['vvi_atrialSensitivityEntry'] = str(temp)
+                            user1['vvi_ventricularSensitivityEntry'] = str(temp)
                         elif(user == 6):
-                            user1['vvi_atrialSensitivityEntry'] = str(temp)
+                            user1['vvi_ventricularSensitivityEntry'] = str(temp)
                         elif(user == 7):
-                            user1['vvi_atrialSensitivityEntry'] = str(temp)
+                            user1['vvi_ventricularSensitivityEntry'] = str(temp)
                         elif(user == 8):
-                            user1['vvi_atrialSensitivityEntry'] = str(temp)
+                            user1['vvi_ventricularSensitivityEntry'] = str(temp)
                         elif(user == 9):
-                            user1['vvi_atrialSensitivityEntry'] = str(temp)
+                            user1['vvi_ventricularSensitivityEntry'] = str(temp)
                         else:
                             pass
             except:
@@ -1489,6 +1506,7 @@ class MainWindow:
                         vvi_ARPEntry = temp
                         self.vviARPValue.config(text="Current Value: " + vvi_ARPEntry)
 
+                        if(user == 0):    
                             user0['vvi_ARPEntry'] = str(temp)
                         elif(user == 1):
                             user1['vvi_ARPEntry'] = str(temp)
@@ -1529,6 +1547,7 @@ class MainWindow:
                         vvi_hysteresisEntry = temp
                         self.vviHysteresisValue.config(text="Current Value: " + vvi_hysteresisEntry)
 
+                        if(user == 0):    
                             user0['vvi_hysteresisEntry'] = str(temp)
                         elif(user == 1):
                             user1['vvi_hysteresisEntry'] = str(temp)
@@ -1569,6 +1588,7 @@ class MainWindow:
                         vvi_rateSmoothingEntry = temp
                         self.vviRateSmoothingValue.config(text="Current Value: " + vvi_rateSmoothingEntry)
 
+                        if(user == 0):    
                             user0['vvi_rateSmoothingEntry'] = str(temp)
                         elif(user == 1):
                             user1['vvi_rateSmoothingEntry'] = str(temp)
@@ -1710,15 +1730,15 @@ def loadVariables():
         for key in range(len(variableStringList)): 
             variableList[key] = user0[variableStringList[key]]
     
-    global aoo_lowerRateLimitEntry,aoo_upperRateLimitEntry,aoo_atrialAmplitudeEntry,aoo_atrialPulseWidthEntry,voo_lowerRateLimitEntry,voo_upperRateLimitEntry,voo_atrialPulseWidthEntry,voo_atrialPulseWidthEntry,aai_lowerRateLimitEntry,aai_upperRateLimitEntry,aai_atrialAmplitudeEntry,aai_atrialPulseWidthEntry,aai_atrialSensitivityEntry,aai_ARPEntry,aai_APVARPEntry,aai_hysteresisEntry,aai_rateSmoothingEntry,vvi_lowerRateLimitEntry,vvi_upperRateLimitEntry,vvi_atrialAmplitudeEntry,vvi_atrialPulseWidthEntry,vvi_atrialSensitivityEntry,vvi_ARPEntry,vvi_hysteresisEntry,vvi_rateSmoothingEntry
+    global aoo_lowerRateLimitEntry,aoo_upperRateLimitEntry,aoo_atrialAmplitudeEntry,aoo_atrialPulseWidthEntry,voo_lowerRateLimitEntry,voo_upperRateLimitEntry,voo_ventricularPulseWidthEntry,voo_ventricularPulseWidthEntry,aai_lowerRateLimitEntry,aai_upperRateLimitEntry,aai_atrialAmplitudeEntry,aai_atrialPulseWidthEntry,aai_atrialSensitivityEntry,aai_ARPEntry,aai_APVARPEntry,aai_hysteresisEntry,aai_rateSmoothingEntry,vvi_lowerRateLimitEntry,vvi_upperRateLimitEntry,vvi_ventricularAmplitudeEntry,vvi_ventricularPulseWidthEntry,vvi_ventricularSensitivityEntry,vvi_ARPEntry,vvi_hysteresisEntry,vvi_rateSmoothingEntry
     aoo_lowerRateLimitEntry = variableList[0]
     aoo_upperRateLimitEntry = variableList[1]
     aoo_atrialAmplitudeEntry = variableList[2]
     aoo_atrialPulseWidthEntry = variableList[3]
     voo_lowerRateLimitEntry = variableList[4]
     voo_upperRateLimitEntry = variableList[5]
-    voo_atrialAmplitudeEntry = variableList[6]
-    voo_atrialPulseWidthEntry = variableList[7]
+    voo_ventricularAmplitudeEntry = variableList[6]
+    voo_ventricularPulseWidthEntry = variableList[7]
     aai_lowerRateLimitEntry = variableList[8]
     aai_upperRateLimitEntry = variableList[9]
     aai_atrialAmplitudeEntry = variableList[10]
@@ -1730,24 +1750,24 @@ def loadVariables():
     aai_rateSmoothingEntry = variableList[16]
     vvi_lowerRateLimitEntry = variableList[17]
     vvi_upperRateLimitEntry = variableList[18]
-    vvi_atrialAmplitudeEntry = variableList[19]
-    vvi_atrialPulseWidthEntry = variableList[20]
-    vvi_atrialSensitivityEntry = variableList[21]
+    vvi_ventricularAmplitudeEntry = variableList[19]
+    vvi_ventricularPulseWidthEntry = variableList[20]
+    vvi_ventricularSensitivityEntry = variableList[21]
     vvi_ARPEntry = variableList[22]
     vvi_hysteresisEntry = variableList[23]
     vvi_rateSmoothingEntry = variableList[24]
 
 
 #Write Variables to dictionary
-# user9 = {
+# user0 = {
 #     'aoo_lowerRateLimitEntry' : '60',
 #     'aoo_upperRateLimitEntry' : '120',
 #     'aoo_atrialAmplitudeEntry' : '3.5',
 #     'aoo_atrialPulseWidthEntry' : '5',
 #     'voo_lowerRateLimitEntry' : '60',
 #     'voo_upperRateLimitEntry' : '120',
-#     'voo_atrialAmplitudeEntry' : '3.5',
-#     'voo_atrialPulseWidthEntry' : '5',
+#     'voo_ventricularAmplitudeEntry' : '3.5',
+#     'voo_ventricularPulseWidthEntry' : '5',
 #     'aai_lowerRateLimitEntry' : '60',
 #     'aai_upperRateLimitEntry' : '120',
 #     'aai_atrialAmplitudeEntry' : '3.5',
@@ -1759,20 +1779,18 @@ def loadVariables():
 #     'aai_rateSmoothingEntry' : '0',
 #     'vvi_lowerRateLimitEntry' : '60',
 #     'vvi_upperRateLimitEntry' : '120',
-#     'vvi_atrialAmplitudeEntry' : '3.5',
-#     'vvi_atrialPulseWidthEntry' : '5',
-#     'vvi_atrialSensitivityEntry' : '3.3',
+#     'vvi_ventricularAmplitudeEntry' : '3.5',
+#     'vvi_ventricularPulseWidthEntry' : '5',
+#     'vvi_ventricularSensitivityEntry' : '3.3',
 #     'vvi_ARPEntry' : '250',
 #     'vvi_hysteresisEntry' :  '0',
 #     'vvi_rateSmoothingEntry'  :  '0'
 # }
-
+# writeValues(0)
 
 
 #Main function that runs everything
 def main():
-
-    print(aoo_lowerRateLimitEntry)
 
     for user in range(10):
         readValues(user)
@@ -1785,16 +1803,11 @@ def main():
        readUsers()
     except (EOFError):
         pass
-
-    print(aoo_lowerRateLimitEntry)
     
     #Run Tkinter
     root = tk.Tk()
     app = WelcomeFrame(root)
     root.mainloop()
-
-    print(aoo_lowerRateLimitEntry)
-
 
 if __name__ == '__main__':
     main()
