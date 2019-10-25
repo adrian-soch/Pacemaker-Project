@@ -21,6 +21,9 @@ aai_lowerRateLimitEntry,aai_upperRateLimitEntry,aai_atrialAmplitudeEntry,aai_atr
 #VVI
 vvi_lowerRateLimitEntry,vvi_upperRateLimitEntry,vvi_atrialAmplitudeEntry,vvi_atrialPulseWidthEntry,vvi_atrialSensitivityEntry,vvi_ARPEntry,vvi_hysteresisEntry,vvi_rateSmoothingEntry = "0","0","0","0","0","0","0","0"
 
+#Variable List in string form used for user dictionarys (can be removed for final release)
+variableStringList = ['aoo_lowerRateLimitEntry','aoo_upperRateLimitEntry','aoo_atrialAmplitudeEntry','aoo_atrialPulseWidthEntry','voo_lowerRateLimitEntry','voo_upperRateLimitEntry','voo_atrialAmplitudeEntry','voo_atrialPulseWidthEntry','aai_lowerRateLimitEntry','aai_upperRateLimitEntry','aai_atrialAmplitudeEntry','aai_atrialPulseWidthEntry','aai_atrialSensitivityEntry','aai_ARPEntry,aai_APVARPEntry','aai_hysteresisEntry','aai_rateSmoothingEntry','vvi_lowerRateLimitEntry','vvi_upperRateLimitEntry','vvi_atrialAmplitudeEntry','vvi_atrialPulseWidthEntry','vvi_atrialSensitivityEntry','vvi_ARPEntry','vvi_hysteresisEntry','vvi_rateSmoothingEntry']
+
 #Creating Initial Welcome Frame
 class WelcomeFrame:
     def __init__(self, master):
@@ -1070,12 +1073,12 @@ def readValues():
     userList = [user0, user1, user2, user3, user4, user5, user6, user7, user8, user9]
     try:
         for i in range(10):
-            with open('user' + i + '.pickle', 'rb') as file:
+            with open('user' + str(i) + '.pickle', 'rb') as file:
                 userList[i] = pickle.load(file)
                 print(userList[i])
     except(FileNotFoundError):
         for i in range(10):
-            with open('DCM/user' + i + '.pickle', 'rb') as file:
+            with open('DCM/user' + str(i) + '.pickle', 'rb') as file:
                 userList[i] = pickle.load(file)
                 print(userList[i])
 
@@ -1092,7 +1095,37 @@ def writeValues():
         for i in range(10):
             with open('DCM/user' + str(i) + '.pickle', 'wb') as file:
                 pickle.dump(userList[i], file)
-        
+
+#Write Variables to dictionary
+user0 = {
+    'aoo_lowerRateLimitEntry' : '0',
+    'aoo_upperRateLimitEntry' : '0',
+    'aoo_atrialAmplitudeEntry' : '0',
+    'aoo_atrialPulseWidthEntry' : '0',
+    'voo_lowerRateLimitEntry' : '0',
+    'voo_upperRateLimitEntry' : '0',
+    'voo_atrialAmplitudeEntry' : '0',
+    'voo_atrialPulseWidthEntry' : '0',
+    'aai_lowerRateLimitEntry' : '0',
+    'aai_upperRateLimitEntry' : '0',
+    'aai_atrialAmplitudeEntry' : '0',
+    'aai_atrialPulseWidthEntry' : '0',
+    'aai_atrialSensitivityEntry' : '0',
+    'aai_ARPEntry,aai_APVARPEntry' : '0',
+    'aai_hysteresisEntry' : '0',
+    'aai_rateSmoothingEntry' : '0',
+    'vvi_lowerRateLimitEntry' : '0',
+    'vvi_upperRateLimitEntry' : '0',
+    'vvi_atrialAmplitudeEntry' : '0',
+    'vvi_atrialPulseWidthEntry' : '0',
+    'vvi_atrialSensitivityEntry' : '0',
+    'vvi_ARPEntry' : '0',
+    'vvi_hysteresisEntry' :  '0',
+    'vvi_rateSmoothingEntry'  :  '0'
+}
+
+writeValues()
+readValues()
 
 #Main function that runs everything
 def main():
