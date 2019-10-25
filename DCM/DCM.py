@@ -12,7 +12,7 @@ user0, user1, user2, user3, user4, user5, user6, user7, user8, user9 = {}, {}, {
 #Initializing all global variables with "0"
 #AOO
 aoo_lowerRateLimitEntry,aoo_upperRateLimitEntry,aoo_atrialAmplitudeEntry,aoo_atrialPulseWidthEntry = "0","0","0","0"
- 
+
 #VOO
 voo_lowerRateLimitEntry,voo_upperRateLimitEntry,voo_atrialAmplitudeEntry,voo_atrialPulseWidthEntry = "0","0","0","0"
 
@@ -21,6 +21,8 @@ aai_lowerRateLimitEntry,aai_upperRateLimitEntry,aai_atrialAmplitudeEntry,aai_atr
 
 #VVI
 vvi_lowerRateLimitEntry,vvi_upperRateLimitEntry,vvi_atrialAmplitudeEntry,vvi_atrialPulseWidthEntry,vvi_atrialSensitivityEntry,vvi_ARPEntry,vvi_hysteresisEntry,vvi_rateSmoothingEntry = "0","0","0","0","0","0","0","0"
+
+
 
 #Variable List in string form used for user dictionarys (can be removed for final release)
 variableStringList = ['aoo_lowerRateLimitEntry','aoo_upperRateLimitEntry','aoo_atrialAmplitudeEntry','aoo_atrialPulseWidthEntry','voo_lowerRateLimitEntry','voo_upperRateLimitEntry','voo_atrialAmplitudeEntry','voo_atrialPulseWidthEntry','aai_lowerRateLimitEntry','aai_upperRateLimitEntry','aai_atrialAmplitudeEntry','aai_atrialPulseWidthEntry','aai_atrialSensitivityEntry','aai_ARPEntry','aai_APVARPEntry','aai_hysteresisEntry','aai_rateSmoothingEntry','vvi_lowerRateLimitEntry','vvi_upperRateLimitEntry','vvi_atrialAmplitudeEntry','vvi_atrialPulseWidthEntry','vvi_atrialSensitivityEntry','vvi_ARPEntry','vvi_hysteresisEntry','vvi_rateSmoothingEntry']
@@ -71,6 +73,7 @@ class WelcomeFrame:
 
 #Login Frame window
 class LoginFrame:
+
     def __init__(self, master):
 
         #General parameters
@@ -236,6 +239,8 @@ class AddUserWindow:
 class MainWindow:
     def __init__(self, master):
         #General window setup
+        
+
         self.content = tk.Entry()
         self.master = master
         self.master.geometry('500x570')
@@ -531,6 +536,7 @@ class MainWindow:
     #Confirm changes method
     def confirmChanges(self):
         if messagebox.askyesno("Confirmation", "Upload these changes?"):
+            
             writeValues(user)
             messagebox.showinfo("Done", "Success")
 
@@ -551,7 +557,7 @@ class MainWindow:
         global aai_lowerRateLimitEntry,aai_upperRateLimitEntry,aai_atrialAmplitudeEntry,aai_atrialPulseWidthEntry,aai_atrialSensitivityEntry,aai_ARPEntry,aai_APVARPEntry,aai_hysteresisEntry,aai_rateSmoothingEntry
         #VVI
         global vvi_lowerRateLimitEntry,vvi_upperRateLimitEntry,vvi_atrialAmplitudeEntry,vvi_atrialPulseWidthEntry,vvi_atrialSensitivityEntry,vvi_ARPEntry,vvi_hysteresisEntry,vvi_rateSmoothingEntry
-
+        global user, user0, user1, user2, user3, user4, user5, user6, user7, user8, user9
         #AOO
         #aooLowerRateLimit
         if(value == "aooLowerRateLimit"):
@@ -571,6 +577,31 @@ class MainWindow:
                         messagebox.showinfo("Done", "Success")
                         aoo_lowerRateLimitEntry = temp
                         self.aooLowerRateLimitValue.config(text="Current Value: " + aoo_lowerRateLimitEntry)
+                        
+                        if(user == 0):
+                            user0['aoo_lowerRateLimitEntry'] = str(temp)
+                        elif(user == 1):
+                            user1['aoo_lowerRateLimitEntry'] = str(temp)
+                        elif(user == 2):
+                            user1['aoo_lowerRateLimitEntry'] = str(temp)
+                        elif(user == 3):
+                            user1['aoo_lowerRateLimitEntry'] = str(temp)
+                        elif(user == 4):
+                            user1['aoo_lowerRateLimitEntry'] = str(temp)
+                        elif(user == 5):
+                            user1['aoo_lowerRateLimitEntry'] = str(temp)
+                        elif(user == 6):
+                            user1['aoo_lowerRateLimitEntry'] = str(temp)
+                        elif(user == 7):
+                            user1['aoo_lowerRateLimitEntry'] = str(temp)
+                        elif(user == 8):
+                            user1['aoo_lowerRateLimitEntry'] = str(temp)
+                        elif(user == 9):
+                            user1['aoo_lowerRateLimitEntry'] = str(temp)
+                        else:
+                            pass
+
+                        
             except:
                 messagebox.showinfo("Error","Please enter a valid value")
                 pass
@@ -593,6 +624,28 @@ class MainWindow:
                         messagebox.showinfo("Done", "Success")
                         aoo_upperRateLimitEntry = temp
                         self.aooUpperRateLimitValue.config(text="Current Value: " + aoo_upperRateLimitEntry)
+                        if(user == 0):
+                            user0[aoo_upperRateLimitEntry] = temp
+                        elif(user == 1):
+                            user1[aoo_upperRateLimitEntry] = temp
+                        elif(user == 2):
+                            user1[aoo_upperRateLimitEntry] = temp
+                        elif(user == 3):
+                            user1[aoo_upperRateLimitEntry] = temp
+                        elif(user == 4):
+                            user1[aoo_upperRateLimitEntry] = temp
+                        elif(user == 5):
+                            user1[aoo_upperRateLimitEntry] = temp
+                        elif(user == 6):
+                            user1[aoo_upperRateLimitEntry] = temp
+                        elif(user == 7):
+                            user1[aoo_upperRateLimitEntry] = temp
+                        elif(user == 8):
+                            user1[aoo_upperRateLimitEntry] = temp
+                        elif(user == 9):
+                            user1[aoo_upperRateLimitEntry] = temp
+                        else:
+                            pass
             except:
                 messagebox.showinfo("Error","Please enter a valid value")
                 pass
@@ -1081,48 +1134,142 @@ def writeUsers():
 #Access pickle file to read values from each user
 def readValues(user):
     global user0, user1, user2, user3, user4, user5, user6, user7, user8, user9
-    userList = [user0, user1, user2, user3, user4, user5, user6, user7, user8, user9]
-    try:
-        for i in range(10):
-            if(user == i):
-                with open('user' + str(i) + '.pickle', 'rb') as file:
-                    userList[i] = pickle.load(file)
-                    #print(userList[i])
-    except(FileNotFoundError):
-        for i in range(10):
-            if(user == i):
-                with open('DCM/user' + str(i) + '.pickle', 'rb') as file:
-                    userList[i] = pickle.load(file)
-                    print(userList[i])
+    
+    
+    with open('user0.pickle', 'rb') as file:
+        user0 = pickle.load(file)
+
+    with open('user1.pickle', 'rb') as file:
+        user1 = pickle.load(file)
+
+    with open('user2.pickle', 'rb') as file:
+        user2 = pickle.load(file)
+
+    with open('user3.pickle', 'rb') as file:
+        user3 = pickle.load(file)
+
+    with open('user4.pickle', 'rb') as file:
+        user4 = pickle.load(file)
+
+    with open('user5.pickle', 'rb') as file:
+        user5 = pickle.load(file)
+    
+    with open('user6.pickle', 'rb') as file:
+        user6 = pickle.load(file)
+
+    with open('user7.pickle', 'rb') as file:
+        user7 = pickle.load(file)
+
+    with open('user8.pickle', 'rb') as file:
+        user8 = pickle.load(file)
+
+    with open('user9.pickle', 'rb') as file:
+        user9 = pickle.load(file)
+
+
+    # try:
+    #     for i in range(10):
+    #         if(user == i):
+    #             with open('user' + str(i) + '.pickle', 'rb') as file:
+    #                 userList[i] = pickle.load(file)
+    #                 #print(userList[i])
+    # except(FileNotFoundError):
+    #     for i in range(10):
+    #         if(user == i):
+    #             with open('DCM/user' + str(i) + '.pickle', 'rb') as file:
+    #                 userList[i] = pickle.load(file)
+    #                 print(userList[i])
 
 
 #Write new user values to pickle file
 def writeValues(user):
     global user0, user1, user2, user3, user4, user5, user6, user7, user8, user9
-    userList = [user0, user1, user2, user3, user4, user5, user6, user7, user8, user9]
-    try:
-        for i in range(10):
-            if(user == i):
-                with open('user' + str(i) + '.pickle', 'wb') as file:
-                    pickle.dump(userList[i], file)
-    except(FileNotFoundError):
-        for i in range(10):
-            if(user == i):
-                with open('DCM/user' + str(i) + '.pickle', 'wb') as file:
-                    pickle.dump(userList[i], file)
+    
+    
+    with open('user0.pickle', 'wb') as file:
+        pickle.dump(user0, file)
+    
+    with open('user1.pickle', 'wb') as file:
+        pickle.dump(user1, file)
+
+    with open('user2.pickle', 'wb') as file:
+        pickle.dump(user2, file)
+    
+    with open('user3.pickle', 'wb') as file:
+        pickle.dump(user3, file)
+
+    with open('user4.pickle', 'wb') as file:
+        pickle.dump(user4, file)
+
+    with open('user5.pickle', 'wb') as file:
+        pickle.dump(user5, file)
+
+    with open('user6.pickle', 'wb') as file:
+        pickle.dump(user6, file)
+
+    with open('user7.pickle', 'wb') as file:
+        pickle.dump(user7, file)
+
+    with open('user8.pickle', 'wb') as file:
+        pickle.dump(user8, file)
+
+    with open('user9.pickle', 'wb') as file:
+        pickle.dump(user9, file)
+        
+    
+    
+    # try:
+    #     for i in range(10):
+    #         if(user == i):
+    #             with open('user' + str(i) + '.pickle', 'wb') as file:
+    #                 pickle.dump(userList[i], file)
+    # except(FileNotFoundError):
+    #     for i in range(10):
+    #         if(user == i):
+    #             with open('DCM/user' + str(i) + '.pickle', 'wb') as file:
+    #                 pickle.dump(userList[i], file)
+
 
 
 def loadVariables():
     global variableList
     global variableStringList
     for i in range(10):
-        count = 0
-        #for key in variableStringList:
-            #count += 1 
-            #variableList[count] = user0[key]
-            #print('hi')
+        for key in range(len(variableStringList)): 
+            variableList[key] = user0[variableStringList[key]]
+    
+    global aoo_lowerRateLimitEntry,aoo_upperRateLimitEntry,aoo_atrialAmplitudeEntry,aoo_atrialPulseWidthEntry,voo_lowerRateLimitEntry,voo_upperRateLimitEntry,voo_atrialAmplitudeEntry,voo_atrialPulseWidthEntry,aai_lowerRateLimitEntry,aai_upperRateLimitEntry,aai_atrialAmplitudeEntry,aai_atrialPulseWidthEntry,aai_atrialSensitivityEntry,aai_ARPEntry,aai_APVARPEntry,aai_hysteresisEntry,aai_rateSmoothingEntry,vvi_lowerRateLimitEntry,vvi_upperRateLimitEntry,vvi_atrialAmplitudeEntry,vvi_atrialPulseWidthEntry,vvi_atrialSensitivityEntry,vvi_ARPEntry,vvi_hysteresisEntry,vvi_rateSmoothingEntry
+    aoo_lowerRateLimitEntry = variableList[0]
+    aoo_upperRateLimitEntry = variableList[1]
+    aoo_atrialAmplitudeEntry = variableList[2]
+    aoo_atrialPulseWidthEntry = variableList[3]
+    voo_lowerRateLimitEntry = variableList[4]
+    voo_upperRateLimitEntry = variableList[5]
+    voo_atrialAmplitudeEntry = variableList[6]
+    voo_atrialPulseWidthEntry = variableList[7]
+    aai_lowerRateLimitEntry = variableList[8]
+    aai_upperRateLimitEntry = variableList[9]
+    aai_atrialAmplitudeEntry = variableList[10]
+    aai_atrialPulseWidthEntry = variableList[11]
+    aai_atrialSensitivityEntry = variableList[12]
+    aai_ARPEntry = variableList[13]
+    aai_APVARPEntry = variableList[14]
+    aai_hysteresisEntry = variableList[15]
+    aai_rateSmoothingEntry = variableList[16]
+    vvi_lowerRateLimitEntry = variableList[17]
+    vvi_upperRateLimitEntry = variableList[18]
+    vvi_atrialAmplitudeEntry = variableList[19]
+    vvi_atrialPulseWidthEntry = variableList[20]
+    vvi_atrialSensitivityEntry = variableList[21]
+    vvi_ARPEntry = variableList[22]
+    vvi_hysteresisEntry = variableList[23]
+    vvi_rateSmoothingEntry = variableList[24]
 
-        
+    #global aoo_lowerRateLimitEntry
+    #aoo_lowerRateLimitEntry = '60'
+            #print(variableStringList[key])
+
+
 
 
 #Write Variables to dictionary
@@ -1160,18 +1307,29 @@ def loadVariables():
 
 #Main function that runs everything
 def main():
+
+    print(aoo_lowerRateLimitEntry)
+
     for user in range(10):
         readValues(user)
-        print(user0)
+
     loadVariables()
+    for i in range(len(variableList)):
+        print(variableList[i])
+
     try:
        readUsers()
     except (EOFError):
         pass
+
+    print(aoo_lowerRateLimitEntry)
+    
     #Run Tkinter
     root = tk.Tk()
     app = WelcomeFrame(root)
     root.mainloop()
+
+    print(aoo_lowerRateLimitEntry)
 
 
 if __name__ == '__main__':
