@@ -5,6 +5,7 @@ from tkinter import messagebox
 import pickle
 
 #Creating empty dictionaries to later load users and values into
+user = 0
 login_dict = {}
 user0, user1, user2, user3, user4, user5, user6, user7, user8, user9 = {}, {}, {}, {}, {}, {}, {}, {}, {}, {}
 
@@ -22,7 +23,8 @@ aai_lowerRateLimitEntry,aai_upperRateLimitEntry,aai_atrialAmplitudeEntry,aai_atr
 vvi_lowerRateLimitEntry,vvi_upperRateLimitEntry,vvi_atrialAmplitudeEntry,vvi_atrialPulseWidthEntry,vvi_atrialSensitivityEntry,vvi_ARPEntry,vvi_hysteresisEntry,vvi_rateSmoothingEntry = "0","0","0","0","0","0","0","0"
 
 #Variable List in string form used for user dictionarys (can be removed for final release)
-variableStringList = ['aoo_lowerRateLimitEntry','aoo_upperRateLimitEntry','aoo_atrialAmplitudeEntry','aoo_atrialPulseWidthEntry','voo_lowerRateLimitEntry','voo_upperRateLimitEntry','voo_atrialAmplitudeEntry','voo_atrialPulseWidthEntry','aai_lowerRateLimitEntry','aai_upperRateLimitEntry','aai_atrialAmplitudeEntry','aai_atrialPulseWidthEntry','aai_atrialSensitivityEntry','aai_ARPEntry,aai_APVARPEntry','aai_hysteresisEntry','aai_rateSmoothingEntry','vvi_lowerRateLimitEntry','vvi_upperRateLimitEntry','vvi_atrialAmplitudeEntry','vvi_atrialPulseWidthEntry','vvi_atrialSensitivityEntry','vvi_ARPEntry','vvi_hysteresisEntry','vvi_rateSmoothingEntry']
+variableStringList = ['aoo_lowerRateLimitEntry','aoo_upperRateLimitEntry','aoo_atrialAmplitudeEntry','aoo_atrialPulseWidthEntry','voo_lowerRateLimitEntry','voo_upperRateLimitEntry','voo_atrialAmplitudeEntry','voo_atrialPulseWidthEntry','aai_lowerRateLimitEntry','aai_upperRateLimitEntry','aai_atrialAmplitudeEntry','aai_atrialPulseWidthEntry','aai_atrialSensitivityEntry','aai_ARPEntry','aai_APVARPEntry','aai_hysteresisEntry','aai_rateSmoothingEntry','vvi_lowerRateLimitEntry','vvi_upperRateLimitEntry','vvi_atrialAmplitudeEntry','vvi_atrialPulseWidthEntry','vvi_atrialSensitivityEntry','vvi_ARPEntry','vvi_hysteresisEntry','vvi_rateSmoothingEntry']
+variableList= [aoo_lowerRateLimitEntry,aoo_upperRateLimitEntry,aoo_atrialAmplitudeEntry,aoo_atrialPulseWidthEntry,voo_lowerRateLimitEntry,voo_upperRateLimitEntry,voo_atrialAmplitudeEntry,voo_atrialPulseWidthEntry,aai_lowerRateLimitEntry,aai_upperRateLimitEntry,aai_atrialAmplitudeEntry,aai_atrialPulseWidthEntry,aai_atrialSensitivityEntry,aai_ARPEntry,aai_APVARPEntry,aai_hysteresisEntry,aai_rateSmoothingEntry,vvi_lowerRateLimitEntry,vvi_upperRateLimitEntry,vvi_atrialAmplitudeEntry,vvi_atrialPulseWidthEntry,vvi_atrialSensitivityEntry,vvi_ARPEntry,vvi_hysteresisEntry,vvi_rateSmoothingEntry]
 
 #Creating Initial Welcome Frame
 class WelcomeFrame:
@@ -140,9 +142,17 @@ class LoginFrame:
         self.entry_username.delete(0, 'end')
         self.entry_password.delete(0, 'end')
 
+        usercounter = 0
         for key in login_dict:
             if key == username and password == login_dict[key]:
                 self.login_successful = True
+                global user
+                user = usercounter
+                try:
+                    readValues(user)
+                except(FileNotFoundError):
+                    pass
+                usercounter += 1
                 self.master.withdraw()
                 self.new_window(MainWindow)
                 break
@@ -265,17 +275,11 @@ class MainWindow:
         self.aooAtrialAmplitudeValue = tk.Label(self.aoo, text = "Current Value: " + aoo_atrialAmplitudeEntry)
         self.aooAtrialPulseWidthValue = tk.Label(self.aoo, text = "Current Value: " + aoo_atrialPulseWidthEntry)
     
-        """#Setup entry field
+        #Setup entry field
         self.aooLowerRateLimitEntry = tk.Entry(self.aoo)
         self.aooUpperRateLimitEntry = tk.Entry(self.aoo)
         self.aooAtrialAmplitudeEntry = tk.Entry(self.aoo)
-        self.aooAtrialPulseWidthEntry = tk.Entry(self.aoo)"""
-
-        #Spinbox
-        self.aooLowerRateLimitEntry = tk.Spinbox(self.aoo,from_=30,to=50,increment=5)
-        self.aooUpperRateLimitEntry = tk.Spinbox(self.aoo,from_=50,to=175,increment=5)
-        self.aooAtrialAmplitudeEntry = tk.Spinbox(self.aoo,from_=0.5,to=7.0,format="%.1f",increment=0.1)
-        self.aooAtrialPulseWidthEntry = tk.Spinbox(self.aoo,from_=0.05,to=1.9,format="%.2f",increment=0.1)
+        self.aooAtrialPulseWidthEntry = tk.Entry(self.aoo)
 
         #Adjust positioning
         self.aooLowerRateLimitLabel.grid(row=0, column=0, padx=15, pady=15)
@@ -527,6 +531,7 @@ class MainWindow:
     #Confirm changes method
     def confirmChanges(self):
         if messagebox.askyesno("Confirmation", "Upload these changes?"):
+            writeValues(user)
             messagebox.showinfo("Done", "Success")
 
     #New window method
@@ -561,9 +566,6 @@ class MainWindow:
                 elif(int(self.aooLowerRateLimitEntry.get()) >= int(aoo_upperRateLimitEntry) and int(aoo_upperRateLimitEntry) != 0 ):
                     messagebox.showinfo("Error","Please ensure your lower rate limit is lower than your upper rate limit")
                     pass
-                elif(int(temp)<30 or int(temp)>175):
-                    messagebox.showinfo("Error","Out of range")
-                    pass
                 else:
                     if messagebox.askyesno("Confirmation", "Replace current value?"):
                         messagebox.showinfo("Done", "Success")
@@ -584,10 +586,7 @@ class MainWindow:
                     pass
                 #Ensure upper limit is larger than lower limit
                 elif(int(aoo_lowerRateLimitEntry) >= int(self.aooUpperRateLimitEntry.get()) and int(aoo_lowerRateLimitEntry) != 0 ):
-                    messagebox.showinfo("Error","Please ensure your upper rate limit is higher than your lower rate limit")
-                    pass
-                elif(int(temp)<50 or int(temp)>175):
-                    messagebox.showinfo("Error","Out of range")
+                    messagebox.showinfo("Error","Please ensure your lower rate limit is lower than your upper rate limit")
                     pass
                 else:
                     if messagebox.askyesno("Confirmation", "Replace current value?"):
@@ -603,12 +602,9 @@ class MainWindow:
             temp = self.aooAtrialAmplitudeEntry.get()
             #Try/access to sanitize user input and ask for confirmation if there are no errors
             try:
-                float(temp)
-                if (temp == '' or float(temp)<0):
+                int(temp)
+                if (temp == '' or int(temp)<0):
                     messagebox.showinfo("Error","Please enter a valid value")
-                    pass
-                elif(float(temp)<0 or float(temp)>7):
-                    messagebox.showinfo("Error","Out of range")
                     pass
                 else:
                     if messagebox.askyesno("Confirmation", "Replace current value?"):
@@ -624,12 +620,9 @@ class MainWindow:
             temp = self.aooAtrialPulseWidthEntry.get()
             #Try/access to sanitize user input and ask for confirmation if there are no errors
             try:
-                float(temp)
-                if (temp == '' or float(temp)<0):
+                int(temp)
+                if (temp == '' or int(temp)<0):
                     messagebox.showinfo("Error","Please enter a valid value")
-                    pass
-                elif(float(temp)<0.05 or float(temp)>1.9):
-                    messagebox.showinfo("Error","Out of range")
                     pass
                 else:
                     if messagebox.askyesno("Confirmation", "Replace current value?"):
@@ -654,9 +647,6 @@ class MainWindow:
                 elif(int(self.vooLowerRateLimitEntry.get()) >= int(voo_upperRateLimitEntry) and int(voo_upperRateLimitEntry) != 0 ):
                     messagebox.showinfo("Error","Please ensure your lower rate limit is lower than your upper rate limit")
                     pass
-                elif(int(temp)<30 or int(temp)>175):
-                    messagebox.showinfo("Error","Out of range")
-                    pass
                 else:
                     if messagebox.askyesno("Confirmation", "Replace current value?"):
                         messagebox.showinfo("Done", "Success")
@@ -677,10 +667,7 @@ class MainWindow:
                     pass
                 #Ensure upper limit is larger than lower limit
                 elif(int(voo_lowerRateLimitEntry) >= int(self.vooUpperRateLimitEntry.get()) and int(voo_lowerRateLimitEntry) != 0 ):
-                    messagebox.showinfo("Error","Please ensure your upper rate limit is higher than your lower rate limit")
-                    pass
-                elif(int(temp)<50 or int(temp)>175):
-                    messagebox.showinfo("Error","Out of range")
+                    messagebox.showinfo("Error","Please ensure your lower rate limit is lower than your upper rate limit")
                     pass
                 else:
                     if messagebox.askyesno("Confirmation", "Replace current value?"):
@@ -696,12 +683,9 @@ class MainWindow:
             temp = self.vooAtrialAmplitudeEntry.get()
             #Try/access to sanitize user input and ask for confirmation if there are no errors
             try:
-                float(temp)
-                if (temp == '' or float(temp)<0):
+                int(temp)
+                if (temp == '' or int(temp)<0):
                     messagebox.showinfo("Error","Please enter a valid value")
-                    pass
-                elif(float(temp)<0 or float(temp)>7):
-                    messagebox.showinfo("Error","Out of range")
                     pass
                 else:
                     if messagebox.askyesno("Confirmation", "Replace current value?"):
@@ -717,12 +701,9 @@ class MainWindow:
             temp = self.vooAtrialPulseWidthEntry.get()
             #Try/access to sanitize user input and ask for confirmation if there are no errors
             try:
-                float(temp)
-                if (temp == '' or float(temp)<0):
+                int(temp)
+                if (temp == '' or int(temp)<0):
                     messagebox.showinfo("Error","Please enter a valid value")
-                    pass
-                elif(float(temp)<0.05 or float(temp)>1.9):
-                    messagebox.showinfo("Error","Out of range")
                     pass
                 else:
                     if messagebox.askyesno("Confirmation", "Replace current value?"):
@@ -747,9 +728,6 @@ class MainWindow:
                 elif(int(self.aaiLowerRateLimitEntry.get()) >= int(aai_upperRateLimitEntry) and int(aai_upperRateLimitEntry) != 0 ):
                     messagebox.showinfo("Error","Please ensure your lower rate limit is lower than your upper rate limit")
                     pass
-                elif(int(temp)<30 or int(temp)>175):
-                    messagebox.showinfo("Error","Out of range")
-                    pass
                 else:
                     if messagebox.askyesno("Confirmation", "Replace current value?"):
                         messagebox.showinfo("Done", "Success")
@@ -770,10 +748,7 @@ class MainWindow:
                     pass
                 #Ensure upper limit is larger than lower limit
                 elif(int(aai_lowerRateLimitEntry) >= int(self.aaiUpperRateLimitEntry.get()) and int(aai_lowerRateLimitEntry) != 0 ):
-                    messagebox.showinfo("Error","Please ensure your upper rate limit is higher than your lower rate limit")
-                    pass
-                elif(int(temp)<50 or int(temp)>175):
-                    messagebox.showinfo("Error","Out of range")
+                    messagebox.showinfo("Error","Please ensure your lower rate limit is lower than your upper rate limit")
                     pass
                 else:
                     if messagebox.askyesno("Confirmation", "Replace current value?"):
@@ -789,12 +764,9 @@ class MainWindow:
             temp = self.aaiAtrialAmplitudeEntry .get()
             #Try/access to sanitize user input and ask for confirmation if there are no errors
             try:
-                float(temp)
-                if (temp == '' or float(temp)<0):
+                int(temp)
+                if (temp == '' or int(temp)<0):
                     messagebox.showinfo("Error","Please enter a valid value")
-                    pass
-                elif(float(temp)<0 or float(temp)>7):
-                    messagebox.showinfo("Error","Out of range")
                     pass
                 else:
                     if messagebox.askyesno("Confirmation", "Replace current value?"):
@@ -810,12 +782,9 @@ class MainWindow:
             temp = self.aaiAtrialPulseWidthEntry.get()
             #Try/access to sanitize user input and ask for confirmation if there are no errors
             try:
-                float(temp)
-                if (temp == '' or float(temp)<0):
+                int(temp)
+                if (temp == '' or int(temp)<0):
                     messagebox.showinfo("Error","Please enter a valid value")
-                    pass
-                elif(float(temp)<0.05 or float(temp)>1.9):
-                    messagebox.showinfo("Error","Out of range")
                     pass
                 else:
                     if messagebox.askyesno("Confirmation", "Replace current value?"):
@@ -831,8 +800,8 @@ class MainWindow:
             temp = self.aaiAtrialSensitivityEntry.get()
             #Try/access to sanitize user input and ask for confirmation if there are no errors
             try:
-                float(temp)
-                if (temp == '' or float(temp)<0):
+                int(temp)
+                if (temp == '' or int(temp)<0):
                     messagebox.showinfo("Error","Please enter a valid value")
                     pass
                 else:
@@ -930,9 +899,6 @@ class MainWindow:
                 elif(int(self.vviLowerRateLimitEntry.get()) >= int(vvi_upperRateLimitEntry) and int(vvi_upperRateLimitEntry) != 0 ):
                     messagebox.showinfo("Error","Please ensure your lower rate limit is lower than your upper rate limit")
                     pass
-                elif(int(temp)<30 or int(temp)>175):
-                    messagebox.showinfo("Error","Out of range")
-                    pass
                 else:
                     if messagebox.askyesno("Confirmation", "Replace current value?"):
                         messagebox.showinfo("Done", "Success")
@@ -953,10 +919,7 @@ class MainWindow:
                     pass
                 #Ensure upper limit is larger than lower limit
                 elif(int(vvi_lowerRateLimitEntry) >= int(self.vviUpperRateLimitEntry.get()) and int(vvi_lowerRateLimitEntry) != 0 ):
-                    messagebox.showinfo("Error","Please ensure your upper rate limit is higher than your lower rate limit")
-                    pass
-                elif(int(temp)<50 or int(temp)>175):
-                    messagebox.showinfo("Error","Out of range")
+                    messagebox.showinfo("Error","Please ensure your lower rate limit is lower than your upper rate limit")
                     pass
                 else:
                     if messagebox.askyesno("Confirmation", "Replace current value?"):
@@ -972,12 +935,9 @@ class MainWindow:
             temp = self.vviAtrialAmplitudeEntry.get() 
             #Try/access to sanitize user input and ask for confirmation if there are no errors
             try:
-                float(temp)
-                if (temp == '' or float(temp)<0):
+                int(temp)
+                if (temp == '' or int(temp)<0):
                     messagebox.showinfo("Error","Please enter a valid value")
-                    pass
-                elif(float(temp)<0 or float(temp)>7):
-                    messagebox.showinfo("Error","Out of range")
                     pass
                 else:
                     if messagebox.askyesno("Confirmation", "Replace current value?"):
@@ -993,12 +953,9 @@ class MainWindow:
             temp = self.vviAtrialPulseWidthEntry.get() 
             #Try/access to sanitize user input and ask for confirmation if there are no errors
             try:
-                float(temp)
-                if (temp == '' or float(temp)<0):
+                int(temp)
+                if (temp == '' or int(temp)<0):
                     messagebox.showinfo("Error","Please enter a valid value")
-                    pass
-                elif(float(temp)<0.05 or float(temp)>1.9):
-                    messagebox.showinfo("Error","Out of range")
                     pass
                 else:
                     if messagebox.askyesno("Confirmation", "Replace current value?"):
@@ -1122,67 +1079,83 @@ def writeUsers():
             pickle.dump(login_dict,file)
 
 #Access pickle file to read values from each user
-def readValues():
+def readValues(user):
     global user0, user1, user2, user3, user4, user5, user6, user7, user8, user9
     userList = [user0, user1, user2, user3, user4, user5, user6, user7, user8, user9]
     try:
         for i in range(10):
-            with open('user' + str(i) + '.pickle', 'rb') as file:
-                userList[i] = pickle.load(file)
-                print(userList[i])
+            if(user == i):
+                with open('user' + str(i) + '.pickle', 'rb') as file:
+                    userList[i] = pickle.load(file)
+                    print(userList[i])
     except(FileNotFoundError):
         for i in range(10):
-            with open('DCM/user' + str(i) + '.pickle', 'rb') as file:
-                userList[i] = pickle.load(file)
-                print(userList[i])
+            if(user == i):
+                with open('DCM/user' + str(i) + '.pickle', 'rb') as file:
+                    userList[i] = pickle.load(file)
+                    print(userList[i])
 
 
 #Write new user values to pickle file
-def writeValues():
+def writeValues(user):
     global user0, user1, user2, user3, user4, user5, user6, user7, user8, user9
     userList = [user0, user1, user2, user3, user4, user5, user6, user7, user8, user9]
     try:
         for i in range(10):
-            with open('user' + str(i) + '.pickle', 'wb') as file:
-                pickle.dump(userList[i], file)
+            if(user == i):
+                with open('user' + str(i) + '.pickle', 'wb') as file:
+                    pickle.dump(userList[i], file)
     except(FileNotFoundError):
         for i in range(10):
-            with open('DCM/user' + str(i) + '.pickle', 'wb') as file:
-                pickle.dump(userList[i], file)
+            if(user == i):
+                with open('DCM/user' + str(i) + '.pickle', 'wb') as file:
+                    pickle.dump(userList[i], file)
+
+
+def loadVariables():
+    global variableList
+    global variableStringList
+    for i in range(10):
+        for key in variableList:
+            name = 'user'+ str(i)
+            variableList = name[key]
+        
+
 
 #Write Variables to dictionary
-user0 = {
-    'aoo_lowerRateLimitEntry' : '0',
-    'aoo_upperRateLimitEntry' : '0',
-    'aoo_atrialAmplitudeEntry' : '0',
-    'aoo_atrialPulseWidthEntry' : '0',
-    'voo_lowerRateLimitEntry' : '0',
-    'voo_upperRateLimitEntry' : '0',
-    'voo_atrialAmplitudeEntry' : '0',
-    'voo_atrialPulseWidthEntry' : '0',
-    'aai_lowerRateLimitEntry' : '0',
-    'aai_upperRateLimitEntry' : '0',
-    'aai_atrialAmplitudeEntry' : '0',
-    'aai_atrialPulseWidthEntry' : '0',
-    'aai_atrialSensitivityEntry' : '0',
-    'aai_ARPEntry,aai_APVARPEntry' : '0',
-    'aai_hysteresisEntry' : '0',
-    'aai_rateSmoothingEntry' : '0',
-    'vvi_lowerRateLimitEntry' : '0',
-    'vvi_upperRateLimitEntry' : '0',
-    'vvi_atrialAmplitudeEntry' : '0',
-    'vvi_atrialPulseWidthEntry' : '0',
-    'vvi_atrialSensitivityEntry' : '0',
-    'vvi_ARPEntry' : '0',
-    'vvi_hysteresisEntry' :  '0',
-    'vvi_rateSmoothingEntry'  :  '0'
-}
+# user9 = {
+#     'aoo_lowerRateLimitEntry' : '60',
+#     'aoo_upperRateLimitEntry' : '120',
+#     'aoo_atrialAmplitudeEntry' : '3.5',
+#     'aoo_atrialPulseWidthEntry' : '5',
+#     'voo_lowerRateLimitEntry' : '60',
+#     'voo_upperRateLimitEntry' : '120',
+#     'voo_atrialAmplitudeEntry' : '3.5',
+#     'voo_atrialPulseWidthEntry' : '5',
+#     'aai_lowerRateLimitEntry' : '60',
+#     'aai_upperRateLimitEntry' : '120',
+#     'aai_atrialAmplitudeEntry' : '3.5',
+#     'aai_atrialPulseWidthEntry' : '5',
+#     'aai_atrialSensitivityEntry' : '3.3',
+#     'aai_ARPEntry' : '250',
+#     'aai_APVARPEntry' : '200',
+#     'aai_hysteresisEntry' : '0',
+#     'aai_rateSmoothingEntry' : '0',
+#     'vvi_lowerRateLimitEntry' : '60',
+#     'vvi_upperRateLimitEntry' : '120',
+#     'vvi_atrialAmplitudeEntry' : '3.5',
+#     'vvi_atrialPulseWidthEntry' : '5',
+#     'vvi_atrialSensitivityEntry' : '3.3',
+#     'vvi_ARPEntry' : '250',
+#     'vvi_hysteresisEntry' :  '0',
+#     'vvi_rateSmoothingEntry'  :  '0'
+# }
 
-writeValues()
-readValues()
+
 
 #Main function that runs everything
 def main():
+    loadVariables()
     try:
         readUsers()
     except (EOFError):
