@@ -382,9 +382,10 @@ class LoginFrame:
         password = self.entry_password.get()
         self.entry_username.delete(0, 'end')
         self.entry_password.delete(0, 'end')
-
-        usercounter = 0
+        usercounter = -1
         for key in login_dict:
+            usercounter += 1
+            print(usercounter)
             if key == username and password == login_dict[key]:
                 self.login_successful = True
                 global user
@@ -393,7 +394,6 @@ class LoginFrame:
                     readValues(user)
                 except(FileNotFoundError):
                     pass
-                usercounter += 1
                 self.master.withdraw()
                 self.new_window(MainWindow)
                 break
@@ -1858,7 +1858,7 @@ class MainWindow:
     def logOff(self):
         if messagebox.askyesno("LogOff", "Do you want to log off?"):
             self.master.destroy()
-            main()  
+            exit()
 
     #Method to exit application
     def on_exit(self):
@@ -1932,35 +1932,38 @@ def readValues(user):
 def writeValues(user):
     global user0, user1, user2, user3, user4, user5, user6, user7, user8, user9
     
-    with open('user0.pickle', 'wb') as file:
-        pickle.dump(user0, file)
-    
-    with open('user1.pickle', 'wb') as file:
-        pickle.dump(user1, file)
-
-    with open('user2.pickle', 'wb') as file:
-        pickle.dump(user2, file)
-    
-    with open('user3.pickle', 'wb') as file:
-        pickle.dump(user3, file)
-
-    with open('user4.pickle', 'wb') as file:
-        pickle.dump(user4, file)
-
-    with open('user5.pickle', 'wb') as file:
-        pickle.dump(user5, file)
-
-    with open('user6.pickle', 'wb') as file:
-        pickle.dump(user6, file)
-
-    with open('user7.pickle', 'wb') as file:
-        pickle.dump(user7, file)
-
-    with open('user8.pickle', 'wb') as file:
-        pickle.dump(user8, file)
-
-    with open('user9.pickle', 'wb') as file:
-        pickle.dump(user9, file)
+    if(user == 0):
+        with open('user0.pickle', 'wb') as file:
+            pickle.dump(user0, file)
+    elif(user == 1):
+        with open('user1.pickle', 'wb') as file:
+            pickle.dump(user1, file)
+    elif(user == 2):
+        with open('user2.pickle', 'wb') as file:
+            pickle.dump(user2, file)
+    elif(user == 3):
+        with open('user3.pickle', 'wb') as file:
+            pickle.dump(user3, file)
+    elif(user == 4):
+        with open('user4.pickle', 'wb') as file:
+            pickle.dump(user4, file)
+    elif(user == 5):
+        with open('user5.pickle', 'wb') as file:
+            pickle.dump(user5, file)
+    elif(user == 6):
+        with open('user6.pickle', 'wb') as file:
+            pickle.dump(user6, file)
+    elif(user == 7):
+        with open('user7.pickle', 'wb') as file:
+            pickle.dump(user7, file)
+    elif(user == 8):
+        with open('user8.pickle', 'wb') as file:
+            pickle.dump(user8, file)
+    elif(user == 9):
+        with open('user9.pickle', 'wb') as file:
+            pickle.dump(user9, file)
+    else:
+        pass
         
 
 def loadVariables():
@@ -1996,20 +1999,6 @@ def loadVariables():
     vvi_ARPEntry = variableList[22]
     vvi_hysteresisEntry = variableList[23]
     vvi_rateSmoothingEntry = variableList[24]
-
-
-#Write Variables to dictionary
-
-writeValues(0)
-writeValues(1)
-writeValues(2)
-writeValues(3)
-writeValues(4)
-writeValues(5)
-writeValues(6)
-writeValues(7)
-writeValues(8)
-writeValues(9)
 
 
 #Main function that runs everything
