@@ -1086,15 +1086,13 @@ def writeValues():
     userList = [user0, user1, user2, user3, user4, user5, user6, user7, user8, user9]
     try:
         for i in range(10):
-            with open('user' + i + '.pickle', 'wb') as file:
+            with open('user' + str(i) + '.pickle', 'wb') as file:
                 pickle.dump(userList[i], file)
     except(FileNotFoundError):
         for i in range(10):
-            with open('DCM/user' + i + '.pickle', 'wb') as file:
+            with open('DCM/user' + str(i) + '.pickle', 'wb') as file:
                 pickle.dump(userList[i], file)
         
-
-
 
 #Main function that runs everything
 def main():
