@@ -1087,7 +1087,7 @@ def readValues(user):
             if(user == i):
                 with open('user' + str(i) + '.pickle', 'rb') as file:
                     userList[i] = pickle.load(file)
-                    print(userList[i])
+                    #print(userList[i])
     except(FileNotFoundError):
         for i in range(10):
             if(user == i):
@@ -1116,9 +1116,12 @@ def loadVariables():
     global variableList
     global variableStringList
     for i in range(10):
-        for key in variableList:
-            name = 'user'+ str(i)
-            variableList = name[key]
+        count = 0
+        #for key in variableStringList:
+            #count += 1 
+            #variableList[count] = user0[key]
+            #print('hi')
+
         
 
 
@@ -1153,11 +1156,16 @@ def loadVariables():
 
 
 
+
+
 #Main function that runs everything
 def main():
+    for user in range(10):
+        readValues(user)
+        print(user0)
     loadVariables()
     try:
-        readUsers()
+       readUsers()
     except (EOFError):
         pass
     #Run Tkinter
