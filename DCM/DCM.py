@@ -2,6 +2,7 @@
 import tkinter as tk
 from tkinter import ttk
 from tkinter import messagebox
+from tkinter import *
 import pickle
 
 #Creating empty dictionaries to later load users and values into
@@ -266,10 +267,16 @@ class MainWindow:
         self.aooAtrialPulseWidthValue = tk.Label(self.aoo, text = "Current Value: " + aoo_atrialPulseWidthEntry)
     
         #Setup entry field
-        self.aooLowerRateLimitEntry = tk.Entry(self.aoo)
-        self.aooUpperRateLimitEntry = tk.Entry(self.aoo)
-        self.aooAtrialAmplitudeEntry = tk.Entry(self.aoo)
-        self.aooAtrialPulseWidthEntry = tk.Entry(self.aoo)
+        #self.aooLowerRateLimitEntry = tk.Entry(self.aoo)
+        #self.aooUpperRateLimitEntry = tk.Entry(self.aoo)
+        #self.aooAtrialAmplitudeEntry = tk.Entry(self.aoo)
+        #self.aooAtrialPulseWidthEntry = tk.Entry(self.aoo)
+
+        #Spinbox
+        self.aooLowerRateLimitEntry = tk.Spinbox(self.aoo,from_=30,to=50,increment=5)
+        self.aooUpperRateLimitEntry = tk.Spinbox(self.aoo,from_=50,to=175)
+        self.aooAtrialAmplitudeEntry = tk.Spinbox(self.aoo,from_=0.5,to=7.0,format="%.1f",increment=0.1)
+        self.aooAtrialPulseWidthEntry = tk.Spinbox(self.aoo,from_=0.1,to=1.9,format="%.1f",increment=0.1)
 
         #Adjust positioning
         self.aooLowerRateLimitLabel.grid(row=0, column=0, padx=15, pady=15)
@@ -555,6 +562,9 @@ class MainWindow:
                 elif(int(self.aooLowerRateLimitEntry.get()) >= int(aoo_upperRateLimitEntry) and int(aoo_upperRateLimitEntry) != 0 ):
                     messagebox.showinfo("Error","Please ensure your lower rate limit is lower than your upper rate limit")
                     pass
+                elif(int(temp)<30 or int(temp)>175):
+                    messagebox.showinfo("Error","Out of range")
+                    pass
                 else:
                     if messagebox.askyesno("Confirmation", "Replace current value?"):
                         messagebox.showinfo("Done", "Success")
@@ -575,7 +585,10 @@ class MainWindow:
                     pass
                 #Ensure upper limit is larger than lower limit
                 elif(int(aoo_lowerRateLimitEntry) >= int(self.aooUpperRateLimitEntry.get()) and int(aoo_lowerRateLimitEntry) != 0 ):
-                    messagebox.showinfo("Error","Please ensure your lower rate limit is lower than your upper rate limit")
+                    messagebox.showinfo("Error","Please ensure your upper rate limit is higher than your lower rate limit")
+                    pass
+                elif(int(temp)<50 or int(temp)>175):
+                    messagebox.showinfo("Error","Out of range")
                     pass
                 else:
                     if messagebox.askyesno("Confirmation", "Replace current value?"):
@@ -636,6 +649,9 @@ class MainWindow:
                 elif(int(self.vooLowerRateLimitEntry.get()) >= int(voo_upperRateLimitEntry) and int(voo_upperRateLimitEntry) != 0 ):
                     messagebox.showinfo("Error","Please ensure your lower rate limit is lower than your upper rate limit")
                     pass
+                elif(int(temp)<30 or int(temp)>175):
+                    messagebox.showinfo("Error","Out of range")
+                    pass
                 else:
                     if messagebox.askyesno("Confirmation", "Replace current value?"):
                         messagebox.showinfo("Done", "Success")
@@ -656,7 +672,10 @@ class MainWindow:
                     pass
                 #Ensure upper limit is larger than lower limit
                 elif(int(voo_lowerRateLimitEntry) >= int(self.vooUpperRateLimitEntry.get()) and int(voo_lowerRateLimitEntry) != 0 ):
-                    messagebox.showinfo("Error","Please ensure your lower rate limit is lower than your upper rate limit")
+                    messagebox.showinfo("Error","Please ensure your upper rate limit is higher than your lower rate limit")
+                    pass
+                elif(int(temp)<50 or int(temp)>175):
+                    messagebox.showinfo("Error","Out of range")
                     pass
                 else:
                     if messagebox.askyesno("Confirmation", "Replace current value?"):
@@ -717,6 +736,9 @@ class MainWindow:
                 elif(int(self.aaiLowerRateLimitEntry.get()) >= int(aai_upperRateLimitEntry) and int(aai_upperRateLimitEntry) != 0 ):
                     messagebox.showinfo("Error","Please ensure your lower rate limit is lower than your upper rate limit")
                     pass
+                elif(int(temp)<30 or int(temp)>175):
+                    messagebox.showinfo("Error","Out of range")
+                    pass
                 else:
                     if messagebox.askyesno("Confirmation", "Replace current value?"):
                         messagebox.showinfo("Done", "Success")
@@ -737,7 +759,10 @@ class MainWindow:
                     pass
                 #Ensure upper limit is larger than lower limit
                 elif(int(aai_lowerRateLimitEntry) >= int(self.aaiUpperRateLimitEntry.get()) and int(aai_lowerRateLimitEntry) != 0 ):
-                    messagebox.showinfo("Error","Please ensure your lower rate limit is lower than your upper rate limit")
+                    messagebox.showinfo("Error","Please ensure your upper rate limit is higher than your lower rate limit")
+                    pass
+                elif(int(temp)<50 or int(temp)>175):
+                    messagebox.showinfo("Error","Out of range")
                     pass
                 else:
                     if messagebox.askyesno("Confirmation", "Replace current value?"):
@@ -888,6 +913,9 @@ class MainWindow:
                 elif(int(self.vviLowerRateLimitEntry.get()) >= int(vvi_upperRateLimitEntry) and int(vvi_upperRateLimitEntry) != 0 ):
                     messagebox.showinfo("Error","Please ensure your lower rate limit is lower than your upper rate limit")
                     pass
+                elif(int(temp)<30 or int(temp)>175):
+                    messagebox.showinfo("Error","Out of range")
+                    pass
                 else:
                     if messagebox.askyesno("Confirmation", "Replace current value?"):
                         messagebox.showinfo("Done", "Success")
@@ -908,7 +936,10 @@ class MainWindow:
                     pass
                 #Ensure upper limit is larger than lower limit
                 elif(int(vvi_lowerRateLimitEntry) >= int(self.vviUpperRateLimitEntry.get()) and int(vvi_lowerRateLimitEntry) != 0 ):
-                    messagebox.showinfo("Error","Please ensure your lower rate limit is lower than your upper rate limit")
+                    messagebox.showinfo("Error","Please ensure your upper rate limit is higher than your lower rate limit")
+                    pass
+                elif(int(temp)<50 or int(temp)>175):
+                    messagebox.showinfo("Error","Out of range")
                     pass
                 else:
                     if messagebox.askyesno("Confirmation", "Replace current value?"):
