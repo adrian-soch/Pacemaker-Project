@@ -625,25 +625,25 @@ class MainWindow:
                         aoo_upperRateLimitEntry = temp
                         self.aooUpperRateLimitValue.config(text="Current Value: " + aoo_upperRateLimitEntry)
                         if(user == 0):
-                            user0[aoo_upperRateLimitEntry] = temp
+                            user0['aoo_upperRateLimitEntry'] = str(temp)
                         elif(user == 1):
-                            user1[aoo_upperRateLimitEntry] = temp
+                            user1['aoo_upperRateLimitEntry'] = str(temp)
                         elif(user == 2):
-                            user1[aoo_upperRateLimitEntry] = temp
+                            user1['aoo_upperRateLimitEntry'] = str(temp)
                         elif(user == 3):
-                            user1[aoo_upperRateLimitEntry] = temp
+                            user1['aoo_upperRateLimitEntry'] = str(temp)
                         elif(user == 4):
-                            user1[aoo_upperRateLimitEntry] = temp
+                            user1['aoo_upperRateLimitEntry'] = str(temp)
                         elif(user == 5):
-                            user1[aoo_upperRateLimitEntry] = temp
+                            user1['aoo_upperRateLimitEntry'] = str(temp)
                         elif(user == 6):
-                            user1[aoo_upperRateLimitEntry] = temp
+                            user1['aoo_upperRateLimitEntry'] = str(temp)
                         elif(user == 7):
-                            user1[aoo_upperRateLimitEntry] = temp
+                            user1['aoo_upperRateLimitEntry'] = str(temp)
                         elif(user == 8):
-                            user1[aoo_upperRateLimitEntry] = temp
+                            user1['aoo_upperRateLimitEntry'] = str(temp)
                         elif(user == 9):
-                            user1[aoo_upperRateLimitEntry] = temp
+                            user1['aoo_upperRateLimitEntry'] = str(temp)
                         else:
                             pass
             except:
@@ -664,6 +664,28 @@ class MainWindow:
                         messagebox.showinfo("Done", "Success")
                         aoo_atrialAmplitudeEntry = temp
                         self.aooAtrialAmplitudeValue.config(text="Current Value: " + aoo_atrialAmplitudeEntry)
+                        if(user == 0):
+                            user0['aoo_atrialAmplitudeEntry'] = str(temp)
+                        elif(user == 1):
+                            user1['aoo_atrialAmplitudeEntry'] = str(temp)
+                        elif(user == 2):
+                            user1['aoo_atrialAmplitudeEntry'] = str(temp)
+                        elif(user == 3):
+                            user1['aoo_atrialAmplitudeEntry'] = str(temp)
+                        elif(user == 4):
+                            user1['aoo_atrialAmplitudeEntry'] = str(temp)
+                        elif(user == 5):
+                            user1['aoo_atrialAmplitudeEntry'] = str(temp)
+                        elif(user == 6):
+                            user1['aoo_atrialAmplitudeEntry'] = str(temp)
+                        elif(user == 7):
+                            user1['aoo_atrialAmplitudeEntry'] = str(temp)
+                        elif(user == 8):
+                            user1['aoo_atrialAmplitudeEntry'] = str(temp)
+                        elif(user == 9):
+                            user1['aoo_atrialAmplitudeEntry'] = str(temp)
+                        else:
+                            pass
             except:
                 messagebox.showinfo("Error","Please enter a valid value")
                 pass
@@ -682,6 +704,28 @@ class MainWindow:
                         messagebox.showinfo("Done", "Success")
                         aoo_atrialPulseWidthEntry = temp
                         self.aooAtrialPulseWidthValue.config(text="Current Value: " + aoo_atrialPulseWidthEntry)
+                        if(user == 0):
+                            user0['aoo_atrialPulseWidthEntry'] = str(temp)
+                        elif(user == 1):
+                            user1['aoo_atrialPulseWidthEntry'] = str(temp)
+                        elif(user == 2):
+                            user1['aoo_atrialPulseWidthEntry'] = str(temp)
+                        elif(user == 3):
+                            user1['aoo_atrialPulseWidthEntry'] = str(temp)
+                        elif(user == 4):
+                            user1['aoo_atrialPulseWidthEntry'] = str(temp)
+                        elif(user == 5):
+                            user1['aoo_atrialPulseWidthEntry'] = str(temp)
+                        elif(user == 6):
+                            user1['aoo_atrialPulseWidthEntry'] = str(temp)
+                        elif(user == 7):
+                            user1['aoo_atrialPulseWidthEntry'] = str(temp)
+                        elif(user == 8):
+                            user1['aoo_atrialPulseWidthEntry'] = str(temp)
+                        elif(user == 9):
+                            user1['aoo_atrialPulseWidthEntry'] = str(temp)
+                        else:
+                            pass
             except:
                 messagebox.showinfo("Error","Please enter a valid value")
                 pass
@@ -705,6 +749,29 @@ class MainWindow:
                         messagebox.showinfo("Done", "Success")
                         voo_lowerRateLimitEntry = temp
                         self.vooLowerRateLimitValue.config(text="Current Value: " + voo_lowerRateLimitEntry)
+                        if(user == 0):
+                            user0['voo_lowerRateLimitEntry'] = str(temp)
+                        elif(user == 1):
+                            user1['voo_lowerRateLimitEntry'] = str(temp)
+                        elif(user == 2):
+                            user1['voo_lowerRateLimitEntry'] = str(temp)
+                        elif(user == 3):
+                            user1['voo_lowerRateLimitEntry'] = str(temp)
+                        elif(user == 4):
+                            user1['voo_lowerRateLimitEntry'] = str(temp)
+                        elif(user == 5):
+                            user1['voo_lowerRateLimitEntry'] = str(temp)
+                        elif(user == 6):
+                            user1['voo_lowerRateLimitEntry'] = str(temp)
+                        elif(user == 7):
+                            user1['voo_lowerRateLimitEntry'] = str(temp)
+                        elif(user == 8):
+                            user1['voo_lowerRateLimitEntry'] = str(temp)
+                        elif(user == 9):
+                            user1['voo_lowerRateLimitEntry'] = str(temp)
+                        else:
+                            pass
+                        
             except:
                 messagebox.showinfo("Error","Please enter a valid value")
                 pass
@@ -727,6 +794,28 @@ class MainWindow:
                         messagebox.showinfo("Done", "Success")
                         voo_upperRateLimitEntry = temp
                         self.vooUpperRateLimitValue.config(text="Current Value: " + voo_upperRateLimitEntry)
+                        if(user == 0):
+                            user0['voo_upperRateLimitEntry'] = str(temp)
+                        elif(user == 1):
+                            user1['voo_upperRateLimitEntry'] = str(temp)
+                        elif(user == 2):
+                            user1['voo_upperRateLimitEntry'] = str(temp)
+                        elif(user == 3):
+                            user1['voo_upperRateLimitEntry'] = str(temp)
+                        elif(user == 4):
+                            user1['voo_upperRateLimitEntry'] = str(temp)
+                        elif(user == 5):
+                            user1['voo_upperRateLimitEntry'] = str(temp)
+                        elif(user == 6):
+                            user1['voo_upperRateLimitEntry'] = str(temp)
+                        elif(user == 7):
+                            user1['voo_upperRateLimitEntry'] = str(temp)
+                        elif(user == 8):
+                            user1['voo_upperRateLimitEntry'] = str(temp)
+                        elif(user == 9):
+                            user1['voo_upperRateLimitEntry'] = str(temp)
+                        else:
+                            pass
             except:
                 messagebox.showinfo("Error","Please enter a valid value")
                 pass
@@ -745,6 +834,28 @@ class MainWindow:
                         messagebox.showinfo("Done", "Success")
                         voo_atrialAmplitudeEntry = temp
                         self.vooAtrialAmplitudeValue.config(text="Current Value: " + voo_atrialAmplitudeEntry)
+                                                if(user == 0):
+                            user0['voo_atrialAmplitudeEntry'] = str(temp)
+                        elif(user == 1):
+                            user1['voo_atrialAmplitudeEntry'] = str(temp)
+                        elif(user == 2):
+                            user1['voo_atrialAmplitudeEntry'] = str(temp)
+                        elif(user == 3):
+                            user1['voo_atrialAmplitudeEntry'] = str(temp)
+                        elif(user == 4):
+                            user1['voo_atrialAmplitudeEntry'] = str(temp)
+                        elif(user == 5):
+                            user1['voo_atrialAmplitudeEntry'] = str(temp)
+                        elif(user == 6):
+                            user1['voo_atrialAmplitudeEntry'] = str(temp)
+                        elif(user == 7):
+                            user1['voo_atrialAmplitudeEntry'] = str(temp)
+                        elif(user == 8):
+                            user1['voo_atrialAmplitudeEntry'] = str(temp)
+                        elif(user == 9):
+                            user1['voo_atrialAmplitudeEntry'] = str(temp)
+                        else:
+                            pass
             except:
                 messagebox.showinfo("Error","Please enter a valid value")
                 pass
@@ -763,6 +874,27 @@ class MainWindow:
                         messagebox.showinfo("Done", "Success")
                         voo_atrialPulseWidthEntry = temp
                         self.vooAtrialPulseWidthValue.config(text="Current Value: " + voo_atrialPulseWidthEntry)
+                            user0['voo_atrialPulseWidthEntry'] = str(temp)
+                        elif(user == 1):
+                            user1['voo_atrialPulseWidthEntry'] = str(temp)
+                        elif(user == 2):
+                            user1['voo_atrialPulseWidthEntry'] = str(temp)
+                        elif(user == 3):
+                            user1['voo_atrialPulseWidthEntry'] = str(temp)
+                        elif(user == 4):
+                            user1['voo_atrialPulseWidthEntry'] = str(temp)
+                        elif(user == 5):
+                            user1['voo_atrialPulseWidthEntry'] = str(temp)
+                        elif(user == 6):
+                            user1['voo_atrialPulseWidthEntry'] = str(temp)
+                        elif(user == 7):
+                            user1['voo_atrialPulseWidthEntry'] = str(temp)
+                        elif(user == 8):
+                            user1['voo_atrialPulseWidthEntry'] = str(temp)
+                        elif(user == 9):
+                            user1['voo_atrialPulseWidthEntry'] = str(temp)
+                        else:
+                            pass
             except:
                 messagebox.showinfo("Error","Please enter a valid value")
                 pass
@@ -786,6 +918,27 @@ class MainWindow:
                         messagebox.showinfo("Done", "Success")
                         aai_lowerRateLimitEntry = temp
                         self.aaiLowerRateLimitValue.config(text="Current Value: " + aai_lowerRateLimitEntry)
+                            user0['aai_lowerRateLimitEntry'] = str(temp)
+                        elif(user == 1):
+                            user1['aai_lowerRateLimitEntry'] = str(temp)
+                        elif(user == 2):
+                            user1['aai_lowerRateLimitEntry'] = str(temp)
+                        elif(user == 3):
+                            user1['aai_lowerRateLimitEntry'] = str(temp)
+                        elif(user == 4):
+                            user1['aai_lowerRateLimitEntry'] = str(temp)
+                        elif(user == 5):
+                            user1['aai_lowerRateLimitEntry'] = str(temp)
+                        elif(user == 6):
+                            user1['aai_lowerRateLimitEntry'] = str(temp)
+                        elif(user == 7):
+                            user1['aai_lowerRateLimitEntry'] = str(temp)
+                        elif(user == 8):
+                            user1['aai_lowerRateLimitEntry'] = str(temp)
+                        elif(user == 9):
+                            user1['aai_lowerRateLimitEntry'] = str(temp)
+                        else:
+                            pass
             except:
                 messagebox.showinfo("Error","Please enter a valid value")
                 pass
@@ -808,6 +961,27 @@ class MainWindow:
                         messagebox.showinfo("Done", "Success")
                         aai_upperRateLimitEntry = temp
                         self.aaiUpperRateLimitValue.config(text="Current Value: " + aai_upperRateLimitEntry)
+                            user0['aai_upperRateLimitEntry'] = str(temp)
+                        elif(user == 1):
+                            user1['aai_upperRateLimitEntry'] = str(temp)
+                        elif(user == 2):
+                            user1['aai_upperRateLimitEntry'] = str(temp)
+                        elif(user == 3):
+                            user1['aai_upperRateLimitEntry'] = str(temp)
+                        elif(user == 4):
+                            user1['aai_upperRateLimitEntry'] = str(temp)
+                        elif(user == 5):
+                            user1['aai_upperRateLimitEntry'] = str(temp)
+                        elif(user == 6):
+                            user1['aai_upperRateLimitEntry'] = str(temp)
+                        elif(user == 7):
+                            user1['aai_upperRateLimitEntry'] = str(temp)
+                        elif(user == 8):
+                            user1['aai_upperRateLimitEntry'] = str(temp)
+                        elif(user == 9):
+                            user1['aai_upperRateLimitEntry'] = str(temp)
+                        else:
+                            pass
             except:
                 messagebox.showinfo("Error","Please enter a valid value")
                 pass
@@ -826,6 +1000,27 @@ class MainWindow:
                         messagebox.showinfo("Done", "Success")
                         aai_atrialAmplitudeEntry  = temp
                         self.aaiAtrialAmplitudeValue.config(text="Current Value: " + aai_atrialAmplitudeEntry)
+                            user0['aai_atrialAmplitudeEntry'] = str(temp)
+                        elif(user == 1):
+                            user1['aai_atrialAmplitudeEntry'] = str(temp)
+                        elif(user == 2):
+                            user1['aai_atrialAmplitudeEntry'] = str(temp)
+                        elif(user == 3):
+                            user1['aai_atrialAmplitudeEntry'] = str(temp)
+                        elif(user == 4):
+                            user1['aai_atrialAmplitudeEntry'] = str(temp)
+                        elif(user == 5):
+                            user1['aai_atrialAmplitudeEntry'] = str(temp)
+                        elif(user == 6):
+                            user1['aai_atrialAmplitudeEntry'] = str(temp)
+                        elif(user == 7):
+                            user1['aai_atrialAmplitudeEntry'] = str(temp)
+                        elif(user == 8):
+                            user1['aai_atrialAmplitudeEntry'] = str(temp)
+                        elif(user == 9):
+                            user1['aai_atrialAmplitudeEntry'] = str(temp)
+                        else:
+                            pass
             except:
                 messagebox.showinfo("Error","Please enter a valid value")
                 pass
@@ -844,6 +1039,28 @@ class MainWindow:
                         messagebox.showinfo("Done", "Success")
                         aai_atrialPulseWidthEntry = temp
                         self.aaiAtrialPulseWidthValue.config(text="Current Value: " + aai_atrialPulseWidthEntry)
+
+                            user0['aai_atrialPulseWidthEntry'] = str(temp)
+                        elif(user == 1):
+                            user1['aai_atrialPulseWidthEntry'] = str(temp)
+                        elif(user == 2):
+                            user1['aai_atrialPulseWidthEntry'] = str(temp)
+                        elif(user == 3):
+                            user1['aai_atrialPulseWidthEntry'] = str(temp)
+                        elif(user == 4):
+                            user1['aai_atrialPulseWidthEntry'] = str(temp)
+                        elif(user == 5):
+                            user1['aai_atrialPulseWidthEntry'] = str(temp)
+                        elif(user == 6):
+                            user1['aai_atrialPulseWidthEntry'] = str(temp)
+                        elif(user == 7):
+                            user1['aai_atrialPulseWidthEntry'] = str(temp)
+                        elif(user == 8):
+                            user1['aai_atrialPulseWidthEntry'] = str(temp)
+                        elif(user == 9):
+                            user1['aai_atrialPulseWidthEntry'] = str(temp)
+                        else:
+                            pass
             except:
                 messagebox.showinfo("Error","Please enter a valid value")
                 pass
@@ -862,6 +1079,28 @@ class MainWindow:
                         messagebox.showinfo("Done", "Success")
                         aai_atrialSensitivityEntry = temp
                         self.aaiAtrialSensitivityValue.config(text="Current Value: " + aai_atrialSensitivityEntry)
+
+                            user0['aai_atrialSensitivityEntry'] = str(temp)
+                        elif(user == 1):
+                            user1['aai_atrialSensitivityEntry'] = str(temp)
+                        elif(user == 2):
+                            user1['aai_atrialSensitivityEntry'] = str(temp)
+                        elif(user == 3):
+                            user1['aai_atrialSensitivityEntry'] = str(temp)
+                        elif(user == 4):
+                            user1['aai_atrialSensitivityEntry'] = str(temp)
+                        elif(user == 5):
+                            user1['aai_atrialSensitivityEntry'] = str(temp)
+                        elif(user == 6):
+                            user1['aai_atrialSensitivityEntry'] = str(temp)
+                        elif(user == 7):
+                            user1['aai_atrialSensitivityEntry'] = str(temp)
+                        elif(user == 8):
+                            user1['aai_atrialSensitivityEntry'] = str(temp)
+                        elif(user == 9):
+                            user1['aai_atrialSensitivityEntry'] = str(temp)
+                        else:
+                            pass
             except:
                 messagebox.showinfo("Error","Please enter a valid value")
                 pass
@@ -880,6 +1119,28 @@ class MainWindow:
                         messagebox.showinfo("Done", "Success")
                         aai_ARPEntry = temp
                         self.aaiARPValue.config(text="Current Value: " + aai_ARPEntry)
+
+                            user0['aai_ARPEntry'] = str(temp)
+                        elif(user == 1):
+                            user1['aai_ARPEntry'] = str(temp)
+                        elif(user == 2):
+                            user1['aai_ARPEntry'] = str(temp)
+                        elif(user == 3):
+                            user1['aai_ARPEntry'] = str(temp)
+                        elif(user == 4):
+                            user1['aai_ARPEntry'] = str(temp)
+                        elif(user == 5):
+                            user1['aai_ARPEntry'] = str(temp)
+                        elif(user == 6):
+                            user1['aai_ARPEntry'] = str(temp)
+                        elif(user == 7):
+                            user1['aai_ARPEntry'] = str(temp)
+                        elif(user == 8):
+                            user1['aai_ARPEntry'] = str(temp)
+                        elif(user == 9):
+                            user1['aai_ARPEntry'] = str(temp)
+                        else:
+                            pass
             except:
                 messagebox.showinfo("Error","Please enter a valid value")
                 pass
@@ -898,6 +1159,28 @@ class MainWindow:
                         messagebox.showinfo("Done", "Success")
                         aai_APVARPEntry = temp
                         self.aaiAPVARPValue.config(text="Current Value: " + aai_APVARPEntry)
+
+                            user0['aai_APVARPEntry'] = str(temp)
+                        elif(user == 1):
+                            user1['aai_APVARPEntry'] = str(temp)
+                        elif(user == 2):
+                            user1['aai_APVARPEntry'] = str(temp)
+                        elif(user == 3):
+                            user1['aai_APVARPEntry'] = str(temp)
+                        elif(user == 4):
+                            user1['aai_APVARPEntry'] = str(temp)
+                        elif(user == 5):
+                            user1['aai_APVARPEntry'] = str(temp)
+                        elif(user == 6):
+                            user1['aai_APVARPEntry'] = str(temp)
+                        elif(user == 7):
+                            user1['aai_APVARPEntry'] = str(temp)
+                        elif(user == 8):
+                            user1['aai_APVARPEntry'] = str(temp)
+                        elif(user == 9):
+                            user1['aai_APVARPEntry'] = str(temp)
+                        else:
+                            pass
             except:
                 messagebox.showinfo("Error","Please enter a valid value")
                 pass
@@ -916,6 +1199,28 @@ class MainWindow:
                         messagebox.showinfo("Done", "Success")
                         aai_hysteresisEntry = temp
                         self.aaiHysteresisValue.config(text="Current Value: " + aai_hysteresisEntry)
+
+                        user0['aai_hysteresisEntry'] = str(temp)
+                        elif(user == 1):
+                            user1['aai_hysteresisEntry'] = str(temp)
+                        elif(user == 2):
+                            user1['aai_hysteresisEntry'] = str(temp)
+                        elif(user == 3):
+                            user1['aai_hysteresisEntry'] = str(temp)
+                        elif(user == 4):
+                            user1['aai_hysteresisEntry'] = str(temp)
+                        elif(user == 5):
+                            user1['aai_hysteresisEntry'] = str(temp)
+                        elif(user == 6):
+                            user1['aai_hysteresisEntry'] = str(temp)
+                        elif(user == 7):
+                            user1['aai_hysteresisEntry'] = str(temp)
+                        elif(user == 8):
+                            user1['aai_hysteresisEntry'] = str(temp)
+                        elif(user == 9):
+                            user1['aai_hysteresisEntry'] = str(temp)
+                        else:
+                            pass
             except:
                 messagebox.showinfo("Error","Please enter a valid value")
                 pass
@@ -934,6 +1239,28 @@ class MainWindow:
                         messagebox.showinfo("Done", "Success")
                         aai_rateSmoothingEntry = temp
                         self.aaiRateSmoothingValue.config(text="Current Value: " + aai_rateSmoothingEntry)
+
+                            user0['aai_rateSmoothingEntry'] = str(temp)
+                        elif(user == 1):
+                            user1['aai_rateSmoothingEntry'] = str(temp)
+                        elif(user == 2):
+                            user1['aai_rateSmoothingEntry'] = str(temp)
+                        elif(user == 3):
+                            user1['aai_rateSmoothingEntry'] = str(temp)
+                        elif(user == 4):
+                            user1['aai_rateSmoothingEntry'] = str(temp)
+                        elif(user == 5):
+                            user1['aai_rateSmoothingEntry'] = str(temp)
+                        elif(user == 6):
+                            user1['aai_rateSmoothingEntry'] = str(temp)
+                        elif(user == 7):
+                            user1['aai_rateSmoothingEntry'] = str(temp)
+                        elif(user == 8):
+                            user1['aai_rateSmoothingEntry'] = str(temp)
+                        elif(user == 9):
+                            user1['aai_rateSmoothingEntry'] = str(temp)
+                        else:
+                            pass
             except:
                 messagebox.showinfo("Error","Please enter a valid value")
                 pass
@@ -957,6 +1284,28 @@ class MainWindow:
                         messagebox.showinfo("Done", "Success")
                         vvi_lowerRateLimitEntry = temp
                         self.vviLowerRateLimitValue.config(text="Current Value: " + vvi_lowerRateLimitEntry)
+
+                            user0['vvi_lowerRateLimitEntry'] = str(temp)
+                        elif(user == 1):
+                            user1['vvi_lowerRateLimitEntry'] = str(temp)
+                        elif(user == 2):
+                            user1['vvi_lowerRateLimitEntry'] = str(temp)
+                        elif(user == 3):
+                            user1['vvi_lowerRateLimitEntry'] = str(temp)
+                        elif(user == 4):
+                            user1['vvi_lowerRateLimitEntry'] = str(temp)
+                        elif(user == 5):
+                            user1['vvi_lowerRateLimitEntry'] = str(temp)
+                        elif(user == 6):
+                            user1['vvi_lowerRateLimitEntry'] = str(temp)
+                        elif(user == 7):
+                            user1['vvi_lowerRateLimitEntry'] = str(temp)
+                        elif(user == 8):
+                            user1['vvi_lowerRateLimitEntry'] = str(temp)
+                        elif(user == 9):
+                            user1['vvi_lowerRateLimitEntry'] = str(temp)
+                        else:
+                            pass
             except:
                 messagebox.showinfo("Error","Please enter a valid value")
                 pass
@@ -979,6 +1328,28 @@ class MainWindow:
                         messagebox.showinfo("Done", "Success")
                         vvi_upperRateLimitEntry = temp
                         self.vviUpperRateLimitValue.config(text="Current Value: " + vvi_upperRateLimitEntry)
+
+                            user0['vvi_upperRateLimitEntry'] = str(temp)
+                        elif(user == 1):
+                            user1['vvi_upperRateLimitEntry'] = str(temp)
+                        elif(user == 2):
+                            user1['vvi_upperRateLimitEntry'] = str(temp)
+                        elif(user == 3):
+                            user1['vvi_upperRateLimitEntry'] = str(temp)
+                        elif(user == 4):
+                            user1['vvi_upperRateLimitEntry'] = str(temp)
+                        elif(user == 5):
+                            user1['vvi_upperRateLimitEntry'] = str(temp)
+                        elif(user == 6):
+                            user1['vvi_upperRateLimitEntry'] = str(temp)
+                        elif(user == 7):
+                            user1['vvi_upperRateLimitEntry'] = str(temp)
+                        elif(user == 8):
+                            user1['vvi_upperRateLimitEntry'] = str(temp)
+                        elif(user == 9):
+                            user1['vvi_upperRateLimitEntry'] = str(temp)
+                        else:
+                            pass
             except:
                 messagebox.showinfo("Error","Please enter a valid value")
                 pass
@@ -997,6 +1368,28 @@ class MainWindow:
                         messagebox.showinfo("Done", "Success")
                         vvi_atrialAmplitudeEntry = temp
                         self.vviAtrialAmplitudeValue.config(text="Current Value: " + vvi_atrialAmplitudeEntry)
+
+                            user0['vvi_atrialAmplitudeEntry'] = str(temp)
+                        elif(user == 1):
+                            user1['vvi_atrialAmplitudeEntry'] = str(temp)
+                        elif(user == 2):
+                            user1['vvi_atrialAmplitudeEntry'] = str(temp)
+                        elif(user == 3):
+                            user1['vvi_atrialAmplitudeEntry'] = str(temp)
+                        elif(user == 4):
+                            user1['vvi_atrialAmplitudeEntry'] = str(temp)
+                        elif(user == 5):
+                            user1['vvi_atrialAmplitudeEntry'] = str(temp)
+                        elif(user == 6):
+                            user1['vvi_atrialAmplitudeEntry'] = str(temp)
+                        elif(user == 7):
+                            user1['vvi_atrialAmplitudeEntry'] = str(temp)
+                        elif(user == 8):
+                            user1['vvi_atrialAmplitudeEntry'] = str(temp)
+                        elif(user == 9):
+                            user1['vvi_atrialAmplitudeEntry'] = str(temp)
+                        else:
+                            pass
             except:
                 messagebox.showinfo("Error","Please enter a valid value")
                 pass
@@ -1015,6 +1408,28 @@ class MainWindow:
                         messagebox.showinfo("Done", "Success")
                         vvi_atrialPulseWidthEntry = temp
                         self.vviAtrialPulseWidthValue.config(text="Current Value: " + vvi_atrialPulseWidthEntry)
+
+                            user0['vvi_atrialPulseWidthEntry'] = str(temp)
+                        elif(user == 1):
+                            user1['vvi_atrialPulseWidthEntry'] = str(temp)
+                        elif(user == 2):
+                            user1['vvi_atrialPulseWidthEntry'] = str(temp)
+                        elif(user == 3):
+                            user1['vvi_atrialPulseWidthEntry'] = str(temp)
+                        elif(user == 4):
+                            user1['vvi_atrialPulseWidthEntry'] = str(temp)
+                        elif(user == 5):
+                            user1['vvi_atrialPulseWidthEntry'] = str(temp)
+                        elif(user == 6):
+                            user1['vvi_atrialPulseWidthEntry'] = str(temp)
+                        elif(user == 7):
+                            user1['vvi_atrialPulseWidthEntry'] = str(temp)
+                        elif(user == 8):
+                            user1['vvi_atrialPulseWidthEntry'] = str(temp)
+                        elif(user == 9):
+                            user1['vvi_atrialPulseWidthEntry'] = str(temp)
+                        else:
+                            pass
             except:
                 messagebox.showinfo("Error","Please enter a valid value")
                 pass
@@ -1033,6 +1448,28 @@ class MainWindow:
                         messagebox.showinfo("Done", "Success")
                         vvi_atrialSensitivityEntry = temp
                         self.vviAtrialSensitivityValue.config(text="Current Value: " + vvi_atrialSensitivityEntry)
+
+                            user0['vvi_atrialSensitivityEntry'] = str(temp)
+                        elif(user == 1):
+                            user1['vvi_atrialSensitivityEntry'] = str(temp)
+                        elif(user == 2):
+                            user1['vvi_atrialSensitivityEntry'] = str(temp)
+                        elif(user == 3):
+                            user1['vvi_atrialSensitivityEntry'] = str(temp)
+                        elif(user == 4):
+                            user1['vvi_atrialSensitivityEntry'] = str(temp)
+                        elif(user == 5):
+                            user1['vvi_atrialSensitivityEntry'] = str(temp)
+                        elif(user == 6):
+                            user1['vvi_atrialSensitivityEntry'] = str(temp)
+                        elif(user == 7):
+                            user1['vvi_atrialSensitivityEntry'] = str(temp)
+                        elif(user == 8):
+                            user1['vvi_atrialSensitivityEntry'] = str(temp)
+                        elif(user == 9):
+                            user1['vvi_atrialSensitivityEntry'] = str(temp)
+                        else:
+                            pass
             except:
                 messagebox.showinfo("Error","Please enter a valid value")
                 pass
@@ -1051,6 +1488,28 @@ class MainWindow:
                         messagebox.showinfo("Done", "Success")
                         vvi_ARPEntry = temp
                         self.vviARPValue.config(text="Current Value: " + vvi_ARPEntry)
+
+                            user0['vvi_ARPEntry'] = str(temp)
+                        elif(user == 1):
+                            user1['vvi_ARPEntry'] = str(temp)
+                        elif(user == 2):
+                            user1['vvi_ARPEntry'] = str(temp)
+                        elif(user == 3):
+                            user1['vvi_ARPEntry'] = str(temp)
+                        elif(user == 4):
+                            user1['vvi_ARPEntry'] = str(temp)
+                        elif(user == 5):
+                            user1['vvi_ARPEntry'] = str(temp)
+                        elif(user == 6):
+                            user1['vvi_ARPEntry'] = str(temp)
+                        elif(user == 7):
+                            user1['vvi_ARPEntry'] = str(temp)
+                        elif(user == 8):
+                            user1['vvi_ARPEntry'] = str(temp)
+                        elif(user == 9):
+                            user1['vvi_ARPEntry'] = str(temp)
+                        else:
+                            pass
             except:
                 messagebox.showinfo("Error","Please enter a valid value")
                 pass
@@ -1069,6 +1528,28 @@ class MainWindow:
                         messagebox.showinfo("Done", "Success")
                         vvi_hysteresisEntry = temp
                         self.vviHysteresisValue.config(text="Current Value: " + vvi_hysteresisEntry)
+
+                            user0['vvi_hysteresisEntry'] = str(temp)
+                        elif(user == 1):
+                            user1['vvi_hysteresisEntry'] = str(temp)
+                        elif(user == 2):
+                            user1['vvi_hysteresisEntry'] = str(temp)
+                        elif(user == 3):
+                            user1['vvi_hysteresisEntry'] = str(temp)
+                        elif(user == 4):
+                            user1['vvi_hysteresisEntry'] = str(temp)
+                        elif(user == 5):
+                            user1['vvi_hysteresisEntry'] = str(temp)
+                        elif(user == 6):
+                            user1['vvi_hysteresisEntry'] = str(temp)
+                        elif(user == 7):
+                            user1['vvi_hysteresisEntry'] = str(temp)
+                        elif(user == 8):
+                            user1['vvi_hysteresisEntry'] = str(temp)
+                        elif(user == 9):
+                            user1['vvi_hysteresisEntry'] = str(temp)
+                        else:
+                            pass
             except:
                 messagebox.showinfo("Error","Please enter a valid value")
                 pass
@@ -1087,6 +1568,28 @@ class MainWindow:
                         messagebox.showinfo("Done", "Success")
                         vvi_rateSmoothingEntry = temp
                         self.vviRateSmoothingValue.config(text="Current Value: " + vvi_rateSmoothingEntry)
+
+                            user0['vvi_rateSmoothingEntry'] = str(temp)
+                        elif(user == 1):
+                            user1['vvi_rateSmoothingEntry'] = str(temp)
+                        elif(user == 2):
+                            user1['vvi_rateSmoothingEntry'] = str(temp)
+                        elif(user == 3):
+                            user1['vvi_rateSmoothingEntry'] = str(temp)
+                        elif(user == 4):
+                            user1['vvi_rateSmoothingEntry'] = str(temp)
+                        elif(user == 5):
+                            user1['vvi_rateSmoothingEntry'] = str(temp)
+                        elif(user == 6):
+                            user1['vvi_rateSmoothingEntry'] = str(temp)
+                        elif(user == 7):
+                            user1['vvi_rateSmoothingEntry'] = str(temp)
+                        elif(user == 8):
+                            user1['vvi_rateSmoothingEntry'] = str(temp)
+                        elif(user == 9):
+                            user1['vvi_rateSmoothingEntry'] = str(temp)
+                        else:
+                            pass
             except:
                 messagebox.showinfo("Error","Please enter a valid value")
                 pass
@@ -1135,7 +1638,6 @@ def writeUsers():
 def readValues(user):
     global user0, user1, user2, user3, user4, user5, user6, user7, user8, user9
     
-    
     with open('user0.pickle', 'rb') as file:
         user0 = pickle.load(file)
 
@@ -1166,25 +1668,9 @@ def readValues(user):
     with open('user9.pickle', 'rb') as file:
         user9 = pickle.load(file)
 
-
-    # try:
-    #     for i in range(10):
-    #         if(user == i):
-    #             with open('user' + str(i) + '.pickle', 'rb') as file:
-    #                 userList[i] = pickle.load(file)
-    #                 #print(userList[i])
-    # except(FileNotFoundError):
-    #     for i in range(10):
-    #         if(user == i):
-    #             with open('DCM/user' + str(i) + '.pickle', 'rb') as file:
-    #                 userList[i] = pickle.load(file)
-    #                 print(userList[i])
-
-
 #Write new user values to pickle file
 def writeValues(user):
     global user0, user1, user2, user3, user4, user5, user6, user7, user8, user9
-    
     
     with open('user0.pickle', 'wb') as file:
         pickle.dump(user0, file)
@@ -1216,20 +1702,6 @@ def writeValues(user):
     with open('user9.pickle', 'wb') as file:
         pickle.dump(user9, file)
         
-    
-    
-    # try:
-    #     for i in range(10):
-    #         if(user == i):
-    #             with open('user' + str(i) + '.pickle', 'wb') as file:
-    #                 pickle.dump(userList[i], file)
-    # except(FileNotFoundError):
-    #     for i in range(10):
-    #         if(user == i):
-    #             with open('DCM/user' + str(i) + '.pickle', 'wb') as file:
-    #                 pickle.dump(userList[i], file)
-
-
 
 def loadVariables():
     global variableList
@@ -1238,7 +1710,7 @@ def loadVariables():
         for key in range(len(variableStringList)): 
             variableList[key] = user0[variableStringList[key]]
     
-    global aoo_lowerRateLimitEntry,aoo_upperRateLimitEntry,aoo_atrialAmplitudeEntry,aoo_atrialPulseWidthEntry,voo_lowerRateLimitEntry,voo_upperRateLimitEntry,voo_atrialAmplitudeEntry,voo_atrialPulseWidthEntry,aai_lowerRateLimitEntry,aai_upperRateLimitEntry,aai_atrialAmplitudeEntry,aai_atrialPulseWidthEntry,aai_atrialSensitivityEntry,aai_ARPEntry,aai_APVARPEntry,aai_hysteresisEntry,aai_rateSmoothingEntry,vvi_lowerRateLimitEntry,vvi_upperRateLimitEntry,vvi_atrialAmplitudeEntry,vvi_atrialPulseWidthEntry,vvi_atrialSensitivityEntry,vvi_ARPEntry,vvi_hysteresisEntry,vvi_rateSmoothingEntry
+    global aoo_lowerRateLimitEntry,aoo_upperRateLimitEntry,aoo_atrialAmplitudeEntry,aoo_atrialPulseWidthEntry,voo_lowerRateLimitEntry,voo_upperRateLimitEntry,voo_atrialPulseWidthEntry,voo_atrialPulseWidthEntry,aai_lowerRateLimitEntry,aai_upperRateLimitEntry,aai_atrialAmplitudeEntry,aai_atrialPulseWidthEntry,aai_atrialSensitivityEntry,aai_ARPEntry,aai_APVARPEntry,aai_hysteresisEntry,aai_rateSmoothingEntry,vvi_lowerRateLimitEntry,vvi_upperRateLimitEntry,vvi_atrialAmplitudeEntry,vvi_atrialPulseWidthEntry,vvi_atrialSensitivityEntry,vvi_ARPEntry,vvi_hysteresisEntry,vvi_rateSmoothingEntry
     aoo_lowerRateLimitEntry = variableList[0]
     aoo_upperRateLimitEntry = variableList[1]
     aoo_atrialAmplitudeEntry = variableList[2]
@@ -1264,12 +1736,6 @@ def loadVariables():
     vvi_ARPEntry = variableList[22]
     vvi_hysteresisEntry = variableList[23]
     vvi_rateSmoothingEntry = variableList[24]
-
-    #global aoo_lowerRateLimitEntry
-    #aoo_lowerRateLimitEntry = '60'
-            #print(variableStringList[key])
-
-
 
 
 #Write Variables to dictionary
@@ -1300,8 +1766,6 @@ def loadVariables():
 #     'vvi_hysteresisEntry' :  '0',
 #     'vvi_rateSmoothingEntry'  :  '0'
 # }
-
-
 
 
 
