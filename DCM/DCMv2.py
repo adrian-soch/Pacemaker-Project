@@ -671,8 +671,8 @@ class MainWindow:
             temp = self.aooAtrialAmplitudeEntry.get()
             #Try/access to sanitize user input and ask for confirmation if there are no errors
             try:
-                int(temp)
-                if (temp == '' or int(temp)<0):
+                float(temp)
+                if (temp == '' or float(temp)<0):
                     messagebox.showinfo("Error","Please enter a valid value")
                     pass
 
@@ -773,8 +773,8 @@ class MainWindow:
             temp = self.vooAtrialAmplitudeEntry.get()
             #Try/access to sanitize user input and ask for confirmation if there are no errors
             try:
-                int(temp)
-                if (temp == '' or int(temp)<0):
+                float(temp)
+                if (temp == '' or float(temp)<0):
                     messagebox.showinfo("Error","Please enter a valid value")
                     pass
 
@@ -874,8 +874,8 @@ class MainWindow:
             temp = self.aaiAtrialAmplitudeEntry .get()
             #Try/access to sanitize user input and ask for confirmation if there are no errors
             try:
-                int(temp)
-                if (temp == '' or int(temp)<0):
+                float(temp)
+                if (temp == '' or float(temp)<0):
                     messagebox.showinfo("Error","Please enter a valid value")
                     pass
 
@@ -920,8 +920,8 @@ class MainWindow:
             temp = self.aaiAtrialSensitivityEntry.get()
             #Try/access to sanitize user input and ask for confirmation if there are no errors
             try:
-                int(temp)
-                if (temp == '' or int(temp)<0):
+                float(temp)
+                if (temp == '' or float(temp)<0):
                     messagebox.showinfo("Error","Please enter a valid value")
                     pass
 
@@ -1092,8 +1092,8 @@ class MainWindow:
             temp = self.vviAtrialAmplitudeEntry.get() 
             #Try/access to sanitize user input and ask for confirmation if there are no errors
             try:
-                int(temp)
-                if (temp == '' or int(temp)<0):
+                float(temp)
+                if (temp == '' or float(temp)<0):
                     messagebox.showinfo("Error","Please enter a valid value")
                     pass
 
@@ -1138,8 +1138,8 @@ class MainWindow:
             temp = self.vviAtrialSensitivityEntry.get()
             #Try/access to sanitize user input and ask for confirmation if there are no errors
             try:
-                int(temp)
-                if (temp == '' or int(temp)<0):
+                float(temp)
+                if (temp == '' or float(temp)<0):
                     messagebox.showinfo("Error","Please enter a valid value")
                     pass
 
