@@ -227,10 +227,10 @@ class AddUserWindow:
 
             #If everything is good create the user in the 4 tables
             else:
-                db.execute("INSERT INTO aoo VALUES(?, ?, ?, ?, ?, ?)", (username, password, 60, 120, 3.5, 5))
-                db.execute("INSERT INTO voo VALUES(?, ?, ?, ?, ?, ?)", (username, password, 60, 120, 3.5, 5))
-                db.execute("INSERT INTO aai VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", (username, password, 60, 120, 3.5, 5, 3.3, 250, 200, 0, 0))
-                db.execute("INSERT INTO vvi VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", (username, password, 60, 120, 3.5, 5, 3.3, 250, 0, 0))
+                db.execute("INSERT INTO aoo VALUES(?, ?, ?, ?, ?, ?)", (username, password, 60, 120, 3.5, 1.5))
+                db.execute("INSERT INTO voo VALUES(?, ?, ?, ?, ?, ?)", (username, password, 60, 120, 3.5, 1.5))
+                db.execute("INSERT INTO aai VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", (username, password, 60, 120, 3.5, 1.5, 3.3, 250, 200, 0, 0))
+                db.execute("INSERT INTO vvi VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", (username, password, 60, 120, 3.5, 1.5, 3.3, 250, 0, 0))
                 messagebox.showinfo("Success", "User Added")
                 self.quitButton.focus()
             db.commit()
@@ -249,7 +249,7 @@ class MainWindow:
         #General window setup
         self.content = tk.Entry()
         self.master = master
-        self.master.geometry('500x570')
+        self.master.geometry('530x570')
         self.master.protocol("WM_DELETE_WINDOW", self.on_exit)
         self.menubar = tk.Menu(self.master)
         self.filemenu = tk.Menu(self.menubar, tearoff=0)
@@ -331,11 +331,17 @@ class MainWindow:
         self.aooAtrialAmplitudeValue = tk.Label(self.aoo, text = "Current Value: " + aoo_atrialAmplitudeEntry)
         self.aooAtrialPulseWidthValue = tk.Label(self.aoo, text = "Current Value: " + aoo_atrialPulseWidthEntry)
     
-        #Setup entry field
+        '''#Setup entry field
         self.aooLowerRateLimitEntry = tk.Entry(self.aoo)
         self.aooUpperRateLimitEntry = tk.Entry(self.aoo)
         self.aooAtrialAmplitudeEntry = tk.Entry(self.aoo)
-        self.aooAtrialPulseWidthEntry = tk.Entry(self.aoo)
+        self.aooAtrialPulseWidthEntry = tk.Entry(self.aoo)'''
+
+        #Spinbox for setup
+        self.aooLowerRateLimitEntry = tk.Spinbox(self.aoo,from_=30,to=175,increment=5)
+        self.aooUpperRateLimitEntry = tk.Spinbox(self.aoo,from_=50,to=175,increment=5)
+        self.aooAtrialAmplitudeEntry = tk.Spinbox(self.aoo,from_=0.5,to=7.0,format="%.1f",increment=0.1)
+        self.aooAtrialPulseWidthEntry = tk.Spinbox(self.aoo,from_=0.05,to=1.9,format="%.2f",increment=0.1)
 
         #Adjust positioning
         self.aooLowerRateLimitLabel.grid(row=0, column=0, padx=15, pady=15)
@@ -375,11 +381,17 @@ class MainWindow:
         self.vooAtrialAmplitudeValue = tk.Label(self.voo, text = "Current Value: "+ voo_ventricularAmplitudeEntry)
         self.vooAtrialPulseWidthValue = tk.Label(self.voo, text = "Current Value: "+ voo_ventricularPulseWidthEntry)
 
-        #Setup entry field
+        '''#Setup entry field
         self.vooLowerRateLimitEntry = tk.Entry(self.voo)
         self.vooUpperRateLimitEntry = tk.Entry(self.voo)
         self.vooAtrialAmplitudeEntry = tk.Entry(self.voo)
-        self.vooAtrialPulseWidthEntry = tk.Entry(self.voo)
+        self.vooAtrialPulseWidthEntry = tk.Entry(self.voo)'''
+
+        #Spinbox for setup
+        self.vooLowerRateLimitEntry = tk.Spinbox(self.voo,from_=30,to=175,increment=5)
+        self.vooUpperRateLimitEntry = tk.Spinbox(self.voo,from_=50,to=175,increment=5)
+        self.vooAtrialAmplitudeEntry = tk.Spinbox(self.voo,from_=0.5,to=7.0,format="%.1f",increment=0.1)
+        self.vooAtrialPulseWidthEntry = tk.Spinbox(self.voo,from_=0.05,to=1.9,format="%.2f",increment=0.1)
 
         #Adjust positioning
         self.vooLowerRateLimitLabel.grid(row=0, column=0, padx=15, pady=15)
@@ -434,7 +446,7 @@ class MainWindow:
         self.aaiHysteresisValue = tk.Label(self.aai, text = "Current Value: "+ aai_hysteresisEntry)
         self.aaiRateSmoothingValue = tk.Label(self.aai, text = "Current Value: "+ aai_rateSmoothingEntry)
 
-        #Setup entry field
+        """#Setup entry field
         self.aaiLowerRateLimitEntry = tk.Entry(self.aai)
         self.aaiUpperRateLimitEntry = tk.Entry(self.aai)
         self.aaiAtrialAmplitudeEntry = tk.Entry(self.aai)
@@ -443,7 +455,18 @@ class MainWindow:
         self.aaiARPEntry = tk.Entry(self.aai)
         self.aaiAPVARPEntry = tk.Entry(self.aai)
         self.aaiHysteresisEntry = tk.Entry(self.aai)
-        self.aaiRateSmoothingEntry = tk.Entry(self.aai)
+        self.aaiRateSmoothingEntry = tk.Entry(self.aai)"""
+
+        #Spinbox for setup
+        self.aaiLowerRateLimitEntry = tk.Spinbox(self.aai,from_=30,to=175,increment=5)
+        self.aaiUpperRateLimitEntry = tk.Spinbox(self.aai,from_=50,to=175,increment=5)
+        self.aaiAtrialAmplitudeEntry = tk.Spinbox(self.aai,from_=0.5,to=7.0,format="%.1f",increment=0.1)
+        self.aaiAtrialPulseWidthEntry = tk.Spinbox(self.aai,from_=0.05,to=1.9,format="%.2f",increment=0.1)
+        self.aaiAtrialSensitivityEntry = tk.Spinbox(self.aai,from_=0.25,to=10.0,format="%.2f",increment=0.25)
+        self.aaiARPEntry = tk.Spinbox(self.aai,from_=150,to=500,increment=10)
+        self.aaiAPVARPEntry = tk.Spinbox(self.aai,from_=150,to=500,increment=10)
+        self.aaiHysteresisEntry = tk.Entry(self.aai)
+        self.aaiRateSmoothingEntry = tk.Spinbox(self.aai,from_=0,to=25,increment=3)
 
         #Adjust positioning
         self.aaiLowerRateLimitLabel.grid(row=0, column=0, padx=15, pady=15)
@@ -515,7 +538,7 @@ class MainWindow:
         self.vviHysteresisValue = tk.Label(self.vvi, text = "Current Value: "+ vvi_hysteresisEntry)
         self.vviRateSmoothingValue = tk.Label(self.vvi, text = "Current Value: "+ vvi_rateSmoothingEntry)
 
-        #Setup entry field
+        '''#Setup entry field
         self.vviLowerRateLimitEntry = tk.Entry(self.vvi)
         self.vviUpperRateLimitEntry = tk.Entry(self.vvi)
         self.vviAtrialAmplitudeEntry = tk.Entry(self.vvi)
@@ -523,7 +546,17 @@ class MainWindow:
         self.vviAtrialSensitivityEntry = tk.Entry(self.vvi)
         self.vviARPEntry = tk.Entry(self.vvi)
         self.vviHysteresisEntry = tk.Entry(self.vvi)
-        self.vviRateSmoothingEntry = tk.Entry(self.vvi)
+        self.vviRateSmoothingEntry = tk.Entry(self.vvi)'''
+
+        #Spinbox for setup
+        self.vviLowerRateLimitEntry = tk.Spinbox(self.vvi,from_=30,to=175,increment=5)
+        self.vviUpperRateLimitEntry = tk.Spinbox(self.vvi,from_=50,to=175,increment=5)
+        self.vviAtrialAmplitudeEntry = tk.Spinbox(self.vvi,from_=0.5,to=7.0,format="%.1f",increment=0.1)
+        self.vviAtrialPulseWidthEntry = tk.Spinbox(self.vvi,from_=0.05,to=1.9,format="%.2f",increment=0.1)
+        self.vviAtrialSensitivityEntry = tk.Spinbox(self.vvi,from_=0.25,to=10.0,format="%.2f",increment=0.25)
+        self.vviARPEntry = tk.Spinbox(self.vvi,from_=150,to=500,increment=10)
+        self.vviHysteresisEntry = tk.Entry(self.vvi)
+        self.vviRateSmoothingEntry = tk.Spinbox(self.vvi,from_=0,to=25,increment=3)
 
         #Adjust positioning
         self.vviLowerRateLimitLabel.grid(row=0, column=0, padx=15, pady=15)
@@ -625,6 +658,11 @@ class MainWindow:
                     messagebox.showinfo("Error","Please ensure your lower rate limit is lower than your upper rate limit")
                     pass
 
+                #Ensure value is in limited range
+                elif(int(temp) < 30 or int(temp) > 175):
+                    messagebox.showinfo("Error","The range is between 30 and 175")
+                    pass
+
                 #If everything is good update current value
                 else:
                     if messagebox.askyesno("Confirmation", "Replace current value?"):
@@ -653,6 +691,11 @@ class MainWindow:
                     messagebox.showinfo("Error","Please ensure your lower rate limit is lower than your upper rate limit")
                     pass
 
+                #Ensure value is in limited range
+                elif(int(temp) < 50 or int(temp) > 175):
+                    messagebox.showinfo("Error","The range is between 50 and 175")
+                    pass
+
                 #If everything is good update current value
                 else:
                     if messagebox.askyesno("Confirmation", "Replace current value?"):
@@ -675,6 +718,10 @@ class MainWindow:
                 if (temp == '' or float(temp)<0):
                     messagebox.showinfo("Error","Please enter a valid value")
                     pass
+                #Ensure value is in limited range
+                elif(float(temp) < 0 or float(temp) > 7.0):
+                    messagebox.showinfo("Error","The range is between 0(off) and 7.0")
+                    pass
 
                 #If everything is good update current value
                 else:
@@ -694,9 +741,14 @@ class MainWindow:
             temp = self.aooAtrialPulseWidthEntry.get()
             #Try/access to sanitize user input and ask for confirmation if there are no errors
             try:
-                int(temp)
-                if (temp == '' or int(temp)<0):
+                float(temp)
+                if (temp == '' or float(temp)<0):
                     messagebox.showinfo("Error","Please enter a valid value")
+                    pass
+
+                #Ensure value is in limited range
+                elif(float(temp) < 0.05 or float(temp) > 1.9):
+                    messagebox.showinfo("Error","The range is between 0.05 and 1.9")
                     pass
 
                 #If everything is good update current value
@@ -727,6 +779,12 @@ class MainWindow:
                 elif(int(self.vooLowerRateLimitEntry.get()) >= int(voo_upperRateLimitEntry) and int(voo_upperRateLimitEntry) != 0 ):
                     messagebox.showinfo("Error","Please ensure your lower rate limit is lower than your upper rate limit")
                     pass
+
+                #Ensure value is in limited range
+                elif(int(temp) < 30 or int(temp) > 175):
+                    messagebox.showinfo("Error","The range is between 30 and 175")
+                    pass
+                
                 #If everything is good update current value
                 else:
                     if messagebox.askyesno("Confirmation", "Replace current value?"):
@@ -755,6 +813,11 @@ class MainWindow:
                     messagebox.showinfo("Error","Please ensure your lower rate limit is lower than your upper rate limit")
                     pass
 
+                #Ensure value is in limited range
+                elif(int(temp) < 50 or int(temp) > 175):
+                    messagebox.showinfo("Error","The range is between 50 and 175")
+                    pass
+
                 #If everything is good update current value
                 else:
                     if messagebox.askyesno("Confirmation", "Replace current value?"):
@@ -778,6 +841,11 @@ class MainWindow:
                     messagebox.showinfo("Error","Please enter a valid value")
                     pass
 
+                #Ensure value is in limited range
+                elif(float(temp) < 0 or float(temp) > 7.0):
+                    messagebox.showinfo("Error","The range is between 0(off) and 7.0")
+                    pass
+
                 #If everything is good update current value
                 else:
                     if messagebox.askyesno("Confirmation", "Replace current value?"):
@@ -796,9 +864,14 @@ class MainWindow:
             temp = self.vooAtrialPulseWidthEntry.get()
             #Try/access to sanitize user input and ask for confirmation if there are no errors
             try:
-                int(temp)
-                if (temp == '' or int(temp)<0):
+                float(temp)
+                if (temp == '' or float(temp)<0):
                     messagebox.showinfo("Error","Please enter a valid value")
+                    pass
+
+                #Ensure value is in limited range
+                elif(float(temp) < 0.05 or float(temp) > 1.9):
+                    messagebox.showinfo("Error","The range is between 0.05 and 1.9")
                     pass
 
                 #If everything is good update current value
@@ -829,6 +902,11 @@ class MainWindow:
                     messagebox.showinfo("Error","Please ensure your lower rate limit is lower than your upper rate limit")
                     pass
 
+                #Ensure value is in limited range
+                elif(int(temp) < 30 or int(temp) > 175):
+                    messagebox.showinfo("Error","The range is between 30 and 175")
+                    pass
+
                 #If everything is good update current value
                 else:
                     if messagebox.askyesno("Confirmation", "Replace current value?"):
@@ -856,6 +934,11 @@ class MainWindow:
                     messagebox.showinfo("Error","Please ensure your lower rate limit is lower than your upper rate limit")
                     pass
 
+                #Ensure value is in limited range
+                elif(int(temp) < 50 or int(temp) > 175):
+                    messagebox.showinfo("Error","The range is between 50 and 175")
+                    pass
+
                 #If everything is good update current value
                 else:
                     if messagebox.askyesno("Confirmation", "Replace current value?"):
@@ -879,6 +962,11 @@ class MainWindow:
                     messagebox.showinfo("Error","Please enter a valid value")
                     pass
 
+                #Ensure value is in limited range
+                elif(float(temp) < 0 or float(temp) > 7.0):
+                    messagebox.showinfo("Error","The range is between 0(off) and 7.0")
+                    pass
+
                 #If everything is good update current value
                 else:
                     if messagebox.askyesno("Confirmation", "Replace current value?"):
@@ -897,9 +985,14 @@ class MainWindow:
             temp = self.aaiAtrialPulseWidthEntry.get()
             #Try/access to sanitize user input and ask for confirmation if there are no errors
             try:
-                int(temp)
-                if (temp == '' or int(temp)<0):
+                float(temp)
+                if (temp == '' or float(temp)<0):
                     messagebox.showinfo("Error","Please enter a valid value")
+                    pass
+
+                #Ensure value is in limited range
+                elif(float(temp) < 0.05 or float(temp) > 1.9):
+                    messagebox.showinfo("Error","The range is between 0.05 and 1.9")
                     pass
 
                 #If everything is good update current value
@@ -925,6 +1018,11 @@ class MainWindow:
                     messagebox.showinfo("Error","Please enter a valid value")
                     pass
 
+                #Ensure value is in limited range
+                elif(float(temp) < 0.25 or float(temp) > 10.0):
+                    messagebox.showinfo("Error","The range is between 0.25 and 10.0")
+                    pass
+
                 #If everything is good update current value
                 else:
                     if messagebox.askyesno("Confirmation", "Replace current value?"):
@@ -948,6 +1046,11 @@ class MainWindow:
                     messagebox.showinfo("Error","Please enter a valid value")
                     pass
 
+                #Ensure value is in limited range
+                elif(int(temp) < 150 or int(temp) > 500):
+                    messagebox.showinfo("Error","The range is between 150 and 500")
+                    pass
+
                 #If everything is good update current value
                 else:
                     if messagebox.askyesno("Confirmation", "Replace current value?"):
@@ -969,6 +1072,11 @@ class MainWindow:
                 int(temp)
                 if (temp == '' or int(temp)<0):
                     messagebox.showinfo("Error","Please enter a valid value")
+                    pass
+
+                #Ensure value is in limited range
+                elif(int(temp) < 150 or int(temp) > 500):
+                    messagebox.showinfo("Error","The range is between 150 and 500")
                     pass
 
                 #If everything is good update current value
@@ -1017,6 +1125,11 @@ class MainWindow:
                     messagebox.showinfo("Error","Please enter a valid value")
                     pass
 
+                #Ensure value is in limited range
+                elif(int(temp) < 0 or int(temp) > 25):
+                    messagebox.showinfo("Error","The range is between 0(off) and 25")
+                    pass
+
                 #If everything is good update current value
                 else:
                     if messagebox.askyesno("Confirmation", "Replace current value?"):
@@ -1044,6 +1157,11 @@ class MainWindow:
                 #Ensure upper limit is larger than lower limit
                 elif(int(self.vviLowerRateLimitEntry.get()) >= int(vvi_upperRateLimitEntry) and int(vvi_upperRateLimitEntry) != 0 ):
                     messagebox.showinfo("Error","Please ensure your lower rate limit is lower than your upper rate limit")
+                    pass
+
+                #Ensure value is in limited range
+                elif(int(temp) < 30 or int(temp) > 175):
+                    messagebox.showinfo("Error","The range is between 30 and 175")
                     pass
 
                 #If everything is good update current value
@@ -1074,6 +1192,11 @@ class MainWindow:
                     messagebox.showinfo("Error","Please ensure your lower rate limit is lower than your upper rate limit")
                     pass
 
+                #Ensure value is in limited range
+                elif(int(temp) < 50 or int(temp) > 175):
+                    messagebox.showinfo("Error","The range is between 50 and 175")
+                    pass
+
                 #If everything is good update current value
                 else:
                     if messagebox.askyesno("Confirmation", "Replace current value?"):
@@ -1097,6 +1220,11 @@ class MainWindow:
                     messagebox.showinfo("Error","Please enter a valid value")
                     pass
 
+                #Ensure value is in limited range
+                elif(float(temp) < 0 or float(temp) > 7.0):
+                    messagebox.showinfo("Error","The range is between 0(off) and 7.0")
+                    pass
+
                 #If everything is good update current value
                 else:
                     if messagebox.askyesno("Confirmation", "Replace current value?"):
@@ -1115,9 +1243,14 @@ class MainWindow:
             temp = self.vviAtrialPulseWidthEntry.get() 
             #Try/access to sanitize user input and ask for confirmation if there are no errors
             try:
-                int(temp)
-                if (temp == '' or int(temp)<0):
+                float(temp)
+                if (temp == '' or float(temp)<0):
                     messagebox.showinfo("Error","Please enter a valid value")
+                    pass
+
+                #Ensure value is in limited range
+                elif(float(temp) < 0.05 or float(temp) > 1.9):
+                    messagebox.showinfo("Error","The range is between 0.05 and 1.9")
                     pass
 
                 #If everything is good update current value
@@ -1143,6 +1276,11 @@ class MainWindow:
                     messagebox.showinfo("Error","Please enter a valid value")
                     pass
 
+                #Ensure value is in limited range
+                elif(float(temp) < 0.25 or float(temp) > 10.0):
+                    messagebox.showinfo("Error","The range is between 0.25 and 10.0")
+                    pass
+
                 #If everything is good update current value
                 else:
                     if messagebox.askyesno("Confirmation", "Replace current value?"):
@@ -1164,6 +1302,11 @@ class MainWindow:
                 int(temp)
                 if (temp == '' or int(temp)<0):
                     messagebox.showinfo("Error","Please enter a valid value")
+                    pass
+
+                #Ensure value is in limited range
+                elif(int(temp) < 150 or int(temp) > 500):
+                    messagebox.showinfo("Error","The range is between 150 and 500")
                     pass
 
                 #If everything is good update current value
@@ -1212,6 +1355,11 @@ class MainWindow:
                     messagebox.showinfo("Error","Please enter a valid value")
                     pass
 
+                #Ensure value is in limited range
+                elif(int(temp) < 0 or int(temp) > 25):
+                    messagebox.showinfo("Error","The range is between 0(off) and 25")
+                    pass
+
                 #If everything is good update current value
                 else:
                     if messagebox.askyesno("Confirmation", "Replace current value?"):
@@ -1229,7 +1377,8 @@ class MainWindow:
     def logOff(self):
         if messagebox.askyesno("LogOff", "Do you want to log off?"):
             self.master.destroy()
-            exit()
+            main()
+            #exit()
 
     #Method to exit application
     def on_exit(self):
