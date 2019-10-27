@@ -144,7 +144,6 @@ class LoginFrame:
     #Method to for login button
     def _login_btn_clicked(self):
         global currentuser
-        global login_dict
         username = self.entry_username.get()
         password = self.entry_password.get()
         self.entry_username.delete(0, 'end')
