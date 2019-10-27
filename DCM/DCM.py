@@ -329,12 +329,6 @@ class MainWindow:
         self.aooUpperRateLimitValue = tk.Label(self.aoo, text = "Current Value: " + aoo_upperRateLimitEntry)
         self.aooAtrialAmplitudeValue = tk.Label(self.aoo, text = "Current Value: " + aoo_atrialAmplitudeEntry)
         self.aooAtrialPulseWidthValue = tk.Label(self.aoo, text = "Current Value: " + aoo_atrialPulseWidthEntry)
-    
-        '''#Setup entry field
-        self.aooLowerRateLimitEntry = tk.Entry(self.aoo)
-        self.aooUpperRateLimitEntry = tk.Entry(self.aoo)
-        self.aooAtrialAmplitudeEntry = tk.Entry(self.aoo)
-        self.aooAtrialPulseWidthEntry = tk.Entry(self.aoo)'''
 
         #Spinbox for setup
         self.aooLowerRateLimitEntry = tk.Spinbox(self.aoo,from_=30,to=175,increment=5)
@@ -379,12 +373,6 @@ class MainWindow:
         self.vooUpperRateLimitValue = tk.Label(self.voo, text = "Current Value: "+ voo_upperRateLimitEntry)
         self.vooAtrialAmplitudeValue = tk.Label(self.voo, text = "Current Value: "+ voo_ventricularAmplitudeEntry)
         self.vooAtrialPulseWidthValue = tk.Label(self.voo, text = "Current Value: "+ voo_ventricularPulseWidthEntry)
-
-        '''#Setup entry field
-        self.vooLowerRateLimitEntry = tk.Entry(self.voo)
-        self.vooUpperRateLimitEntry = tk.Entry(self.voo)
-        self.vooAtrialAmplitudeEntry = tk.Entry(self.voo)
-        self.vooAtrialPulseWidthEntry = tk.Entry(self.voo)'''
 
         #Spinbox for setup
         self.vooLowerRateLimitEntry = tk.Spinbox(self.voo,from_=30,to=175,increment=5)
@@ -444,17 +432,6 @@ class MainWindow:
         self.aaiAPVARPValue = tk.Label(self.aai, text = "Current Value: "+ aai_APVARPEntry)
         self.aaiHysteresisValue = tk.Label(self.aai, text = "Current Value: "+ aai_hysteresisEntry)
         self.aaiRateSmoothingValue = tk.Label(self.aai, text = "Current Value: "+ aai_rateSmoothingEntry)
-
-        """#Setup entry field
-        self.aaiLowerRateLimitEntry = tk.Entry(self.aai)
-        self.aaiUpperRateLimitEntry = tk.Entry(self.aai)
-        self.aaiAtrialAmplitudeEntry = tk.Entry(self.aai)
-        self.aaiAtrialPulseWidthEntry = tk.Entry(self.aai)
-        self.aaiAtrialSensitivityEntry = tk.Entry(self.aai)
-        self.aaiARPEntry = tk.Entry(self.aai)
-        self.aaiAPVARPEntry = tk.Entry(self.aai)
-        self.aaiHysteresisEntry = tk.Entry(self.aai)
-        self.aaiRateSmoothingEntry = tk.Entry(self.aai)"""
 
         #Spinbox for setup
         self.aaiLowerRateLimitEntry = tk.Spinbox(self.aai,from_=30,to=175,increment=5)
@@ -536,16 +513,6 @@ class MainWindow:
         self.vviARPValue = tk.Label(self.vvi, text = "Current Value: "+ vvi_ARPEntry)
         self.vviHysteresisValue = tk.Label(self.vvi, text = "Current Value: "+ vvi_hysteresisEntry)
         self.vviRateSmoothingValue = tk.Label(self.vvi, text = "Current Value: "+ vvi_rateSmoothingEntry)
-
-        '''#Setup entry field
-        self.vviLowerRateLimitEntry = tk.Entry(self.vvi)
-        self.vviUpperRateLimitEntry = tk.Entry(self.vvi)
-        self.vviAtrialAmplitudeEntry = tk.Entry(self.vvi)
-        self.vviAtrialPulseWidthEntry = tk.Entry(self.vvi)
-        self.vviAtrialSensitivityEntry = tk.Entry(self.vvi)
-        self.vviARPEntry = tk.Entry(self.vvi)
-        self.vviHysteresisEntry = tk.Entry(self.vvi)
-        self.vviRateSmoothingEntry = tk.Entry(self.vvi)'''
 
         #Spinbox for setup
         self.vviLowerRateLimitEntry = tk.Spinbox(self.vvi,from_=30,to=175,increment=5)
