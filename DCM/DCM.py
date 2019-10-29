@@ -268,10 +268,10 @@ class MainWindow:
 
         #Retrieve all relevant data from tables for currentuser
         global currentuser
-        aoocursor = db.execute("SELECT * FROM aoo WHERE (user = ?)", (currentuser));aoorow = aoocursor.fetchall()
-        voocursor = db.execute("SELECT * FROM voo WHERE (user = ?)", (currentuser));voorow = voocursor.fetchall()
-        aaicursor = db.execute("SELECT * FROM aai WHERE (user = ?)", (currentuser));aairow = aaicursor.fetchall()
-        vvicursor = db.execute("SELECT * FROM vvi WHERE (user = ?)", (currentuser));vvirow = vvicursor.fetchall()
+        aoocursor = db.execute("SELECT * FROM aoo WHERE (user = ?)", (currentuser,));aoorow = aoocursor.fetchall()
+        voocursor = db.execute("SELECT * FROM voo WHERE (user = ?)", (currentuser,));voorow = voocursor.fetchall()
+        aaicursor = db.execute("SELECT * FROM aai WHERE (user = ?)", (currentuser,));aairow = aaicursor.fetchall()
+        vvicursor = db.execute("SELECT * FROM vvi WHERE (user = ?)", (currentuser,));vvirow = vvicursor.fetchall()
 
         #Global Variables setup with current user parameters
         #AOO
