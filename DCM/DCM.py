@@ -248,7 +248,7 @@ class MainWindow:
         #General window setup
         self.content = tk.Entry()
         self.master = master
-        self.master.geometry('530x570')
+        self.master.geometry('650x570')
         self.master.protocol("WM_DELETE_WINDOW", self.on_exit)
         self.menubar = tk.Menu(self.master)
         self.filemenu = tk.Menu(self.menubar, tearoff=0)
@@ -265,6 +265,27 @@ class MainWindow:
         self.tab_parent.add(self.voo, text = "VOO")
         self.tab_parent.add(self.aai, text = "AAI")
         self.tab_parent.add(self.vvi, text = "VVI")
+
+        #Track the process
+        self.logTitle = tk.Label(self.aoo, text = "Process")
+        self.logTitle.grid(row=0, column=4, padx=15, pady=15)
+        self.aooLog = tk.Label(self.aoo, text = "log")
+        self.aooLog.grid(row=1, column=4, padx=15, pady=15)
+
+        self.logTitle = tk.Label(self.voo, text = "Process")
+        self.logTitle.grid(row=0, column=4, padx=15, pady=15)
+        self.vooLog = tk.Label(self.voo, text = "log")
+        self.vooLog.grid(row=1, column=4, padx=15, pady=15)
+
+        self.logTitle = tk.Label(self.aai, text = "Process")
+        self.logTitle.grid(row=0, column=4, padx=15, pady=15)
+        self.aaiLog = tk.Label(self.aai, text = "log")
+        self.aaiLog.grid(row=1, column=4, padx=15, pady=15)
+
+        self.logTitle = tk.Label(self.vvi, text = "Process")
+        self.logTitle.grid(row=0, column=4, padx=15, pady=15)
+        self.vviLog = tk.Label(self.vvi, text = "log")
+        self.vviLog.grid(row=1, column=4, padx=15, pady=15)
 
         #Retrieve all relevant data from tables for currentuser
         global currentuser
@@ -563,13 +584,13 @@ class MainWindow:
         self.tab_parent.pack(expand = 1, fill='both')
 
         #Setup confirm buttons
-        self.confirmButton = tk.Button(self.aoo, text = 'Confirm', width = 20, command = self.confirmChanges)
+        self.confirmButton = tk.Button(self.aoo, text = 'Confirm', width = 20, command = lambda: self.confirmChanges("aooConfirm"))
         self.confirmButton.grid(row = 4, column = 1)
-        self.confirmButton = tk.Button(self.voo, text = 'Confirm', width = 20, command = self.confirmChanges)
+        self.confirmButton = tk.Button(self.voo, text = 'Confirm', width = 20, command = lambda: self.confirmChanges("vooConfirm"))
         self.confirmButton.grid(row = 4, column = 1)
-        self.confirmButton = tk.Button(self.aai, text = 'Confirm', width = 20, command = self.confirmChanges)
+        self.confirmButton = tk.Button(self.aai, text = 'Confirm', width = 20, command = lambda: self.confirmChanges("aaiConfirm"))
         self.confirmButton.grid(row = 9, column = 1)
-        self.confirmButton = tk.Button(self.vvi, text = 'Confirm', width = 20, command = self.confirmChanges)
+        self.confirmButton = tk.Button(self.vvi, text = 'Confirm', width = 20, command = lambda: self.confirmChanges("vviConfirm"))
         self.confirmButton.grid(row = 8, column = 1)
 
         #Setup logoff button
@@ -583,10 +604,36 @@ class MainWindow:
         self.quitButton.grid(row=10,column=1,pady=5)
 
     #Confirm changes method
-    def confirmChanges(self):
-        if messagebox.askyesno("Confirmation", "Upload these changes?"):
-            messagebox.showinfo("Done", "Success")
-
+    def confirmChanges(self,value):
+        if (value == "aooConfirm"):
+            if messagebox.askyesno("Confirmation", "Upload these changes?"):
+                messagebox.showinfo("Done", "Success")
+                self.aooLog.config(text="aoo has done")
+                self.vooLog.config(text="aoo has done")
+                self.aaiLog.config(text="aoo has done")
+                self.vviLog.config(text="aoo has done")
+        elif (value == "vooConfirm"):
+            if messagebox.askyesno("Confirmation", "Upload these changes?"):
+                messagebox.showinfo("Done", "Success")
+                self.aooLog.config(text="voo has done")
+                self.vooLog.config(text="voo has done")
+                self.aaiLog.config(text="voo has done")
+                self.vviLog.config(text="voo has done")
+        elif (value == "aaiConfirm"):
+            if messagebox.askyesno("Confirmation", "Upload these changes?"):
+                messagebox.showinfo("Done", "Success")
+                self.aooLog.config(text="aai has done")
+                self.vooLog.config(text="aai has done")
+                self.aaiLog.config(text="aai has done")
+                self.vviLog.config(text="aai has done")
+        elif (value == "vviConfirm"):
+            if messagebox.askyesno("Confirmation", "Upload these changes?"):
+                messagebox.showinfo("Done", "Success")
+                self.aooLog.config(text="vvi has done")
+                self.vooLog.config(text="vvi has done")
+                self.aaiLog.config(text="vvi has done")
+                self.vviLog.config(text="vvi has done")
+            
     #New window method
     def new_window(self,window):
         self.newWindow = tk.Toplevel(self.master)
@@ -594,7 +641,6 @@ class MainWindow:
 
     #Method to set value
     def setValue(self,value):
-
         #Global Variables
         #AOO
         global aoo_lowerRateLimitEntry,aoo_upperRateLimitEntry,aoo_atrialAmplitudeEntry,aoo_atrialPulseWidthEntry 
