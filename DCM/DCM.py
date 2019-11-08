@@ -3,6 +3,7 @@ import tkinter as tk
 from tkinter import ttk
 from tkinter import messagebox
 import sqlite3
+import serial
 
 #Creating sqlite3 database
 db = sqlite3.connect("DCM.sqlite", detect_types= sqlite3.PARSE_DECLTYPES)
@@ -1415,6 +1416,12 @@ class MainWindow:
         self.master.destroy()
         exit()
 
+
+#space reserved for serial communication
+
+ser = serial.Serial()
+print(ser.name)
+ser.close()
 
 #Main function that runs everything
 def main():
