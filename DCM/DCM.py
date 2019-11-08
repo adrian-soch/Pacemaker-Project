@@ -3,12 +3,13 @@ import tkinter as tk
 from tkinter import ttk
 from tkinter import messagebox
 import sqlite3
+import serial
 
 #Creating sqlite3 database
 db = sqlite3.connect("DCM.sqlite", detect_types= sqlite3.PARSE_DECLTYPES)
 
 #Create seperate table for each state within database
-db.execute("CREATE TABLE IF NOT EXISTS AOO (user TEXT NOT NULL, password TEXT NOT NULL, aoo_lowerRateLimitEntry INTEGER NOT NULL, aoo_upperRateLimitEntry INTEGER NOT NULL, aoo_atrialAmplitudeEntry REAL NOT NULL, aoo_atrialPulseWidthEntry INTEGER NOT NULL)")
+db.execute("CREATE TABLE IF NOT EXISTS AOO (user TEXT NOT NULL, password TEXT NOT NULL, aoo_lowerRateLimitEntry INTEGER NOT NULL, aoo_upperRateLimitEntry INTEGER NOT NULL, aoo_atrialAmplitudeEntry REAL NOT NULL, aoo_atrialPulseWidthEntry INTEGER NOT NULL, userLog TEXT NOT NULL)")
 db.execute("CREATE TABLE IF NOT EXISTS VOO (user TEXT NOT NULL, password TEXT NOT NULL, voo_lowerRateLimitEntry INTEGER NOT NULL, voo_upperRateLimitEntry INTEGER NOT NULL, voo_ventricularAmplitudeEntry REAL NOT NULL, voo_ventricularPulseWidthEntry INTEGER NOT NULL)")
 db.execute("CREATE TABLE IF NOT EXISTS AAI (user TEXT NOT NULL, password TEXT NOT NULL, aai_lowerRateLimitEntry INTEGER NOT NULL, aai_upperRateLimitEntry INTEGER NOT NULL, aai_atrialAmplitudeEntry REAL NOT NULL, aai_atrialPulseWidthEntry INTEGER NOT NULL,"
            " aai_atrialSensitivityEntry REAL NOT NULL, aai_ARPEntry INTEGER NOT NULL, aai_APVARPEntry INTEGER NOT NULL, aai_hysteresisEntry INTEGER NOT NULL, aai_rateSmoothingEntry INTEGER NOT NULL)")
@@ -21,7 +22,7 @@ currentuser = ''
 #Initializing all global variables with "0"
 #AOO
 aoo_lowerRateLimitEntry,aoo_upperRateLimitEntry,aoo_atrialAmplitudeEntry,aoo_atrialPulseWidthEntry = "0","0","0","0"
-
+userLog = ""
 #VOO
 voo_lowerRateLimitEntry,voo_upperRateLimitEntry,voo_ventricularAmplitudeEntry,voo_ventricularPulseWidthEntry = "0","0","0","0"
 
@@ -226,7 +227,7 @@ class AddUserWindow:
 
             #If everything is good create the user in the 4 tables
             else:
-                db.execute("INSERT INTO aoo VALUES(?, ?, ?, ?, ?, ?)", (username, password, 60, 120, 3.5, 1.5))
+                db.execute("INSERT INTO aoo VALUES(?, ?, ?, ?, ?, ?, ?)", (username, password, 60, 120, 3.5, 1.5, "log"))
                 db.execute("INSERT INTO voo VALUES(?, ?, ?, ?, ?, ?)", (username, password, 60, 120, 3.5, 1.5))
                 db.execute("INSERT INTO aai VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", (username, password, 60, 120, 3.5, 1.5, 3.3, 250, 200, 0, 0))
                 db.execute("INSERT INTO vvi VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", (username, password, 60, 120, 3.5, 1.5, 3.3, 250, 0, 0))
@@ -266,27 +267,6 @@ class MainWindow:
         self.tab_parent.add(self.aai, text = "AAI")
         self.tab_parent.add(self.vvi, text = "VVI")
 
-        #Track the process
-        self.logTitle = tk.Label(self.aoo, text = "Process")
-        self.logTitle.grid(row=0, column=4, padx=15, pady=15)
-        self.aooLog = tk.Label(self.aoo, text = "log")
-        self.aooLog.grid(row=1, column=4, padx=15, pady=15)
-
-        self.logTitle = tk.Label(self.voo, text = "Process")
-        self.logTitle.grid(row=0, column=4, padx=15, pady=15)
-        self.vooLog = tk.Label(self.voo, text = "log")
-        self.vooLog.grid(row=1, column=4, padx=15, pady=15)
-
-        self.logTitle = tk.Label(self.aai, text = "Process")
-        self.logTitle.grid(row=0, column=4, padx=15, pady=15)
-        self.aaiLog = tk.Label(self.aai, text = "log")
-        self.aaiLog.grid(row=1, column=4, padx=15, pady=15)
-
-        self.logTitle = tk.Label(self.vvi, text = "Process")
-        self.logTitle.grid(row=0, column=4, padx=15, pady=15)
-        self.vviLog = tk.Label(self.vvi, text = "log")
-        self.vviLog.grid(row=1, column=4, padx=15, pady=15)
-
         #Retrieve all relevant data from tables for currentuser
         global currentuser
         aoocursor = db.execute("SELECT * FROM aoo WHERE (user = ?)", (currentuser,));aoorow = aoocursor.fetchall()
@@ -296,11 +276,12 @@ class MainWindow:
 
         #Global Variables setup with current user parameters
         #AOO
-        global aoo_lowerRateLimitEntry,aoo_upperRateLimitEntry,aoo_atrialAmplitudeEntry,aoo_atrialPulseWidthEntry 
+        global aoo_lowerRateLimitEntry,aoo_upperRateLimitEntry,aoo_atrialAmplitudeEntry,aoo_atrialPulseWidthEntry,userLog
         aoo_lowerRateLimitEntry = str(aoorow[0][2])
         aoo_upperRateLimitEntry = str(aoorow[0][3])
         aoo_atrialAmplitudeEntry = str(aoorow[0][4])
         aoo_atrialPulseWidthEntry  = str(aoorow[0][5])
+        userLog = str(aoorow[0][6])
         
         #VOO
         global voo_lowerRateLimitEntry,voo_upperRateLimitEntry,voo_ventricularAmplitudeEntry,voo_ventricularPulseWidthEntry
@@ -308,7 +289,7 @@ class MainWindow:
         voo_upperRateLimitEntry = str(voorow[0][3])
         voo_ventricularAmplitudeEntry = str(voorow[0][4])
         voo_ventricularPulseWidthEntry  = str(voorow[0][5])
-
+        
         #AAI
         global aai_lowerRateLimitEntry,aai_upperRateLimitEntry,aai_atrialAmplitudeEntry,aai_atrialPulseWidthEntry,aai_atrialSensitivityEntry,aai_ARPEntry,aai_APVARPEntry,aai_hysteresisEntry,aai_rateSmoothingEntry
         aai_lowerRateLimitEntry = str(aairow[0][2])
@@ -580,6 +561,27 @@ class MainWindow:
         self.vviRateSmoothingValue.grid(row=7, column=3, padx=15, pady=15)
         #VVI END-------------------------------------------------------------------------------------------------------------------------------
 
+        #Track the process
+        self.logTitle = tk.Label(self.aoo, text = "History")
+        self.logTitle.grid(row=0, column=4, padx=15, pady=15)
+        self.aooLog = tk.Label(self.aoo, text = userLog)
+        self.aooLog.grid(row=1, column=4, padx=15, pady=15)
+        
+        self.logTitle = tk.Label(self.voo, text = "History")
+        self.logTitle.grid(row=0, column=4, padx=15, pady=15)
+        self.vooLog = tk.Label(self.voo, text = userLog)
+        self.vooLog.grid(row=1, column=4, padx=15, pady=15)
+
+        self.logTitle = tk.Label(self.aai, text = "History")
+        self.logTitle.grid(row=0, column=4, padx=15, pady=15)
+        self.aaiLog = tk.Label(self.aai, text = userLog)
+        self.aaiLog.grid(row=1, column=4, padx=15, pady=15)
+
+        self.logTitle = tk.Label(self.vvi, text = "History")
+        self.logTitle.grid(row=0, column=4, padx=15, pady=15)
+        self.vviLog = tk.Label(self.vvi, text = userLog)
+        self.vviLog.grid(row=1, column=4, padx=15, pady=15)
+
         #Position tabs properly
         self.tab_parent.pack(expand = 1, fill='both')
 
@@ -608,31 +610,43 @@ class MainWindow:
         if (value == "aooConfirm"):
             if messagebox.askyesno("Confirmation", "Upload these changes?"):
                 messagebox.showinfo("Done", "Success")
-                self.aooLog.config(text="aoo has done")
-                self.vooLog.config(text="aoo has done")
-                self.aaiLog.config(text="aoo has done")
-                self.vviLog.config(text="aoo has done")
+                userLog = "aoo has done"
+                self.aooLog.config(text=userLog)
+                self.vooLog.config(text=userLog)
+                self.aaiLog.config(text=userLog)
+                self.vviLog.config(text=userLog)
+                db.execute("UPDATE aoo SET userLog = ? WHERE (user = ?)", (userLog, currentuser))
+                db.commit()
         elif (value == "vooConfirm"):
             if messagebox.askyesno("Confirmation", "Upload these changes?"):
                 messagebox.showinfo("Done", "Success")
-                self.aooLog.config(text="voo has done")
-                self.vooLog.config(text="voo has done")
-                self.aaiLog.config(text="voo has done")
-                self.vviLog.config(text="voo has done")
+                userLog = "voo has done"
+                self.aooLog.config(text=userLog)
+                self.vooLog.config(text=userLog)
+                self.aaiLog.config(text=userLog)
+                self.vviLog.config(text=userLog)
+                db.execute("UPDATE aoo SET userLog = ? WHERE (user = ?)", (userLog, currentuser))
+                db.commit()
         elif (value == "aaiConfirm"):
             if messagebox.askyesno("Confirmation", "Upload these changes?"):
                 messagebox.showinfo("Done", "Success")
-                self.aooLog.config(text="aai has done")
-                self.vooLog.config(text="aai has done")
-                self.aaiLog.config(text="aai has done")
-                self.vviLog.config(text="aai has done")
+                userLog = "aai has done"
+                self.aooLog.config(text=userLog)
+                self.vooLog.config(text=userLog)
+                self.aaiLog.config(text=userLog)
+                self.vviLog.config(text=userLog)
+                db.execute("UPDATE aoo SET userLog = ? WHERE (user = ?)", (userLog, currentuser))
+                db.commit()
         elif (value == "vviConfirm"):
             if messagebox.askyesno("Confirmation", "Upload these changes?"):
                 messagebox.showinfo("Done", "Success")
-                self.aooLog.config(text="vvi has done")
-                self.vooLog.config(text="vvi has done")
-                self.aaiLog.config(text="vvi has done")
-                self.vviLog.config(text="vvi has done")
+                userLog = "vvi has done"
+                self.aooLog.config(text=userLog)
+                self.vooLog.config(text=userLog)
+                self.aaiLog.config(text=userLog)
+                self.vviLog.config(text=userLog)
+                db.execute("UPDATE aoo SET userLog = ? WHERE (user = ?)", (userLog, currentuser))
+                db.commit()
             
     #New window method
     def new_window(self,window):
@@ -1402,6 +1416,12 @@ class MainWindow:
         self.master.destroy()
         exit()
 
+
+#space reserved for serial communication
+
+ser = serial.Serial()
+print(ser.name)
+ser.close()
 
 #Main function that runs everything
 def main():
