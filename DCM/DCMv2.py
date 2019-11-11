@@ -197,7 +197,7 @@ class AddUserWindow:
         self.entry_username.delete(0, 'end')
         self.entry_password.delete(0, 'end')
         self.entry_password2.delete(0, 'end')
-        
+
         #Password verification
         if(password == password2):
             valid = 0
@@ -223,12 +223,13 @@ class AddUserWindow:
                     elif (counter2 > 10):
                         messagebox.showerror("Error", "Maximum allowed user limit reached")
                     else:
+                        userlog = 'No Mode Set'
                         db.execute("CREATE TABLE "+counters+" (aoo_lowerRateLimitEntry INTEGER NOT NULL, aoo_upperRateLimitEntry INTEGER NOT NULL, aoo_atrialAmplitudeEntry REAL NOT NULL, aoo_atrialPulseWidthEntry INTEGER NOT NULL,"
                             " voo_lowerRateLimitEntry INTEGER NOT NULL, voo_upperRateLimitEntry INTEGER NOT NULL, voo_ventricularAmplitudeEntry REAL NOT NULL, voo_ventricularPulseWidthEntry INTEGER NOT NULL,"
                             " aai_lowerRateLimitEntry INTEGER NOT NULL, aai_upperRateLimitEntry INTEGER NOT NULL, aai_atrialAmplitudeEntry REAL NOT NULL, aai_atrialPulseWidthEntry INTEGER NOT NULL, aai_atrialSensitivityEntry REAL NOT NULL, aai_ARPEntry INTEGER NOT NULL, aai_APVARPEntry INTEGER NOT NULL, aai_hysteresisEntry INTEGER NOT NULL, aai_rateSmoothingEntry INTEGER NOT NULL,"
-                            " vvi_lowerRateLimitEntry INTEGER NOT NULL, vvi_upperRateLimitEntry INTEGER NOT NULL, vvi_ventricularAmplitudeEntry REAL NOT NULL, vvi_ventricularPulseWidthEntry INTEGER NOT NULL, vvi_ventricularSensitivityEntry REAL NOT NULL, vvi_ARPEntry INTEGER NOT NULL, vvi_hysteresisEntry INTEGER NOT NULL, vvi_rateSmoothingEntry INTEGER NOT NULL)")
+                            " vvi_lowerRateLimitEntry INTEGER NOT NULL, vvi_upperRateLimitEntry INTEGER NOT NULL, vvi_ventricularAmplitudeEntry REAL NOT NULL, vvi_ventricularPulseWidthEntry INTEGER NOT NULL, vvi_ventricularSensitivityEntry REAL NOT NULL, vvi_ARPEntry INTEGER NOT NULL, vvi_hysteresisEntry INTEGER NOT NULL, vvi_rateSmoothingEntry INTEGER NOT NULL, userlog TEXT NOT NULL)")
                         db.execute("INSERT INTO users VALUES(?, ?, ?)", (username, password, counters))
-                        db.execute("INSERT INTO "+counters+" VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", (60, 120, 3.5, 1.5, 60, 120, 3.5, 1.5, 60, 120, 3.5, 1.5, 3.3, 250, 200, 0, 0, 60, 120, 3.5, 1.5, 3.3, 250, 0, 0))
+                        db.execute("INSERT INTO "+counters+" VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)", (60, 120, 3.5, 1.5, 60, 120, 3.5, 1.5, 60, 120, 3.5, 1.5, 3.3, 250, 200, 0, 0, 60, 120, 3.5, 1.5, 3.3, 250, 0, 0, userlog))
                         messagebox.showinfo("Success", "User Added")
                         self.quitButton.focus()
 
@@ -251,7 +252,7 @@ class MainWindow:
         #General window setup
         self.content = tk.Entry()
         self.master = master
-        self.master.geometry('650x570')
+        self.master.geometry('750x570')
         self.master.protocol("WM_DELETE_WINDOW", self.on_exit)
         self.menubar = tk.Menu(self.master)
         self.filemenu = tk.Menu(self.menubar, tearoff=0)
@@ -268,27 +269,6 @@ class MainWindow:
         self.tab_parent.add(self.voo, text = "VOO")
         self.tab_parent.add(self.aai, text = "AAI")
         self.tab_parent.add(self.vvi, text = "VVI")
-
-        #Track the process
-        self.logTitle = tk.Label(self.aoo, text = "Recent Activity")
-        self.logTitle.grid(row=0, column=4, padx=15, pady=15)
-        self.aooLog = tk.Label(self.aoo, text = "Nothing")
-        self.aooLog.grid(row=1, column=4, padx=15, pady=15)
-
-        self.logTitle = tk.Label(self.voo, text = "Recent Activity")
-        self.logTitle.grid(row=0, column=4, padx=15, pady=15)
-        self.vooLog = tk.Label(self.voo, text = "Nothing")
-        self.vooLog.grid(row=1, column=4, padx=15, pady=15)
-
-        self.logTitle = tk.Label(self.aai, text = "Recent Activity")
-        self.logTitle.grid(row=0, column=4, padx=15, pady=15)
-        self.aaiLog = tk.Label(self.aai, text = "Nothing")
-        self.aaiLog.grid(row=1, column=4, padx=15, pady=15)
-
-        self.logTitle = tk.Label(self.vvi, text = "Recent Activity")
-        self.logTitle.grid(row=0, column=4, padx=15, pady=15)
-        self.vviLog = tk.Label(self.vvi, text = "Nothing")
-        self.vviLog.grid(row=1, column=4, padx=15, pady=15)
 
         #Retrieve all relevant data from tables for currentuser
         global currentuser
@@ -331,6 +311,10 @@ class MainWindow:
         vvi_ARPEntry = str(row[0][22])
         vvi_hysteresisEntry = str(row[0][23])
         vvi_rateSmoothingEntry = str(row[0][24])
+
+        #Current Mode
+        global userlog
+        userlog = str(row[0][25])
 
         #AOO BEGIN-----------------------------------------------------------------------------------------------------------------------------
         #Setup buttons
@@ -580,6 +564,27 @@ class MainWindow:
         self.vviRateSmoothingValue.grid(row=7, column=3, padx=15, pady=15)
         #VVI END-------------------------------------------------------------------------------------------------------------------------------
 
+        #Track the process
+        self.logTitle = tk.Label(self.aoo, text = "Current Mode")
+        self.logTitle.grid(row=0, column=4, padx=15, pady=15)
+        self.aooLog = tk.Label(self.aoo, text = userlog)
+        self.aooLog.grid(row=1, column=4, padx=15, pady=15)
+        
+        self.logTitle = tk.Label(self.voo, text = "Current Mode")
+        self.logTitle.grid(row=0, column=4, padx=15, pady=15)
+        self.vooLog = tk.Label(self.voo, text = userlog)
+        self.vooLog.grid(row=1, column=4, padx=15, pady=15)
+
+        self.logTitle = tk.Label(self.aai, text = "Current Mode")
+        self.logTitle.grid(row=0, column=4, padx=15, pady=15)
+        self.aaiLog = tk.Label(self.aai, text = userlog)
+        self.aaiLog.grid(row=1, column=4, padx=15, pady=15)
+
+        self.logTitle = tk.Label(self.vvi, text = "Current Mode")
+        self.logTitle.grid(row=0, column=4, padx=15, pady=15)
+        self.vviLog = tk.Label(self.vvi, text = userlog)
+        self.vviLog.grid(row=1, column=4, padx=15, pady=15)
+
         #Position tabs properly
         self.tab_parent.pack(expand = 1, fill='both')
 
@@ -605,34 +610,47 @@ class MainWindow:
 
     #Confirm changes method
     def confirmChanges(self,value):
+        global currentuser
         if (value == "aooConfirm"):
             if messagebox.askyesno("Confirmation", "Upload these changes?"):
                 messagebox.showinfo("Done", "Success")
-                self.aooLog.config(text="AOO Was Last Updated")
-                self.vooLog.config(text="AOO Was Last Updated")
-                self.aaiLog.config(text="AOO Was Last Updated")
-                self.vviLog.config(text="AOO Was Last Updated")
+                userlog = "AOO Was Uploaded"
+                self.aooLog.config(text= userlog)
+                self.vooLog.config(text= userlog)
+                self.aaiLog.config(text= userlog)
+                self.vviLog.config(text= userlog)
+                db.execute("UPDATE "+currentuser+" SET userlog = ?", (userlog, ))
+                db.commit()
         elif (value == "vooConfirm"):
             if messagebox.askyesno("Confirmation", "Upload these changes?"):
                 messagebox.showinfo("Done", "Success")
-                self.aooLog.config(text="VOO Was Last Updated")
-                self.vooLog.config(text="VOO Was Last Updated")
-                self.aaiLog.config(text="VOO Was Last Updated")
-                self.vviLog.config(text="VOO Was Last Updated")
+                userlog = "VOO Was Uploaded"
+                self.aooLog.config(text= userlog)
+                self.vooLog.config(text= userlog)
+                self.aaiLog.config(text= userlog)
+                self.vviLog.config(text= userlog)
+                db.execute("UPDATE "+currentuser+" SET userlog = ?", (userlog, ))
+                db.commit()
         elif (value == "aaiConfirm"):
             if messagebox.askyesno("Confirmation", "Upload these changes?"):
                 messagebox.showinfo("Done", "Success")
-                self.aooLog.config(text="AAI Was Last Updated")
-                self.vooLog.config(text="AAI Was Last Updated")
-                self.aaiLog.config(text="AAI Was Last Updated")
-                self.vviLog.config(text="AAI Was Last Updated")
+                userlog = "AAI Was Uploaded"
+                self.aooLog.config(text= userlog)
+                self.vooLog.config(text= userlog)
+                self.aaiLog.config(text= userlog)
+                self.vviLog.config(text= userlog)
+                db.execute("UPDATE "+currentuser+" SET userlog = ?", (userlog, ))
+                db.commit()
         elif (value == "vviConfirm"):
             if messagebox.askyesno("Confirmation", "Upload these changes?"):
                 messagebox.showinfo("Done", "Success")
-                self.aooLog.config(text="VVI Was Last Updated")
-                self.vooLog.config(text="VVI Was Last Updated")
-                self.aaiLog.config(text="VVI Was Last Updated")
-                self.vviLog.config(text="VVI Was Last Updated")
+                userlog = "VVI Was Uploaded"
+                self.aooLog.config(text= userlog)
+                self.vooLog.config(text= userlog)
+                self.aaiLog.config(text= userlog)
+                self.vviLog.config(text= userlog)
+                db.execute("UPDATE "+currentuser+" SET userlog = ?", (userlog, ))
+                db.commit()
             
     #New window method
     def new_window(self,window):
