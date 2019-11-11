@@ -8,12 +8,7 @@ import sqlite3
 db = sqlite3.connect("DCM.sqlite", detect_types= sqlite3.PARSE_DECLTYPES)
 
 #Create seperate table for each state within database
-db.execute("CREATE TABLE IF NOT EXISTS AOO (user TEXT NOT NULL, password TEXT NOT NULL, aoo_lowerRateLimitEntry INTEGER NOT NULL, aoo_upperRateLimitEntry INTEGER NOT NULL, aoo_atrialAmplitudeEntry REAL NOT NULL, aoo_atrialPulseWidthEntry INTEGER NOT NULL)")
-db.execute("CREATE TABLE IF NOT EXISTS VOO (user TEXT NOT NULL, password TEXT NOT NULL, voo_lowerRateLimitEntry INTEGER NOT NULL, voo_upperRateLimitEntry INTEGER NOT NULL, voo_ventricularAmplitudeEntry REAL NOT NULL, voo_ventricularPulseWidthEntry INTEGER NOT NULL)")
-db.execute("CREATE TABLE IF NOT EXISTS AAI (user TEXT NOT NULL, password TEXT NOT NULL, aai_lowerRateLimitEntry INTEGER NOT NULL, aai_upperRateLimitEntry INTEGER NOT NULL, aai_atrialAmplitudeEntry REAL NOT NULL, aai_atrialPulseWidthEntry INTEGER NOT NULL,"
-           " aai_atrialSensitivityEntry REAL NOT NULL, aai_ARPEntry INTEGER NOT NULL, aai_APVARPEntry INTEGER NOT NULL, aai_hysteresisEntry INTEGER NOT NULL, aai_rateSmoothingEntry INTEGER NOT NULL)")
-db.execute("CREATE TABLE IF NOT EXISTS VVI (user TEXT NOT NULL, password TEXT NOT NULL, vvi_lowerRateLimitEntry INTEGER NOT NULL, vvi_upperRateLimitEntry INTEGER NOT NULL, vvi_ventricularAmplitudeEntry REAL NOT NULL, vvi_ventricularPulseWidthEntry INTEGER NOT NULL,"
-           " vvi_ventricularSensitivityEntry REAL NOT NULL, vvi_ARPEntry INTEGER NOT NULL, vvi_hysteresisEntry INTEGER NOT NULL, vvi_rateSmoothingEntry INTEGER NOT NULL)")
+db.execute("CREATE TABLE IF NOT EXISTS users (user TEXT NOT NULL, password TEXT NOT NULL, codename TEXT NOT NULL)")
 
 #Current User
 currentuser = ''
@@ -150,18 +145,17 @@ class LoginFrame:
         self.entry_password.delete(0, 'end')
 
         #Query Database to find username and password
-        cursor = db.execute("SELECT user FROM aoo WHERE (user = ?) and (password = ?)", (username,password))
-        row = cursor.fetchone()
+        cursor = db.execute("SELECT * FROM users WHERE (user = ?) and (password = ?)", (username,password,))
+        row = cursor.fetchall()
+
         if row:
             #If username is found then they become the current user
-            currentuser = username         
+            currentuser = str(row[0][2])
             self.master.withdraw()
             self.new_window(MainWindow)
         else:
             #Otherwise the username/password is wrong
             messagebox.showerror("Error", "Username/Password is Incorrect")
-
-            
 
 #Add new user class window
 class AddUserWindow:
@@ -189,7 +183,6 @@ class AddUserWindow:
         self.add_userbtn.grid(row=3,column=1,pady=10)
         self.quitButton = tk.Button(self.master, text = 'Back', width = 12, command = self.close_windows)
         self.quitButton.grid(row=4,column=1,pady=5)
-
         self.master.protocol("WM_DELETE_WINDOW", self.on_exit)
 
     #Method for clean exit 
@@ -207,32 +200,42 @@ class AddUserWindow:
         
         #Password verification
         if(password == password2):
-
-            #Query to find user already exists in the database
-            cursor = db.execute("SELECT user FROM aoo WHERE (user = ?)", (username,))
+            valid = 0
+            cursor = db.execute("SELECT user FROM users WHERE (user=?)", (username,))
             row = cursor.fetchone()
-
-            #Query to find total number of users
-            checker = db.execute('SELECT * FROM aoo')
-            counter = len(checker.fetchall())
-
-            #Verify there are no errors    
-            if (len(username) < 1 or len(password) < 1):
-                messagebox.showerror("Error", "Missing Username and/or Password")
-            elif row:
+            if row:
+                valid = 0
                 messagebox.showerror("Error", "User exists")
-            elif (counter > 9):
-                messagebox.showerror("Error", "Maximum allowed user limit reached")
-
-            #If everything is good create the user in the 4 tables
             else:
-                db.execute("INSERT INTO aoo VALUES(?, ?, ?, ?, ?, ?)", (username, password, 60, 120, 3.5, 1.5))
-                db.execute("INSERT INTO voo VALUES(?, ?, ?, ?, ?, ?)", (username, password, 60, 120, 3.5, 1.5))
-                db.execute("INSERT INTO aai VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", (username, password, 60, 120, 3.5, 1.5, 3.3, 250, 200, 0, 0))
-                db.execute("INSERT INTO vvi VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", (username, password, 60, 120, 3.5, 1.5, 3.3, 250, 0, 0))
-                messagebox.showinfo("Success", "User Added")
-                self.quitButton.focus()
-            db.commit()
+                checker = db.execute("SELECT * FROM sqlite_master WHERE type = 'table' AND name != 'android_metadata' AND name != 'sqlite_sequence';")
+                counter = len(checker.fetchall())
+                counters = "user"+str(counter+1)
+                valid = 1
+
+            if valid == 1:
+                try:
+                    checker = db.execute("SELECT * FROM sqlite_master WHERE type = 'table' AND name != 'android_metadata' AND name != 'sqlite_sequence';")
+                    counter2 = len(checker.fetchall())
+
+                    #Verify there are no errors    
+                    if (len(username) < 1 or len(password) < 1):
+                        messagebox.showerror("Error", "Missing Username and/or Password")
+                    elif (counter2 > 10):
+                        messagebox.showerror("Error", "Maximum allowed user limit reached")
+                    else:
+                        db.execute("CREATE TABLE "+counters+" (aoo_lowerRateLimitEntry INTEGER NOT NULL, aoo_upperRateLimitEntry INTEGER NOT NULL, aoo_atrialAmplitudeEntry REAL NOT NULL, aoo_atrialPulseWidthEntry INTEGER NOT NULL,"
+                            " voo_lowerRateLimitEntry INTEGER NOT NULL, voo_upperRateLimitEntry INTEGER NOT NULL, voo_ventricularAmplitudeEntry REAL NOT NULL, voo_ventricularPulseWidthEntry INTEGER NOT NULL,"
+                            " aai_lowerRateLimitEntry INTEGER NOT NULL, aai_upperRateLimitEntry INTEGER NOT NULL, aai_atrialAmplitudeEntry REAL NOT NULL, aai_atrialPulseWidthEntry INTEGER NOT NULL, aai_atrialSensitivityEntry REAL NOT NULL, aai_ARPEntry INTEGER NOT NULL, aai_APVARPEntry INTEGER NOT NULL, aai_hysteresisEntry INTEGER NOT NULL, aai_rateSmoothingEntry INTEGER NOT NULL,"
+                            " vvi_lowerRateLimitEntry INTEGER NOT NULL, vvi_upperRateLimitEntry INTEGER NOT NULL, vvi_ventricularAmplitudeEntry REAL NOT NULL, vvi_ventricularPulseWidthEntry INTEGER NOT NULL, vvi_ventricularSensitivityEntry REAL NOT NULL, vvi_ARPEntry INTEGER NOT NULL, vvi_hysteresisEntry INTEGER NOT NULL, vvi_rateSmoothingEntry INTEGER NOT NULL)")
+                        db.execute("INSERT INTO users VALUES(?, ?, ?)", (username, password, counters))
+                        db.execute("INSERT INTO "+counters+" VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", (60, 120, 3.5, 1.5, 60, 120, 3.5, 1.5, 60, 120, 3.5, 1.5, 3.3, 250, 200, 0, 0, 60, 120, 3.5, 1.5, 3.3, 250, 0, 0))
+                        messagebox.showinfo("Success", "User Added")
+                        self.quitButton.focus()
+
+                except Exception as e:
+                    messagebox.showerror("Error", "User exists")
+                
+                db.commit()
 
         #Passwords don't match
         else:
@@ -267,70 +270,67 @@ class MainWindow:
         self.tab_parent.add(self.vvi, text = "VVI")
 
         #Track the process
-        self.logTitle = tk.Label(self.aoo, text = "Process")
+        self.logTitle = tk.Label(self.aoo, text = "Recent Activity")
         self.logTitle.grid(row=0, column=4, padx=15, pady=15)
-        self.aooLog = tk.Label(self.aoo, text = "log")
+        self.aooLog = tk.Label(self.aoo, text = "Nothing")
         self.aooLog.grid(row=1, column=4, padx=15, pady=15)
 
-        self.logTitle = tk.Label(self.voo, text = "Process")
+        self.logTitle = tk.Label(self.voo, text = "Recent Activity")
         self.logTitle.grid(row=0, column=4, padx=15, pady=15)
-        self.vooLog = tk.Label(self.voo, text = "log")
+        self.vooLog = tk.Label(self.voo, text = "Nothing")
         self.vooLog.grid(row=1, column=4, padx=15, pady=15)
 
-        self.logTitle = tk.Label(self.aai, text = "Process")
+        self.logTitle = tk.Label(self.aai, text = "Recent Activity")
         self.logTitle.grid(row=0, column=4, padx=15, pady=15)
-        self.aaiLog = tk.Label(self.aai, text = "log")
+        self.aaiLog = tk.Label(self.aai, text = "Nothing")
         self.aaiLog.grid(row=1, column=4, padx=15, pady=15)
 
-        self.logTitle = tk.Label(self.vvi, text = "Process")
+        self.logTitle = tk.Label(self.vvi, text = "Recent Activity")
         self.logTitle.grid(row=0, column=4, padx=15, pady=15)
-        self.vviLog = tk.Label(self.vvi, text = "log")
+        self.vviLog = tk.Label(self.vvi, text = "Nothing")
         self.vviLog.grid(row=1, column=4, padx=15, pady=15)
 
         #Retrieve all relevant data from tables for currentuser
         global currentuser
-        aoocursor = db.execute("SELECT * FROM aoo WHERE (user = ?)", (currentuser,));aoorow = aoocursor.fetchall()
-        voocursor = db.execute("SELECT * FROM voo WHERE (user = ?)", (currentuser,));voorow = voocursor.fetchall()
-        aaicursor = db.execute("SELECT * FROM aai WHERE (user = ?)", (currentuser,));aairow = aaicursor.fetchall()
-        vvicursor = db.execute("SELECT * FROM vvi WHERE (user = ?)", (currentuser,));vvirow = vvicursor.fetchall()
+        cursor = db.execute("SELECT * FROM "+currentuser);row = cursor.fetchall()
 
         #Global Variables setup with current user parameters
         #AOO
         global aoo_lowerRateLimitEntry,aoo_upperRateLimitEntry,aoo_atrialAmplitudeEntry,aoo_atrialPulseWidthEntry 
-        aoo_lowerRateLimitEntry = str(aoorow[0][2])
-        aoo_upperRateLimitEntry = str(aoorow[0][3])
-        aoo_atrialAmplitudeEntry = str(aoorow[0][4])
-        aoo_atrialPulseWidthEntry  = str(aoorow[0][5])
+        aoo_lowerRateLimitEntry = str(row[0][0])
+        aoo_upperRateLimitEntry = str(row[0][1])
+        aoo_atrialAmplitudeEntry = str(row[0][2])
+        aoo_atrialPulseWidthEntry  = str(row[0][3])
         
         #VOO
         global voo_lowerRateLimitEntry,voo_upperRateLimitEntry,voo_ventricularAmplitudeEntry,voo_ventricularPulseWidthEntry
-        voo_lowerRateLimitEntry = str(voorow[0][2])
-        voo_upperRateLimitEntry = str(voorow[0][3])
-        voo_ventricularAmplitudeEntry = str(voorow[0][4])
-        voo_ventricularPulseWidthEntry  = str(voorow[0][5])
+        voo_lowerRateLimitEntry = str(row[0][4])
+        voo_upperRateLimitEntry = str(row[0][5])
+        voo_ventricularAmplitudeEntry = str(row[0][6])
+        voo_ventricularPulseWidthEntry  = str(row[0][7])
 
         #AAI
         global aai_lowerRateLimitEntry,aai_upperRateLimitEntry,aai_atrialAmplitudeEntry,aai_atrialPulseWidthEntry,aai_atrialSensitivityEntry,aai_ARPEntry,aai_APVARPEntry,aai_hysteresisEntry,aai_rateSmoothingEntry
-        aai_lowerRateLimitEntry = str(aairow[0][2])
-        aai_upperRateLimitEntry = str(aairow[0][3])
-        aai_atrialAmplitudeEntry = str(aairow[0][4])
-        aai_atrialPulseWidthEntry  = str(aairow[0][5])
-        aai_atrialSensitivityEntry = str(aairow[0][6])
-        aai_ARPEntry = str(aairow[0][7])
-        aai_APVARPEntry = str(aairow[0][8])
-        aai_hysteresisEntry = str(aairow[0][9])
-        aai_rateSmoothingEntry = str(aairow[0][10])
+        aai_lowerRateLimitEntry = str(row[0][8])
+        aai_upperRateLimitEntry = str(row[0][9])
+        aai_atrialAmplitudeEntry = str(row[0][10])
+        aai_atrialPulseWidthEntry  = str(row[0][11])
+        aai_atrialSensitivityEntry = str(row[0][12])
+        aai_ARPEntry = str(row[0][13])
+        aai_APVARPEntry = str(row[0][14])
+        aai_hysteresisEntry = str(row[0][15])
+        aai_rateSmoothingEntry = str(row[0][16])
 
         #VVI
         global vvi_lowerRateLimitEntry,vvi_upperRateLimitEntry,vvi_ventricularAmplitudeEntry,vvi_ventricularPulseWidthEntry,vvi_ventricularSensitivityEntry,vvi_ARPEntry,vvi_hysteresisEntry,vvi_rateSmoothingEntry
-        vvi_lowerRateLimitEntry = str(vvirow[0][2])
-        vvi_upperRateLimitEntry = str(vvirow[0][3])
-        vvi_ventricularAmplitudeEntry = str(vvirow[0][4])
-        vvi_ventricularPulseWidthEntry  = str(vvirow[0][5])
-        vvi_ventricularSensitivityEntry = str(vvirow[0][6])
-        vvi_ARPEntry = str(vvirow[0][7])
-        vvi_hysteresisEntry = str(vvirow[0][8])
-        vvi_rateSmoothingEntry = str(vvirow[0][9])
+        vvi_lowerRateLimitEntry = str(row[0][17])
+        vvi_upperRateLimitEntry = str(row[0][18])
+        vvi_ventricularAmplitudeEntry = str(row[0][19])
+        vvi_ventricularPulseWidthEntry  = str(row[0][20])
+        vvi_ventricularSensitivityEntry = str(row[0][21])
+        vvi_ARPEntry = str(row[0][22])
+        vvi_hysteresisEntry = str(row[0][23])
+        vvi_rateSmoothingEntry = str(row[0][24])
 
         #AOO BEGIN-----------------------------------------------------------------------------------------------------------------------------
         #Setup buttons
@@ -462,7 +462,7 @@ class MainWindow:
         self.aaiAtrialSensitivityEntry = tk.Spinbox(self.aai,from_=0.25,to=10.0,format="%.2f",increment=0.25)
         self.aaiARPEntry = tk.Spinbox(self.aai,from_=150,to=500,increment=10)
         self.aaiAPVARPEntry = tk.Spinbox(self.aai,from_=150,to=500,increment=10)
-        self.aaiHysteresisEntry = tk.Entry(self.aai)
+        self.aaiHysteresisEntry = tk.Spinbox(self.aai,from_=0,to=25,increment=5)
         self.aaiRateSmoothingEntry = tk.Spinbox(self.aai,from_=0,to=25,increment=3)
 
         #Adjust positioning
@@ -542,7 +542,7 @@ class MainWindow:
         self.vviAtrialPulseWidthEntry = tk.Spinbox(self.vvi,from_=0.05,to=1.9,format="%.2f",increment=0.1)
         self.vviAtrialSensitivityEntry = tk.Spinbox(self.vvi,from_=0.25,to=10.0,format="%.2f",increment=0.25)
         self.vviARPEntry = tk.Spinbox(self.vvi,from_=150,to=500,increment=10)
-        self.vviHysteresisEntry = tk.Entry(self.vvi)
+        self.vviHysteresisEntry = tk.Spinbox(self.vvi,from_=0,to=25,increment=5)
         self.vviRateSmoothingEntry = tk.Spinbox(self.vvi,from_=0,to=25,increment=3)
 
         #Adjust positioning
@@ -608,31 +608,31 @@ class MainWindow:
         if (value == "aooConfirm"):
             if messagebox.askyesno("Confirmation", "Upload these changes?"):
                 messagebox.showinfo("Done", "Success")
-                self.aooLog.config(text="aoo has done")
-                self.vooLog.config(text="aoo has done")
-                self.aaiLog.config(text="aoo has done")
-                self.vviLog.config(text="aoo has done")
+                self.aooLog.config(text="AOO Was Last Updated")
+                self.vooLog.config(text="AOO Was Last Updated")
+                self.aaiLog.config(text="AOO Was Last Updated")
+                self.vviLog.config(text="AOO Was Last Updated")
         elif (value == "vooConfirm"):
             if messagebox.askyesno("Confirmation", "Upload these changes?"):
                 messagebox.showinfo("Done", "Success")
-                self.aooLog.config(text="voo has done")
-                self.vooLog.config(text="voo has done")
-                self.aaiLog.config(text="voo has done")
-                self.vviLog.config(text="voo has done")
+                self.aooLog.config(text="VOO Was Last Updated")
+                self.vooLog.config(text="VOO Was Last Updated")
+                self.aaiLog.config(text="VOO Was Last Updated")
+                self.vviLog.config(text="VOO Was Last Updated")
         elif (value == "aaiConfirm"):
             if messagebox.askyesno("Confirmation", "Upload these changes?"):
                 messagebox.showinfo("Done", "Success")
-                self.aooLog.config(text="aai has done")
-                self.vooLog.config(text="aai has done")
-                self.aaiLog.config(text="aai has done")
-                self.vviLog.config(text="aai has done")
+                self.aooLog.config(text="AAI Was Last Updated")
+                self.vooLog.config(text="AAI Was Last Updated")
+                self.aaiLog.config(text="AAI Was Last Updated")
+                self.vviLog.config(text="AAI Was Last Updated")
         elif (value == "vviConfirm"):
             if messagebox.askyesno("Confirmation", "Upload these changes?"):
                 messagebox.showinfo("Done", "Success")
-                self.aooLog.config(text="vvi has done")
-                self.vooLog.config(text="vvi has done")
-                self.aaiLog.config(text="vvi has done")
-                self.vviLog.config(text="vvi has done")
+                self.aooLog.config(text="VVI Was Last Updated")
+                self.vooLog.config(text="VVI Was Last Updated")
+                self.aaiLog.config(text="VVI Was Last Updated")
+                self.vviLog.config(text="VVI Was Last Updated")
             
     #New window method
     def new_window(self,window):
@@ -681,10 +681,11 @@ class MainWindow:
                         messagebox.showinfo("Done", "Success")
                         aoo_lowerRateLimitEntry = temp
                         self.aooLowerRateLimitValue.config(text="Current Value: " + aoo_lowerRateLimitEntry)
-                        db.execute("UPDATE aoo SET aoo_lowerRateLimitEntry = ? WHERE (user = ?)", (aoo_lowerRateLimitEntry, currentuser))
+                        db.execute("UPDATE "+currentuser+" SET aoo_lowerRateLimitEntry = ?", (aoo_lowerRateLimitEntry,))
                         db.commit()
 
-            except:
+            except Exception as e:
+                print(e)
                 messagebox.showinfo("Error","Please enter a valid value")
                 pass
 
@@ -714,7 +715,7 @@ class MainWindow:
                         messagebox.showinfo("Done", "Success")
                         aoo_upperRateLimitEntry = temp
                         self.aooUpperRateLimitValue.config(text="Current Value: " + aoo_upperRateLimitEntry)
-                        db.execute("UPDATE aoo SET aoo_upperRateLimitEntry = ? WHERE (user = ?)", (aoo_upperRateLimitEntry, currentuser))
+                        db.execute("UPDATE "+currentuser+" SET aoo_upperRateLimitEntry = ?", (aoo_upperRateLimitEntry,))
                         db.commit()
 
             except:
@@ -741,7 +742,7 @@ class MainWindow:
                         messagebox.showinfo("Done", "Success")
                         aoo_atrialAmplitudeEntry = temp
                         self.aooAtrialAmplitudeValue.config(text="Current Value: " + aoo_atrialAmplitudeEntry)
-                        db.execute("UPDATE aoo SET aoo_atrialAmplitudeEntry = ? WHERE (user = ?)", (aoo_atrialAmplitudeEntry, currentuser))
+                        db.execute("UPDATE "+currentuser+" SET aoo_atrialAmplitudeEntry = ?", (aoo_atrialAmplitudeEntry,))
                         db.commit()
 
             except:
@@ -769,7 +770,7 @@ class MainWindow:
                         messagebox.showinfo("Done", "Success")
                         aoo_atrialPulseWidthEntry = temp
                         self.aooAtrialPulseWidthValue.config(text="Current Value: " + aoo_atrialPulseWidthEntry)
-                        db.execute("UPDATE aoo SET aoo_atrialPulseWidthEntry = ? WHERE (user = ?)", (aoo_atrialPulseWidthEntry, currentuser))
+                        db.execute("UPDATE "+currentuser+" SET aoo_atrialPulseWidthEntry = ?", (aoo_atrialPulseWidthEntry,))
                         db.commit()
 
             except:
@@ -803,7 +804,7 @@ class MainWindow:
                         messagebox.showinfo("Done", "Success")
                         voo_lowerRateLimitEntry = temp
                         self.vooLowerRateLimitValue.config(text="Current Value: " + voo_lowerRateLimitEntry)
-                        db.execute("UPDATE voo SET voo_lowerRateLimitEntry = ? WHERE (user = ?)", (voo_lowerRateLimitEntry, currentuser))
+                        db.execute("UPDATE "+currentuser+" SET voo_lowerRateLimitEntry = ?", (voo_lowerRateLimitEntry,))
                         db.commit()
                         
             except:
@@ -836,7 +837,7 @@ class MainWindow:
                         messagebox.showinfo("Done", "Success")
                         voo_upperRateLimitEntry = temp
                         self.vooUpperRateLimitValue.config(text="Current Value: " + voo_upperRateLimitEntry)
-                        db.execute("UPDATE voo SET voo_upperRateLimitEntry = ? WHERE (user = ?)", (voo_upperRateLimitEntry, currentuser))
+                        db.execute("UPDATE "+currentuser+" SET voo_upperRateLimitEntry = ?", (voo_upperRateLimitEntry,))
                         db.commit()
 
             except:
@@ -864,7 +865,7 @@ class MainWindow:
                         messagebox.showinfo("Done", "Success")
                         voo_ventricularAmplitudeEntry = temp
                         self.vooAtrialAmplitudeValue.config(text="Current Value: " + voo_ventricularAmplitudeEntry)
-                        db.execute("UPDATE voo SET voo_ventricularAmplitudeEntry = ? WHERE (user = ?)", (voo_ventricularAmplitudeEntry, currentuser))
+                        db.execute("UPDATE "+currentuser+" SET voo_ventricularAmplitudeEntry = ?", (voo_ventricularAmplitudeEntry,))
                         db.commit()
 
             except:
@@ -892,7 +893,7 @@ class MainWindow:
                         messagebox.showinfo("Done", "Success")
                         voo_ventricularPulseWidthEntry = temp
                         self.vooAtrialPulseWidthValue.config(text="Current Value: " + voo_ventricularPulseWidthEntry)
-                        db.execute("UPDATE voo SET voo_ventricularPulseWidthEntry = ? WHERE (user = ?)", (voo_ventricularPulseWidthEntry, currentuser))
+                        db.execute("UPDATE "+currentuser+" SET voo_ventricularPulseWidthEntry = ?", (voo_ventricularPulseWidthEntry,))
                         db.commit()
 
             except:
@@ -925,7 +926,7 @@ class MainWindow:
                         messagebox.showinfo("Done", "Success")
                         aai_lowerRateLimitEntry = temp
                         self.aaiLowerRateLimitValue.config(text="Current Value: " + aai_lowerRateLimitEntry)
-                        db.execute("UPDATE aai SET aai_lowerRateLimitEntry = ? WHERE (user = ?)", (aai_lowerRateLimitEntry, currentuser))
+                        db.execute("UPDATE "+currentuser+" SET aai_lowerRateLimitEntry = ?", (aai_lowerRateLimitEntry,))
                         db.commit()
 
             except:
@@ -957,7 +958,7 @@ class MainWindow:
                         messagebox.showinfo("Done", "Success")
                         aai_upperRateLimitEntry = temp
                         self.aaiUpperRateLimitValue.config(text="Current Value: " + aai_upperRateLimitEntry)
-                        db.execute("UPDATE aai SET aai_upperRateLimitEntry = ? WHERE (user = ?)", (aai_upperRateLimitEntry, currentuser))
+                        db.execute("UPDATE "+currentuser+" SET aai_upperRateLimitEntry = ?", (aai_upperRateLimitEntry,))
                         db.commit()
 
             except:
@@ -985,7 +986,7 @@ class MainWindow:
                         messagebox.showinfo("Done", "Success")
                         aai_atrialAmplitudeEntry  = temp
                         self.aaiAtrialAmplitudeValue.config(text="Current Value: " + aai_atrialAmplitudeEntry)
-                        db.execute("UPDATE aai SET aai_atrialAmplitudeEntry = ? WHERE (user = ?)", (aai_atrialAmplitudeEntry, currentuser))
+                        db.execute("UPDATE "+currentuser+" SET aai_atrialAmplitudeEntry = ?", (aai_atrialAmplitudeEntry,))
                         db.commit()
 
             except:
@@ -1013,7 +1014,7 @@ class MainWindow:
                         messagebox.showinfo("Done", "Success")
                         aai_atrialPulseWidthEntry = temp
                         self.aaiAtrialPulseWidthValue.config(text="Current Value: " + aai_atrialPulseWidthEntry)
-                        db.execute("UPDATE aai SET aai_atrialPulseWidthEntry = ? WHERE (user = ?)", (aai_atrialPulseWidthEntry, currentuser))
+                        db.execute("UPDATE "+currentuser+" SET aai_atrialPulseWidthEntry = ?", (aai_atrialPulseWidthEntry,))
                         db.commit()
 
             except:
@@ -1041,7 +1042,7 @@ class MainWindow:
                         messagebox.showinfo("Done", "Success")
                         aai_atrialSensitivityEntry = temp
                         self.aaiAtrialSensitivityValue.config(text="Current Value: " + aai_atrialSensitivityEntry)
-                        db.execute("UPDATE aai SET aai_atrialSensitivityEntry = ? WHERE (user = ?)", (aai_atrialSensitivityEntry, currentuser))
+                        db.execute("UPDATE "+currentuser+" SET aai_atrialSensitivityEntry = ?", (aai_atrialSensitivityEntry,))
                         db.commit()
 
             except:
@@ -1069,7 +1070,7 @@ class MainWindow:
                         messagebox.showinfo("Done", "Success")
                         aai_ARPEntry = temp
                         self.aaiARPValue.config(text="Current Value: " + aai_ARPEntry)
-                        db.execute("UPDATE aai SET aai_ARPEntry = ? WHERE (user = ?)", (aai_ARPEntry, currentuser))
+                        db.execute("UPDATE "+currentuser+" SET aai_ARPEntry = ?", (aai_ARPEntry,))
                         db.commit()
 
             except:
@@ -1097,7 +1098,7 @@ class MainWindow:
                         messagebox.showinfo("Done", "Success")
                         aai_APVARPEntry = temp
                         self.aaiAPVARPValue.config(text="Current Value: " + aai_APVARPEntry)
-                        db.execute("UPDATE aai SET aai_APVARPEntry = ? WHERE (user = ?)", (aai_APVARPEntry, currentuser))
+                        db.execute("UPDATE "+currentuser+" SET aai_APVARPEntry = ?", (aai_APVARPEntry,))
                         db.commit()
 
             except:
@@ -1120,7 +1121,7 @@ class MainWindow:
                         messagebox.showinfo("Done", "Success")
                         aai_hysteresisEntry = temp
                         self.aaiHysteresisValue.config(text="Current Value: " + aai_hysteresisEntry)
-                        db.execute("UPDATE aai SET aai_hysteresisEntry = ? WHERE (user = ?)", (aai_hysteresisEntry, currentuser))
+                        db.execute("UPDATE "+currentuser+" SET aai_hysteresisEntry = ?", (aai_hysteresisEntry,))
                         db.commit()
 
             except:
@@ -1148,7 +1149,7 @@ class MainWindow:
                         messagebox.showinfo("Done", "Success")
                         aai_rateSmoothingEntry = temp
                         self.aaiRateSmoothingValue.config(text="Current Value: " + aai_rateSmoothingEntry)
-                        db.execute("UPDATE aai SET aai_rateSmoothingEntry = ? WHERE (user = ?)", (aai_rateSmoothingEntry, currentuser))
+                        db.execute("UPDATE "+currentuser+" SET aai_rateSmoothingEntry = ?", (aai_rateSmoothingEntry,))
                         db.commit()
 
             except:
@@ -1182,7 +1183,7 @@ class MainWindow:
                         messagebox.showinfo("Done", "Success")
                         vvi_lowerRateLimitEntry = temp
                         self.vviLowerRateLimitValue.config(text="Current Value: " + vvi_lowerRateLimitEntry)
-                        db.execute("UPDATE vvi SET vvi_lowerRateLimitEntry = ? WHERE (user = ?)", (vvi_lowerRateLimitEntry, currentuser))
+                        db.execute("UPDATE "+currentuser+" SET vvi_lowerRateLimitEntry = ?", (vvi_lowerRateLimitEntry,))
                         db.commit()
 
             except:
@@ -1215,7 +1216,7 @@ class MainWindow:
                         messagebox.showinfo("Done", "Success")
                         vvi_upperRateLimitEntry = temp
                         self.vviUpperRateLimitValue.config(text="Current Value: " + vvi_upperRateLimitEntry)
-                        db.execute("UPDATE vvi SET vvi_upperRateLimitEntry = ? WHERE (user = ?)", (vvi_upperRateLimitEntry, currentuser))
+                        db.execute("UPDATE "+currentuser+" SET vvi_upperRateLimitEntry = ?", (vvi_upperRateLimitEntry,))
                         db.commit()
 
             except:
@@ -1243,7 +1244,7 @@ class MainWindow:
                         messagebox.showinfo("Done", "Success")
                         vvi_ventricularAmplitudeEntry = temp
                         self.vviAtrialAmplitudeValue.config(text="Current Value: " + vvi_ventricularAmplitudeEntry)
-                        db.execute("UPDATE vvi SET vvi_ventricularAmplitudeEntry = ? WHERE (user = ?)", (vvi_ventricularAmplitudeEntry, currentuser))
+                        db.execute("UPDATE "+currentuser+" SET vvi_ventricularAmplitudeEntry = ?", (vvi_ventricularAmplitudeEntry,))
                         db.commit()
 
             except:
@@ -1271,7 +1272,7 @@ class MainWindow:
                         messagebox.showinfo("Done", "Success")
                         vvi_ventricularPulseWidthEntry = temp
                         self.vviAtrialPulseWidthValue.config(text="Current Value: " + vvi_ventricularPulseWidthEntry)
-                        db.execute("UPDATE vvi SET vvi_ventricularPulseWidthEntry = ? WHERE (user = ?)", (vvi_ventricularPulseWidthEntry, currentuser))
+                        db.execute("UPDATE "+currentuser+" SET vvi_ventricularPulseWidthEntry = ?", (vvi_ventricularPulseWidthEntry,))
                         db.commit()
 
             except:
@@ -1299,7 +1300,7 @@ class MainWindow:
                         messagebox.showinfo("Done", "Success")
                         vvi_ventricularSensitivityEntry = temp
                         self.vviAtrialSensitivityValue.config(text="Current Value: " + vvi_ventricularSensitivityEntry)
-                        db.execute("UPDATE vvi SET vvi_ventricularSensitivityEntry = ? WHERE (user = ?)", (vvi_ventricularSensitivityEntry, currentuser))
+                        db.execute("UPDATE "+currentuser+" SET vvi_ventricularSensitivityEntry = ?", (vvi_ventricularSensitivityEntry,))
                         db.commit()
 
             except:
@@ -1327,7 +1328,7 @@ class MainWindow:
                         messagebox.showinfo("Done", "Success")
                         vvi_ARPEntry = temp
                         self.vviARPValue.config(text="Current Value: " + vvi_ARPEntry)
-                        db.execute("UPDATE vvi SET vvi_ARPEntry = ? WHERE (user = ?)", (vvi_ARPEntry, currentuser))
+                        db.execute("UPDATE "+currentuser+" SET vvi_ARPEntry = ?", (vvi_ARPEntry,))
                         db.commit()
 
             except:
@@ -1350,7 +1351,7 @@ class MainWindow:
                         messagebox.showinfo("Done", "Success")
                         vvi_hysteresisEntry = temp
                         self.vviHysteresisValue.config(text="Current Value: " + vvi_hysteresisEntry)
-                        db.execute("UPDATE vvi SET vvi_hysteresisEntry = ? WHERE (user = ?)", (vvi_hysteresisEntry, currentuser))
+                        db.execute("UPDATE "+currentuser+" SET vvi_hysteresisEntry = ?", (vvi_hysteresisEntry,))
                         db.commit()
 
             except:
@@ -1378,7 +1379,7 @@ class MainWindow:
                         messagebox.showinfo("Done", "Success")
                         vvi_rateSmoothingEntry = temp
                         self.vviRateSmoothingValue.config(text="Current Value: " + vvi_rateSmoothingEntry)
-                        db.execute("UPDATE vvi SET vvi_rateSmoothingEntry = ? WHERE (user = ?)", (vvi_rateSmoothingEntry, currentuser))
+                        db.execute("UPDATE "+currentuser+" SET vvi_rateSmoothingEntry = ?", (vvi_rateSmoothingEntry,))
                         db.commit()
 
             except:
