@@ -224,12 +224,13 @@ class AddUserWindow:
                         messagebox.showerror("Error", "Maximum allowed user limit reached")
                     else:
                         userlog = 'No Mode Set'
-                        db.execute("CREATE TABLE "+counters+" (aoo_lowerRateLimitEntry INTEGER NOT NULL, aoo_upperRateLimitEntry INTEGER NOT NULL, aoo_atrialAmplitudeEntry REAL NOT NULL, aoo_atrialPulseWidthEntry INTEGER NOT NULL,"
+                        db.execute("CREATE TABLE "+counters+" (userlog TEXT NOT NULL,"
+                            " aoo_lowerRateLimitEntry INTEGER NOT NULL, aoo_upperRateLimitEntry INTEGER NOT NULL, aoo_atrialAmplitudeEntry REAL NOT NULL, aoo_atrialPulseWidthEntry INTEGER NOT NULL,"
                             " voo_lowerRateLimitEntry INTEGER NOT NULL, voo_upperRateLimitEntry INTEGER NOT NULL, voo_ventricularAmplitudeEntry REAL NOT NULL, voo_ventricularPulseWidthEntry INTEGER NOT NULL,"
                             " aai_lowerRateLimitEntry INTEGER NOT NULL, aai_upperRateLimitEntry INTEGER NOT NULL, aai_atrialAmplitudeEntry REAL NOT NULL, aai_atrialPulseWidthEntry INTEGER NOT NULL, aai_atrialSensitivityEntry REAL NOT NULL, aai_ARPEntry INTEGER NOT NULL, aai_APVARPEntry INTEGER NOT NULL, aai_hysteresisEntry INTEGER NOT NULL, aai_rateSmoothingEntry INTEGER NOT NULL,"
-                            " vvi_lowerRateLimitEntry INTEGER NOT NULL, vvi_upperRateLimitEntry INTEGER NOT NULL, vvi_ventricularAmplitudeEntry REAL NOT NULL, vvi_ventricularPulseWidthEntry INTEGER NOT NULL, vvi_ventricularSensitivityEntry REAL NOT NULL, vvi_ARPEntry INTEGER NOT NULL, vvi_hysteresisEntry INTEGER NOT NULL, vvi_rateSmoothingEntry INTEGER NOT NULL, userlog TEXT NOT NULL)")
+                            " vvi_lowerRateLimitEntry INTEGER NOT NULL, vvi_upperRateLimitEntry INTEGER NOT NULL, vvi_ventricularAmplitudeEntry REAL NOT NULL, vvi_ventricularPulseWidthEntry INTEGER NOT NULL, vvi_ventricularSensitivityEntry REAL NOT NULL, vvi_ARPEntry INTEGER NOT NULL, vvi_hysteresisEntry INTEGER NOT NULL, vvi_rateSmoothingEntry INTEGER NOT NULL)")
                         db.execute("INSERT INTO users VALUES(?, ?, ?)", (username, password, counters))
-                        db.execute("INSERT INTO "+counters+" VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)", (60, 120, 3.5, 1.5, 60, 120, 3.5, 1.5, 60, 120, 3.5, 1.5, 3.3, 250, 200, 0, 0, 60, 120, 3.5, 1.5, 3.3, 250, 0, 0, userlog))
+                        db.execute("INSERT INTO "+counters+" VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)", (userlog, 60, 120, 3.5, 1.5, 60, 120, 3.5, 1.5, 60, 120, 3.5, 1.5, 3.3, 250, 200, 0, 0, 60, 120, 3.5, 1.5, 3.3, 250, 0, 0))
                         messagebox.showinfo("Success", "User Added")
                         self.quitButton.focus()
 
@@ -274,47 +275,47 @@ class MainWindow:
         global currentuser
         cursor = db.execute("SELECT * FROM "+currentuser);row = cursor.fetchall()
 
+        #Current Mode
+        global userlog
+        userlog                           = str(row[0][0])
+
         #Global Variables setup with current user parameters
         #AOO
         global aoo_lowerRateLimitEntry,aoo_upperRateLimitEntry,aoo_atrialAmplitudeEntry,aoo_atrialPulseWidthEntry 
-        aoo_lowerRateLimitEntry = str(row[0][0])
-        aoo_upperRateLimitEntry = str(row[0][1])
-        aoo_atrialAmplitudeEntry = str(row[0][2])
-        aoo_atrialPulseWidthEntry  = str(row[0][3])
+        aoo_lowerRateLimitEntry           = str(row[0][1])
+        aoo_upperRateLimitEntry           = str(row[0][2])
+        aoo_atrialAmplitudeEntry          = str(row[0][3])
+        aoo_atrialPulseWidthEntry         = str(row[0][4])
         
         #VOO
         global voo_lowerRateLimitEntry,voo_upperRateLimitEntry,voo_ventricularAmplitudeEntry,voo_ventricularPulseWidthEntry
-        voo_lowerRateLimitEntry = str(row[0][4])
-        voo_upperRateLimitEntry = str(row[0][5])
-        voo_ventricularAmplitudeEntry = str(row[0][6])
-        voo_ventricularPulseWidthEntry  = str(row[0][7])
+        voo_lowerRateLimitEntry           = str(row[0][5])
+        voo_upperRateLimitEntry           = str(row[0][6])
+        voo_ventricularAmplitudeEntry     = str(row[0][7])
+        voo_ventricularPulseWidthEntry    = str(row[0][8])
 
         #AAI
-        global aai_lowerRateLimitEntry,aai_upperRateLimitEntry,aai_atrialAmplitudeEntry,aai_atrialPulseWidthEntry,aai_atrialSensitivityEntry,aai_ARPEntry,aai_APVARPEntry,aai_hysteresisEntry,aai_rateSmoothingEntry
-        aai_lowerRateLimitEntry = str(row[0][8])
-        aai_upperRateLimitEntry = str(row[0][9])
-        aai_atrialAmplitudeEntry = str(row[0][10])
-        aai_atrialPulseWidthEntry  = str(row[0][11])
-        aai_atrialSensitivityEntry = str(row[0][12])
-        aai_ARPEntry = str(row[0][13])
-        aai_APVARPEntry = str(row[0][14])
-        aai_hysteresisEntry = str(row[0][15])
-        aai_rateSmoothingEntry = str(row[0][16])
+        global aai_lowerRateLimitEntry,aai_upperRateLimitEntry,aai_atrialAmplitudeEntry,aai_atrialPulseWidthEntry,aai_atrialSensitivityEntry,aai_ARPEntry,aai_PVARPEntry,aai_hysteresisEntry,aai_rateSmoothingEntry
+        aai_lowerRateLimitEntry           = str(row[0][9])
+        aai_upperRateLimitEntry           = str(row[0][10])
+        aai_atrialAmplitudeEntry          = str(row[0][11])
+        aai_atrialPulseWidthEntry         = str(row[0][12])
+        aai_atrialSensitivityEntry        = str(row[0][13])
+        aai_ARPEntry                      = str(row[0][14])
+        aai_PVARPEntry                    = str(row[0][15])
+        aai_hysteresisEntry               = str(row[0][16])
+        aai_rateSmoothingEntry            = str(row[0][17])
 
         #VVI
-        global vvi_lowerRateLimitEntry,vvi_upperRateLimitEntry,vvi_ventricularAmplitudeEntry,vvi_ventricularPulseWidthEntry,vvi_ventricularSensitivityEntry,vvi_ARPEntry,vvi_hysteresisEntry,vvi_rateSmoothingEntry
-        vvi_lowerRateLimitEntry = str(row[0][17])
-        vvi_upperRateLimitEntry = str(row[0][18])
-        vvi_ventricularAmplitudeEntry = str(row[0][19])
-        vvi_ventricularPulseWidthEntry  = str(row[0][20])
-        vvi_ventricularSensitivityEntry = str(row[0][21])
-        vvi_ARPEntry = str(row[0][22])
-        vvi_hysteresisEntry = str(row[0][23])
-        vvi_rateSmoothingEntry = str(row[0][24])
-
-        #Current Mode
-        global userlog
-        userlog = str(row[0][25])
+        global vvi_lowerRateLimitEntry,vvi_upperRateLimitEntry,vvi_ventricularAmplitudeEntry,vvi_ventricularPulseWidthEntry,vvi_ventricularSensitivityEntry,vvi_VRPEntry,vvi_hysteresisEntry,vvi_rateSmoothingEntry
+        vvi_lowerRateLimitEntry           = str(row[0][18])
+        vvi_upperRateLimitEntry           = str(row[0][19])
+        vvi_ventricularAmplitudeEntry     = str(row[0][20])
+        vvi_ventricularPulseWidthEntry    = str(row[0][21])
+        vvi_ventricularSensitivityEntry   = str(row[0][22])
+        vvi_VRPEntry                      = str(row[0][23])
+        vvi_hysteresisEntry               = str(row[0][24])
+        vvi_rateSmoothingEntry            = str(row[0][25])
 
         #AOO BEGIN-----------------------------------------------------------------------------------------------------------------------------
         #Setup buttons
