@@ -230,7 +230,15 @@ class AddUserWindow:
                             " aai_lowerRateLimitEntry INTEGER NOT NULL, aai_upperRateLimitEntry INTEGER NOT NULL, aai_atrialAmplitudeEntry REAL NOT NULL, aai_atrialPulseWidthEntry INTEGER NOT NULL, aai_atrialSensitivityEntry REAL NOT NULL, aai_ARPEntry INTEGER NOT NULL, aai_APVARPEntry INTEGER NOT NULL, aai_hysteresisEntry INTEGER NOT NULL, aai_rateSmoothingEntry INTEGER NOT NULL,"
                             " vvi_lowerRateLimitEntry INTEGER NOT NULL, vvi_upperRateLimitEntry INTEGER NOT NULL, vvi_ventricularAmplitudeEntry REAL NOT NULL, vvi_ventricularPulseWidthEntry INTEGER NOT NULL, vvi_ventricularSensitivityEntry REAL NOT NULL, vvi_ARPEntry INTEGER NOT NULL, vvi_hysteresisEntry INTEGER NOT NULL, vvi_rateSmoothingEntry INTEGER NOT NULL)")
                         db.execute("INSERT INTO users VALUES(?, ?, ?)", (username, password, counters))
-                        db.execute("INSERT INTO "+counters+" VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)", (userlog, 60, 120, 3.5, 1.5, 60, 120, 3.5, 1.5, 60, 120, 3.5, 1.5, 3.3, 250, 200, 0, 0, 60, 120, 3.5, 1.5, 3.3, 250, 0, 0))
+                        db.execute("INSERT INTO "+counters+" VALUES(?, "
+                            "?,?,?,?, "
+                            "?,?,?,?, "
+                            "?,?,?,?,?,?,?,?,?, "
+                            "?,?,?,?,?,?,?,?)", (userlog, 
+                            60, 120, 3.5, 1.5, 
+                            60, 120, 3.5, 1.5, 
+                            60, 120, 3.5, 1.5, 3.3, 250, 200, 0, 0, 
+                            60, 120, 3.5, 1.5, 3.3, 250, 0, 0))
                         messagebox.showinfo("Success", "User Added")
                         self.quitButton.focus()
 
@@ -365,26 +373,26 @@ class MainWindow:
         #Setup buttons
         self.vooLowerRateLimitButton = tk.Button(self.voo, text = "Set", command= lambda: self.setValue("vooLowerRateLimit"))
         self.vooUpperRateLimitButton = tk.Button(self.voo, text = "Set", command= lambda: self.setValue("vooUpperRateLimit"))
-        self.vooAtrialAmplitudeButton = tk.Button(self.voo, text = "Set", command= lambda: self.setValue("vooAtrialAmplitude"))
-        self.vooAtrialPulseWidthButton = tk.Button(self.voo, text = "Set", command= lambda: self.setValue("vooAtrialPulseWidth"))
+        self.vooVentricularAmplitudeButton = tk.Button(self.voo, text = "Set", command= lambda: self.setValue("vooVentricularAmplitude"))
+        self.vooVentricularPulseWidthButton = tk.Button(self.voo, text = "Set", command= lambda: self.setValue("vooVentricularPulseWidth"))
         
         #Setup labels for inputs
         self.vooLowerRateLimitLabel = tk.Label(self.voo, text = "Lower Rate Limit")
         self.vooUpperRateLimitLabel = tk.Label(self.voo, text = "Upper Rate Limit ")
-        self.vooAtrialAmplitudeLabel = tk.Label(self.voo, text = "Ventricular Amplitude")
-        self.vooAtrialPulseWidthLabel = tk.Label(self.voo, text = "Ventricular Pulse Width")
+        self.vooVentricularAmplitudeLabel = tk.Label(self.voo, text = "Ventricular Amplitude")
+        self.vooVentricularPulseWidthLabel = tk.Label(self.voo, text = "Ventricular Pulse Width")
 
         #Setup  labels to display values
         self.vooLowerRateLimitValue = tk.Label(self.voo, text = "Current Value: "+ voo_lowerRateLimitEntry)
         self.vooUpperRateLimitValue = tk.Label(self.voo, text = "Current Value: "+ voo_upperRateLimitEntry)
-        self.vooAtrialAmplitudeValue = tk.Label(self.voo, text = "Current Value: "+ voo_ventricularAmplitudeEntry)
-        self.vooAtrialPulseWidthValue = tk.Label(self.voo, text = "Current Value: "+ voo_ventricularPulseWidthEntry)
+        self.vooVentricularAmplitudeValue = tk.Label(self.voo, text = "Current Value: "+ voo_ventricularAmplitudeEntry)
+        self.vooVentricularPulseWidthValue = tk.Label(self.voo, text = "Current Value: "+ voo_ventricularPulseWidthEntry)
 
         #Spinbox for setup
         self.vooLowerRateLimitEntry = tk.Spinbox(self.voo,from_=30,to=175,increment=5)
         self.vooUpperRateLimitEntry = tk.Spinbox(self.voo,from_=50,to=175,increment=5)
-        self.vooAtrialAmplitudeEntry = tk.Spinbox(self.voo,from_=0.5,to=7.0,format="%.1f",increment=0.1)
-        self.vooAtrialPulseWidthEntry = tk.Spinbox(self.voo,from_=0.05,to=1.9,format="%.2f",increment=0.1)
+        self.vooVentricularAmplitudeEntry = tk.Spinbox(self.voo,from_=0.5,to=7.0,format="%.1f",increment=0.1)
+        self.vooVentricularPulseWidthEntry = tk.Spinbox(self.voo,from_=0.05,to=1.9,format="%.2f",increment=0.1)
 
         #Adjust positioning
         self.vooLowerRateLimitLabel.grid(row=0, column=0, padx=15, pady=15)
@@ -395,14 +403,14 @@ class MainWindow:
         self.vooUpperRateLimitEntry.grid(row=1, column=1, padx=15, pady=15)
         self.vooUpperRateLimitButton.grid(row=1, column=2, padx=15, pady=15)
         self.vooUpperRateLimitValue.grid(row=1, column=3, padx=15, pady=15)
-        self.vooAtrialAmplitudeLabel.grid(row=2, column=0, padx=15, pady=15)
-        self.vooAtrialAmplitudeEntry.grid(row=2, column=1, padx=15, pady=15)
-        self.vooAtrialAmplitudeButton.grid(row=2, column=2, padx=15, pady=15)
-        self.vooAtrialAmplitudeValue.grid(row=2, column=3, padx=15, pady=15)
-        self.vooAtrialPulseWidthLabel.grid(row=3, column=0, padx=15, pady=15)
-        self.vooAtrialPulseWidthEntry.grid(row=3, column=1, padx=15, pady=15)
-        self.vooAtrialPulseWidthButton.grid(row=3, column=2, padx=15, pady=15)
-        self.vooAtrialPulseWidthValue.grid(row=3, column=3, padx=15, pady=15)
+        self.vooVentricularAmplitudeLabel.grid(row=2, column=0, padx=15, pady=15)
+        self.vooVentricularAmplitudeEntry.grid(row=2, column=1, padx=15, pady=15)
+        self.vooVentricularAmplitudeButton.grid(row=2, column=2, padx=15, pady=15)
+        self.vooVentricularAmplitudeValue.grid(row=2, column=3, padx=15, pady=15)
+        self.vooVentricularPulseWidthLabel.grid(row=3, column=0, padx=15, pady=15)
+        self.vooVentricularPulseWidthEntry.grid(row=3, column=1, padx=15, pady=15)
+        self.vooVentricularPulseWidthButton.grid(row=3, column=2, padx=15, pady=15)
+        self.vooVentricularPulseWidthValue.grid(row=3, column=3, padx=15, pady=15)
         #VOO END-------------------------------------------------------------------------------------------------------------------------------
 
         #AAI BEGIN-----------------------------------------------------------------------------------------------------------------------------
@@ -493,40 +501,40 @@ class MainWindow:
         #Setup buttons
         self.vviLowerRateLimitButton = tk.Button(self.vvi, text = "Set", command= lambda: self.setValue("vviLowerRateLimit"))
         self.vviUpperRateLimitButton = tk.Button(self.vvi, text = "Set", command= lambda: self.setValue("vviUpperRateLimit"))
-        self.vviAtrialAmplitudeButton = tk.Button(self.vvi, text = "Set", command= lambda: self.setValue("vviAtrialAmplitude"))
-        self.vviAtrialPulseWidthButton = tk.Button(self.vvi, text = "Set", command= lambda: self.setValue("vviAtrialPulseWidth"))
-        self.vviAtrialSensitivityButton = tk.Button(self.vvi, text = "Set", command= lambda: self.setValue("vviAtrialSensitivity"))
-        self.vviARPButton = tk.Button(self.vvi, text = "Set", command= lambda: self.setValue("vviARP"))
+        self.vviVentricularAmplitudeButton = tk.Button(self.vvi, text = "Set", command= lambda: self.setValue("vviVentricularAmplitude"))
+        self.vviVentricularPulseWidthButton = tk.Button(self.vvi, text = "Set", command= lambda: self.setValue("vviVentricularPulseWidth"))
+        self.vviVentricularSensitivityButton = tk.Button(self.vvi, text = "Set", command= lambda: self.setValue("vviVentricularSensitivity"))
+        self.vviVRPButton = tk.Button(self.vvi, text = "Set", command= lambda: self.setValue("vviVRP"))
         self.vviHysteresisButton = tk.Button(self.vvi, text = "Set", command= lambda: self.setValue("vviHysteresis"))
         self.vviRateSmoothingButton = tk.Button(self.vvi, text = "Set", command= lambda: self.setValue("vviRateSmoothing"))
 
         #Setup labels for inputs
         self.vviLowerRateLimitLabel = tk.Label(self.vvi, text = "Lower Rate Limit")
         self.vviUpperRateLimitLabel = tk.Label(self.vvi, text = "Upper Rate Limit ")
-        self.vviAtrialAmplitudeLabel = tk.Label(self.vvi, text = "Ventricular Amplitude")
-        self.vviAtrialPulseWidthLabel = tk.Label(self.vvi, text = "Ventricular Pulse Width")
-        self.vviAtrialSensitivityLabel = tk.Label(self.vvi, text = "Ventricular Sensitivity")
-        self.vviARPLabel = tk.Label(self.vvi, text = "VRP")
+        self.vviVentricularAmplitudeLabel = tk.Label(self.vvi, text = "Ventricular Amplitude")
+        self.vviVentricularPulseWidthLabel = tk.Label(self.vvi, text = "Ventricular Pulse Width")
+        self.vviVentricularSensitivityLabel = tk.Label(self.vvi, text = "Ventricular Sensitivity")
+        self.vviVRPLabel = tk.Label(self.vvi, text = "VRP")
         self.vviHysteresisLabel = tk.Label(self.vvi, text = "Hysteresis")
         self.vviRateSmoothingLabel = tk.Label(self.vvi, text = "Rate Smoothing")
 
         #Setup  labels to display values
         self.vviLowerRateLimitValue = tk.Label(self.vvi, text = "Current Value: "+ vvi_lowerRateLimitEntry)
         self.vviUpperRateLimitValue = tk.Label(self.vvi, text = "Current Value: "+ vvi_upperRateLimitEntry)
-        self.vviAtrialAmplitudeValue = tk.Label(self.vvi, text = "Current Value: "+ vvi_ventricularAmplitudeEntry)
-        self.vviAtrialPulseWidthValue = tk.Label(self.vvi, text = "Current Value: "+ vvi_ventricularPulseWidthEntry)
-        self.vviAtrialSensitivityValue = tk.Label(self.vvi, text = "Current Value: "+ vvi_ventricularSensitivityEntry)
-        self.vviARPValue = tk.Label(self.vvi, text = "Current Value: "+ vvi_ARPEntry)
+        self.vviVentricularAmplitudeValue = tk.Label(self.vvi, text = "Current Value: "+ vvi_ventricularAmplitudeEntry)
+        self.vviVentricularPulseWidthValue = tk.Label(self.vvi, text = "Current Value: "+ vvi_ventricularPulseWidthEntry)
+        self.vviVentricularSensitivityValue = tk.Label(self.vvi, text = "Current Value: "+ vvi_ventricularSensitivityEntry)
+        self.vviVRPValue = tk.Label(self.vvi, text = "Current Value: "+ vvi_ARPEntry)
         self.vviHysteresisValue = tk.Label(self.vvi, text = "Current Value: "+ vvi_hysteresisEntry)
         self.vviRateSmoothingValue = tk.Label(self.vvi, text = "Current Value: "+ vvi_rateSmoothingEntry)
 
         #Spinbox for setup
         self.vviLowerRateLimitEntry = tk.Spinbox(self.vvi,from_=30,to=175,increment=5)
         self.vviUpperRateLimitEntry = tk.Spinbox(self.vvi,from_=50,to=175,increment=5)
-        self.vviAtrialAmplitudeEntry = tk.Spinbox(self.vvi,from_=0.5,to=7.0,format="%.1f",increment=0.1)
-        self.vviAtrialPulseWidthEntry = tk.Spinbox(self.vvi,from_=0.05,to=1.9,format="%.2f",increment=0.1)
-        self.vviAtrialSensitivityEntry = tk.Spinbox(self.vvi,from_=0.25,to=10.0,format="%.2f",increment=0.25)
-        self.vviARPEntry = tk.Spinbox(self.vvi,from_=150,to=500,increment=10)
+        self.vviVentricularAmplitudeEntry = tk.Spinbox(self.vvi,from_=0.5,to=7.0,format="%.1f",increment=0.1)
+        self.vviVentricularPulseWidthEntry = tk.Spinbox(self.vvi,from_=0.05,to=1.9,format="%.2f",increment=0.1)
+        self.vviVentricularSensitivityEntry = tk.Spinbox(self.vvi,from_=0.25,to=10.0,format="%.2f",increment=0.25)
+        self.vviVRPEntry = tk.Spinbox(self.vvi,from_=150,to=500,increment=10)
         self.vviHysteresisEntry = tk.Spinbox(self.vvi,from_=0,to=25,increment=5)
         self.vviRateSmoothingEntry = tk.Spinbox(self.vvi,from_=0,to=25,increment=3)
 
@@ -537,18 +545,18 @@ class MainWindow:
         self.vviUpperRateLimitLabel.grid(row=1, column=0, padx=15, pady=15)
         self.vviUpperRateLimitEntry.grid(row=1, column=1, padx=15, pady=15)
         self.vviUpperRateLimitButton.grid(row=1, column=2, padx=15, pady=15)
-        self.vviAtrialAmplitudeLabel.grid(row=2, column=0, padx=15, pady=15)
-        self.vviAtrialAmplitudeEntry.grid(row=2, column=1, padx=15, pady=15)
-        self.vviAtrialAmplitudeButton.grid(row=2, column=2, padx=15, pady=15)
-        self.vviAtrialPulseWidthLabel.grid(row=3, column=0, padx=15, pady=15)
-        self.vviAtrialPulseWidthEntry.grid(row=3, column=1, padx=15, pady=15)
-        self.vviAtrialPulseWidthButton.grid(row=3, column=2, padx=15, pady=15)
-        self.vviAtrialSensitivityLabel.grid(row=4, column=0, padx=15, pady=15)
-        self.vviAtrialSensitivityEntry.grid(row=4, column=1, padx=15, pady=15)
-        self.vviAtrialSensitivityButton.grid(row=4, column=2, padx=15, pady=15)
-        self.vviARPLabel.grid(row=5, column=0, padx=15, pady=15)
-        self.vviARPEntry.grid(row=5, column=1, padx=15, pady=15)
-        self.vviARPButton.grid(row=5, column=2, padx=15, pady=15)
+        self.vviVentricularAmplitudeLabel.grid(row=2, column=0, padx=15, pady=15)
+        self.vviVentricularAmplitudeEntry.grid(row=2, column=1, padx=15, pady=15)
+        self.vviVentricularAmplitudeButton.grid(row=2, column=2, padx=15, pady=15)
+        self.vviVentricularPulseWidthLabel.grid(row=3, column=0, padx=15, pady=15)
+        self.vviVentricularPulseWidthEntry.grid(row=3, column=1, padx=15, pady=15)
+        self.vviVentricularPulseWidthButton.grid(row=3, column=2, padx=15, pady=15)
+        self.vviVentricularSensitivityLabel.grid(row=4, column=0, padx=15, pady=15)
+        self.vviVentricularSensitivityEntry.grid(row=4, column=1, padx=15, pady=15)
+        self.vviVentricularSensitivityButton.grid(row=4, column=2, padx=15, pady=15)
+        self.vviVRPLabel.grid(row=5, column=0, padx=15, pady=15)
+        self.vviVRPEntry.grid(row=5, column=1, padx=15, pady=15)
+        self.vviVRPButton.grid(row=5, column=2, padx=15, pady=15)
         self.vviHysteresisLabel.grid(row=6, column=0, padx=15, pady=15)
         self.vviHysteresisEntry.grid(row=6, column=1, padx=15, pady=15)
         self.vviHysteresisButton.grid(row=6, column=2, padx=15, pady=15)
@@ -557,10 +565,10 @@ class MainWindow:
         self.vviRateSmoothingButton.grid(row=7, column=2, padx=15, pady=15)
         self.vviLowerRateLimitValue.grid(row=0, column=3, padx=15, pady=15)
         self.vviUpperRateLimitValue.grid(row=1, column=3, padx=15, pady=15)
-        self.vviAtrialAmplitudeValue.grid(row=2, column=3, padx=15, pady=15)
-        self.vviAtrialPulseWidthValue.grid(row=3, column=3, padx=15, pady=15)
-        self.vviAtrialSensitivityValue.grid(row=4, column=3, padx=15, pady=15)
-        self.vviARPValue.grid(row=5, column=3, padx=15, pady=15)
+        self.vviVentricularAmplitudeValue.grid(row=2, column=3, padx=15, pady=15)
+        self.vviVentricularPulseWidthValue.grid(row=3, column=3, padx=15, pady=15)
+        self.vviVentricularSensitivityValue.grid(row=4, column=3, padx=15, pady=15)
+        self.vviVRPValue.grid(row=5, column=3, padx=15, pady=15)
         self.vviHysteresisValue.grid(row=6, column=3, padx=15, pady=15)
         self.vviRateSmoothingValue.grid(row=7, column=3, padx=15, pady=15)
         #VVI END-------------------------------------------------------------------------------------------------------------------------------
@@ -863,9 +871,9 @@ class MainWindow:
                 messagebox.showinfo("Error","Please enter a valid value")
                 pass
 
-        #vooAtrialAmplitude
-        if(value == "vooAtrialAmplitude"):
-            temp = self.vooAtrialAmplitudeEntry.get()
+        #vooVentricularAmplitude
+        if(value == "vooVentricularAmplitude"):
+            temp = self.vooVentricularAmplitudeEntry.get()
             #Try/access to sanitize user input and ask for confirmation if there are no errors
             try:
                 float(temp)
@@ -883,7 +891,7 @@ class MainWindow:
                     if messagebox.askyesno("Confirmation", "Replace current value?"):
                         messagebox.showinfo("Done", "Success")
                         voo_ventricularAmplitudeEntry = temp
-                        self.vooAtrialAmplitudeValue.config(text="Current Value: " + voo_ventricularAmplitudeEntry)
+                        self.vooVentricularAmplitudeValue.config(text="Current Value: " + voo_ventricularAmplitudeEntry)
                         db.execute("UPDATE "+currentuser+" SET voo_ventricularAmplitudeEntry = ?", (voo_ventricularAmplitudeEntry,))
                         db.commit()
 
@@ -891,9 +899,9 @@ class MainWindow:
                 messagebox.showinfo("Error","Please enter a valid value")
                 pass
 
-        #vooAtrialPulseWidth
-        if(value == "vooAtrialPulseWidth"):
-            temp = self.vooAtrialPulseWidthEntry.get()
+        #vooVentricularPulseWidth
+        if(value == "vooVentricularPulseWidth"):
+            temp = self.vooVentricularPulseWidthEntry.get()
             #Try/access to sanitize user input and ask for confirmation if there are no errors
             try:
                 float(temp)
@@ -911,7 +919,7 @@ class MainWindow:
                     if messagebox.askyesno("Confirmation", "Replace current value?"):
                         messagebox.showinfo("Done", "Success")
                         voo_ventricularPulseWidthEntry = temp
-                        self.vooAtrialPulseWidthValue.config(text="Current Value: " + voo_ventricularPulseWidthEntry)
+                        self.vooVentricularPulseWidthValue.config(text="Current Value: " + voo_ventricularPulseWidthEntry)
                         db.execute("UPDATE "+currentuser+" SET voo_ventricularPulseWidthEntry = ?", (voo_ventricularPulseWidthEntry,))
                         db.commit()
 
@@ -1242,9 +1250,9 @@ class MainWindow:
                 messagebox.showinfo("Error","Please enter a valid value")
                 pass
 
-        #vviAtrialAmplitude
-        if(value == "vviAtrialAmplitude"):
-            temp = self.vviAtrialAmplitudeEntry.get() 
+        #vviVentricularAmplitude
+        if(value == "vviVentricularAmplitude"):
+            temp = self.vviVentricularAmplitudeEntry.get() 
             #Try/access to sanitize user input and ask for confirmation if there are no errors
             try:
                 float(temp)
@@ -1262,7 +1270,7 @@ class MainWindow:
                     if messagebox.askyesno("Confirmation", "Replace current value?"):
                         messagebox.showinfo("Done", "Success")
                         vvi_ventricularAmplitudeEntry = temp
-                        self.vviAtrialAmplitudeValue.config(text="Current Value: " + vvi_ventricularAmplitudeEntry)
+                        self.vviVentricularAmplitudeValue.config(text="Current Value: " + vvi_ventricularAmplitudeEntry)
                         db.execute("UPDATE "+currentuser+" SET vvi_ventricularAmplitudeEntry = ?", (vvi_ventricularAmplitudeEntry,))
                         db.commit()
 
@@ -1270,9 +1278,9 @@ class MainWindow:
                 messagebox.showinfo("Error","Please enter a valid value")
                 pass
 
-        #vviAtrialPulseWidth
-        if(value == "vviAtrialPulseWidth"):
-            temp = self.vviAtrialPulseWidthEntry.get() 
+        #vviVentricularPulseWidth
+        if(value == "vviVentricularPulseWidth"):
+            temp = self.vviVentricularPulseWidthEntry.get() 
             #Try/access to sanitize user input and ask for confirmation if there are no errors
             try:
                 float(temp)
@@ -1290,7 +1298,7 @@ class MainWindow:
                     if messagebox.askyesno("Confirmation", "Replace current value?"):
                         messagebox.showinfo("Done", "Success")
                         vvi_ventricularPulseWidthEntry = temp
-                        self.vviAtrialPulseWidthValue.config(text="Current Value: " + vvi_ventricularPulseWidthEntry)
+                        self.vviVentricularPulseWidthValue.config(text="Current Value: " + vvi_ventricularPulseWidthEntry)
                         db.execute("UPDATE "+currentuser+" SET vvi_ventricularPulseWidthEntry = ?", (vvi_ventricularPulseWidthEntry,))
                         db.commit()
 
@@ -1298,9 +1306,9 @@ class MainWindow:
                 messagebox.showinfo("Error","Please enter a valid value")
                 pass
 
-        #vviAtrialSensitivity
-        if(value == "vviAtrialSensitivity"):
-            temp = self.vviAtrialSensitivityEntry.get()
+        #vviVentricularSensitivity
+        if(value == "vviVentricularSensitivity"):
+            temp = self.vviVentricularSensitivityEntry.get()
             #Try/access to sanitize user input and ask for confirmation if there are no errors
             try:
                 float(temp)
@@ -1318,7 +1326,7 @@ class MainWindow:
                     if messagebox.askyesno("Confirmation", "Replace current value?"):
                         messagebox.showinfo("Done", "Success")
                         vvi_ventricularSensitivityEntry = temp
-                        self.vviAtrialSensitivityValue.config(text="Current Value: " + vvi_ventricularSensitivityEntry)
+                        self.vviVentricularSensitivityValue.config(text="Current Value: " + vvi_ventricularSensitivityEntry)
                         db.execute("UPDATE "+currentuser+" SET vvi_ventricularSensitivityEntry = ?", (vvi_ventricularSensitivityEntry,))
                         db.commit()
 
@@ -1326,9 +1334,9 @@ class MainWindow:
                 messagebox.showinfo("Error","Please enter a valid value")
                 pass
 
-        #vviARP
-        if(value == "vviARP"):
-            temp = self.vviARPEntry.get() 
+        #vviVRP
+        if(value == "vviVRP"):
+            temp = self.vviVRPEntry.get() 
             #Try/access to sanitize user input and ask for confirmation if there are no errors
             try:
                 int(temp)
@@ -1346,7 +1354,7 @@ class MainWindow:
                     if messagebox.askyesno("Confirmation", "Replace current value?"):
                         messagebox.showinfo("Done", "Success")
                         vvi_ARPEntry = temp
-                        self.vviARPValue.config(text="Current Value: " + vvi_ARPEntry)
+                        self.vviVRPValue.config(text="Current Value: " + vvi_ARPEntry)
                         db.execute("UPDATE "+currentuser+" SET vvi_ARPEntry = ?", (vvi_ARPEntry,))
                         db.commit()
 
