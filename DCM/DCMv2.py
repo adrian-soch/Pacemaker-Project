@@ -21,11 +21,25 @@ aoo_lowerRateLimitEntry,aoo_upperRateLimitEntry,aoo_atrialAmplitudeEntry,aoo_atr
 voo_lowerRateLimitEntry,voo_upperRateLimitEntry,voo_ventricularAmplitudeEntry,voo_ventricularPulseWidthEntry = "0","0","0","0"
 
 #AAI
-aai_lowerRateLimitEntry,aai_upperRateLimitEntry,aai_atrialAmplitudeEntry,aai_atrialPulseWidthEntry,aai_atrialSensitivityEntry,aai_ARPEntry,aai_APVARPEntry,aai_hysteresisEntry,aai_rateSmoothingEntry = "0","0","0","0","0","0","0","0","0"
+aai_lowerRateLimitEntry,aai_upperRateLimitEntry,aai_atrialAmplitudeEntry,aai_atrialPulseWidthEntry,aai_atrialSensitivityEntry,aai_ARPEntry,aai_PVARPEntry,aai_hysteresisEntry,aai_rateSmoothingEntry = "0","0","0","0","0","0","0","0","0"
 
 #VVI
 vvi_lowerRateLimitEntry,vvi_upperRateLimitEntry,vvi_ventricularAmplitudeEntry,vvi_ventricularPulseWidthEntry,vvi_ventricularSensitivityEntry,vvi_ARPEntry,vvi_hysteresisEntry,vvi_rateSmoothingEntry = "0","0","0","0","0","0","0","0"
 
+#DOO
+doo_lowerRateLimitEntry, doo_upperRateLimitEntry, doo_atrialAmplitudeEntry, doo_atrialPulseWidthEntry, doo_ventricularAmplitudeEntry, doo_ventricularPulseWidthEntry, doo_fixedAVDelayEntry = "0","0","0","0","0","0","0"
+
+#AOOR
+aoor_lowerRateLimitEntry, aoor_upperRateLimitEntry, aoor_atrialAmplitudeEntry, aoor_atrialPulseWidthEntry, aoor_maximumSensorRateEntry, aoor_activityThresholdEntry, aoor_reactionTimeEntry, aoor_responseFactorEntry, aoor_recoveryTimeEntry = "0","0","0","0","0","0","0","0","0"
+
+#VOOR
+voor_lowerRateLimitEntry, voor_upperRateLimitEntry, voor_ventricularAmplitudeEntry, voor_ventricularPulseWidthEntry, voor_maximumSensorRateEntry, voor_activityThresholdEntry, voor_reactionTimeEntry, voor_responseFactorEntry, voor_recoveryTimeEntry = "0","0","0","0","0","0","0","0","0"
+
+#AAIR
+aair_lowerRateLimitEntry, aair_upperRateLimitEntry, aair_atrialAmplitudeEntry, aair_atrialPulseWidthEntry, aair_atrialSensitivityEntry, aair_ARPEntry, aair_PVARPEntry, aair_hysteresisEntry, aair_rateSmoothingEntry, aair_maximumSensorRateEntry, aair_activityThresholdEntry, aair_reactionTimeEntry, aair_responseFactorEntry, aair_recoveryTimeEntry = "0","0","0","0","0","0","0","0","0","0","0","0","0","0"
+
+#VVIR
+vvir_lowerRateLimitEntry, vvir_upperRateLimitEntry, vvir_ventricularAmplitudeEntry, vvir_ventricularPulseWidthEntry, vvir_ventricularSensitivityEntry, vvir_VRPEntry, vvir_hysteresisEntry, vvir_rateSmoothingEntry, vvir_maximumSensorRateEntry, vvir_activityThresholdEntry, vvir_reactionTimeEntry, vvir_responseFactorEntry, vvir_recoveryTimeEntry = "0","0","0","0","0","0","0","0","0","0","0","0","0"
 
 #Creating Initial Welcome Frame
 class WelcomeFrame:
@@ -224,21 +238,24 @@ class AddUserWindow:
                         messagebox.showerror("Error", "Maximum allowed user limit reached")
                     else:
                         userlog = 'No Mode Set'
-                        db.execute("CREATE TABLE "+counters+" (userlog TEXT NOT NULL,"
-                            " aoo_lowerRateLimitEntry INTEGER NOT NULL, aoo_upperRateLimitEntry INTEGER NOT NULL, aoo_atrialAmplitudeEntry REAL NOT NULL, aoo_atrialPulseWidthEntry INTEGER NOT NULL,"
-                            " voo_lowerRateLimitEntry INTEGER NOT NULL, voo_upperRateLimitEntry INTEGER NOT NULL, voo_ventricularAmplitudeEntry REAL NOT NULL, voo_ventricularPulseWidthEntry INTEGER NOT NULL,"
-                            " aai_lowerRateLimitEntry INTEGER NOT NULL, aai_upperRateLimitEntry INTEGER NOT NULL, aai_atrialAmplitudeEntry REAL NOT NULL, aai_atrialPulseWidthEntry INTEGER NOT NULL, aai_atrialSensitivityEntry REAL NOT NULL, aai_ARPEntry INTEGER NOT NULL, aai_APVARPEntry INTEGER NOT NULL, aai_hysteresisEntry INTEGER NOT NULL, aai_rateSmoothingEntry INTEGER NOT NULL,"
-                            " vvi_lowerRateLimitEntry INTEGER NOT NULL, vvi_upperRateLimitEntry INTEGER NOT NULL, vvi_ventricularAmplitudeEntry REAL NOT NULL, vvi_ventricularPulseWidthEntry INTEGER NOT NULL, vvi_ventricularSensitivityEntry REAL NOT NULL, vvi_ARPEntry INTEGER NOT NULL, vvi_hysteresisEntry INTEGER NOT NULL, vvi_rateSmoothingEntry INTEGER NOT NULL)")
+                        db.execute("CREATE TABLE "+counters+" (userlog TEXT NOT NULL, "
+                            "aoo_lowerRateLimitEntry INTEGER NOT NULL, aoo_upperRateLimitEntry INTEGER NOT NULL, aoo_atrialAmplitudeEntry REAL NOT NULL, aoo_atrialPulseWidthEntry INTEGER NOT NULL, "
+                            "voo_lowerRateLimitEntry INTEGER NOT NULL, voo_upperRateLimitEntry INTEGER NOT NULL, voo_ventricularAmplitudeEntry REAL NOT NULL, voo_ventricularPulseWidthEntry INTEGER NOT NULL, "
+                            "aai_lowerRateLimitEntry INTEGER NOT NULL, aai_upperRateLimitEntry INTEGER NOT NULL, aai_atrialAmplitudeEntry REAL NOT NULL, aai_atrialPulseWidthEntry INTEGER NOT NULL, aai_atrialSensitivityEntry REAL NOT NULL, aai_ARPEntry INTEGER NOT NULL, aai_PVARPEntry INTEGER NOT NULL, aai_hysteresisEntry INTEGER NOT NULL, aai_rateSmoothingEntry INTEGER NOT NULL, "
+                            "vvi_lowerRateLimitEntry INTEGER NOT NULL, vvi_upperRateLimitEntry INTEGER NOT NULL, vvi_ventricularAmplitudeEntry REAL NOT NULL, vvi_ventricularPulseWidthEntry INTEGER NOT NULL, vvi_ventricularSensitivityEntry REAL NOT NULL, vvi_ARPEntry INTEGER NOT NULL, vvi_hysteresisEntry INTEGER NOT NULL, vvi_rateSmoothingEntry INTEGER NOT NULL, "
+                            "doo_lowerRateLimitEntry INTEGER NOT NULL, doo_upperRateLimitEntry INTEGER NOT NULL, doo_atrialAmplitudeEntry REAL NOT NULL, doo_atrialPulseWidthEntry INTEGER NOT NULL, doo_ventricularAmplitudeEntry REAL NOT NULL, doo_ventricularPulseWidthEntry INTEGER NOT NULL, doo_fixedAVDelayEntry INTEGER NOT NULL)")
                         db.execute("INSERT INTO users VALUES(?, ?, ?)", (username, password, counters))
                         db.execute("INSERT INTO "+counters+" VALUES(?, "
-                            "?,?,?,?, "
-                            "?,?,?,?, "
-                            "?,?,?,?,?,?,?,?,?, "
-                            "?,?,?,?,?,?,?,?)", (userlog, 
+                            "?,?,?,?, " #aoo
+                            "?,?,?,?, " #voo
+                            "?,?,?,?,?,?,?,?,?, " #aai
+                            "?,?,?,?,?,?,?,?, " #vvi
+                            "?,?,?,?,?,?,?)", (userlog,
                             60, 120, 3.5, 1.5, 
                             60, 120, 3.5, 1.5, 
                             60, 120, 3.5, 1.5, 3.3, 250, 200, 0, 0, 
-                            60, 120, 3.5, 1.5, 3.3, 250, 0, 0))
+                            60, 120, 3.5, 1.5, 3.3, 250, 0, 0,
+                            0,0,0,0,0,0,0))
                         messagebox.showinfo("Success", "User Added")
                         self.quitButton.focus()
 
@@ -268,16 +285,29 @@ class MainWindow:
         self.master.config(menu=self.menubar)
         self.frame = tk.Frame(self.master)
 
-        # Tabs created for AOO, VOO, AAI, and VVI 
+        # Tabs created for AOO, VOO, AAI, VVI, and DOO
+        # Also AOOR, VOOR, AAIR, VVIR, and DOOR 
         self.tab_parent = ttk.Notebook(self.master)
         self.aoo = ttk.Frame(self.tab_parent)
         self.voo = ttk.Frame(self.tab_parent)
         self.aai = ttk.Frame(self.tab_parent)
         self.vvi = ttk.Frame(self.tab_parent)
+        self.doo = ttk.Frame(self.tab_parent)
+        self.aoor = ttk.Frame(self.tab_parent)
+        self.voor = ttk.Frame(self.tab_parent)
+        self.aair = ttk.Frame(self.tab_parent)
+        self.vvir = ttk.Frame(self.tab_parent)
+        self.door = ttk.Frame(self.tab_parent)
         self.tab_parent.add(self.aoo, text = "AOO")
         self.tab_parent.add(self.voo, text = "VOO")
         self.tab_parent.add(self.aai, text = "AAI")
         self.tab_parent.add(self.vvi, text = "VVI")
+        self.tab_parent.add(self.doo, text = "DOO")
+        self.tab_parent.add(self.aoor, text = "AOOR")
+        self.tab_parent.add(self.voor, text = "VOOR")
+        self.tab_parent.add(self.aair, text = "AAIR")
+        self.tab_parent.add(self.vvir, text = "VVIR")
+        self.tab_parent.add(self.door, text = "DOOR")
 
         #Retrieve all relevant data from tables for currentuser
         global currentuser
@@ -324,89 +354,105 @@ class MainWindow:
         vvi_VRPEntry                      = str(row[0][23])
         vvi_hysteresisEntry               = str(row[0][24])
         vvi_rateSmoothingEntry            = str(row[0][25])
+        
+        #DOO
+        global doo_lowerRateLimitEntry, doo_upperRateLimitEntry, doo_atrialAmplitudeEntry, doo_atrialPulseWidthEntry, doo_ventricularAmplitudeEntry, doo_ventricularPulseWidthEntry, doo_fixedAVDelayEntry
+        doo_lowerRateLimitEntry           = str(row[0][26])
+        doo_upperRateLimitEntry           = str(row[0][27])
+        doo_atrialAmplitudeEntry          = str(row[0][28])
+        doo_atrialPulseWidthEntry         = str(row[0][29])
+        doo_ventricularAmplitudeEntry     = str(row[0][30])
+        doo_ventricularPulseWidthEntry    = str(row[0][31])
+        doo_fixedAVDelayEntry             = str(row[0][32])
 
         #AOO BEGIN-----------------------------------------------------------------------------------------------------------------------------
-        #Setup buttons
-        self.aooLowerRateLimitButton = tk.Button(self.aoo, text = "Set", command= lambda: self.setValue("aooLowerRateLimit"))
-        self.aooUpperRateLimitButton = tk.Button(self.aoo, text = "Set", command= lambda: self.setValue("aooUpperRateLimit"))
-        self.aooAtrialAmplitudeButton = tk.Button(self.aoo, text = "Set", command= lambda: self.setValue("aooAtrialAmplitude"))
-        self.aooAtrialPulseWidthButton = tk.Button(self.aoo, text = "Set", command= lambda: self.setValue("aooAtrialPulseWidth"))
-
         #Setup labels for inputs
         self.aooLowerRateLimitLabel = tk.Label(self.aoo, text = "Lower Rate Limit")
         self.aooUpperRateLimitLabel = tk.Label(self.aoo, text = "Upper Rate Limit")
         self.aooAtrialAmplitudeLabel = tk.Label(self.aoo, text = "Atrial Amplitude")
         self.aooAtrialPulseWidthLabel = tk.Label(self.aoo, text = "Atrial Pulse Width")
-
-        #Setup  labels to display values
-        self.aooLowerRateLimitValue = tk.Label(self.aoo, text = "Current Value: " + aoo_lowerRateLimitEntry)
-        self.aooUpperRateLimitValue = tk.Label(self.aoo, text = "Current Value: " + aoo_upperRateLimitEntry)
-        self.aooAtrialAmplitudeValue = tk.Label(self.aoo, text = "Current Value: " + aoo_atrialAmplitudeEntry)
-        self.aooAtrialPulseWidthValue = tk.Label(self.aoo, text = "Current Value: " + aoo_atrialPulseWidthEntry)
-
+        
         #Spinbox for setup
         self.aooLowerRateLimitEntry = tk.Spinbox(self.aoo,from_=30,to=175,increment=5)
         self.aooUpperRateLimitEntry = tk.Spinbox(self.aoo,from_=50,to=175,increment=5)
         self.aooAtrialAmplitudeEntry = tk.Spinbox(self.aoo,from_=0.5,to=7.0,format="%.1f",increment=0.1)
         self.aooAtrialPulseWidthEntry = tk.Spinbox(self.aoo,from_=0.05,to=1.9,format="%.2f",increment=0.1)
 
+        #Setup buttons
+        self.aooLowerRateLimitButton = tk.Button(self.aoo, text = "Set", command= lambda: self.setValue("aooLowerRateLimit"))
+        self.aooUpperRateLimitButton = tk.Button(self.aoo, text = "Set", command= lambda: self.setValue("aooUpperRateLimit"))
+        self.aooAtrialAmplitudeButton = tk.Button(self.aoo, text = "Set", command= lambda: self.setValue("aooAtrialAmplitude"))
+        self.aooAtrialPulseWidthButton = tk.Button(self.aoo, text = "Set", command= lambda: self.setValue("aooAtrialPulseWidth"))
+        
+        #Setup  labels to display values
+        self.aooLowerRateLimitValue = tk.Label(self.aoo, text = "Current Value: " + aoo_lowerRateLimitEntry)
+        self.aooUpperRateLimitValue = tk.Label(self.aoo, text = "Current Value: " + aoo_upperRateLimitEntry)
+        self.aooAtrialAmplitudeValue = tk.Label(self.aoo, text = "Current Value: " + aoo_atrialAmplitudeEntry)
+        self.aooAtrialPulseWidthValue = tk.Label(self.aoo, text = "Current Value: " + aoo_atrialPulseWidthEntry)
+
         #Adjust positioning
         self.aooLowerRateLimitLabel.grid(row=0, column=0, padx=15, pady=15)
         self.aooLowerRateLimitEntry.grid(row=0, column=1, padx=15, pady=15)
         self.aooLowerRateLimitButton.grid(row=0, column=2, padx=15, pady=15)
         self.aooLowerRateLimitValue.grid(row=0, column=3, padx=15, pady=15)
+
         self.aooUpperRateLimitLabel.grid(row=1, column=0, padx=15, pady=15)
         self.aooUpperRateLimitEntry.grid(row=1, column=1, padx=15, pady=15)
         self.aooUpperRateLimitButton.grid(row=1, column=2, padx=15, pady=15)
         self.aooUpperRateLimitValue.grid(row=1, column=3, padx=15, pady=15)
+
         self.aooAtrialAmplitudeLabel.grid(row=2, column=0, padx=15, pady=15)
         self.aooAtrialAmplitudeEntry.grid(row=2, column=1, padx=15, pady=15)
         self.aooAtrialAmplitudeButton.grid(row=2, column=2, padx=15, pady=15)
         self.aooAtrialAmplitudeValue.grid(row=2, column=3, padx=15, pady=15)
+
         self.aooAtrialPulseWidthLabel.grid(row=3, column=0, padx=15, pady=15)
         self.aooAtrialPulseWidthEntry.grid(row=3, column=1, padx=15, pady=15)
         self.aooAtrialPulseWidthButton.grid(row=3, column=2, padx=15, pady=15)
         self.aooAtrialPulseWidthValue.grid(row=3, column=3, padx=15, pady=15)
         #AOO END-------------------------------------------------------------------------------------------------------------------------------
 
-        #VOO BEGIN-----------------------------------------------------------------------------------------------------------------------------
+        #VOO BEGIN----------------------------------------------------------------------------------------------------------------------------- 
+        #Setup labels for inputs
+        self.vooLowerRateLimitLabel = tk.Label(self.voo, text = "Lower Rate Limit")
+        self.vooUpperRateLimitLabel = tk.Label(self.voo, text = "Upper Rate Limit ")
+        self.vooVentricularAmplitudeLabel = tk.Label(self.voo, text = "Ventricular Amplitude")
+        self.vooVentricularPulseWidthLabel = tk.Label(self.voo, text = "Ventricular Pulse Width")
+        
+        #Spinbox for setup
+        self.vooLowerRateLimitEntry = tk.Spinbox(self.voo,from_=30,to=175,increment=5)
+        self.vooUpperRateLimitEntry = tk.Spinbox(self.voo,from_=50,to=175,increment=5)
+        self.vooVentricularAmplitudeEntry = tk.Spinbox(self.voo,from_=0.5,to=7.0,format="%.1f",increment=0.1)
+        self.vooVentricularPulseWidthEntry = tk.Spinbox(self.voo,from_=0.05,to=1.9,format="%.2f",increment=0.1)
+        
         #Setup buttons
         self.vooLowerRateLimitButton = tk.Button(self.voo, text = "Set", command= lambda: self.setValue("vooLowerRateLimit"))
         self.vooUpperRateLimitButton = tk.Button(self.voo, text = "Set", command= lambda: self.setValue("vooUpperRateLimit"))
         self.vooVentricularAmplitudeButton = tk.Button(self.voo, text = "Set", command= lambda: self.setValue("vooVentricularAmplitude"))
         self.vooVentricularPulseWidthButton = tk.Button(self.voo, text = "Set", command= lambda: self.setValue("vooVentricularPulseWidth"))
         
-        #Setup labels for inputs
-        self.vooLowerRateLimitLabel = tk.Label(self.voo, text = "Lower Rate Limit")
-        self.vooUpperRateLimitLabel = tk.Label(self.voo, text = "Upper Rate Limit ")
-        self.vooVentricularAmplitudeLabel = tk.Label(self.voo, text = "Ventricular Amplitude")
-        self.vooVentricularPulseWidthLabel = tk.Label(self.voo, text = "Ventricular Pulse Width")
-
         #Setup  labels to display values
         self.vooLowerRateLimitValue = tk.Label(self.voo, text = "Current Value: "+ voo_lowerRateLimitEntry)
         self.vooUpperRateLimitValue = tk.Label(self.voo, text = "Current Value: "+ voo_upperRateLimitEntry)
         self.vooVentricularAmplitudeValue = tk.Label(self.voo, text = "Current Value: "+ voo_ventricularAmplitudeEntry)
         self.vooVentricularPulseWidthValue = tk.Label(self.voo, text = "Current Value: "+ voo_ventricularPulseWidthEntry)
 
-        #Spinbox for setup
-        self.vooLowerRateLimitEntry = tk.Spinbox(self.voo,from_=30,to=175,increment=5)
-        self.vooUpperRateLimitEntry = tk.Spinbox(self.voo,from_=50,to=175,increment=5)
-        self.vooVentricularAmplitudeEntry = tk.Spinbox(self.voo,from_=0.5,to=7.0,format="%.1f",increment=0.1)
-        self.vooVentricularPulseWidthEntry = tk.Spinbox(self.voo,from_=0.05,to=1.9,format="%.2f",increment=0.1)
-
         #Adjust positioning
         self.vooLowerRateLimitLabel.grid(row=0, column=0, padx=15, pady=15)
         self.vooLowerRateLimitEntry.grid(row=0, column=1, padx=15, pady=15)
         self.vooLowerRateLimitButton.grid(row=0, column=2, padx=15, pady=15)
         self.vooLowerRateLimitValue.grid(row=0, column=3, padx=15, pady=15)
+
         self.vooUpperRateLimitLabel.grid(row=1, column=0, padx=15, pady=15)
         self.vooUpperRateLimitEntry.grid(row=1, column=1, padx=15, pady=15)
         self.vooUpperRateLimitButton.grid(row=1, column=2, padx=15, pady=15)
         self.vooUpperRateLimitValue.grid(row=1, column=3, padx=15, pady=15)
+
         self.vooVentricularAmplitudeLabel.grid(row=2, column=0, padx=15, pady=15)
         self.vooVentricularAmplitudeEntry.grid(row=2, column=1, padx=15, pady=15)
         self.vooVentricularAmplitudeButton.grid(row=2, column=2, padx=15, pady=15)
         self.vooVentricularAmplitudeValue.grid(row=2, column=3, padx=15, pady=15)
+
         self.vooVentricularPulseWidthLabel.grid(row=3, column=0, padx=15, pady=15)
         self.vooVentricularPulseWidthEntry.grid(row=3, column=1, padx=15, pady=15)
         self.vooVentricularPulseWidthButton.grid(row=3, column=2, padx=15, pady=15)
@@ -414,17 +460,6 @@ class MainWindow:
         #VOO END-------------------------------------------------------------------------------------------------------------------------------
 
         #AAI BEGIN-----------------------------------------------------------------------------------------------------------------------------
-        #Setup buttons
-        self.aaiLowerRateLimitButton = tk.Button(self.aai, text = "Set", command= lambda: self.setValue("aaiLowerRateLimit"))
-        self.aaiUpperRateLimitButton = tk.Button(self.aai, text = "Set", command= lambda: self.setValue("aaiUpperRateLimit"))
-        self.aaiAtrialAmplitudeButton = tk.Button(self.aai, text = "Set", command= lambda: self.setValue("aaiAtrialAmplitude"))
-        self.aaiAtrialPulseWidthButton = tk.Button(self.aai, text = "Set", command= lambda: self.setValue("aaiAtrialPulseWidth"))
-        self.aaiAtrialSensitivityButton = tk.Button(self.aai, text = "Set", command= lambda: self.setValue("aaiAtrialSensitivity"))
-        self.aaiARPButton = tk.Button(self.aai, text = "Set", command= lambda: self.setValue("aaiARP"))
-        self.aaiAPVARPButton = tk.Button(self.aai, text = "Set", command= lambda: self.setValue("aaiAPVARP"))
-        self.aaiHysteresisButton = tk.Button(self.aai, text = "Set", command= lambda: self.setValue("aaiHysteresis"))
-        self.aaiRateSmoothingButton = tk.Button(self.aai, text = "Set", command= lambda: self.setValue("aaiRateSmoothing"))
-
         #Setup labels for inputs
         self.aaiLowerRateLimitLabel = tk.Label(self.aai, text = "Lower Rate Limit")
         self.aaiUpperRateLimitLabel = tk.Label(self.aai, text = "Upper Rate Limit ")
@@ -432,20 +467,9 @@ class MainWindow:
         self.aaiAtrialPulseWidthLabel = tk.Label(self.aai, text = "Atrial Pulse Width")
         self.aaiAtrialSensitivityLabel = tk.Label(self.aai, text = "Atrial Sensitivity")
         self.aaiARPLabel = tk.Label(self.aai, text = "ARP")
-        self.aaiAPVARPLabel = tk.Label(self.aai, text = "APVARP")
+        self.aaiPVARPLabel = tk.Label(self.aai, text = "APVARP")
         self.aaiHysteresisLabel = tk.Label(self.aai, text = "Hysteresis")
         self.aaiRateSmoothingLabel = tk.Label(self.aai, text = "Rate Smoothing")
-
-        #Setup  labels to display values
-        self.aaiLowerRateLimitValue = tk.Label(self.aai, text = "Current Value: "+ aai_lowerRateLimitEntry)
-        self.aaiUpperRateLimitValue = tk.Label(self.aai, text = "Current Value: "+ aai_upperRateLimitEntry)
-        self.aaiAtrialAmplitudeValue = tk.Label(self.aai, text = "Current Value: "+ aai_atrialAmplitudeEntry)
-        self.aaiAtrialPulseWidthValue = tk.Label(self.aai, text = "Current Value: "+ aai_atrialPulseWidthEntry)
-        self.aaiAtrialSensitivityValue = tk.Label(self.aai, text = "Current Value: "+ aai_atrialSensitivityEntry)
-        self.aaiARPValue = tk.Label(self.aai, text = "Current Value: "+ aai_ARPEntry)
-        self.aaiAPVARPValue = tk.Label(self.aai, text = "Current Value: "+ aai_APVARPEntry)
-        self.aaiHysteresisValue = tk.Label(self.aai, text = "Current Value: "+ aai_hysteresisEntry)
-        self.aaiRateSmoothingValue = tk.Label(self.aai, text = "Current Value: "+ aai_rateSmoothingEntry)
 
         #Spinbox for setup
         self.aaiLowerRateLimitEntry = tk.Spinbox(self.aai,from_=30,to=175,increment=5)
@@ -454,60 +478,80 @@ class MainWindow:
         self.aaiAtrialPulseWidthEntry = tk.Spinbox(self.aai,from_=0.05,to=1.9,format="%.2f",increment=0.1)
         self.aaiAtrialSensitivityEntry = tk.Spinbox(self.aai,from_=0.25,to=10.0,format="%.2f",increment=0.25)
         self.aaiARPEntry = tk.Spinbox(self.aai,from_=150,to=500,increment=10)
-        self.aaiAPVARPEntry = tk.Spinbox(self.aai,from_=150,to=500,increment=10)
+        self.aaiPVARPEntry = tk.Spinbox(self.aai,from_=150,to=500,increment=10)
         self.aaiHysteresisEntry = tk.Spinbox(self.aai,from_=0,to=25,increment=5)
         self.aaiRateSmoothingEntry = tk.Spinbox(self.aai,from_=0,to=25,increment=3)
 
+        #Setup buttons
+        self.aaiLowerRateLimitButton = tk.Button(self.aai, text = "Set", command= lambda: self.setValue("aaiLowerRateLimit"))
+        self.aaiUpperRateLimitButton = tk.Button(self.aai, text = "Set", command= lambda: self.setValue("aaiUpperRateLimit"))
+        self.aaiAtrialAmplitudeButton = tk.Button(self.aai, text = "Set", command= lambda: self.setValue("aaiAtrialAmplitude"))
+        self.aaiAtrialPulseWidthButton = tk.Button(self.aai, text = "Set", command= lambda: self.setValue("aaiAtrialPulseWidth"))
+        self.aaiAtrialSensitivityButton = tk.Button(self.aai, text = "Set", command= lambda: self.setValue("aaiAtrialSensitivity"))
+        self.aaiARPButton = tk.Button(self.aai, text = "Set", command= lambda: self.setValue("aaiARP"))
+        self.aaiPVARPButton = tk.Button(self.aai, text = "Set", command= lambda: self.setValue("aaiPVARP"))
+        self.aaiHysteresisButton = tk.Button(self.aai, text = "Set", command= lambda: self.setValue("aaiHysteresis"))
+        self.aaiRateSmoothingButton = tk.Button(self.aai, text = "Set", command= lambda: self.setValue("aaiRateSmoothing"))
+        
+        #Setup  labels to display values
+        self.aaiLowerRateLimitValue = tk.Label(self.aai, text = "Current Value: "+ aai_lowerRateLimitEntry)
+        self.aaiUpperRateLimitValue = tk.Label(self.aai, text = "Current Value: "+ aai_upperRateLimitEntry)
+        self.aaiAtrialAmplitudeValue = tk.Label(self.aai, text = "Current Value: "+ aai_atrialAmplitudeEntry)
+        self.aaiAtrialPulseWidthValue = tk.Label(self.aai, text = "Current Value: "+ aai_atrialPulseWidthEntry)
+        self.aaiAtrialSensitivityValue = tk.Label(self.aai, text = "Current Value: "+ aai_atrialSensitivityEntry)
+        self.aaiARPValue = tk.Label(self.aai, text = "Current Value: "+ aai_ARPEntry)
+        self.aaiPVARPValue = tk.Label(self.aai, text = "Current Value: "+ aai_PVARPEntry)
+        self.aaiHysteresisValue = tk.Label(self.aai, text = "Current Value: "+ aai_hysteresisEntry)
+        self.aaiRateSmoothingValue = tk.Label(self.aai, text = "Current Value: "+ aai_rateSmoothingEntry)
+        
         #Adjust positioning
         self.aaiLowerRateLimitLabel.grid(row=0, column=0, padx=15, pady=15)
         self.aaiLowerRateLimitEntry.grid(row=0, column=1, padx=15, pady=15)
         self.aaiLowerRateLimitButton.grid(row=0, column=2, padx=15, pady=15)
+        self.aaiLowerRateLimitValue.grid(row=0, column=3, padx=15, pady=15)
+        
         self.aaiUpperRateLimitLabel.grid(row=1, column=0, padx=15, pady=15)
         self.aaiUpperRateLimitEntry.grid(row=1, column=1, padx=15, pady=15)
         self.aaiUpperRateLimitButton.grid(row=1, column=2, padx=15, pady=15)
+        self.aaiUpperRateLimitValue.grid(row=1, column=3, padx=15, pady=15)       
+
         self.aaiAtrialAmplitudeLabel.grid(row=2, column=0, padx=15, pady=15)
         self.aaiAtrialAmplitudeEntry.grid(row=2, column=1, padx=15, pady=15)
         self.aaiAtrialAmplitudeButton.grid(row=2, column=2, padx=15, pady=15)
+        self.aaiAtrialAmplitudeValue.grid(row=2, column=3, padx=15, pady=15)
+        
         self.aaiAtrialPulseWidthLabel.grid(row=3, column=0, padx=15, pady=15)
         self.aaiAtrialPulseWidthEntry.grid(row=3, column=1, padx=15, pady=15)
         self.aaiAtrialPulseWidthButton.grid(row=3, column=2, padx=15, pady=15)
+        self.aaiAtrialPulseWidthValue.grid(row=3, column=3, padx=15, pady=15)
+        
         self.aaiAtrialSensitivityLabel.grid(row=4, column=0, padx=15, pady=15)
         self.aaiAtrialSensitivityEntry.grid(row=4, column=1, padx=15, pady=15)
         self.aaiAtrialSensitivityButton.grid(row=4, column=2, padx=15, pady=15)
+        self.aaiAtrialSensitivityValue.grid(row=4, column=3, padx=15, pady=15)       
+
         self.aaiARPLabel.grid(row=5, column=0, padx=15, pady=15)
         self.aaiARPEntry.grid(row=5, column=1, padx=15, pady=15)
         self.aaiARPButton.grid(row=5, column=2, padx=15, pady=15)
-        self.aaiAPVARPLabel.grid(row=6, column=0, padx=15, pady=15)
-        self.aaiAPVARPEntry.grid(row=6, column=1, padx=15, pady=15)
-        self.aaiAPVARPButton.grid(row=6, column=2, padx=15, pady=15)
+        self.aaiARPValue.grid(row=5, column=3, padx=15, pady=15)
+        
+        self.aaiPVARPLabel.grid(row=6, column=0, padx=15, pady=15)
+        self.aaiPVARPEntry.grid(row=6, column=1, padx=15, pady=15)
+        self.aaiPVARPButton.grid(row=6, column=2, padx=15, pady=15)
+        self.aaiPVARPValue.grid(row=6, column=3, padx=15, pady=15)
+        
         self.aaiHysteresisLabel.grid(row=7, column=0, padx=15, pady=15)
         self.aaiHysteresisEntry.grid(row=7, column=1, padx=15, pady=15)
         self.aaiHysteresisButton.grid(row=7, column=2, padx=15, pady=15)
+        self.aaiHysteresisValue.grid(row=7, column=3, padx=15, pady=15)
+        
         self.aaiRateSmoothingLabel.grid(row=8, column=0, padx=15, pady=15)
         self.aaiRateSmoothingEntry.grid(row=8, column=1, padx=15, pady=15)
         self.aaiRateSmoothingButton.grid(row=8, column=2, padx=15, pady=15)
-        self.aaiLowerRateLimitValue.grid(row=0, column=3, padx=15, pady=15)
-        self.aaiUpperRateLimitValue.grid(row=1, column=3, padx=15, pady=15)
-        self.aaiAtrialAmplitudeValue.grid(row=2, column=3, padx=15, pady=15)
-        self.aaiAtrialPulseWidthValue.grid(row=3, column=3, padx=15, pady=15)
-        self.aaiAtrialSensitivityValue.grid(row=4, column=3, padx=15, pady=15)
-        self.aaiARPValue.grid(row=5, column=3, padx=15, pady=15)
-        self.aaiAPVARPValue.grid(row=6, column=3, padx=15, pady=15)
-        self.aaiHysteresisValue.grid(row=7, column=3, padx=15, pady=15)
         self.aaiRateSmoothingValue.grid(row=8, column=3, padx=15, pady=15)
         #AAI END-------------------------------------------------------------------------------------------------------------------------------
 
         #VVI BEGIN-----------------------------------------------------------------------------------------------------------------------------
-        #Setup buttons
-        self.vviLowerRateLimitButton = tk.Button(self.vvi, text = "Set", command= lambda: self.setValue("vviLowerRateLimit"))
-        self.vviUpperRateLimitButton = tk.Button(self.vvi, text = "Set", command= lambda: self.setValue("vviUpperRateLimit"))
-        self.vviVentricularAmplitudeButton = tk.Button(self.vvi, text = "Set", command= lambda: self.setValue("vviVentricularAmplitude"))
-        self.vviVentricularPulseWidthButton = tk.Button(self.vvi, text = "Set", command= lambda: self.setValue("vviVentricularPulseWidth"))
-        self.vviVentricularSensitivityButton = tk.Button(self.vvi, text = "Set", command= lambda: self.setValue("vviVentricularSensitivity"))
-        self.vviVRPButton = tk.Button(self.vvi, text = "Set", command= lambda: self.setValue("vviVRP"))
-        self.vviHysteresisButton = tk.Button(self.vvi, text = "Set", command= lambda: self.setValue("vviHysteresis"))
-        self.vviRateSmoothingButton = tk.Button(self.vvi, text = "Set", command= lambda: self.setValue("vviRateSmoothing"))
-
         #Setup labels for inputs
         self.vviLowerRateLimitLabel = tk.Label(self.vvi, text = "Lower Rate Limit")
         self.vviUpperRateLimitLabel = tk.Label(self.vvi, text = "Upper Rate Limit ")
@@ -518,6 +562,26 @@ class MainWindow:
         self.vviHysteresisLabel = tk.Label(self.vvi, text = "Hysteresis")
         self.vviRateSmoothingLabel = tk.Label(self.vvi, text = "Rate Smoothing")
 
+        #Spinbox for setup
+        self.vviLowerRateLimitEntry = tk.Spinbox(self.vvi,from_=30,to=175,increment=5)
+        self.vviUpperRateLimitEntry = tk.Spinbox(self.vvi,from_=50,to=175,increment=5)
+        self.vviVentricularAmplitudeEntry = tk.Spinbox(self.vvi,from_=0.5,to=7.0,format="%.1f",increment=0.1)
+        self.vviVentricularPulseWidthEntry = tk.Spinbox(self.vvi,from_=0.05,to=1.9,format="%.2f",increment=0.1)
+        self.vviVentricularSensitivityEntry = tk.Spinbox(self.vvi,from_=0.25,to=10.0,format="%.2f",increment=0.25)
+        self.vviVRPEntry = tk.Spinbox(self.vvi,from_=150,to=500,increment=10)
+        self.vviHysteresisEntry = tk.Spinbox(self.vvi,from_=0,to=25,increment=5)
+        self.vviRateSmoothingEntry = tk.Spinbox(self.vvi,from_=0,to=25,increment=3)
+        
+        #Setup buttons
+        self.vviLowerRateLimitButton = tk.Button(self.vvi, text = "Set", command= lambda: self.setValue("vviLowerRateLimit"))
+        self.vviUpperRateLimitButton = tk.Button(self.vvi, text = "Set", command= lambda: self.setValue("vviUpperRateLimit"))
+        self.vviVentricularAmplitudeButton = tk.Button(self.vvi, text = "Set", command= lambda: self.setValue("vviVentricularAmplitude"))
+        self.vviVentricularPulseWidthButton = tk.Button(self.vvi, text = "Set", command= lambda: self.setValue("vviVentricularPulseWidth"))
+        self.vviVentricularSensitivityButton = tk.Button(self.vvi, text = "Set", command= lambda: self.setValue("vviVentricularSensitivity"))
+        self.vviVRPButton = tk.Button(self.vvi, text = "Set", command= lambda: self.setValue("vviVRP"))
+        self.vviHysteresisButton = tk.Button(self.vvi, text = "Set", command= lambda: self.setValue("vviHysteresis"))
+        self.vviRateSmoothingButton = tk.Button(self.vvi, text = "Set", command= lambda: self.setValue("vviRateSmoothing"))
+        
         #Setup  labels to display values
         self.vviLowerRateLimitValue = tk.Label(self.vvi, text = "Current Value: "+ vvi_lowerRateLimitEntry)
         self.vviUpperRateLimitValue = tk.Label(self.vvi, text = "Current Value: "+ vvi_upperRateLimitEntry)
@@ -528,50 +592,119 @@ class MainWindow:
         self.vviHysteresisValue = tk.Label(self.vvi, text = "Current Value: "+ vvi_hysteresisEntry)
         self.vviRateSmoothingValue = tk.Label(self.vvi, text = "Current Value: "+ vvi_rateSmoothingEntry)
 
-        #Spinbox for setup
-        self.vviLowerRateLimitEntry = tk.Spinbox(self.vvi,from_=30,to=175,increment=5)
-        self.vviUpperRateLimitEntry = tk.Spinbox(self.vvi,from_=50,to=175,increment=5)
-        self.vviVentricularAmplitudeEntry = tk.Spinbox(self.vvi,from_=0.5,to=7.0,format="%.1f",increment=0.1)
-        self.vviVentricularPulseWidthEntry = tk.Spinbox(self.vvi,from_=0.05,to=1.9,format="%.2f",increment=0.1)
-        self.vviVentricularSensitivityEntry = tk.Spinbox(self.vvi,from_=0.25,to=10.0,format="%.2f",increment=0.25)
-        self.vviVRPEntry = tk.Spinbox(self.vvi,from_=150,to=500,increment=10)
-        self.vviHysteresisEntry = tk.Spinbox(self.vvi,from_=0,to=25,increment=5)
-        self.vviRateSmoothingEntry = tk.Spinbox(self.vvi,from_=0,to=25,increment=3)
-
         #Adjust positioning
         self.vviLowerRateLimitLabel.grid(row=0, column=0, padx=15, pady=15)
         self.vviLowerRateLimitEntry.grid(row=0, column=1, padx=15, pady=15)
         self.vviLowerRateLimitButton.grid(row=0, column=2, padx=15, pady=15)
+        self.vviLowerRateLimitValue.grid(row=0, column=3, padx=15, pady=15)
+        
         self.vviUpperRateLimitLabel.grid(row=1, column=0, padx=15, pady=15)
         self.vviUpperRateLimitEntry.grid(row=1, column=1, padx=15, pady=15)
         self.vviUpperRateLimitButton.grid(row=1, column=2, padx=15, pady=15)
+        self.vviUpperRateLimitValue.grid(row=1, column=3, padx=15, pady=15)
+        
         self.vviVentricularAmplitudeLabel.grid(row=2, column=0, padx=15, pady=15)
         self.vviVentricularAmplitudeEntry.grid(row=2, column=1, padx=15, pady=15)
         self.vviVentricularAmplitudeButton.grid(row=2, column=2, padx=15, pady=15)
+        self.vviVentricularAmplitudeValue.grid(row=2, column=3, padx=15, pady=15)
+        
         self.vviVentricularPulseWidthLabel.grid(row=3, column=0, padx=15, pady=15)
         self.vviVentricularPulseWidthEntry.grid(row=3, column=1, padx=15, pady=15)
         self.vviVentricularPulseWidthButton.grid(row=3, column=2, padx=15, pady=15)
+        self.vviVentricularPulseWidthValue.grid(row=3, column=3, padx=15, pady=15)
+        
         self.vviVentricularSensitivityLabel.grid(row=4, column=0, padx=15, pady=15)
         self.vviVentricularSensitivityEntry.grid(row=4, column=1, padx=15, pady=15)
         self.vviVentricularSensitivityButton.grid(row=4, column=2, padx=15, pady=15)
+        self.vviVentricularSensitivityValue.grid(row=4, column=3, padx=15, pady=15)
+        
         self.vviVRPLabel.grid(row=5, column=0, padx=15, pady=15)
         self.vviVRPEntry.grid(row=5, column=1, padx=15, pady=15)
         self.vviVRPButton.grid(row=5, column=2, padx=15, pady=15)
+        self.vviVRPValue.grid(row=5, column=3, padx=15, pady=15)
+        
         self.vviHysteresisLabel.grid(row=6, column=0, padx=15, pady=15)
         self.vviHysteresisEntry.grid(row=6, column=1, padx=15, pady=15)
         self.vviHysteresisButton.grid(row=6, column=2, padx=15, pady=15)
+        self.vviHysteresisValue.grid(row=6, column=3, padx=15, pady=15)
+        
         self.vviRateSmoothingLabel.grid(row=7, column=0, padx=15, pady=15)
         self.vviRateSmoothingEntry.grid(row=7, column=1, padx=15, pady=15)
         self.vviRateSmoothingButton.grid(row=7, column=2, padx=15, pady=15)
-        self.vviLowerRateLimitValue.grid(row=0, column=3, padx=15, pady=15)
-        self.vviUpperRateLimitValue.grid(row=1, column=3, padx=15, pady=15)
-        self.vviVentricularAmplitudeValue.grid(row=2, column=3, padx=15, pady=15)
-        self.vviVentricularPulseWidthValue.grid(row=3, column=3, padx=15, pady=15)
-        self.vviVentricularSensitivityValue.grid(row=4, column=3, padx=15, pady=15)
-        self.vviVRPValue.grid(row=5, column=3, padx=15, pady=15)
-        self.vviHysteresisValue.grid(row=6, column=3, padx=15, pady=15)
-        self.vviRateSmoothingValue.grid(row=7, column=3, padx=15, pady=15)
+        self.vviRateSmoothingValue.grid(row=7, column=3, padx=15, pady=15)   
         #VVI END-------------------------------------------------------------------------------------------------------------------------------
+        
+        #DOO BEGIN-----------------------------------------------------------------------------------------------------------------------------
+        #Setup labels for inputs
+        self.dooLowerRateLimitLabel = tk.Label(self.doo, text = "Lower Rate Limit")
+        self.dooUpperRateLimitLabel = tk.Label(self.doo, text = "Upper Rate Limit")
+        self.dooAtrialAmplitudeLabel = tk.Label(self.doo, text = "Atrial Amplitude")
+        self.dooAtrialPulseWidthLabel = tk.Label(self.doo, text = "Atrial Pulse Width")
+        self.dooVentricularAmplitudeLabel = tk.Label(self.doo, text = "Ventricular Amplitude")
+        self.dooVentricularPulseWidthLabel = tk.Label(self.doo, text = "Ventricular Pulse Width")
+        self.dooFixedAVDelayLabel = tk.Label(self.doo, text = "Fixed AV Delay")
+
+        #Spinbox for setup
+        self.dooLowerRateLimitEntry = tk.Spinbox(self.doo,from_=30,to=175,increment=5)
+        self.dooUpperRateLimitEntry = tk.Spinbox(self.doo,from_=50,to=175,increment=5)
+        self.dooAtrialAmplitudeEntry = tk.Spinbox(self.doo,from_=0.5,to=7.0,format="%.1f",increment=0.1)
+        self.dooAtrialPulseWidthEntry = tk.Spinbox(self.doo,from_=0.05,to=1.9,format="%.2f",increment=0.1)
+        self.dooVentricularAmplitudeEntry = tk.Spinbox(self.doo,from_=0.5,to=7.0,format="%.1f",increment=0.1)
+        self.dooVentricularPulseWidthEntry = tk.Spinbox(self.doo,from_=0.05,to=1.9,format="%.2f",increment=0.1)
+        self.dooFixedAVDelayEntry = tk.Spinbox(self.doo,from_=70,to=300,increment=10)
+
+        #Setup buttons
+        self.dooLowerRateLimitButton = tk.Button(self.doo, text = "Set", command= lambda: self.setValue("dooLowerRateLimit"))
+        self.dooUpperRateLimitButton = tk.Button(self.doo, text = "Set", command= lambda: self.setValue("dooUpperRateLimit"))
+        self.dooAtrialAmplitudeButton = tk.Button(self.doo, text = "Set", command= lambda: self.setValue("dooAtrialAmplitude"))
+        self.dooAtrialPulseWidthButton = tk.Button(self.doo, text = "Set", command= lambda: self.setValue("dooAtrialPulseWidth"))
+        self.dooVentricularAmplitudeButton = tk.Button(self.doo, text = "Set", command= lambda: self.setValue("dooVentricularAmplitude"))
+        self.dooVentricularPulseWidthButton = tk.Button(self.doo, text = "Set", command= lambda: self.setValue("dooVentricularPulseWidth"))
+        self.dooFixedAVDelayButton = tk.Spinbox(self.doo, text = "Set", command= lambda: self.setValue("dooFixedAVDelay"))
+
+        #Setup labels to display values
+        self.dooLowerRateLimitValue = tk.Label(self.doo, text = "Current Value: " + doo_lowerRateLimitEntry)
+        self.dooUpperRateLimitValue = tk.Label(self.doo, text = "Current Value: " + doo_upperRateLimitEntry)
+        self.dooAtrialAmplitudeValue = tk.Label(self.doo, text = "Current Value: " + doo_atrialAmplitudeEntry)
+        self.dooAtrialPulseWidthValue = tk.Label(self.doo, text = "Current Value: " + doo_atrialPulseWidthEntry)
+        self.dooVentricularAmplitudeValue = tk.Label(self.doo, text = "Current Value: "+ doo_ventricularAmplitudeEntry)
+        self.dooVentricularPulseWidthValue = tk.Label(self.doo, text = "Current Value: "+ doo_ventricularPulseWidthEntry)
+        self.dooFixedAVDelayButton = tk.Spinbox(self.doo, text = "Current Value: "+ doo_fixedAVDelayEntry)
+
+        #Adjust positioning
+        self.dooLowerRateLimitLabel.grid(row=0, column=0, padx=15, pady=15)
+        self.dooLowerRateLimitEntry.grid(row=0, column=1, padx=15, pady=15)
+        self.dooLowerRateLimitButton.grid(row=0, column=2, padx=15, pady=15)
+        self.dooLowerRateLimitValue.grid(row=0, column=3, padx=15, pady=15)
+
+        self.dooUpperRateLimitLabel.grid(row=1, column=0, padx=15, pady=15)
+        self.dooUpperRateLimitEntry.grid(row=1, column=1, padx=15, pady=15)
+        self.dooUpperRateLimitButton.grid(row=1, column=2, padx=15, pady=15)
+        self.dooUpperRateLimitValue.grid(row=1, column=3, padx=15, pady=15)
+
+        self.dooAtrialAmplitudeLabel.grid(row=2, column=0, padx=15, pady=15)
+        self.dooAtrialAmplitudeEntry.grid(row=2, column=1, padx=15, pady=15)
+        self.dooAtrialAmplitudeButton.grid(row=2, column=2, padx=15, pady=15)
+        self.dooAtrialAmplitudeValue.grid(row=2, column=3, padx=15, pady=15)
+
+        self.dooAtrialPulseWidthLabel.grid(row=3, column=0, padx=15, pady=15)
+        self.dooAtrialPulseWidthEntry.grid(row=3, column=1, padx=15, pady=15)
+        self.dooAtrialPulseWidthButton.grid(row=3, column=2, padx=15, pady=15)
+        self.dooAtrialPulseWidthValue.grid(row=3, column=3, padx=15, pady=15)
+
+        self.dooVentricularAmplitudeLabel.grid(row=4, column=0, padx=15, pady=15)
+        self.dooVentricularAmplitudeEntry.grid(row=4, column=1, padx=15, pady=15)
+        self.dooVentricularAmplitudeButton.grid(row=4, column=2, padx=15, pady=15)
+        self.dooVentricularAmplitudeValue.grid(row=4, column=3, padx=15, pady=15)
+        
+        self.dooVentricularPulseWidthLabel.grid(row=5, column=0, padx=15, pady=15)
+        self.dooVentricularPulseWidthEntry.grid(row=5, column=1, padx=15, pady=15)
+        self.dooVentricularPulseWidthButton.grid(row=5, column=2, padx=15, pady=15)
+        self.dooVentricularPulseWidthValue.grid(row=5, column=3, padx=15, pady=15)
+        #DOO END-------------------------------------------------------------------------------------------------------------------------------
+        
+        #Position tabs properly
+        self.tab_parent.pack(expand = 1, fill='both')
 
         #Track the process
         self.logTitle = tk.Label(self.aoo, text = "Current Mode")
@@ -594,8 +727,10 @@ class MainWindow:
         self.vviLog = tk.Label(self.vvi, text = userlog)
         self.vviLog.grid(row=1, column=4, padx=15, pady=15)
 
-        #Position tabs properly
-        self.tab_parent.pack(expand = 1, fill='both')
+        self.logTitle = tk.Label(self.doo, text = "Current Mode")
+        self.logTitle.grid(row=0, column=4, padx=15, pady=15)
+        self.dooLog = tk.Label(self.doo, text = userlog)
+        self.dooLog.grid(row=1, column=4, padx=15, pady=15)
 
         #Setup confirm buttons
         self.confirmButton = tk.Button(self.aoo, text = 'Confirm', width = 20, command = lambda: self.confirmChanges("aooConfirm"))
@@ -605,6 +740,8 @@ class MainWindow:
         self.confirmButton = tk.Button(self.aai, text = 'Confirm', width = 20, command = lambda: self.confirmChanges("aaiConfirm"))
         self.confirmButton.grid(row = 9, column = 1)
         self.confirmButton = tk.Button(self.vvi, text = 'Confirm', width = 20, command = lambda: self.confirmChanges("vviConfirm"))
+        self.confirmButton.grid(row = 8, column = 1)
+        self.confirmButton = tk.Button(self.doo, text = 'Confirm', width = 20, command = lambda: self.confirmChanges("vviConfirm"))
         self.confirmButton.grid(row = 8, column = 1)
 
         #Setup logoff button
@@ -616,6 +753,9 @@ class MainWindow:
         self.quitButton.grid(row=10,column=1,pady=5)
         self.quitButton = tk.Button(self.vvi, text = 'LogOff', width = 12, command = self.logOff)
         self.quitButton.grid(row=10,column=1,pady=5)
+        self.quitButton = tk.Button(self.doo, text = 'LogOff', width = 12, command = self.logOff)
+        self.quitButton.grid(row=10,column=1,pady=5)
+        
 
     #Confirm changes method
     def confirmChanges(self,value):
@@ -674,7 +814,7 @@ class MainWindow:
         #VOO
         global voo_lowerRateLimitEntry,voo_upperRateLimitEntry,voo_ventricularAmplitudeEntry,voo_ventricularPulseWidthEntry
         #AAI
-        global aai_lowerRateLimitEntry,aai_upperRateLimitEntry,aai_atrialAmplitudeEntry,aai_atrialPulseWidthEntry,aai_atrialSensitivityEntry,aai_ARPEntry,aai_APVARPEntry,aai_hysteresisEntry,aai_rateSmoothingEntry
+        global aai_lowerRateLimitEntry,aai_upperRateLimitEntry,aai_atrialAmplitudeEntry,aai_atrialPulseWidthEntry,aai_atrialSensitivityEntry,aai_ARPEntry,aai_PVARPEntry,aai_hysteresisEntry,aai_rateSmoothingEntry
         #VVI
         global vvi_lowerRateLimitEntry,vvi_upperRateLimitEntry,vvi_ventricularAmplitudeEntry,vvi_ventricularPulseWidthEntry,vvi_ventricularSensitivityEntry,vvi_ARPEntry,vvi_hysteresisEntry,vvi_rateSmoothingEntry
 
@@ -1104,9 +1244,9 @@ class MainWindow:
                 messagebox.showinfo("Error","Please enter a valid value")
                 pass
 
-        #aaiAPVARP
-        if(value == "aaiAPVARP"):
-            temp = self.aaiAPVARPEntry.get()
+        #aaiPVARP
+        if(value == "aaiPVARP"):
+            temp = self.aaiPVARPEntry.get()
             #Try/access to sanitize user input and ask for confirmation if there are no errors
             try:
                 int(temp)
@@ -1123,9 +1263,9 @@ class MainWindow:
                 else:
                     if messagebox.askyesno("Confirmation", "Replace current value?"):
                         messagebox.showinfo("Done", "Success")
-                        aai_APVARPEntry = temp
-                        self.aaiAPVARPValue.config(text="Current Value: " + aai_APVARPEntry)
-                        db.execute("UPDATE "+currentuser+" SET aai_APVARPEntry = ?", (aai_APVARPEntry,))
+                        aai_PVARPEntry = temp
+                        self.aaiPVARPValue.config(text="Current Value: " + aai_PVARPEntry)
+                        db.execute("UPDATE "+currentuser+" SET aai_PVARPEntry = ?", (aai_PVARPEntry,))
                         db.commit()
 
             except:
