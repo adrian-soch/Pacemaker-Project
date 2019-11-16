@@ -253,7 +253,7 @@ class AddUserWindow:
                             "vvir_lowerRateLimitEntry INTEGER NOT NULL, vvir_upperRateLimitEntry INTEGER NOT NULL, vvir_ventricularAmplitudeEntry REAL NOT NULL, vvir_ventricularPulseWidthEntry INTEGER NOT NULL, vvir_ventricularSensitivityEntry REAL NOT NULL, vvir_VRPEntry INTEGER NOT NULL, vvir_hysteresisEntry INTEGER NOT NULL, vvir_rateSmoothingEntry INTEGER NOT NULL, vvir_maximumSensorRateEntry INTEGER NOT NULL, vvir_activityThresholdEntry INTEGER NOT NULL, vvir_reactionTimeEntry INTEGER NOT NULL, vvir_responseFactorEntry INTEGER NOT NULL, vvir_recoveryTimeEntry INTEGER NOT NULL, "
                             "door_lowerRateLimitEntry INTEGER NOT NULL, door_upperRateLimitEntry INTEGER NOT NULL, door_atrialAmplitudeEntry REAL NOT NULL, door_atrialPulseWidthEntry INTEGER NOT NULL, door_ventricularAmplitudeEntry REAL NOT NULL, door_ventricularPulseWidthEntry INTEGER NOT NULL, door_maximumSensorRateEntry INTEGER NOT NULL, door_fixedAVDelayEntry INTEGER NOT NULL, door_activityThresholdEntry INTEGER NOT NULL, door_reactionTimeEntry INTEGER NOT NULL, door_responseFactorEntry INTEGER NOT NULL, door_recoveryTimeEntry INTEGER NOT NULL)")
                         db.execute("INSERT INTO users VALUES(?, ?, ?)", (username, password, counters))
-                        db.execute("INSERT INTO "+counters+" VALUES(?, "
+                        db.execute("INSERT INTO "+counters+" VALUES(?, " #log
                             "?,?,?,?, " #aoo
                             "?,?,?,?, " #voo
                             "?,?,?,?,?,?,?,?,?, " #aai
@@ -263,16 +263,17 @@ class AddUserWindow:
                             "?,?,?,?,?,?,?,?,?, " #voor
                             "?,?,?,?,?,?,?,?,?,?,?,?,?,?, " #aair
                             "?,?,?,?,?,?,?,?,?,?,?,?,?, " #vvir
-                            "?,?,?,?,?,?,?,?,?,?,?,?)", (userlog, #door
+                            "?,?,?,?,?,?,?,?,?,?,?,?)", #door
+                            (userlog, 
                             60, 120, 3.5, 1.5, #aoo
                             60, 120, 3.5, 1.5, #voo
                             60, 120, 3.5, 1.5, 3.3, 250, 200, 0, 0, #aai
                             60, 120, 3.5, 1.5, 3.3, 250, 0, 0, #vvi
                             0,0,0,0,0,0,0, #doo
-                            0,0,0,0,0,0,0,0,0, #aoor
-                            0,0,0,0,0,0,0,0,0, #voor
-                            0,0,0,0,0,0,0,0,0,0,0,0,0,0, #aair
-                            0,0,0,0,0,0,0,0,0,0,0,0,0, #vvir
+                            60, 120, 3.5, 1.5, 0,0,0,0,0, #aoor
+                            60, 120, 3.5, 1.5, 0,0,0,0,0, #voor
+                            60, 120, 3.5, 1.5, 3.3, 250, 200, 0, 0, 0,0,0,0,0, #aair
+                            60, 120, 3.5, 1.5, 3.3, 250, 0, 0, 0,0,0,0,0, #vvir
                             0,0,0,0,0,0,0,0,0,0,0,0)) #door
                         messagebox.showinfo("Success", "User Added")
                         self.quitButton.focus()
@@ -326,6 +327,9 @@ class MainWindow:
         self.tab_parent.add(self.aair, text = "AAIR")
         self.tab_parent.add(self.vvir, text = "VVIR")
         self.tab_parent.add(self.door, text = "DOOR")
+
+        #Position tabs properly
+        self.tab_parent.pack(expand = 1, fill='both')
 
         #Retrieve all relevant data from tables for currentuser
         global currentuser
@@ -804,24 +808,44 @@ class MainWindow:
         self.aoorUpperRateLimitLabel = tk.Label(self.aoor, text = "Upper Rate Limit")
         self.aoorAtrialAmplitudeLabel = tk.Label(self.aoor, text = "Atrial Amplitude")
         self.aoorAtrialPulseWidthLabel = tk.Label(self.aoor, text = "Atrial Pulse Width")
-        
+        self.aoorMaximumSensorRateLabel = tk.Label(self.aoor, text = "Maximum Sensor Rate")
+        self.aoorActivityThresholdLabel = tk.Label(self.aoor, text = "Activity Threshold")
+        self.aoorReactionTimeLabel = tk.Label(self.aoor, text = "Reaction Time")
+        self.aoorResponseFactorLabel = tk.Label(self.aoor, text = "Response Factor")
+        self.aoorRecoveryTimeLabel = tk.Label(self.aoor, text = "Recovery Time")
+
         #Spinbox for setup
         self.aoorLowerRateLimitEntry = tk.Spinbox(self.aoor,from_=30,to=175,increment=5)
         self.aoorUpperRateLimitEntry = tk.Spinbox(self.aoor,from_=50,to=175,increment=5)
         self.aoorAtrialAmplitudeEntry = tk.Spinbox(self.aoor,from_=0.5,to=7.0,format="%.1f",increment=0.1)
         self.aoorAtrialPulseWidthEntry = tk.Spinbox(self.aoor,from_=0.05,to=1.9,format="%.2f",increment=0.1)
+        self.aoorMaximumSensorRateEntry = tk.Spinbox(self.aoor,from_=30,to=175,increment=5)
+        self.aoorActivityThresholdEntry = tk.Spinbox(self.aoor,from_=50,to=175,increment=5)
+        self.aoorReactionTimeEntry = tk.Spinbox(self.aoor,from_=0.5,to=7.0,format="%.1f",increment=0.1)
+        self.aoorResponseFactorEntry = tk.Spinbox(self.aoor,from_=0.05,to=1.9,format="%.2f",increment=0.1)
+        self.aoorRecoveryTimeEntry = tk.Spinbox(self.aoor,from_=30,to=175,increment=5)
 
         #Setup buttons
         self.aoorLowerRateLimitButton = tk.Button(self.aoor, text = "Set", command= lambda: self.setValue("aoorLowerRateLimit"))
         self.aoorUpperRateLimitButton = tk.Button(self.aoor, text = "Set", command= lambda: self.setValue("aoorUpperRateLimit"))
         self.aoorAtrialAmplitudeButton = tk.Button(self.aoor, text = "Set", command= lambda: self.setValue("aoorAtrialAmplitude"))
         self.aoorAtrialPulseWidthButton = tk.Button(self.aoor, text = "Set", command= lambda: self.setValue("aoorAtrialPulseWidth"))
-        
+        self.aoorMaximumSensorRateButton = tk.Button(self.aoor, text = "Set", command= lambda: self.setValue("aoorMaximumSensorRate"))
+        self.aoorActivityThresholdButton = tk.Button(self.aoor, text = "Set", command= lambda: self.setValue("aoorActivityThreshold"))
+        self.aoorReactionTimeButton = tk.Button(self.aoor, text = "Set", command= lambda: self.setValue("aoorReactionTime"))
+        self.aoorResponseFactorButton = tk.Button(self.aoor, text = "Set", command= lambda: self.setValue("aoorResponseFactor"))
+        self.aoorRecoveryTimeButton = tk.Button(self.aoor, text = "Set", command= lambda: self.setValue("aoorRecoveryTime"))
+
         #Setup  labels to display values
         self.aoorLowerRateLimitValue = tk.Label(self.aoor, text = "Current Value: " + aoor_lowerRateLimitEntry)
         self.aoorUpperRateLimitValue = tk.Label(self.aoor, text = "Current Value: " + aoor_upperRateLimitEntry)
         self.aoorAtrialAmplitudeValue = tk.Label(self.aoor, text = "Current Value: " + aoor_atrialAmplitudeEntry)
         self.aoorAtrialPulseWidthValue = tk.Label(self.aoor, text = "Current Value: " + aoor_atrialPulseWidthEntry)
+        self.aoorMaximumSensorRateValue = tk.Label(self.aoor, text = "Current Value: " + aoor_maximumSensorRateEntry)
+        self.aoorActivityThresholdValue = tk.Label(self.aoor, text = "Current Value: " + aoor_activityThresholdEntry)
+        self.aoorReactionTimeValue = tk.Label(self.aoor, text = "Current Value: " + aoor_reactionTimeEntry)
+        self.aoorResponseFactorValue = tk.Label(self.aoor, text = "Current Value: " + aoor_responseFactorEntry)
+        self.aoorRecoveryTimeValue = tk.Label(self.aoor, text = "Current Value: " + aoor_recoveryTimeEntry)
 
         #Adjust positioning
         self.aoorLowerRateLimitLabel.grid(row=0, column=0, padx=15, pady=15)
@@ -843,32 +867,77 @@ class MainWindow:
         self.aoorAtrialPulseWidthEntry.grid(row=3, column=1, padx=15, pady=15)
         self.aoorAtrialPulseWidthButton.grid(row=3, column=2, padx=15, pady=15)
         self.aoorAtrialPulseWidthValue.grid(row=3, column=3, padx=15, pady=15)
+        
+        self.aoorMaximumSensorRateLabel.grid(row=4, column=0, padx=15, pady=15)
+        self.aoorMaximumSensorRateEntry.grid(row=4, column=1, padx=15, pady=15)
+        self.aoorMaximumSensorRateButton.grid(row=4, column=2, padx=15, pady=15)
+        self.aoorMaximumSensorRateValue.grid(row=4, column=3, padx=15, pady=15)
+
+        self.aoorActivityThresholdLabel.grid(row=5, column=0, padx=15, pady=15)
+        self.aoorActivityThresholdEntry.grid(row=5, column=1, padx=15, pady=15)
+        self.aoorActivityThresholdButton.grid(row=5, column=2, padx=15, pady=15)
+        self.aoorActivityThresholdValue.grid(row=5, column=3, padx=15, pady=15)
+
+        self.aoorReactionTimeLabel.grid(row=6, column=0, padx=15, pady=15)
+        self.aoorReactionTimeEntry.grid(row=6, column=1, padx=15, pady=15)
+        self.aoorReactionTimeButton.grid(row=6, column=2, padx=15, pady=15)
+        self.aoorReactionTimeValue.grid(row=6, column=3, padx=15, pady=15)
+
+        self.aoorResponseFactorLabel.grid(row=7, column=0, padx=15, pady=15)
+        self.aoorResponseFactorEntry.grid(row=7, column=1, padx=15, pady=15)
+        self.aoorResponseFactorButton.grid(row=7, column=2, padx=15, pady=15)
+        self.aoorResponseFactorValue.grid(row=7, column=3, padx=15, pady=15)
+
+        self.aoorRecoveryTimeLabel.grid(row=8, column=0, padx=15, pady=15)
+        self.aoorRecoveryTimeEntry.grid(row=8, column=1, padx=15, pady=15)
+        self.aoorRecoveryTimeButton.grid(row=8, column=2, padx=15, pady=15)
+        self.aoorRecoveryTimeValue.grid(row=8, column=3, padx=15, pady=15)
         #AOOR END-------------------------------------------------------------------------------------------------------------------------------
 
         #VOOR BEGIN----------------------------------------------------------------------------------------------------------------------------- 
         #Setup labels for inputs
         self.voorLowerRateLimitLabel = tk.Label(self.voor, text = "Lower Rate Limit")
-        self.voorUpperRateLimitLabel = tk.Label(self.voor, text = "Upper Rate Limit ")
+        self.voorUpperRateLimitLabel = tk.Label(self.voor, text = "Upper Rate Limit")
         self.voorVentricularAmplitudeLabel = tk.Label(self.voor, text = "Ventricular Amplitude")
         self.voorVentricularPulseWidthLabel = tk.Label(self.voor, text = "Ventricular Pulse Width")
-        
+        self.voorMaximumSensorRateLabel = tk.Label(self.voor, text = "Maximum Sensor Rate")
+        self.voorActivityThresholdLabel = tk.Label(self.voor, text = "Activity Threshold")
+        self.voorReactionTimeLabel = tk.Label(self.voor, text = "Reaction Time")
+        self.voorResponseFactorLabel = tk.Label(self.voor, text = "Response Factor")
+        self.voorRecoveryTimeLabel = tk.Label(self.voor, text = "Recovery Time")
+
         #Spinbox for setup
         self.voorLowerRateLimitEntry = tk.Spinbox(self.voor,from_=30,to=175,increment=5)
         self.voorUpperRateLimitEntry = tk.Spinbox(self.voor,from_=50,to=175,increment=5)
         self.voorVentricularAmplitudeEntry = tk.Spinbox(self.voor,from_=0.5,to=7.0,format="%.1f",increment=0.1)
         self.voorVentricularPulseWidthEntry = tk.Spinbox(self.voor,from_=0.05,to=1.9,format="%.2f",increment=0.1)
-        
+        self.voorMaximumSensorRateEntry = tk.Spinbox(self.voor,from_=30,to=175,increment=5)
+        self.voorActivityThresholdEntry = tk.Spinbox(self.voor,from_=50,to=175,increment=5)
+        self.voorReactionTimeEntry = tk.Spinbox(self.voor,from_=0.5,to=7.0,format="%.1f",increment=0.1)
+        self.voorResponseFactorEntry = tk.Spinbox(self.voor,from_=0.05,to=1.9,format="%.2f",increment=0.1)
+        self.voorRecoveryTimeEntry = tk.Spinbox(self.voor,from_=30,to=175,increment=5)
+
         #Setup buttons
         self.voorLowerRateLimitButton = tk.Button(self.voor, text = "Set", command= lambda: self.setValue("voorLowerRateLimit"))
         self.voorUpperRateLimitButton = tk.Button(self.voor, text = "Set", command= lambda: self.setValue("voorUpperRateLimit"))
         self.voorVentricularAmplitudeButton = tk.Button(self.voor, text = "Set", command= lambda: self.setValue("voorVentricularAmplitude"))
         self.voorVentricularPulseWidthButton = tk.Button(self.voor, text = "Set", command= lambda: self.setValue("voorVentricularPulseWidth"))
-        
+        self.voorMaximumSensorRateButton = tk.Button(self.voor, text = "Set", command= lambda: self.setValue("voorMaximumSensorRate"))
+        self.voorActivityThresholdButton = tk.Button(self.voor, text = "Set", command= lambda: self.setValue("voorActivityThreshold"))
+        self.voorReactionTimeButton = tk.Button(self.voor, text = "Set", command= lambda: self.setValue("voorReactionTime"))
+        self.voorResponseFactorButton = tk.Button(self.voor, text = "Set", command= lambda: self.setValue("voorResponseFactor"))
+        self.voorRecoveryTimeButton = tk.Button(self.voor, text = "Set", command= lambda: self.setValue("voorRecoveryTime"))
+
         #Setup  labels to display values
-        self.voorLowerRateLimitValue = tk.Label(self.voor, text = "Current Value: "+ voor_lowerRateLimitEntry)
-        self.voorUpperRateLimitValue = tk.Label(self.voor, text = "Current Value: "+ voor_upperRateLimitEntry)
-        self.voorVentricularAmplitudeValue = tk.Label(self.voor, text = "Current Value: "+ voor_ventricularAmplitudeEntry)
-        self.voorVentricularPulseWidthValue = tk.Label(self.voor, text = "Current Value: "+ voor_ventricularPulseWidthEntry)
+        self.voorLowerRateLimitValue = tk.Label(self.voor, text = "Current Value: " + voor_lowerRateLimitEntry)
+        self.voorUpperRateLimitValue = tk.Label(self.voor, text = "Current Value: " + voor_upperRateLimitEntry)
+        self.voorVentricularAmplitudeValue = tk.Label(self.voor, text = "Current Value: " + voor_ventricularAmplitudeEntry)
+        self.voorVentricularPulseWidthValue = tk.Label(self.voor, text = "Current Value: " + voor_ventricularPulseWidthEntry)
+        self.voorMaximumSensorRateValue = tk.Label(self.voor, text = "Current Value: " + voor_maximumSensorRateEntry)
+        self.voorActivityThresholdValue = tk.Label(self.voor, text = "Current Value: " + voor_activityThresholdEntry)
+        self.voorReactionTimeValue = tk.Label(self.voor, text = "Current Value: " + voor_reactionTimeEntry)
+        self.voorResponseFactorValue = tk.Label(self.voor, text = "Current Value: " + voor_responseFactorEntry)
+        self.voorRecoveryTimeValue = tk.Label(self.voor, text = "Current Value: " + voor_recoveryTimeEntry)
 
         #Adjust positioning
         self.voorLowerRateLimitLabel.grid(row=0, column=0, padx=15, pady=15)
@@ -890,6 +959,31 @@ class MainWindow:
         self.voorVentricularPulseWidthEntry.grid(row=3, column=1, padx=15, pady=15)
         self.voorVentricularPulseWidthButton.grid(row=3, column=2, padx=15, pady=15)
         self.voorVentricularPulseWidthValue.grid(row=3, column=3, padx=15, pady=15)
+        
+        self.voorMaximumSensorRateLabel.grid(row=4, column=0, padx=15, pady=15)
+        self.voorMaximumSensorRateEntry.grid(row=4, column=1, padx=15, pady=15)
+        self.voorMaximumSensorRateButton.grid(row=4, column=2, padx=15, pady=15)
+        self.voorMaximumSensorRateValue.grid(row=4, column=3, padx=15, pady=15)
+
+        self.voorActivityThresholdLabel.grid(row=5, column=0, padx=15, pady=15)
+        self.voorActivityThresholdEntry.grid(row=5, column=1, padx=15, pady=15)
+        self.voorActivityThresholdButton.grid(row=5, column=2, padx=15, pady=15)
+        self.voorActivityThresholdValue.grid(row=5, column=3, padx=15, pady=15)
+
+        self.voorReactionTimeLabel.grid(row=6, column=0, padx=15, pady=15)
+        self.voorReactionTimeEntry.grid(row=6, column=1, padx=15, pady=15)
+        self.voorReactionTimeButton.grid(row=6, column=2, padx=15, pady=15)
+        self.voorReactionTimeValue.grid(row=6, column=3, padx=15, pady=15)
+
+        self.voorResponseFactorLabel.grid(row=7, column=0, padx=15, pady=15)
+        self.voorResponseFactorEntry.grid(row=7, column=1, padx=15, pady=15)
+        self.voorResponseFactorButton.grid(row=7, column=2, padx=15, pady=15)
+        self.voorResponseFactorValue.grid(row=7, column=3, padx=15, pady=15)
+
+        self.voorRecoveryTimeLabel.grid(row=8, column=0, padx=15, pady=15)
+        self.voorRecoveryTimeEntry.grid(row=8, column=1, padx=15, pady=15)
+        self.voorRecoveryTimeButton.grid(row=8, column=2, padx=15, pady=15)
+        self.voorRecoveryTimeValue.grid(row=8, column=3, padx=15, pady=15)
         #VOOR END------------------------------------------------------------------------------------------------------------------------------
 
         #AAIR BEGIN----------------------------------------------------------------------------------------------------------------------------
@@ -903,7 +997,12 @@ class MainWindow:
         self.aairPVARPLabel = tk.Label(self.aair, text = "APVARP")
         self.aairHysteresisLabel = tk.Label(self.aair, text = "Hysteresis")
         self.aairRateSmoothingLabel = tk.Label(self.aair, text = "Rate Smoothing")
-
+        self.aairMaximumSensorRateLabel = tk.Label(self.aair, text = "Maximum Sensor Rate")
+        self.aairActivityThresholdLabel = tk.Label(self.aair, text = "Activity Threshold")
+        self.aairReactionTimeLabel = tk.Label(self.aair, text = "Reaction Time")
+        self.aairResponseFactorLabel = tk.Label(self.aair, text = "Response Factor")
+        self.aairRecoveryTimeLabel = tk.Label(self.aair, text = "Recovery Time")
+        
         #Spinbox for setup
         self.aairLowerRateLimitEntry = tk.Spinbox(self.aair,from_=30,to=175,increment=5)
         self.aairUpperRateLimitEntry = tk.Spinbox(self.aair,from_=50,to=175,increment=5)
@@ -914,6 +1013,11 @@ class MainWindow:
         self.aairPVARPEntry = tk.Spinbox(self.aair,from_=150,to=500,increment=10)
         self.aairHysteresisEntry = tk.Spinbox(self.aair,from_=0,to=25,increment=5)
         self.aairRateSmoothingEntry = tk.Spinbox(self.aair,from_=0,to=25,increment=3)
+        self.aairMaximumSensorRateEntry = tk.Spinbox(self.aair,from_=30,to=175,increment=5)
+        self.aairActivityThresholdEntry = tk.Spinbox(self.aair,from_=50,to=175,increment=5)
+        self.aairReactionTimeEntry = tk.Spinbox(self.aair,from_=0.5,to=7.0,format="%.1f",increment=0.1)
+        self.aairResponseFactorEntry = tk.Spinbox(self.aair,from_=0.05,to=1.9,format="%.2f",increment=0.1)
+        self.aairRecoveryTimeEntry = tk.Spinbox(self.aair,from_=30,to=175,increment=5)
 
         #Setup buttons
         self.aairLowerRateLimitButton = tk.Button(self.aair, text = "Set", command= lambda: self.setValue("aairLowerRateLimit"))
@@ -925,7 +1029,12 @@ class MainWindow:
         self.aairPVARPButton = tk.Button(self.aair, text = "Set", command= lambda: self.setValue("aairPVARP"))
         self.aairHysteresisButton = tk.Button(self.aair, text = "Set", command= lambda: self.setValue("aairHysteresis"))
         self.aairRateSmoothingButton = tk.Button(self.aair, text = "Set", command= lambda: self.setValue("aairRateSmoothing"))
-        
+        self.aairMaximumSensorRateButton = tk.Button(self.aair, text = "Set", command= lambda: self.setValue("aairMaximumSensorRate"))
+        self.aairActivityThresholdButton = tk.Button(self.aair, text = "Set", command= lambda: self.setValue("aairActivityThreshold"))
+        self.aairReactionTimeButton = tk.Button(self.aair, text = "Set", command= lambda: self.setValue("aairReactionTime"))
+        self.aairResponseFactorButton = tk.Button(self.aair, text = "Set", command= lambda: self.setValue("aairResponseFactor"))
+        self.aairRecoveryTimeButton = tk.Button(self.aair, text = "Set", command= lambda: self.setValue("aairRecoveryTime"))
+
         #Setup  labels to display values
         self.aairLowerRateLimitValue = tk.Label(self.aair, text = "Current Value: "+ aair_lowerRateLimitEntry)
         self.aairUpperRateLimitValue = tk.Label(self.aair, text = "Current Value: "+ aair_upperRateLimitEntry)
@@ -936,7 +1045,12 @@ class MainWindow:
         self.aairPVARPValue = tk.Label(self.aair, text = "Current Value: "+ aair_PVARPEntry)
         self.aairHysteresisValue = tk.Label(self.aair, text = "Current Value: "+ aair_hysteresisEntry)
         self.aairRateSmoothingValue = tk.Label(self.aair, text = "Current Value: "+ aair_rateSmoothingEntry)
-        
+        self.aairMaximumSensorRateValue = tk.Label(self.aair, text = "Current Value: " + aair_maximumSensorRateEntry)
+        self.aairActivityThresholdValue = tk.Label(self.aair, text = "Current Value: " + aair_activityThresholdEntry)
+        self.aairReactionTimeValue = tk.Label(self.aair, text = "Current Value: " + aair_reactionTimeEntry)
+        self.aairResponseFactorValue = tk.Label(self.aair, text = "Current Value: " + aair_responseFactorEntry)
+        self.aairRecoveryTimeValue = tk.Label(self.aair, text = "Current Value: " + aair_recoveryTimeEntry)
+
         #Adjust positioning
         self.aairLowerRateLimitLabel.grid(row=0, column=0, padx=15, pady=15)
         self.aairLowerRateLimitEntry.grid(row=0, column=1, padx=15, pady=15)
@@ -982,6 +1096,31 @@ class MainWindow:
         self.aairRateSmoothingEntry.grid(row=8, column=1, padx=15, pady=15)
         self.aairRateSmoothingButton.grid(row=8, column=2, padx=15, pady=15)
         self.aairRateSmoothingValue.grid(row=8, column=3, padx=15, pady=15)
+
+        self.aairMaximumSensorRateLabel.grid(row=9, column=0, padx=15, pady=15)
+        self.aairMaximumSensorRateEntry.grid(row=9, column=1, padx=15, pady=15)
+        self.aairMaximumSensorRateButton.grid(row=9, column=2, padx=15, pady=15)
+        self.aairMaximumSensorRateValue.grid(row=9, column=3, padx=15, pady=15)
+
+        self.aairActivityThresholdLabel.grid(row=10, column=0, padx=15, pady=15)
+        self.aairActivityThresholdEntry.grid(row=10, column=1, padx=15, pady=15)
+        self.aairActivityThresholdButton.grid(row=10, column=2, padx=15, pady=15)
+        self.aairActivityThresholdValue.grid(row=10, column=3, padx=15, pady=15)
+
+        self.aairReactionTimeLabel.grid(row=11, column=0, padx=15, pady=15)
+        self.aairReactionTimeEntry.grid(row=11, column=1, padx=15, pady=15)
+        self.aairReactionTimeButton.grid(row=11, column=2, padx=15, pady=15)
+        self.aairReactionTimeValue.grid(row=11, column=3, padx=15, pady=15)
+
+        self.aairResponseFactorLabel.grid(row=12, column=0, padx=15, pady=15)
+        self.aairResponseFactorEntry.grid(row=12, column=1, padx=15, pady=15)
+        self.aairResponseFactorButton.grid(row=12, column=2, padx=15, pady=15)
+        self.aairResponseFactorValue.grid(row=12, column=3, padx=15, pady=15)
+
+        self.aairRecoveryTimeLabel.grid(row=13, column=0, padx=15, pady=15)
+        self.aairRecoveryTimeEntry.grid(row=13, column=1, padx=15, pady=15)
+        self.aairRecoveryTimeButton.grid(row=13, column=2, padx=15, pady=15)
+        self.aairRecoveryTimeValue.grid(row=13, column=3, padx=15, pady=15)
         #AAIR END------------------------------------------------------------------------------------------------------------------------------
 
         #VVIR BEGIN----------------------------------------------------------------------------------------------------------------------------
@@ -994,6 +1133,11 @@ class MainWindow:
         self.vvirVRPLabel = tk.Label(self.vvir, text = "VRP")
         self.vvirHysteresisLabel = tk.Label(self.vvir, text = "Hysteresis")
         self.vvirRateSmoothingLabel = tk.Label(self.vvir, text = "Rate Smoothing")
+        self.vvirMaximumSensorRateLabel = tk.Label(self.vvir, text = "Maximum Sensor Rate")
+        self.vvirActivityThresholdLabel = tk.Label(self.vvir, text = "Activity Threshold")
+        self.vvirReactionTimeLabel = tk.Label(self.vvir, text = "Reaction Time")
+        self.vvirResponseFactorLabel = tk.Label(self.vvir, text = "Response Factor")
+        self.vvirRecoveryTimeLabel = tk.Label(self.vvir, text = "Recovery Time")
 
         #Spinbox for setup
         self.vvirLowerRateLimitEntry = tk.Spinbox(self.vvir,from_=30,to=175,increment=5)
@@ -1004,6 +1148,11 @@ class MainWindow:
         self.vvirVRPEntry = tk.Spinbox(self.vvir,from_=150,to=500,increment=10)
         self.vvirHysteresisEntry = tk.Spinbox(self.vvir,from_=0,to=25,increment=5)
         self.vvirRateSmoothingEntry = tk.Spinbox(self.vvir,from_=0,to=25,increment=3)
+        self.vvirMaximumSensorRateEntry = tk.Spinbox(self.vvir,from_=30,to=175,increment=5)
+        self.vvirActivityThresholdEntry = tk.Spinbox(self.vvir,from_=50,to=175,increment=5)
+        self.vvirReactionTimeEntry = tk.Spinbox(self.vvir,from_=0.5,to=7.0,format="%.1f",increment=0.1)
+        self.vvirResponseFactorEntry = tk.Spinbox(self.vvir,from_=0.05,to=1.9,format="%.2f",increment=0.1)
+        self.vvirRecoveryTimeEntry = tk.Spinbox(self.vvir,from_=30,to=175,increment=5)
         
         #Setup buttons
         self.vvirLowerRateLimitButton = tk.Button(self.vvir, text = "Set", command= lambda: self.setValue("vvirLowerRateLimit"))
@@ -1014,7 +1163,12 @@ class MainWindow:
         self.vvirVRPButton = tk.Button(self.vvir, text = "Set", command= lambda: self.setValue("vvirVRP"))
         self.vvirHysteresisButton = tk.Button(self.vvir, text = "Set", command= lambda: self.setValue("vvirHysteresis"))
         self.vvirRateSmoothingButton = tk.Button(self.vvir, text = "Set", command= lambda: self.setValue("vvirRateSmoothing"))
-        
+        self.vvirMaximumSensorRateButton = tk.Button(self.vvir, text = "Set", command= lambda: self.setValue("vvirMaximumSensorRate"))
+        self.vvirActivityThresholdButton = tk.Button(self.vvir, text = "Set", command= lambda: self.setValue("vvirActivityThreshold"))
+        self.vvirReactionTimeButton = tk.Button(self.vvir, text = "Set", command= lambda: self.setValue("vvirReactionTime"))
+        self.vvirResponseFactorButton = tk.Button(self.vvir, text = "Set", command= lambda: self.setValue("vvirResponseFactor"))
+        self.vvirRecoveryTimeButton = tk.Button(self.vvir, text = "Set", command= lambda: self.setValue("vvirRecoveryTime"))
+
         #Setup  labels to display values
         self.vvirLowerRateLimitValue = tk.Label(self.vvir, text = "Current Value: "+ vvir_lowerRateLimitEntry)
         self.vvirUpperRateLimitValue = tk.Label(self.vvir, text = "Current Value: "+ vvir_upperRateLimitEntry)
@@ -1024,6 +1178,11 @@ class MainWindow:
         self.vvirVRPValue = tk.Label(self.vvir, text = "Current Value: "+ vvir_VRPEntry)
         self.vvirHysteresisValue = tk.Label(self.vvir, text = "Current Value: "+ vvir_hysteresisEntry)
         self.vvirRateSmoothingValue = tk.Label(self.vvir, text = "Current Value: "+ vvir_rateSmoothingEntry)
+        self.vvirMaximumSensorRateValue = tk.Label(self.vvir, text = "Current Value: " + vvir_maximumSensorRateEntry)
+        self.vvirActivityThresholdValue = tk.Label(self.vvir, text = "Current Value: " + vvir_activityThresholdEntry)
+        self.vvirReactionTimeValue = tk.Label(self.vvir, text = "Current Value: " + vvir_reactionTimeEntry)
+        self.vvirResponseFactorValue = tk.Label(self.vvir, text = "Current Value: " + vvir_responseFactorEntry)
+        self.vvirRecoveryTimeValue = tk.Label(self.vvir, text = "Current Value: " + vvir_recoveryTimeEntry)
 
         #Adjust positioning
         self.vvirLowerRateLimitLabel.grid(row=0, column=0, padx=15, pady=15)
@@ -1064,7 +1223,32 @@ class MainWindow:
         self.vvirRateSmoothingLabel.grid(row=7, column=0, padx=15, pady=15)
         self.vvirRateSmoothingEntry.grid(row=7, column=1, padx=15, pady=15)
         self.vvirRateSmoothingButton.grid(row=7, column=2, padx=15, pady=15)
-        self.vvirRateSmoothingValue.grid(row=7, column=3, padx=15, pady=15) 
+        self.vvirRateSmoothingValue.grid(row=7, column=3, padx=15, pady=15)
+
+        self.vvirMaximumSensorRateLabel.grid(row=8, column=0, padx=15, pady=15)
+        self.vvirMaximumSensorRateEntry.grid(row=8, column=1, padx=15, pady=15)
+        self.vvirMaximumSensorRateButton.grid(row=8, column=2, padx=15, pady=15)
+        self.vvirMaximumSensorRateValue.grid(row=8, column=3, padx=15, pady=15)
+
+        self.vvirActivityThresholdLabel.grid(row=9, column=0, padx=15, pady=15)
+        self.vvirActivityThresholdEntry.grid(row=9, column=1, padx=15, pady=15)
+        self.vvirActivityThresholdButton.grid(row=9, column=2, padx=15, pady=15)
+        self.vvirActivityThresholdValue.grid(row=9, column=3, padx=15, pady=15)
+
+        self.vvirReactionTimeLabel.grid(row=10, column=0, padx=15, pady=15)
+        self.vvirReactionTimeEntry.grid(row=10, column=1, padx=15, pady=15)
+        self.vvirReactionTimeButton.grid(row=10, column=2, padx=15, pady=15)
+        self.vvirReactionTimeValue.grid(row=10, column=3, padx=15, pady=15)
+
+        self.vvirResponseFactorLabel.grid(row=11, column=0, padx=15, pady=15)
+        self.vvirResponseFactorEntry.grid(row=11, column=1, padx=15, pady=15)
+        self.vvirResponseFactorButton.grid(row=11, column=2, padx=15, pady=15)
+        self.vvirResponseFactorValue.grid(row=11, column=3, padx=15, pady=15)
+
+        self.vvirRecoveryTimeLabel.grid(row=12, column=0, padx=15, pady=15)
+        self.vvirRecoveryTimeEntry.grid(row=12, column=1, padx=15, pady=15)
+        self.vvirRecoveryTimeButton.grid(row=12, column=2, padx=15, pady=15)
+        self.vvirRecoveryTimeValue.grid(row=12, column=3, padx=15, pady=15)
         #VVIR END------------------------------------------------------------------------------------------------------------------------------
 
         #DOOR BEGIN----------------------------------------------------------------------------------------------------------------------------
@@ -1076,6 +1260,11 @@ class MainWindow:
         self.doorVentricularAmplitudeLabel = tk.Label(self.door, text = "Ventricular Amplitude")
         self.doorVentricularPulseWidthLabel = tk.Label(self.door, text = "Ventricular Pulse Width")
         self.doorFixedAVDelayLabel = tk.Label(self.door, text = "Fixed AV Delay")
+        self.doorMaximumSensorRateLabel = tk.Label(self.door, text = "Maximum Sensor Rate")
+        self.doorActivityThresholdLabel = tk.Label(self.door, text = "Activity Threshold")
+        self.doorReactionTimeLabel = tk.Label(self.door, text = "Reaction Time")
+        self.doorResponseFactorLabel = tk.Label(self.door, text = "Response Factor")
+        self.doorRecoveryTimeLabel = tk.Label(self.door, text = "Recovery Time")
 
         #Spinbox for setup
         self.doorLowerRateLimitEntry = tk.Spinbox(self.door,from_=30,to=175,increment=5)
@@ -1085,7 +1274,12 @@ class MainWindow:
         self.doorVentricularAmplitudeEntry = tk.Spinbox(self.door,from_=0.5,to=7.0,format="%.1f",increment=0.1)
         self.doorVentricularPulseWidthEntry = tk.Spinbox(self.door,from_=0.05,to=1.9,format="%.2f",increment=0.1)
         self.doorFixedAVDelayEntry = tk.Spinbox(self.door,from_=70,to=300,increment=10)
-
+        self.doorMaximumSensorRateEntry = tk.Spinbox(self.door,from_=30,to=175,increment=5)
+        self.doorActivityThresholdEntry = tk.Spinbox(self.door,from_=50,to=175,increment=5)
+        self.doorReactionTimeEntry = tk.Spinbox(self.door,from_=0.5,to=7.0,format="%.1f",increment=0.1)
+        self.doorResponseFactorEntry = tk.Spinbox(self.door,from_=0.05,to=1.9,format="%.2f",increment=0.1)
+        self.doorRecoveryTimeEntry = tk.Spinbox(self.door,from_=30,to=175,increment=5)
+        
         #Setup buttons
         self.doorLowerRateLimitButton = tk.Button(self.door, text = "Set", command= lambda: self.setValue("doorLowerRateLimit"))
         self.doorUpperRateLimitButton = tk.Button(self.door, text = "Set", command= lambda: self.setValue("doorUpperRateLimit"))
@@ -1094,7 +1288,12 @@ class MainWindow:
         self.doorVentricularAmplitudeButton = tk.Button(self.door, text = "Set", command= lambda: self.setValue("doorVentricularAmplitude"))
         self.doorVentricularPulseWidthButton = tk.Button(self.door, text = "Set", command= lambda: self.setValue("doorVentricularPulseWidth"))
         self.doorFixedAVDelayButton = tk.Button(self.door, text = "Set", command= lambda: self.setValue("doorFixedAVDelay"))
-
+        self.doorMaximumSensorRateButton = tk.Button(self.door, text = "Set", command= lambda: self.setValue("doorMaximumSensorRate"))
+        self.doorActivityThresholdButton = tk.Button(self.door, text = "Set", command= lambda: self.setValue("doorActivityThreshold"))
+        self.doorReactionTimeButton = tk.Button(self.door, text = "Set", command= lambda: self.setValue("doorReactionTime"))
+        self.doorResponseFactorButton = tk.Button(self.door, text = "Set", command= lambda: self.setValue("doorResponseFactor"))
+        self.doorRecoveryTimeButton = tk.Button(self.door, text = "Set", command= lambda: self.setValue("doorRecoveryTime"))
+        
         #Setup labels to display values
         self.doorLowerRateLimitValue = tk.Label(self.door, text = "Current Value: " + door_lowerRateLimitEntry)
         self.doorUpperRateLimitValue = tk.Label(self.door, text = "Current Value: " + door_upperRateLimitEntry)
@@ -1103,7 +1302,12 @@ class MainWindow:
         self.doorVentricularAmplitudeValue = tk.Label(self.door, text = "Current Value: "+ door_ventricularAmplitudeEntry)
         self.doorVentricularPulseWidthValue = tk.Label(self.door, text = "Current Value: "+ door_ventricularPulseWidthEntry)
         self.doorFixedAVDelayValue = tk.Label(self.door, text = "Current Value: "+ door_fixedAVDelayEntry)
-
+        self.doorMaximumSensorRateValue = tk.Label(self.door, text = "Current Value: " + door_maximumSensorRateEntry)
+        self.doorActivityThresholdValue = tk.Label(self.door, text = "Current Value: " + door_activityThresholdEntry)
+        self.doorReactionTimeValue = tk.Label(self.door, text = "Current Value: " + door_reactionTimeEntry)
+        self.doorResponseFactorValue = tk.Label(self.door, text = "Current Value: " + door_responseFactorEntry)
+        self.doorRecoveryTimeValue = tk.Label(self.door, text = "Current Value: " + door_recoveryTimeEntry)
+        
         #Adjust positioning
         self.doorLowerRateLimitLabel.grid(row=0, column=0, padx=15, pady=15)
         self.doorLowerRateLimitEntry.grid(row=0, column=1, padx=15, pady=15)
@@ -1139,61 +1343,123 @@ class MainWindow:
         self.doorFixedAVDelayEntry.grid(row=6, column=1, padx=15, pady=15)
         self.doorFixedAVDelayButton.grid(row=6, column=2, padx=15, pady=15)
         self.doorFixedAVDelayValue.grid(row=6, column=3, padx=15, pady=15)
+
+        self.doorMaximumSensorRateLabel.grid(row=7, column=0, padx=15, pady=15)
+        self.doorMaximumSensorRateEntry.grid(row=7, column=1, padx=15, pady=15)
+        self.doorMaximumSensorRateButton.grid(row=7, column=2, padx=15, pady=15)
+        self.doorMaximumSensorRateValue.grid(row=7, column=3, padx=15, pady=15)
+
+        self.doorActivityThresholdLabel.grid(row=8, column=0, padx=15, pady=15)
+        self.doorActivityThresholdEntry.grid(row=8, column=1, padx=15, pady=15)
+        self.doorActivityThresholdButton.grid(row=8, column=2, padx=15, pady=15)
+        self.doorActivityThresholdValue.grid(row=8, column=3, padx=15, pady=15)
+
+        self.doorReactionTimeLabel.grid(row=9, column=0, padx=15, pady=15)
+        self.doorReactionTimeEntry.grid(row=9, column=1, padx=15, pady=15)
+        self.doorReactionTimeButton.grid(row=9, column=2, padx=15, pady=15)
+        self.doorReactionTimeValue.grid(row=9, column=3, padx=15, pady=15)
+
+        self.doorResponseFactorLabel.grid(row=10, column=0, padx=15, pady=15)
+        self.doorResponseFactorEntry.grid(row=10, column=1, padx=15, pady=15)
+        self.doorResponseFactorButton.grid(row=10, column=2, padx=15, pady=15)
+        self.doorResponseFactorValue.grid(row=10, column=3, padx=15, pady=15)
+
+        self.doorRecoveryTimeLabel.grid(row=11, column=0, padx=15, pady=15)
+        self.doorRecoveryTimeEntry.grid(row=11, column=1, padx=15, pady=15)
+        self.doorRecoveryTimeButton.grid(row=11, column=2, padx=15, pady=15)
+        self.doorRecoveryTimeValue.grid(row=11, column=3, padx=15, pady=15)
         #DOOR END------------------------------------------------------------------------------------------------------------------------------
 
-
-        #Position tabs properly
-        self.tab_parent.pack(expand = 1, fill='both')
+        
 
         #Track the process
-        self.logTitle = tk.Label(self.aoo, text = "Current Mode")
-        self.logTitle.grid(row=0, column=4, padx=15, pady=15)
+        self.aooLogTitle = tk.Label(self.aoo, text = "Current Mode")
+        self.aooLogTitle.grid(row=0, column=4, padx=15, pady=15)
         self.aooLog = tk.Label(self.aoo, text = userlog)
         self.aooLog.grid(row=1, column=4, padx=15, pady=15)
-        
-        self.logTitle = tk.Label(self.voo, text = "Current Mode")
-        self.logTitle.grid(row=0, column=4, padx=15, pady=15)
+        self.vooLogTitle = tk.Label(self.voo, text = "Current Mode")
+        self.vooLogTitle.grid(row=0, column=4, padx=15, pady=15)
         self.vooLog = tk.Label(self.voo, text = userlog)
         self.vooLog.grid(row=1, column=4, padx=15, pady=15)
-
-        self.logTitle = tk.Label(self.aai, text = "Current Mode")
-        self.logTitle.grid(row=0, column=4, padx=15, pady=15)
+        self.aaiLogTitle = tk.Label(self.aai, text = "Current Mode")
+        self.aaiLogTitle.grid(row=0, column=4, padx=15, pady=15)
         self.aaiLog = tk.Label(self.aai, text = userlog)
         self.aaiLog.grid(row=1, column=4, padx=15, pady=15)
-
-        self.logTitle = tk.Label(self.vvi, text = "Current Mode")
-        self.logTitle.grid(row=0, column=4, padx=15, pady=15)
+        self.vviLogTitle = tk.Label(self.vvi, text = "Current Mode")
+        self.vviLogTitle.grid(row=0, column=4, padx=15, pady=15)
         self.vviLog = tk.Label(self.vvi, text = userlog)
         self.vviLog.grid(row=1, column=4, padx=15, pady=15)
-
-        self.logTitle = tk.Label(self.doo, text = "Current Mode")
-        self.logTitle.grid(row=0, column=4, padx=15, pady=15)
+        self.dooLogTitle = tk.Label(self.doo, text = "Current Mode")
+        self.dooLogTitle.grid(row=0, column=4, padx=15, pady=15)
         self.dooLog = tk.Label(self.doo, text = userlog)
         self.dooLog.grid(row=1, column=4, padx=15, pady=15)
 
+        self.aoorLogTitle = tk.Label(self.aoor, text = "Current Mode")
+        self.aoorLogTitle.grid(row=0, column=4, padx=15, pady=15)
+        self.aoorLog = tk.Label(self.aoor, text = userlog)
+        self.aoorLog.grid(row=1, column=4, padx=15, pady=15)
+        self.voorLogTitle = tk.Label(self.voor, text = "Current Mode")
+        self.voorLogTitle.grid(row=0, column=4, padx=15, pady=15)
+        self.voorLog = tk.Label(self.voor, text = userlog)
+        self.voorLog.grid(row=1, column=4, padx=15, pady=15)
+        self.aairLogTitle = tk.Label(self.aair, text = "Current Mode")
+        self.aairLogTitle.grid(row=0, column=4, padx=15, pady=15)
+        self.aairLog = tk.Label(self.aair, text = userlog)
+        self.aairLog.grid(row=1, column=4, padx=15, pady=15)
+        self.vvirLogTitle = tk.Label(self.vvir, text = "Current Mode")
+        self.vvirLogTitle.grid(row=0, column=4, padx=15, pady=15)
+        self.vvirLog = tk.Label(self.vvir, text = userlog)
+        self.vvirLog.grid(row=1, column=4, padx=15, pady=15)
+        self.doorLogTitle = tk.Label(self.door, text = "Current Mode")
+        self.doorLogTitle.grid(row=0, column=4, padx=15, pady=15)
+        self.doorLog = tk.Label(self.door, text = userlog)
+        self.doorLog.grid(row=1, column=4, padx=15, pady=15)
+
         #Setup confirm buttons
-        self.confirmButton = tk.Button(self.aoo, text = 'Confirm', width = 20, command = lambda: self.confirmChanges("aooConfirm"))
-        self.confirmButton.grid(row = 4, column = 1)
-        self.confirmButton = tk.Button(self.voo, text = 'Confirm', width = 20, command = lambda: self.confirmChanges("vooConfirm"))
-        self.confirmButton.grid(row = 4, column = 1)
-        self.confirmButton = tk.Button(self.aai, text = 'Confirm', width = 20, command = lambda: self.confirmChanges("aaiConfirm"))
-        self.confirmButton.grid(row = 9, column = 1)
-        self.confirmButton = tk.Button(self.vvi, text = 'Confirm', width = 20, command = lambda: self.confirmChanges("vviConfirm"))
-        self.confirmButton.grid(row = 8, column = 1)
-        self.confirmButton = tk.Button(self.doo, text = 'Confirm', width = 20, command = lambda: self.confirmChanges("vviConfirm"))
-        self.confirmButton.grid(row = 8, column = 1)
+        self.aooConfirmButton = tk.Button(self.aoo, text = 'Confirm', width = 20, command = lambda: self.confirmChanges("aooConfirm"))
+        self.aooConfirmButton.grid(row=2, column=4)
+        self.vooConfirmButton = tk.Button(self.voo, text = 'Confirm', width = 20, command = lambda: self.confirmChanges("vooConfirm"))
+        self.vooConfirmButton.grid(row=2, column=4)
+        self.aaiConfirmButton = tk.Button(self.aai, text = 'Confirm', width = 20, command = lambda: self.confirmChanges("aaiConfirm"))
+        self.aaiConfirmButton.grid(row=2, column=4)
+        self.vviConfirmButton = tk.Button(self.vvi, text = 'Confirm', width = 20, command = lambda: self.confirmChanges("vviConfirm"))
+        self.vviConfirmButton.grid(row=2, column=4)
+        self.dooConfirmButton = tk.Button(self.doo, text = 'Confirm', width = 20, command = lambda: self.confirmChanges("dooConfirm"))
+        self.dooConfirmButton.grid(row=2, column=4)
+        
+        self.aoorConfirmButton = tk.Button(self.aoor, text = 'Confirm', width = 20, command = lambda: self.confirmChanges("aoorConfirm"))
+        self.aoorConfirmButton.grid(row=2, column=4)
+        self.voorConfirmButton = tk.Button(self.voor, text = 'Confirm', width = 20, command = lambda: self.confirmChanges("voorConfirm"))
+        self.voorConfirmButton.grid(row=2, column=4)
+        self.aairConfirmButton = tk.Button(self.aair, text = 'Confirm', width = 20, command = lambda: self.confirmChanges("aairConfirm"))
+        self.aairConfirmButton.grid(row=2, column=4)
+        self.vvirConfirmButton = tk.Button(self.vvir, text = 'Confirm', width = 20, command = lambda: self.confirmChanges("vvirConfirm"))
+        self.vvirConfirmButton.grid(row=2, column=4)
+        self.doorConfirmButton = tk.Button(self.door, text = 'Confirm', width = 20, command = lambda: self.confirmChanges("doorConfirm"))
+        self.doorConfirmButton.grid(row=2, column=4)
 
         #Setup logoff button
-        self.quitButton = tk.Button(self.aoo, text = 'LogOff', width = 12, command = self.logOff)
-        self.quitButton.grid(row=5,column=1,pady=5)
-        self.quitButton = tk.Button(self.voo, text = 'LogOff', width = 12, command = self.logOff)
-        self.quitButton.grid(row=5,column=1,pady=5)
-        self.quitButton = tk.Button(self.aai, text = 'LogOff', width = 12, command = self.logOff)
-        self.quitButton.grid(row=10,column=1,pady=5)
-        self.quitButton = tk.Button(self.vvi, text = 'LogOff', width = 12, command = self.logOff)
-        self.quitButton.grid(row=10,column=1,pady=5)
-        self.quitButton = tk.Button(self.doo, text = 'LogOff', width = 12, command = self.logOff)
-        self.quitButton.grid(row=10,column=1,pady=5)
+        self.aooQuitButton = tk.Button(self.aoo, text = 'LogOff', width = 12, command = self.logOff)
+        self.aooQuitButton.grid(row=3,column=4,pady=5)
+        self.vooQuitButton = tk.Button(self.voo, text = 'LogOff', width = 12, command = self.logOff)
+        self.vooQuitButton.grid(row=3,column=4,pady=5)
+        self.aaiQuitButton = tk.Button(self.aai, text = 'LogOff', width = 12, command = self.logOff)
+        self.aaiQuitButton.grid(row=3,column=4,pady=5)
+        self.vviQuitButton = tk.Button(self.vvi, text = 'LogOff', width = 12, command = self.logOff)
+        self.vviQuitButton.grid(row=3,column=4,pady=5)
+        self.dooQuitButton = tk.Button(self.doo, text = 'LogOff', width = 12, command = self.logOff)
+        self.dooQuitButton.grid(row=3,column=4,pady=5)
+        
+        self.aoorQuitButton = tk.Button(self.aoor, text = 'LogOff', width = 12, command = self.logOff)
+        self.aoorQuitButton.grid(row=3,column=4,pady=5)
+        self.voorQuitButton = tk.Button(self.voor, text = 'LogOff', width = 12, command = self.logOff)
+        self.voorQuitButton.grid(row=3,column=4,pady=5)
+        self.aairQuitButton = tk.Button(self.aair, text = 'LogOff', width = 12, command = self.logOff)
+        self.aairQuitButton.grid(row=3,column=4,pady=5)
+        self.vvirQuitButton = tk.Button(self.vvir, text = 'LogOff', width = 12, command = self.logOff)
+        self.vvirQuitButton.grid(row=3,column=4,pady=5)
+        self.doorQuitButton = tk.Button(self.door, text = 'LogOff', width = 12, command = self.logOff)
+        self.doorQuitButton.grid(row=3,column=4,pady=5)
 
     #Confirm changes method
     def confirmChanges(self,value):
@@ -1206,6 +1472,12 @@ class MainWindow:
                 self.vooLog.config(text= userlog)
                 self.aaiLog.config(text= userlog)
                 self.vviLog.config(text= userlog)
+                self.dooLog.config(text= userlog)
+                self.aoorLog.config(text= userlog)
+                self.voorLog.config(text= userlog)
+                self.aairLog.config(text= userlog)
+                self.vvirLog.config(text= userlog)
+                self.doorLog.config(text= userlog)
                 db.execute("UPDATE "+currentuser+" SET userlog = ?", (userlog, ))
                 db.commit()
         elif (value == "vooConfirm"):
@@ -1216,6 +1488,12 @@ class MainWindow:
                 self.vooLog.config(text= userlog)
                 self.aaiLog.config(text= userlog)
                 self.vviLog.config(text= userlog)
+                self.dooLog.config(text= userlog)
+                self.aoorLog.config(text= userlog)
+                self.voorLog.config(text= userlog)
+                self.aairLog.config(text= userlog)
+                self.vvirLog.config(text= userlog)
+                self.doorLog.config(text= userlog)
                 db.execute("UPDATE "+currentuser+" SET userlog = ?", (userlog, ))
                 db.commit()
         elif (value == "aaiConfirm"):
@@ -1226,6 +1504,12 @@ class MainWindow:
                 self.vooLog.config(text= userlog)
                 self.aaiLog.config(text= userlog)
                 self.vviLog.config(text= userlog)
+                self.dooLog.config(text= userlog)
+                self.aoorLog.config(text= userlog)
+                self.voorLog.config(text= userlog)
+                self.aairLog.config(text= userlog)
+                self.vvirLog.config(text= userlog)
+                self.doorLog.config(text= userlog)
                 db.execute("UPDATE "+currentuser+" SET userlog = ?", (userlog, ))
                 db.commit()
         elif (value == "vviConfirm"):
@@ -1236,6 +1520,12 @@ class MainWindow:
                 self.vooLog.config(text= userlog)
                 self.aaiLog.config(text= userlog)
                 self.vviLog.config(text= userlog)
+                self.dooLog.config(text= userlog)
+                self.aoorLog.config(text= userlog)
+                self.voorLog.config(text= userlog)
+                self.aairLog.config(text= userlog)
+                self.vvirLog.config(text= userlog)
+                self.doorLog.config(text= userlog)
                 db.execute("UPDATE "+currentuser+" SET userlog = ?", (userlog, ))
                 db.commit()
 
