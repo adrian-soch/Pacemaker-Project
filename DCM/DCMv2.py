@@ -660,7 +660,7 @@ class MainWindow:
         self.dooAtrialPulseWidthButton = tk.Button(self.doo, text = "Set", command= lambda: self.setValue("dooAtrialPulseWidth"))
         self.dooVentricularAmplitudeButton = tk.Button(self.doo, text = "Set", command= lambda: self.setValue("dooVentricularAmplitude"))
         self.dooVentricularPulseWidthButton = tk.Button(self.doo, text = "Set", command= lambda: self.setValue("dooVentricularPulseWidth"))
-        self.dooFixedAVDelayButton = tk.Spinbox(self.doo, text = "Set", command= lambda: self.setValue("dooFixedAVDelay"))
+        self.dooFixedAVDelayButton = tk.Button(self.doo, text = "Set", command= lambda: self.setValue("dooFixedAVDelay"))
 
         #Setup labels to display values
         self.dooLowerRateLimitValue = tk.Label(self.doo, text = "Current Value: " + doo_lowerRateLimitEntry)
@@ -669,7 +669,7 @@ class MainWindow:
         self.dooAtrialPulseWidthValue = tk.Label(self.doo, text = "Current Value: " + doo_atrialPulseWidthEntry)
         self.dooVentricularAmplitudeValue = tk.Label(self.doo, text = "Current Value: "+ doo_ventricularAmplitudeEntry)
         self.dooVentricularPulseWidthValue = tk.Label(self.doo, text = "Current Value: "+ doo_ventricularPulseWidthEntry)
-        self.dooFixedAVDelayButton = tk.Spinbox(self.doo, text = "Current Value: "+ doo_fixedAVDelayEntry)
+        self.dooFixedAVDelayValue = tk.Label(self.doo, text = "Current Value: "+ doo_fixedAVDelayEntry)
 
         #Adjust positioning
         self.dooLowerRateLimitLabel.grid(row=0, column=0, padx=15, pady=15)
@@ -701,8 +701,29 @@ class MainWindow:
         self.dooVentricularPulseWidthEntry.grid(row=5, column=1, padx=15, pady=15)
         self.dooVentricularPulseWidthButton.grid(row=5, column=2, padx=15, pady=15)
         self.dooVentricularPulseWidthValue.grid(row=5, column=3, padx=15, pady=15)
+
+        self.dooFixedAVDelayLabel.grid(row=6, column=0, padx=15, pady=15)
+        self.dooFixedAVDelayEntry.grid(row=6, column=1, padx=15, pady=15)
+        self.dooFixedAVDelayButton.grid(row=6, column=2, padx=15, pady=15)
+        self.dooFixedAVDelayValue.grid(row=6, column=3, padx=15, pady=15)
         #DOO END-------------------------------------------------------------------------------------------------------------------------------
         
+        #AOOR BEGIN----------------------------------------------------------------------------------------------------------------------------
+        #AOOR END------------------------------------------------------------------------------------------------------------------------------
+
+        #VOOR BEGIN----------------------------------------------------------------------------------------------------------------------------
+        #VOOR END------------------------------------------------------------------------------------------------------------------------------
+
+        #AAIR BEGIN----------------------------------------------------------------------------------------------------------------------------
+        #AAIR END------------------------------------------------------------------------------------------------------------------------------
+
+        #VVIR BEGIN----------------------------------------------------------------------------------------------------------------------------
+        #VVIR END------------------------------------------------------------------------------------------------------------------------------
+
+        #DOOR BEGIN----------------------------------------------------------------------------------------------------------------------------
+        #DOOR END------------------------------------------------------------------------------------------------------------------------------
+
+
         #Position tabs properly
         self.tab_parent.pack(expand = 1, fill='both')
 
@@ -755,7 +776,6 @@ class MainWindow:
         self.quitButton.grid(row=10,column=1,pady=5)
         self.quitButton = tk.Button(self.doo, text = 'LogOff', width = 12, command = self.logOff)
         self.quitButton.grid(row=10,column=1,pady=5)
-        
 
     #Confirm changes method
     def confirmChanges(self,value):
@@ -800,11 +820,6 @@ class MainWindow:
                 self.vviLog.config(text= userlog)
                 db.execute("UPDATE "+currentuser+" SET userlog = ?", (userlog, ))
                 db.commit()
-            
-    #New window method
-    def new_window(self,window):
-        self.newWindow = tk.Toplevel(self.master)
-        self.app = window(self.newWindow)
 
     #Method to set value
     def setValue(self,value):
@@ -821,7 +836,7 @@ class MainWindow:
         #Currentuser
         global currentuser
 
-        #AOO
+        #AOO BEGIN-----------------------------------------------------------------------------------------------------------------------------
         #aooLowerRateLimit
         if(value == "aooLowerRateLimit"):
             temp = self.aooLowerRateLimitEntry.get()
@@ -943,8 +958,9 @@ class MainWindow:
             except:
                 messagebox.showinfo("Error","Please enter a valid value")
                 pass
+        #AOO END-------------------------------------------------------------------------------------------------------------------------------
 
-        #VOO
+        #VOO BEGIN-----------------------------------------------------------------------------------------------------------------------------
         #vooLowerRateLimit
         if(value == "vooLowerRateLimit"):
             temp = self.vooLowerRateLimitEntry.get()
@@ -1066,8 +1082,9 @@ class MainWindow:
             except:
                 messagebox.showinfo("Error","Please enter a valid value")
                 pass
+        #VOO END-------------------------------------------------------------------------------------------------------------------------------
 
-        #AAI
+        #AAI BEGIN-----------------------------------------------------------------------------------------------------------------------------
         #aaiLowerRateLimit
         if(value == "aaiLowerRateLimit"):
             temp = self.aaiLowerRateLimitEntry.get()
@@ -1322,8 +1339,9 @@ class MainWindow:
             except:
                 messagebox.showinfo("Error","Please enter a valid value")
                 pass
-
-        #VVI
+        #AAI END-------------------------------------------------------------------------------------------------------------------------------
+        
+        #VVI BEGIN-----------------------------------------------------------------------------------------------------------------------------
         #vviLowerRateLimit
         if(value == "vviLowerRateLimit"):
             temp = self.vviLowerRateLimitEntry.get()
@@ -1552,6 +1570,31 @@ class MainWindow:
             except:
                 messagebox.showinfo("Error","Please enter a valid value")
                 pass
+        #VVI END-------------------------------------------------------------------------------------------------------------------------------
+
+        #DOO BEGIN-----------------------------------------------------------------------------------------------------------------------------
+        
+        #DOO END-------------------------------------------------------------------------------------------------------------------------------
+
+        #AOOR BEGIN----------------------------------------------------------------------------------------------------------------------------
+        
+        #AOOR END------------------------------------------------------------------------------------------------------------------------------
+
+        #VOOR BEGIN----------------------------------------------------------------------------------------------------------------------------
+        
+        #VOOR END------------------------------------------------------------------------------------------------------------------------------
+
+        #AAIR BEGIN----------------------------------------------------------------------------------------------------------------------------
+        
+        #AAIR END------------------------------------------------------------------------------------------------------------------------------
+
+        #VVIR BEGIN----------------------------------------------------------------------------------------------------------------------------
+        
+        #VVIR END------------------------------------------------------------------------------------------------------------------------------
+
+        #DOOR BEGIN----------------------------------------------------------------------------------------------------------------------------
+        
+        #DOOR END------------------------------------------------------------------------------------------------------------------------------
 
     #Method used to log off user
     def logOff(self):
@@ -1564,6 +1607,11 @@ class MainWindow:
     def on_exit(self):
         if messagebox.askyesno("Exit", "Do you want to quit the application?"):
             exit()
+
+    #New window method
+    def new_window(self,window):
+        self.newWindow = tk.Toplevel(self.master)
+        self.app = window(self.newWindow)
     
     #Method for closing windows
     def close_windows(self):
