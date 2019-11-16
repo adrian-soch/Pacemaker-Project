@@ -297,7 +297,7 @@ class MainWindow:
         #General window setup
         self.content = tk.Entry()
         self.master = master
-        self.master.geometry('750x570')
+        self.master.geometry('750x800')
         self.master.protocol("WM_DELETE_WINDOW", self.on_exit)
         self.menubar = tk.Menu(self.master)
         self.filemenu = tk.Menu(self.menubar, tearoff=0)
@@ -1652,7 +1652,7 @@ class MainWindow:
         #VVI
         global vvi_lowerRateLimitEntry,vvi_upperRateLimitEntry,vvi_ventricularAmplitudeEntry,vvi_ventricularPulseWidthEntry,vvi_ventricularSensitivityEntry,vvi_VRPEntry,vvi_hysteresisEntry,vvi_rateSmoothingEntry
         #DOO
-        global doo_lowerRateLimitEntry, doo_upperRateLimitEntry, doo_atrialAmplitudeEntry, doo_atrialPulseWidthEntry, doo_ventricularAmplitudeEntry, doo_ventricularPulseWidthEntry, doo_fixedAVDelayEntry
+        global doo_lowerRateLimitEntry,doo_upperRateLimitEntry,doo_atrialAmplitudeEntry,doo_atrialPulseWidthEntry,doo_ventricularAmplitudeEntry,doo_ventricularPulseWidthEntry,doo_fixedAVDelayEntry
 
         #AOOR
         global aoor_lowerRateLimitEntry, aoor_upperRateLimitEntry, aoor_atrialAmplitudeEntry, aoor_atrialPulseWidthEntry, aoor_maximumSensorRateEntry, aoor_activityThresholdEntry, aoor_reactionTimeEntry, aoor_responseFactorEntry, aoor_recoveryTimeEntry
@@ -2405,7 +2405,210 @@ class MainWindow:
         #VVI END-------------------------------------------------------------------------------------------------------------------------------
 
         #DOO BEGIN-----------------------------------------------------------------------------------------------------------------------------
+        #dooLowerRateLimit
+        if(value == "dooLowerRateLimit"):
+            temp = self.dooLowerRateLimitEntry.get()
+            #Try/access to sanitize user input and ask for confirmation if there are no errors
+            try:
+                int(temp)
+                if (temp == '' or int(temp)<0):
+                    messagebox.showinfo("Error","Please enter a valid value")
+                    pass
+
+                #Ensure upper limit is larger than lower limit
+                elif(int(self.dooLowerRateLimitEntry.get()) >= int(doo_upperRateLimitEntry) and int(doo_upperRateLimitEntry) != 0 ):
+                    messagebox.showinfo("Error","Please ensure your lower rate limit is lower than your upper rate limit")
+                    pass
+
+                #Ensure value is in limited range
+                elif(int(temp) < 30 or int(temp) > 175):
+                    messagebox.showinfo("Error","The range is between 30 and 175")
+                    pass
+
+                #If everything is good update current value
+                else:
+                    if messagebox.askyesno("Confirmation", "Replace current value?"):
+                        messagebox.showinfo("Done", "Success")
+                        doo_lowerRateLimitEntry = temp
+                        self.dooLowerRateLimitValue.config(text="Current Value: " + doo_lowerRateLimitEntry)
+                        db.execute("UPDATE "+currentuser+" SET doo_lowerRateLimitEntry = ?", (doo_lowerRateLimitEntry,))
+                        db.commit()
+
+            except:
+                messagebox.showinfo("Error","Please enter a valid value")
+                pass
+
+        #dooUpperRateLimit
+        if(value == "dooUpperRateLimit"):
+            temp = self.dooUpperRateLimitEntry.get()
+            #Try/access to sanitize user input and ask for confirmation if there are no errors
+            try:
+                int(temp)
+                if (temp == '' or int(temp)<0):
+                    messagebox.showinfo("Error","Please enter a valid value")
+                    pass
+
+                #Ensure upper limit is larger than lower limit
+                elif(int(doo_lowerRateLimitEntry) >= int(self.dooUpperRateLimitEntry.get()) and int(doo_lowerRateLimitEntry) != 0 ):
+                    messagebox.showinfo("Error","Please ensure your upper rate limit is higher than your lower rate limit")
+                    pass
+
+                #Ensure value is in limited range
+                elif(int(temp) < 50 or int(temp) > 175):
+                    messagebox.showinfo("Error","The range is between 50 and 175")
+                    pass
+
+                #If everything is good update current value
+                else:
+                    if messagebox.askyesno("Confirmation", "Replace current value?"):
+                        messagebox.showinfo("Done", "Success")
+                        doo_upperRateLimitEntry = temp
+                        self.dooUpperRateLimitValue.config(text="Current Value: " + doo_upperRateLimitEntry)
+                        db.execute("UPDATE "+currentuser+" SET doo_upperRateLimitEntry = ?", (doo_upperRateLimitEntry,))
+                        db.commit()
+
+            except:
+                messagebox.showinfo("Error","Please enter a valid value")
+                pass
+
+        #dooAtrialAmplitude
+        if(value == "dooAtrialAmplitude"):
+            temp = self.dooAtrialAmplitudeEntry.get()
+            #Try/access to sanitize user input and ask for confirmation if there are no errors
+            try:
+                float(temp)
+                if (temp == '' or float(temp)<0):
+                    messagebox.showinfo("Error","Please enter a valid value")
+                    pass
+                #Ensure value is in limited range
+                elif(float(temp) < 0 or float(temp) > 7.0):
+                    messagebox.showinfo("Error","The range is between 0(off) and 7.0")
+                    pass
+
+                #If everything is good update current value
+                else:
+                    if messagebox.askyesno("Confirmation", "Replace current value?"):
+                        messagebox.showinfo("Done", "Success")
+                        doo_atrialAmplitudeEntry = temp
+                        self.dooAtrialAmplitudeValue.config(text="Current Value: " + doo_atrialAmplitudeEntry)
+                        db.execute("UPDATE "+currentuser+" SET doo_atrialAmplitudeEntry = ?", (doo_atrialAmplitudeEntry,))
+                        db.commit()
+
+            except:
+                messagebox.showinfo("Error","Please enter a valid value")
+                pass
+
+        #dooAtrialPulseWidth
+        if(value == "dooAtrialPulseWidth"):
+            temp = self.dooAtrialPulseWidthEntry.get()
+            #Try/access to sanitize user input and ask for confirmation if there are no errors
+            try:
+                float(temp)
+                if (temp == '' or float(temp)<0):
+                    messagebox.showinfo("Error","Please enter a valid value")
+                    pass
+
+                #Ensure value is in limited range
+                elif(float(temp) < 0.05 or float(temp) > 1.9):
+                    messagebox.showinfo("Error","The range is between 0.05 and 1.9")
+                    pass
+
+                #If everything is good update current value
+                else:
+                    if messagebox.askyesno("Confirmation", "Replace current value?"):
+                        messagebox.showinfo("Done", "Success")
+                        doo_atrialPulseWidthEntry = temp
+                        self.dooAtrialPulseWidthValue.config(text="Current Value: " + doo_atrialPulseWidthEntry)
+                        db.execute("UPDATE "+currentuser+" SET doo_atrialPulseWidthEntry = ?", (doo_atrialPulseWidthEntry,))
+                        db.commit()
+
+            except:
+                messagebox.showinfo("Error","Please enter a valid value")
+                pass
         
+        #dooVentricularAmplitude
+        if(value == "dooVentricularAmplitude"):
+            temp = self.dooVentricularAmplitudeEntry.get()
+            #Try/access to sanitize user input and ask for confirmation if there are no errors
+            try:
+                float(temp)
+                if (temp == '' or float(temp)<0):
+                    messagebox.showinfo("Error","Please enter a valid value")
+                    pass
+
+                #Ensure value is in limited range
+                elif(float(temp) < 0 or float(temp) > 7.0):
+                    messagebox.showinfo("Error","The range is between 0(off) and 7.0")
+                    pass
+
+                #If everything is good update current value
+                else:
+                    if messagebox.askyesno("Confirmation", "Replace current value?"):
+                        messagebox.showinfo("Done", "Success")
+                        doo_ventricularAmplitudeEntry = temp
+                        self.dooVentricularAmplitudeValue.config(text="Current Value: " + doo_ventricularAmplitudeEntry)
+                        db.execute("UPDATE "+currentuser+" SET doo_ventricularAmplitudeEntry = ?", (doo_ventricularAmplitudeEntry,))
+                        db.commit()
+
+            except:
+                messagebox.showinfo("Error","Please enter a valid value")
+                pass
+
+        #dooVentricularPulseWidth
+        if(value == "dooVentricularPulseWidth"):
+            temp = self.dooVentricularPulseWidthEntry.get()
+            #Try/access to sanitize user input and ask for confirmation if there are no errors
+            try:
+                float(temp)
+                if (temp == '' or float(temp)<0):
+                    messagebox.showinfo("Error","Please enter a valid value")
+                    pass
+
+                #Ensure value is in limited range
+                elif(float(temp) < 0.05 or float(temp) > 1.9):
+                    messagebox.showinfo("Error","The range is between 0.05 and 1.9")
+                    pass
+
+                #If everything is good update current value
+                else:
+                    if messagebox.askyesno("Confirmation", "Replace current value?"):
+                        messagebox.showinfo("Done", "Success")
+                        doo_ventricularPulseWidthEntry = temp
+                        self.dooVentricularPulseWidthValue.config(text="Current Value: " + doo_ventricularPulseWidthEntry)
+                        db.execute("UPDATE "+currentuser+" SET doo_ventricularPulseWidthEntry = ?", (doo_ventricularPulseWidthEntry,))
+                        db.commit()
+
+            except:
+                messagebox.showinfo("Error","Please enter a valid value")
+                pass
+        
+        #dooFixedAVDelay
+        if(value == "dooFixedAVDelay"):
+            temp = self.dooFixedAVDelayEntry.get()
+            #Try/access to sanitize user input and ask for confirmation if there are no errors
+            try:
+                int(temp)
+                if (temp == '' or int(temp)<0):
+                    messagebox.showinfo("Error","Please enter a valid value")
+                    pass
+
+                #Ensure value is in limited range
+                elif(int(temp) < 70 or int(temp) > 300):
+                    messagebox.showinfo("Error","The range is between 70 and 300")
+                    pass
+
+                #If everything is good update current value
+                else:
+                    if messagebox.askyesno("Confirmation", "Replace current value?"):
+                        messagebox.showinfo("Done", "Success")
+                        doo_fixedAVDelayEntry = temp
+                        self.dooFixedAVDelayValue.config(text="Current Value: " + doo_fixedAVDelayEntry)
+                        db.execute("UPDATE "+currentuser+" SET doo_fixedAVDelayEntry = ?", (doo_fixedAVDelayEntry,))
+                        db.commit()
+
+            except:
+                messagebox.showinfo("Error","Please enter a valid value")
+                pass
         #DOO END-------------------------------------------------------------------------------------------------------------------------------
 
         #AOOR BEGIN----------------------------------------------------------------------------------------------------------------------------
@@ -2438,8 +2641,7 @@ class MainWindow:
                         db.execute("UPDATE "+currentuser+" SET aoor_lowerRateLimitEntry = ?", (aoor_lowerRateLimitEntry,))
                         db.commit()
 
-            except Exception as e:
-                print(e)
+            except:
                 messagebox.showinfo("Error","Please enter a valid value")
                 pass
 
@@ -2525,6 +2727,146 @@ class MainWindow:
                         aoor_atrialPulseWidthEntry = temp
                         self.aoorAtrialPulseWidthValue.config(text="Current Value: " + aoor_atrialPulseWidthEntry)
                         db.execute("UPDATE "+currentuser+" SET aoor_atrialPulseWidthEntry = ?", (aoor_atrialPulseWidthEntry,))
+                        db.commit()
+
+            except:
+                messagebox.showinfo("Error","Please enter a valid value")
+                pass
+
+        #aoorMaximumSensorRate
+        if(value == "aoorMaximumSensorRate"):
+            temp = self.aoorMaximumSensorRateEntry.get()
+            #Try/access to sanitize user input and ask for confirmation if there are no errors
+            try:
+                int(temp)
+                if (temp == '' or int(temp)<0):
+                    messagebox.showinfo("Error","Please enter a valid value")
+                    pass
+
+                #Ensure value is in limited range
+                elif(int(temp) < 50 or int(temp) > 175):
+                    messagebox.showinfo("Error","The range is between 50 and 175")
+                    pass
+
+                #If everything is good update current value
+                else:
+                    if messagebox.askyesno("Confirmation", "Replace current value?"):
+                        messagebox.showinfo("Done", "Success")
+                        aoor_maximumSensorRateEntry = temp
+                        self.aoorMaximumSensorRateValue.config(text="Current Value: " + aoor_maximumSensorRateEntry)
+                        db.execute("UPDATE "+currentuser+" SET aoor_maximumSensorRateEntry = ?", (aoor_maximumSensorRateEntry,))
+                        db.commit()
+
+            except:
+                messagebox.showinfo("Error","Please enter a valid value")
+                pass
+
+        #aoorActivityThreshold
+        if(value == "aoorActivityThreshold"):
+            temp = self.aoorActivityThresholdEntry.get()
+            #Try/access to sanitize user input and ask for confirmation if there are no errors
+            try:
+                int(temp)
+                if (temp == '' or int(temp)<0):
+                    messagebox.showinfo("Error","Please enter a valid value")
+                    pass
+
+                #Ensure value is in limited range
+                elif(int(temp) < 1 or int(temp) > 7):
+                    messagebox.showinfo("Error","The range is between 1 and 7")
+                    pass
+
+                #If everything is good update current value
+                else:
+                    if messagebox.askyesno("Confirmation", "Replace current value?"):
+                        messagebox.showinfo("Done", "Success")
+                        aoor_activityThresholdEntry = temp
+                        self.aoorActivityThresholdValue.config(text="Current Value: " + aoor_activityThresholdEntry)
+                        db.execute("UPDATE "+currentuser+" SET aoor_activityThresholdEntry = ?", (aoor_activityThresholdEntry,))
+                        db.commit()
+
+            except:
+                messagebox.showinfo("Error","Please enter a valid value")
+                pass
+
+        #aoorReactionTime
+        if(value == "aoorReactionTime"):
+            temp = self.aoorReactionTimeEntry.get()
+            #Try/access to sanitize user input and ask for confirmation if there are no errors
+            try:
+                int(temp)
+                if (temp == '' or int(temp)<0):
+                    messagebox.showinfo("Error","Please enter a valid value")
+                    pass
+
+                #Ensure value is in limited range
+                elif(int(temp) < 10 or int(temp) > 50):
+                    messagebox.showinfo("Error","The range is between 10 and 50")
+                    pass
+
+                #If everything is good update current value
+                else:
+                    if messagebox.askyesno("Confirmation", "Replace current value?"):
+                        messagebox.showinfo("Done", "Success")
+                        aoor_reactionTimeEntry = temp
+                        self.aoorReactionTimeValue.config(text="Current Value: " + aoor_reactionTimeEntry)
+                        db.execute("UPDATE "+currentuser+" SET aoor_reactionTimeEntry = ?", (aoor_reactionTimeEntry,))
+                        db.commit()
+
+            except:
+                messagebox.showinfo("Error","Please enter a valid value")
+                pass
+
+        #aoorResponseFactor
+        if(value == "aoorResponseFactor"):
+            temp = self.aoorResponseFactorEntry.get()
+            #Try/access to sanitize user input and ask for confirmation if there are no errors
+            try:
+                int(temp)
+                if (temp == '' or int(temp)<0):
+                    messagebox.showinfo("Error","Please enter a valid value")
+                    pass
+
+                #Ensure value is in limited range
+                elif(int(temp) < 1 or int(temp) > 16):
+                    messagebox.showinfo("Error","The range is between 1 and 16")
+                    pass
+
+                #If everything is good update current value
+                else:
+                    if messagebox.askyesno("Confirmation", "Replace current value?"):
+                        messagebox.showinfo("Done", "Success")
+                        aoor_responseFactorEntry = temp
+                        self.aoorResponseFactorValue.config(text="Current Value: " + aoor_responseFactorEntry)
+                        db.execute("UPDATE "+currentuser+" SET aoor_responseFactorEntry = ?", (aoor_responseFactorEntry,))
+                        db.commit()
+
+            except:
+                messagebox.showinfo("Error","Please enter a valid value")
+                pass
+
+        #aoorRecoveryTime
+        if(value == "aoorRecoveryTime"):
+            temp = self.aoorRecoveryTimeEntry.get()
+            #Try/access to sanitize user input and ask for confirmation if there are no errors
+            try:
+                int(temp)
+                if (temp == '' or int(temp)<0):
+                    messagebox.showinfo("Error","Please enter a valid value")
+                    pass
+
+                #Ensure value is in limited range
+                elif(int(temp) < 2 or int(temp) > 16):
+                    messagebox.showinfo("Error","The range is between 2 and 16")
+                    pass
+
+                #If everything is good update current value
+                else:
+                    if messagebox.askyesno("Confirmation", "Replace current value?"):
+                        messagebox.showinfo("Done", "Success")
+                        aoor_recoveryTimeEntry = temp
+                        self.aoorRecoveryTimeValue.config(text="Current Value: " + aoor_recoveryTimeEntry)
+                        db.execute("UPDATE "+currentuser+" SET aoor_recoveryTimeEntry = ?", (aoor_recoveryTimeEntry,))
                         db.commit()
 
             except:
@@ -2649,6 +2991,146 @@ class MainWindow:
                         voor_ventricularPulseWidthEntry = temp
                         self.voorVentricularPulseWidthValue.config(text="Current Value: " + voor_ventricularPulseWidthEntry)
                         db.execute("UPDATE "+currentuser+" SET voor_ventricularPulseWidthEntry = ?", (voor_ventricularPulseWidthEntry,))
+                        db.commit()
+
+            except:
+                messagebox.showinfo("Error","Please enter a valid value")
+                pass
+
+        #voorMaximumSensorRate
+        if(value == "voorMaximumSensorRate"):
+            temp = self.voorMaximumSensorRateEntry.get()
+            #Try/access to sanitize user input and ask for confirmation if there are no errors
+            try:
+                int(temp)
+                if (temp == '' or int(temp)<0):
+                    messagebox.showinfo("Error","Please enter a valid value")
+                    pass
+
+                #Ensure value is in limited range
+                elif(int(temp) < 50 or int(temp) > 175):
+                    messagebox.showinfo("Error","The range is between 50 and 175")
+                    pass
+
+                #If everything is good update current value
+                else:
+                    if messagebox.askyesno("Confirmation", "Replace current value?"):
+                        messagebox.showinfo("Done", "Success")
+                        voor_maximumSensorRateEntry = temp
+                        self.voorMaximumSensorRateValue.config(text="Current Value: " + voor_maximumSensorRateEntry)
+                        db.execute("UPDATE "+currentuser+" SET voor_maximumSensorRateEntry = ?", (voor_maximumSensorRateEntry,))
+                        db.commit()
+
+            except:
+                messagebox.showinfo("Error","Please enter a valid value")
+                pass
+
+        #voorActivityThreshold
+        if(value == "voorActivityThreshold"):
+            temp = self.voorActivityThresholdEntry.get()
+            #Try/access to sanitize user input and ask for confirmation if there are no errors
+            try:
+                int(temp)
+                if (temp == '' or int(temp)<0):
+                    messagebox.showinfo("Error","Please enter a valid value")
+                    pass
+
+                #Ensure value is in limited range
+                elif(int(temp) < 1 or int(temp) > 7):
+                    messagebox.showinfo("Error","The range is between 1 and 7")
+                    pass
+
+                #If everything is good update current value
+                else:
+                    if messagebox.askyesno("Confirmation", "Replace current value?"):
+                        messagebox.showinfo("Done", "Success")
+                        voor_activityThresholdEntry = temp
+                        self.voorActivityThresholdValue.config(text="Current Value: " + voor_activityThresholdEntry)
+                        db.execute("UPDATE "+currentuser+" SET voor_activityThresholdEntry = ?", (voor_activityThresholdEntry,))
+                        db.commit()
+
+            except:
+                messagebox.showinfo("Error","Please enter a valid value")
+                pass
+
+        #voorReactionTime
+        if(value == "voorReactionTime"):
+            temp = self.voorReactionTimeEntry.get()
+            #Try/access to sanitize user input and ask for confirmation if there are no errors
+            try:
+                int(temp)
+                if (temp == '' or int(temp)<0):
+                    messagebox.showinfo("Error","Please enter a valid value")
+                    pass
+
+                #Ensure value is in limited range
+                elif(int(temp) < 10 or int(temp) > 50):
+                    messagebox.showinfo("Error","The range is between 10 and 50")
+                    pass
+
+                #If everything is good update current value
+                else:
+                    if messagebox.askyesno("Confirmation", "Replace current value?"):
+                        messagebox.showinfo("Done", "Success")
+                        voor_reactionTimeEntry = temp
+                        self.voorReactionTimeValue.config(text="Current Value: " + voor_reactionTimeEntry)
+                        db.execute("UPDATE "+currentuser+" SET voor_reactionTimeEntry = ?", (voor_reactionTimeEntry,))
+                        db.commit()
+
+            except:
+                messagebox.showinfo("Error","Please enter a valid value")
+                pass
+
+        #voorResponseFactor
+        if(value == "voorResponseFactor"):
+            temp = self.voorResponseFactorEntry.get()
+            #Try/access to sanitize user input and ask for confirmation if there are no errors
+            try:
+                int(temp)
+                if (temp == '' or int(temp)<0):
+                    messagebox.showinfo("Error","Please enter a valid value")
+                    pass
+
+                #Ensure value is in limited range
+                elif(int(temp) < 1 or int(temp) > 16):
+                    messagebox.showinfo("Error","The range is between 1 and 16")
+                    pass
+
+                #If everything is good update current value
+                else:
+                    if messagebox.askyesno("Confirmation", "Replace current value?"):
+                        messagebox.showinfo("Done", "Success")
+                        voor_responseFactorEntry = temp
+                        self.voorResponseFactorValue.config(text="Current Value: " + voor_responseFactorEntry)
+                        db.execute("UPDATE "+currentuser+" SET voor_responseFactorEntry = ?", (voor_responseFactorEntry,))
+                        db.commit()
+
+            except:
+                messagebox.showinfo("Error","Please enter a valid value")
+                pass
+
+        #voorRecoveryTime
+        if(value == "voorRecoveryTime"):
+            temp = self.voorRecoveryTimeEntry.get()
+            #Try/access to sanitize user input and ask for confirmation if there are no errors
+            try:
+                int(temp)
+                if (temp == '' or int(temp)<0):
+                    messagebox.showinfo("Error","Please enter a valid value")
+                    pass
+
+                #Ensure value is in limited range
+                elif(int(temp) < 2 or int(temp) > 16):
+                    messagebox.showinfo("Error","The range is between 2 and 16")
+                    pass
+
+                #If everything is good update current value
+                else:
+                    if messagebox.askyesno("Confirmation", "Replace current value?"):
+                        messagebox.showinfo("Done", "Success")
+                        voor_recoveryTimeEntry = temp
+                        self.voorRecoveryTimeValue.config(text="Current Value: " + voor_recoveryTimeEntry)
+                        db.execute("UPDATE "+currentuser+" SET voor_recoveryTimeEntry = ?", (voor_recoveryTimeEntry,))
                         db.commit()
 
             except:
@@ -2911,6 +3393,146 @@ class MainWindow:
             except:
                 messagebox.showinfo("Error","Please enter a valid value")
                 pass
+        
+        #aairMaximumSensorRate
+        if(value == "aairMaximumSensorRate"):
+            temp = self.aairMaximumSensorRateEntry.get()
+            #Try/access to sanitize user input and ask for confirmation if there are no errors
+            try:
+                int(temp)
+                if (temp == '' or int(temp)<0):
+                    messagebox.showinfo("Error","Please enter a valid value")
+                    pass
+
+                #Ensure value is in limited range
+                elif(int(temp) < 50 or int(temp) > 175):
+                    messagebox.showinfo("Error","The range is between 50 and 175")
+                    pass
+
+                #If everything is good update current value
+                else:
+                    if messagebox.askyesno("Confirmation", "Replace current value?"):
+                        messagebox.showinfo("Done", "Success")
+                        aair_maximumSensorRateEntry = temp
+                        self.aairMaximumSensorRateValue.config(text="Current Value: " + aair_maximumSensorRateEntry)
+                        db.execute("UPDATE "+currentuser+" SET aair_maximumSensorRateEntry = ?", (aair_maximumSensorRateEntry,))
+                        db.commit()
+
+            except:
+                messagebox.showinfo("Error","Please enter a valid value")
+                pass
+
+        #aairActivityThreshold
+        if(value == "aairActivityThreshold"):
+            temp = self.aairActivityThresholdEntry.get()
+            #Try/access to sanitize user input and ask for confirmation if there are no errors
+            try:
+                int(temp)
+                if (temp == '' or int(temp)<0):
+                    messagebox.showinfo("Error","Please enter a valid value")
+                    pass
+
+                #Ensure value is in limited range
+                elif(int(temp) < 1 or int(temp) > 7):
+                    messagebox.showinfo("Error","The range is between 1 and 7")
+                    pass
+
+                #If everything is good update current value
+                else:
+                    if messagebox.askyesno("Confirmation", "Replace current value?"):
+                        messagebox.showinfo("Done", "Success")
+                        aair_activityThresholdEntry = temp
+                        self.aairActivityThresholdValue.config(text="Current Value: " + aair_activityThresholdEntry)
+                        db.execute("UPDATE "+currentuser+" SET aair_activityThresholdEntry = ?", (aair_activityThresholdEntry,))
+                        db.commit()
+
+            except:
+                messagebox.showinfo("Error","Please enter a valid value")
+                pass
+
+        #aairReactionTime
+        if(value == "aairReactionTime"):
+            temp = self.aairReactionTimeEntry.get()
+            #Try/access to sanitize user input and ask for confirmation if there are no errors
+            try:
+                int(temp)
+                if (temp == '' or int(temp)<0):
+                    messagebox.showinfo("Error","Please enter a valid value")
+                    pass
+
+                #Ensure value is in limited range
+                elif(int(temp) < 10 or int(temp) > 50):
+                    messagebox.showinfo("Error","The range is between 10 and 50")
+                    pass
+
+                #If everything is good update current value
+                else:
+                    if messagebox.askyesno("Confirmation", "Replace current value?"):
+                        messagebox.showinfo("Done", "Success")
+                        aair_reactionTimeEntry = temp
+                        self.aairReactionTimeValue.config(text="Current Value: " + aair_reactionTimeEntry)
+                        db.execute("UPDATE "+currentuser+" SET aair_reactionTimeEntry = ?", (aair_reactionTimeEntry,))
+                        db.commit()
+
+            except:
+                messagebox.showinfo("Error","Please enter a valid value")
+                pass
+
+        #aairResponseFactor
+        if(value == "aairResponseFactor"):
+            temp = self.aairResponseFactorEntry.get()
+            #Try/access to sanitize user input and ask for confirmation if there are no errors
+            try:
+                int(temp)
+                if (temp == '' or int(temp)<0):
+                    messagebox.showinfo("Error","Please enter a valid value")
+                    pass
+
+                #Ensure value is in limited range
+                elif(int(temp) < 1 or int(temp) > 16):
+                    messagebox.showinfo("Error","The range is between 1 and 16")
+                    pass
+
+                #If everything is good update current value
+                else:
+                    if messagebox.askyesno("Confirmation", "Replace current value?"):
+                        messagebox.showinfo("Done", "Success")
+                        aair_responseFactorEntry = temp
+                        self.aairResponseFactorValue.config(text="Current Value: " + aair_responseFactorEntry)
+                        db.execute("UPDATE "+currentuser+" SET aair_responseFactorEntry = ?", (aair_responseFactorEntry,))
+                        db.commit()
+
+            except:
+                messagebox.showinfo("Error","Please enter a valid value")
+                pass
+
+        #aairRecoveryTime
+        if(value == "aairRecoveryTime"):
+            temp = self.aairRecoveryTimeEntry.get()
+            #Try/access to sanitize user input and ask for confirmation if there are no errors
+            try:
+                int(temp)
+                if (temp == '' or int(temp)<0):
+                    messagebox.showinfo("Error","Please enter a valid value")
+                    pass
+
+                #Ensure value is in limited range
+                elif(int(temp) < 2 or int(temp) > 16):
+                    messagebox.showinfo("Error","The range is between 2 and 16")
+                    pass
+
+                #If everything is good update current value
+                else:
+                    if messagebox.askyesno("Confirmation", "Replace current value?"):
+                        messagebox.showinfo("Done", "Success")
+                        aair_recoveryTimeEntry = temp
+                        self.aairRecoveryTimeValue.config(text="Current Value: " + aair_recoveryTimeEntry)
+                        db.execute("UPDATE "+currentuser+" SET aair_recoveryTimeEntry = ?", (aair_recoveryTimeEntry,))
+                        db.commit()
+
+            except:
+                messagebox.showinfo("Error","Please enter a valid value")
+                pass
         #AAIR END------------------------------------------------------------------------------------------------------------------------------
 
         #VVIR BEGIN----------------------------------------------------------------------------------------------------------------------------
@@ -3142,10 +3764,493 @@ class MainWindow:
             except:
                 messagebox.showinfo("Error","Please enter a valid value")
                 pass
+        
+        #vvirMaximumSensorRate
+        if(value == "vvirMaximumSensorRate"):
+            temp = self.vvirMaximumSensorRateEntry.get()
+            #Try/access to sanitize user input and ask for confirmation if there are no errors
+            try:
+                int(temp)
+                if (temp == '' or int(temp)<0):
+                    messagebox.showinfo("Error","Please enter a valid value")
+                    pass
+
+                #Ensure value is in limited range
+                elif(int(temp) < 50 or int(temp) > 175):
+                    messagebox.showinfo("Error","The range is between 50 and 175")
+                    pass
+
+                #If everything is good update current value
+                else:
+                    if messagebox.askyesno("Confirmation", "Replace current value?"):
+                        messagebox.showinfo("Done", "Success")
+                        vvir_maximumSensorRateEntry = temp
+                        self.vvirMaximumSensorRateValue.config(text="Current Value: " + vvir_maximumSensorRateEntry)
+                        db.execute("UPDATE "+currentuser+" SET vvir_maximumSensorRateEntry = ?", (vvir_maximumSensorRateEntry,))
+                        db.commit()
+
+            except:
+                messagebox.showinfo("Error","Please enter a valid value")
+                pass
+
+        #vvirActivityThreshold
+        if(value == "vvirActivityThreshold"):
+            temp = self.vvirActivityThresholdEntry.get()
+            #Try/access to sanitize user input and ask for confirmation if there are no errors
+            try:
+                int(temp)
+                if (temp == '' or int(temp)<0):
+                    messagebox.showinfo("Error","Please enter a valid value")
+                    pass
+
+                #Ensure value is in limited range
+                elif(int(temp) < 1 or int(temp) > 7):
+                    messagebox.showinfo("Error","The range is between 1 and 7")
+                    pass
+
+                #If everything is good update current value
+                else:
+                    if messagebox.askyesno("Confirmation", "Replace current value?"):
+                        messagebox.showinfo("Done", "Success")
+                        vvir_activityThresholdEntry = temp
+                        self.vvirActivityThresholdValue.config(text="Current Value: " + vvir_activityThresholdEntry)
+                        db.execute("UPDATE "+currentuser+" SET vvir_activityThresholdEntry = ?", (vvir_activityThresholdEntry,))
+                        db.commit()
+
+            except:
+                messagebox.showinfo("Error","Please enter a valid value")
+                pass
+
+        #vvirReactionTime
+        if(value == "vvirReactionTime"):
+            temp = self.vvirReactionTimeEntry.get()
+            #Try/access to sanitize user input and ask for confirmation if there are no errors
+            try:
+                int(temp)
+                if (temp == '' or int(temp)<0):
+                    messagebox.showinfo("Error","Please enter a valid value")
+                    pass
+
+                #Ensure value is in limited range
+                elif(int(temp) < 10 or int(temp) > 50):
+                    messagebox.showinfo("Error","The range is between 10 and 50")
+                    pass
+
+                #If everything is good update current value
+                else:
+                    if messagebox.askyesno("Confirmation", "Replace current value?"):
+                        messagebox.showinfo("Done", "Success")
+                        vvir_reactionTimeEntry = temp
+                        self.vvirReactionTimeValue.config(text="Current Value: " + vvir_reactionTimeEntry)
+                        db.execute("UPDATE "+currentuser+" SET vvir_reactionTimeEntry = ?", (vvir_reactionTimeEntry,))
+                        db.commit()
+
+            except:
+                messagebox.showinfo("Error","Please enter a valid value")
+                pass
+
+        #vvirResponseFactor
+        if(value == "vvirResponseFactor"):
+            temp = self.vvirResponseFactorEntry.get()
+            #Try/access to sanitize user input and ask for confirmation if there are no errors
+            try:
+                int(temp)
+                if (temp == '' or int(temp)<0):
+                    messagebox.showinfo("Error","Please enter a valid value")
+                    pass
+
+                #Ensure value is in limited range
+                elif(int(temp) < 1 or int(temp) > 16):
+                    messagebox.showinfo("Error","The range is between 1 and 16")
+                    pass
+
+                #If everything is good update current value
+                else:
+                    if messagebox.askyesno("Confirmation", "Replace current value?"):
+                        messagebox.showinfo("Done", "Success")
+                        vvir_responseFactorEntry = temp
+                        self.vvirResponseFactorValue.config(text="Current Value: " + vvir_responseFactorEntry)
+                        db.execute("UPDATE "+currentuser+" SET vvir_responseFactorEntry = ?", (vvir_responseFactorEntry,))
+                        db.commit()
+
+            except:
+                messagebox.showinfo("Error","Please enter a valid value")
+                pass
+
+        #vvirRecoveryTime
+        if(value == "vvirRecoveryTime"):
+            temp = self.vvirRecoveryTimeEntry.get()
+            #Try/access to sanitize user input and ask for confirmation if there are no errors
+            try:
+                int(temp)
+                if (temp == '' or int(temp)<0):
+                    messagebox.showinfo("Error","Please enter a valid value")
+                    pass
+
+                #Ensure value is in limited range
+                elif(int(temp) < 2 or int(temp) > 16):
+                    messagebox.showinfo("Error","The range is between 2 and 16")
+                    pass
+
+                #If everything is good update current value
+                else:
+                    if messagebox.askyesno("Confirmation", "Replace current value?"):
+                        messagebox.showinfo("Done", "Success")
+                        vvir_recoveryTimeEntry = temp
+                        self.vvirRecoveryTimeValue.config(text="Current Value: " + vvir_recoveryTimeEntry)
+                        db.execute("UPDATE "+currentuser+" SET vvir_recoveryTimeEntry = ?", (vvir_recoveryTimeEntry,))
+                        db.commit()
+
+            except:
+                messagebox.showinfo("Error","Please enter a valid value")
+                pass
         #VVIR END------------------------------------------------------------------------------------------------------------------------------
 
         #DOOR BEGIN----------------------------------------------------------------------------------------------------------------------------
+        #doorLowerRateLimit
+        if(value == "doorLowerRateLimit"):
+            temp = self.doorLowerRateLimitEntry.get()
+            #Try/access to sanitize user input and ask for confirmation if there are no errors
+            try:
+                int(temp)
+                if (temp == '' or int(temp)<0):
+                    messagebox.showinfo("Error","Please enter a valid value")
+                    pass
+
+                #Ensure upper limit is larger than lower limit
+                elif(int(self.doorLowerRateLimitEntry.get()) >= int(door_upperRateLimitEntry) and int(door_upperRateLimitEntry) != 0 ):
+                    messagebox.showinfo("Error","Please ensure your lower rate limit is lower than your upper rate limit")
+                    pass
+
+                #Ensure value is in limited range
+                elif(int(temp) < 30 or int(temp) > 175):
+                    messagebox.showinfo("Error","The range is between 30 and 175")
+                    pass
+
+                #If everything is good update current value
+                else:
+                    if messagebox.askyesno("Confirmation", "Replace current value?"):
+                        messagebox.showinfo("Done", "Success")
+                        door_lowerRateLimitEntry = temp
+                        self.doorLowerRateLimitValue.config(text="Current Value: " + door_lowerRateLimitEntry)
+                        db.execute("UPDATE "+currentuser+" SET door_lowerRateLimitEntry = ?", (door_lowerRateLimitEntry,))
+                        db.commit()
+
+            except:
+                messagebox.showinfo("Error","Please enter a valid value")
+                pass
+
+        #doorUpperRateLimit
+        if(value == "doorUpperRateLimit"):
+            temp = self.doorUpperRateLimitEntry.get()
+            #Try/access to sanitize user input and ask for confirmation if there are no errors
+            try:
+                int(temp)
+                if (temp == '' or int(temp)<0):
+                    messagebox.showinfo("Error","Please enter a valid value")
+                    pass
+
+                #Ensure upper limit is larger than lower limit
+                elif(int(door_lowerRateLimitEntry) >= int(self.doorUpperRateLimitEntry.get()) and int(door_lowerRateLimitEntry) != 0 ):
+                    messagebox.showinfo("Error","Please ensure your upper rate limit is higher than your lower rate limit")
+                    pass
+
+                #Ensure value is in limited range
+                elif(int(temp) < 50 or int(temp) > 175):
+                    messagebox.showinfo("Error","The range is between 50 and 175")
+                    pass
+
+                #If everything is good update current value
+                else:
+                    if messagebox.askyesno("Confirmation", "Replace current value?"):
+                        messagebox.showinfo("Done", "Success")
+                        door_upperRateLimitEntry = temp
+                        self.doorUpperRateLimitValue.config(text="Current Value: " + door_upperRateLimitEntry)
+                        db.execute("UPDATE "+currentuser+" SET door_upperRateLimitEntry = ?", (door_upperRateLimitEntry,))
+                        db.commit()
+
+            except:
+                messagebox.showinfo("Error","Please enter a valid value")
+                pass
+
+        #doorAtrialAmplitude
+        if(value == "doorAtrialAmplitude"):
+            temp = self.doorAtrialAmplitudeEntry.get()
+            #Try/access to sanitize user input and ask for confirmation if there are no errors
+            try:
+                float(temp)
+                if (temp == '' or float(temp)<0):
+                    messagebox.showinfo("Error","Please enter a valid value")
+                    pass
+                #Ensure value is in limited range
+                elif(float(temp) < 0 or float(temp) > 7.0):
+                    messagebox.showinfo("Error","The range is between 0(off) and 7.0")
+                    pass
+
+                #If everything is good update current value
+                else:
+                    if messagebox.askyesno("Confirmation", "Replace current value?"):
+                        messagebox.showinfo("Done", "Success")
+                        door_atrialAmplitudeEntry = temp
+                        self.doorAtrialAmplitudeValue.config(text="Current Value: " + door_atrialAmplitudeEntry)
+                        db.execute("UPDATE "+currentuser+" SET door_atrialAmplitudeEntry = ?", (door_atrialAmplitudeEntry,))
+                        db.commit()
+
+            except:
+                messagebox.showinfo("Error","Please enter a valid value")
+                pass
+
+        #doorAtrialPulseWidth
+        if(value == "doorAtrialPulseWidth"):
+            temp = self.doorAtrialPulseWidthEntry.get()
+            #Try/access to sanitize user input and ask for confirmation if there are no errors
+            try:
+                float(temp)
+                if (temp == '' or float(temp)<0):
+                    messagebox.showinfo("Error","Please enter a valid value")
+                    pass
+
+                #Ensure value is in limited range
+                elif(float(temp) < 0.05 or float(temp) > 1.9):
+                    messagebox.showinfo("Error","The range is between 0.05 and 1.9")
+                    pass
+
+                #If everything is good update current value
+                else:
+                    if messagebox.askyesno("Confirmation", "Replace current value?"):
+                        messagebox.showinfo("Done", "Success")
+                        door_atrialPulseWidthEntry = temp
+                        self.doorAtrialPulseWidthValue.config(text="Current Value: " + door_atrialPulseWidthEntry)
+                        db.execute("UPDATE "+currentuser+" SET door_atrialPulseWidthEntry = ?", (door_atrialPulseWidthEntry,))
+                        db.commit()
+
+            except:
+                messagebox.showinfo("Error","Please enter a valid value")
+                pass
         
+        #doorVentricularAmplitude
+        if(value == "doorVentricularAmplitude"):
+            temp = self.doorVentricularAmplitudeEntry.get()
+            #Try/access to sanitize user input and ask for confirmation if there are no errors
+            try:
+                float(temp)
+                if (temp == '' or float(temp)<0):
+                    messagebox.showinfo("Error","Please enter a valid value")
+                    pass
+
+                #Ensure value is in limited range
+                elif(float(temp) < 0 or float(temp) > 7.0):
+                    messagebox.showinfo("Error","The range is between 0(off) and 7.0")
+                    pass
+
+                #If everything is good update current value
+                else:
+                    if messagebox.askyesno("Confirmation", "Replace current value?"):
+                        messagebox.showinfo("Done", "Success")
+                        door_ventricularAmplitudeEntry = temp
+                        self.doorVentricularAmplitudeValue.config(text="Current Value: " + door_ventricularAmplitudeEntry)
+                        db.execute("UPDATE "+currentuser+" SET door_ventricularAmplitudeEntry = ?", (door_ventricularAmplitudeEntry,))
+                        db.commit()
+
+            except:
+                messagebox.showinfo("Error","Please enter a valid value")
+                pass
+
+        #doorVentricularPulseWidth
+        if(value == "doorVentricularPulseWidth"):
+            temp = self.doorVentricularPulseWidthEntry.get()
+            #Try/access to sanitize user input and ask for confirmation if there are no errors
+            try:
+                float(temp)
+                if (temp == '' or float(temp)<0):
+                    messagebox.showinfo("Error","Please enter a valid value")
+                    pass
+
+                #Ensure value is in limited range
+                elif(float(temp) < 0.05 or float(temp) > 1.9):
+                    messagebox.showinfo("Error","The range is between 0.05 and 1.9")
+                    pass
+
+                #If everything is good update current value
+                else:
+                    if messagebox.askyesno("Confirmation", "Replace current value?"):
+                        messagebox.showinfo("Done", "Success")
+                        door_ventricularPulseWidthEntry = temp
+                        self.doorVentricularPulseWidthValue.config(text="Current Value: " + door_ventricularPulseWidthEntry)
+                        db.execute("UPDATE "+currentuser+" SET door_ventricularPulseWidthEntry = ?", (door_ventricularPulseWidthEntry,))
+                        db.commit()
+
+            except:
+                messagebox.showinfo("Error","Please enter a valid value")
+                pass
+        
+        #doorFixedAVDelay
+        if(value == "doorFixedAVDelay"):
+            temp = self.doorFixedAVDelayEntry.get()
+            #Try/access to sanitize user input and ask for confirmation if there are no errors
+            try:
+                int(temp)
+                if (temp == '' or int(temp)<0):
+                    messagebox.showinfo("Error","Please enter a valid value")
+                    pass
+
+                #Ensure value is in limited range
+                elif(int(temp) < 70 or int(temp) > 300):
+                    messagebox.showinfo("Error","The range is between 70 and 300")
+                    pass
+
+                #If everything is good update current value
+                else:
+                    if messagebox.askyesno("Confirmation", "Replace current value?"):
+                        messagebox.showinfo("Done", "Success")
+                        door_fixedAVDelayEntry = temp
+                        self.doorFixedAVDelayValue.config(text="Current Value: " + door_fixedAVDelayEntry)
+                        db.execute("UPDATE "+currentuser+" SET door_fixedAVDelayEntry = ?", (door_fixedAVDelayEntry,))
+                        db.commit()
+
+            except:
+                messagebox.showinfo("Error","Please enter a valid value")
+                pass
+        
+        #doorMaximumSensorRate
+        if(value == "doorMaximumSensorRate"):
+            temp = self.doorMaximumSensorRateEntry.get()
+            #Try/access to sanitize user input and ask for confirmation if there are no errors
+            try:
+                int(temp)
+                if (temp == '' or int(temp)<0):
+                    messagebox.showinfo("Error","Please enter a valid value")
+                    pass
+
+                #Ensure value is in limited range
+                elif(int(temp) < 50 or int(temp) > 175):
+                    messagebox.showinfo("Error","The range is between 50 and 175")
+                    pass
+
+                #If everything is good update current value
+                else:
+                    if messagebox.askyesno("Confirmation", "Replace current value?"):
+                        messagebox.showinfo("Done", "Success")
+                        door_maximumSensorRateEntry = temp
+                        self.doorMaximumSensorRateValue.config(text="Current Value: " + door_maximumSensorRateEntry)
+                        db.execute("UPDATE "+currentuser+" SET door_maximumSensorRateEntry = ?", (door_maximumSensorRateEntry,))
+                        db.commit()
+
+            except:
+                messagebox.showinfo("Error","Please enter a valid value")
+                pass
+
+        #doorActivityThreshold
+        if(value == "doorActivityThreshold"):
+            temp = self.doorActivityThresholdEntry.get()
+            #Try/access to sanitize user input and ask for confirmation if there are no errors
+            try:
+                int(temp)
+                if (temp == '' or int(temp)<0):
+                    messagebox.showinfo("Error","Please enter a valid value")
+                    pass
+
+                #Ensure value is in limited range
+                elif(int(temp) < 1 or int(temp) > 7):
+                    messagebox.showinfo("Error","The range is between 1 and 7")
+                    pass
+
+                #If everything is good update current value
+                else:
+                    if messagebox.askyesno("Confirmation", "Replace current value?"):
+                        messagebox.showinfo("Done", "Success")
+                        door_activityThresholdEntry = temp
+                        self.doorActivityThresholdValue.config(text="Current Value: " + door_activityThresholdEntry)
+                        db.execute("UPDATE "+currentuser+" SET door_activityThresholdEntry = ?", (door_activityThresholdEntry,))
+                        db.commit()
+
+            except:
+                messagebox.showinfo("Error","Please enter a valid value")
+                pass
+
+        #doorReactionTime
+        if(value == "doorReactionTime"):
+            temp = self.doorReactionTimeEntry.get()
+            #Try/access to sanitize user input and ask for confirmation if there are no errors
+            try:
+                int(temp)
+                if (temp == '' or int(temp)<0):
+                    messagebox.showinfo("Error","Please enter a valid value")
+                    pass
+
+                #Ensure value is in limited range
+                elif(int(temp) < 10 or int(temp) > 50):
+                    messagebox.showinfo("Error","The range is between 10 and 50")
+                    pass
+
+                #If everything is good update current value
+                else:
+                    if messagebox.askyesno("Confirmation", "Replace current value?"):
+                        messagebox.showinfo("Done", "Success")
+                        door_reactionTimeEntry = temp
+                        self.doorReactionTimeValue.config(text="Current Value: " + door_reactionTimeEntry)
+                        db.execute("UPDATE "+currentuser+" SET door_reactionTimeEntry = ?", (door_reactionTimeEntry,))
+                        db.commit()
+
+            except:
+                messagebox.showinfo("Error","Please enter a valid value")
+                pass
+
+        #doorResponseFactor
+        if(value == "doorResponseFactor"):
+            temp = self.doorResponseFactorEntry.get()
+            #Try/access to sanitize user input and ask for confirmation if there are no errors
+            try:
+                int(temp)
+                if (temp == '' or int(temp)<0):
+                    messagebox.showinfo("Error","Please enter a valid value")
+                    pass
+
+                #Ensure value is in limited range
+                elif(int(temp) < 1 or int(temp) > 16):
+                    messagebox.showinfo("Error","The range is between 1 and 16")
+                    pass
+
+                #If everything is good update current value
+                else:
+                    if messagebox.askyesno("Confirmation", "Replace current value?"):
+                        messagebox.showinfo("Done", "Success")
+                        door_responseFactorEntry = temp
+                        self.doorResponseFactorValue.config(text="Current Value: " + door_responseFactorEntry)
+                        db.execute("UPDATE "+currentuser+" SET door_responseFactorEntry = ?", (door_responseFactorEntry,))
+                        db.commit()
+
+            except:
+                messagebox.showinfo("Error","Please enter a valid value")
+                pass
+
+        #doorRecoveryTime
+        if(value == "doorRecoveryTime"):
+            temp = self.doorRecoveryTimeEntry.get()
+            #Try/access to sanitize user input and ask for confirmation if there are no errors
+            try:
+                int(temp)
+                if (temp == '' or int(temp)<0):
+                    messagebox.showinfo("Error","Please enter a valid value")
+                    pass
+
+                #Ensure value is in limited range
+                elif(int(temp) < 2 or int(temp) > 16):
+                    messagebox.showinfo("Error","The range is between 2 and 16")
+                    pass
+
+                #If everything is good update current value
+                else:
+                    if messagebox.askyesno("Confirmation", "Replace current value?"):
+                        messagebox.showinfo("Done", "Success")
+                        door_recoveryTimeEntry = temp
+                        self.doorRecoveryTimeValue.config(text="Current Value: " + door_recoveryTimeEntry)
+                        db.execute("UPDATE "+currentuser+" SET door_recoveryTimeEntry = ?", (door_recoveryTimeEntry,))
+                        db.commit()
+
+            except:
+                messagebox.showinfo("Error","Please enter a valid value")
+                pass
         #DOOR END------------------------------------------------------------------------------------------------------------------------------
 
     #Method used to log off user
