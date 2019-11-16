@@ -1,6 +1,6 @@
 import serial
+import numpy
 from DCMv2 import *
-
 
 def aoo_data_output(aoo_lowerRateLimitEntry,aoo_upperRateLimitEntry,aoo_atrialAmplitudeEntry,aoo_atrialPulseWidthEntry):
 
@@ -10,6 +10,9 @@ def aoo_data_output(aoo_lowerRateLimitEntry,aoo_upperRateLimitEntry,aoo_atrialAm
     atrialAmplitude = aoo_atrialAmplitudeEntry
     atrialPulseWidth = aoo_atrialPulseWidthEntry
 
+    data_output = [state, lowerRateLimit, upperRateLimit, atrialAmplitude, atrialPulseWidth]
+    serial_data_output = str.encode(data_output)
+
 def voo_data_output(voo_lowerRateLimitEntry,voo_upperRateLimitEntry,voo_ventricularAmplitudeEntry,voo_ventricularPulseWidthEntry):
 
     state = "voo"
@@ -17,6 +20,9 @@ def voo_data_output(voo_lowerRateLimitEntry,voo_upperRateLimitEntry,voo_ventricu
     upperRateLimit = voo_upperRateLimitEntry
     ventricularAmplitude = voo_ventricularAmplitudeEntry
     ventricularPulseWidth = voo_ventricularPulseWidthEntry
+
+    data_output = [state, lowerRateLimit, upperRateLimit, ventricularAmplitude, ventricularPulseWidth]
+    serial_data_output = str.encode(data_output)
 
 def aii_data_ouput(aai_lowerRateLimitEntry,aai_upperRateLimitEntry,aai_atrialAmplitudeEntry,aai_atrialPulseWidthEntry,aai_atrialSensitivityEntry,aai_ARPEntry,aai_PVARPEntry,):
 
@@ -29,6 +35,9 @@ def aii_data_ouput(aai_lowerRateLimitEntry,aai_upperRateLimitEntry,aai_atrialAmp
     ARP = aai_ARPEntry
     PVRAP = aai_PVARPEntry
 
+    data_output = [state, lowerRateLimit, upperRateLimit, atrialAmplitude, atrialPulseWidth, atrialSensitivity, ARP, PVRAP]
+    serial_data_output = str.encode(data_output)
+
 def vvi_data_output(vvi_lowerRateLimitEntry,vvi_upperRateLimitEntry,vvi_ventricularAmplitudeEntry,vvi_ventricularPulseWidthEntry,vvi_ventricularSensitivityEntry,vvi_VRPEntry):
 
     state = "vvi"
@@ -39,6 +48,9 @@ def vvi_data_output(vvi_lowerRateLimitEntry,vvi_upperRateLimitEntry,vvi_ventricu
     ventricularSensitivity = vvi_ventricularSensitivityEntry
     VRP = vvi_VRPEntry
 
+    data_output = [state, lowerRateLimit, upperRateLimit, ventricularAmplitude, ventricularPulseWidth, ventricularSensitivity, VRP]
+    serial_data_output = str.encode(data_output)
+
 def doo_data_output(doo_lowerRateLimitEntry, doo_upperRateLimitEntry, doo_atrialAmplitudeEntry, doo_atrialPulseWidthEntry, doo_ventricularAmplitudeEntry, doo_ventricularPulseWidthEntry, doo_fixedAVDelayEntry):
     
     state = "doo"
@@ -48,6 +60,9 @@ def doo_data_output(doo_lowerRateLimitEntry, doo_upperRateLimitEntry, doo_atrial
     ventricularAmplitude = doo_ventricularAmplitudeEntry
     atrialPulseWidth = doo_atrialPulseWidthEntry
     fixedAVDelay = doo_fixedAVDelayEntry
+
+    data_output = [state, lowerRateLimit, upperRateLimit, atrialAmplitude, ventricularAmplitude, atrialAmplitude, fixedAVDelay]
+    serial_data_output = str.encode(data_output)
 
 def aoor_data_output(aoor_lowerRateLimitEntry, aoor_upperRateLimitEntry, aoor_atrialAmplitudeEntry, aoor_atrialPulseWidthEntry, aoor_maximumSensorRateEntry, aoor_activityThresholdEntry, aoor_reactionTimeEntry, aoor_responseFactorEntry, aoor_recoveryTimeEntry):
     
@@ -61,7 +76,11 @@ def aoor_data_output(aoor_lowerRateLimitEntry, aoor_upperRateLimitEntry, aoor_at
     reactionTime = aoor_reactionTimeEntry
     responseFactor  = aoor_responseFactorEntry
     recoveryTime = aoor_recoveryTimeEntry
+
+    data_output = [state, lowerRateLimit, upperRateLimit, atrialAmplitude, atrialPulseWidth, atrialMaximumSensorRate, activityThreshold, reactionTime, responseFactor, recoveryTime]
+    serial_data_output = str.encode(data_output)
     
+    return serial_data_output
     
 def voor_data_output(voor_lowerRateLimitEntry, voor_upperRateLimitEntry, voor_ventricularAmplitudeEntry, voor_ventricularPulseWidthEntry, voor_maximumSensorRateEntry, voor_activityThresholdEntry, voor_reactionTimeEntry, voor_responseFactorEntry, voor_recoveryTimeEntry):
 
@@ -75,6 +94,11 @@ def voor_data_output(voor_lowerRateLimitEntry, voor_upperRateLimitEntry, voor_ve
     reactionTime = voor_reactionTimeEntry
     responseFactor = voor_responseFactorEntry
     recoveryTime = voor_recoveryTimeEntry
+    
+    data_output = [state, lowerRateLimit, upperRateLimit, ventricularAmplitude, ventricularPulseWidth, maximumSensorRate, activityThresholdEntry, reactionTime, responseFactor, recoveryTime]
+    serial_data_output = str.encode(data_output)
+    
+    return serial_data_output
     
 def aair_data_output(aair_lowerRateLimitEntry, aair_upperRateLimitEntry, aair_atrialAmplitudeEntry, aair_atrialPulseWidthEntry, aair_atrialSensitivityEntry, aair_ARPEntry, aair_PVARPEntry, aair_hysteresisEntry, aair_rateSmoothingEntry, aair_maximumSensorRateEntry, aair_activityThresholdEntry, aair_reactionTimeEntry, aair_responseFactorEntry, aair_recoveryTimeEntry):
 
@@ -92,6 +116,10 @@ def aair_data_output(aair_lowerRateLimitEntry, aair_upperRateLimitEntry, aair_at
     responseFactor = aair_responseFactorEntry
     recoveryTime = aair_recoveryTimeEntry
 
+    data_output = [state, lowerRateLimit, upperRateLimit, atrialAmplitude, atrialPulseWidth, atrialSensitivity, ARP, PVARP, maximumSensorRate, activityThreshold, reactionTime, responseFactor, recoveryTime]
+    serial_data_output = str.encode(data_output)
+    return serial_data_output
+    
 
 def vvir_data_output(vvir_lowerRateLimitEntry, vvir_upperRateLimitEntry, vvir_ventricularAmplitudeEntry, vvir_ventricularPulseWidthEntry, vvir_ventricularSensitivityEntry, vvir_VRPEntry, vvir_hysteresisEntry, vvir_rateSmoothingEntry, vvir_maximumSensorRateEntry, vvir_activityThresholdEntry, vvir_reactionTimeEntry, vvir_responseFactorEntry, vvir_recoveryTimeEntry):
     
@@ -104,10 +132,14 @@ def vvir_data_output(vvir_lowerRateLimitEntry, vvir_upperRateLimitEntry, vvir_ve
     VRP = vvir_VRPEntry
     maximumSensorRate = vvir_maximumSensorRateEntry
     activityThreshold = vvir_activityThresholdEntry
-    vir_reactionTimeEntry = vir_reactionTimeEntry
-    vvir_responseFactorEntry = vvir_responseFactorEntry
-    vvir_recoveryTimeEntry = vvir_recoveryTimeEntry
-   
+    reactionTimeEntry = vir_reactionTimeEntry
+    responseFactorEntry = vvir_responseFactorEntry
+    recoveryTimeEntry = vvir_recoveryTimeEntry
+
+    data_output = [state, lowerRateLimit, upperRateLimit, ventricularAmplitude, ventricularPulseWidth, ventricularSensitivity, VRP, maximumSensorRate, fixedAVDelay, activityThreshold, reactionTime, responseFactor, recoveryTime]
+    serial_data_output = str.encode(data_output)
+    return serial_data_output
+    
 
 def door_data_output(door_lowerRateLimitEntry, door_upperRateLimitEntry, door_atrialAmplitudeEntry, door_atrialPulseWidthEntry, door_ventricularAmplitudeEntry, door_ventricularPulseWidthEntry, door_maximumSensorRateEntry, door_fixedAVDelayEntry, door_activityThresholdEntry, door_reactionTimeEntry, door_responseFactorEntry, door_recoveryTimeEntry):
     
@@ -125,8 +157,12 @@ def door_data_output(door_lowerRateLimitEntry, door_upperRateLimitEntry, door_at
     responseFactor = door_responseFactorEntry
     recoveryTime = door_recoveryTimeEntry
 
+    data_output = [state, lowerRateLimit, upperRateLimit, atrialAmplitude, atrialPulseWidth, ventricularAmplitude, ventricularPulseWidth, maximumSensorRate, fixedAVDelay, activityThreshold, reactionTime, responseFactor, recoveryTime]
+    serial_data_output = str.encode(data_output)
+    return serial_data_output
 
 def main():
+
     global state
     global aoo_lowerRateLimitEntry,aoo_upperRateLimitEntry,aoo_atrialAmplitudeEntry,aoo_atrialPulseWidthEntry
     global voo_lowerRateLimitEntry,voo_upperRateLimitEntry,voo_ventricularAmplitudeEntry,voo_ventricularPulseWidthEntry
@@ -139,46 +175,45 @@ def main():
     global vvir_lowerRateLimitEntry, vvir_upperRateLimitEntry, vvir_ventricularAmplitudeEntry, vvir_ventricularPulseWidthEntry, vvir_ventricularSensitivityEntry, vvir_VRPEntry, vvir_hysteresisEntry, vvir_rateSmoothingEntry, vvir_maximumSensorRateEntry, vvir_activityThresholdEntry, vvir_reactionTimeEntry, vvir_responseFactorEntry, vvir_recoveryTimeEntry
     global door_lowerRateLimitEntry, door_upperRateLimitEntry, door_atrialAmplitudeEntry, door_atrialPulseWidthEntry, door_ventricularAmplitudeEntry, door_ventricularPulseWidthEntry, door_maximumSensorRateEntry, door_fixedAVDelayEntry, door_activityThresholdEntry, door_reactionTimeEntry, door_responseFactorEntry, door_recoveryTimeEntry
 
+
+    if (state == "aooConfirm"):
+        data_out = aoo_data_output(aoo_lowerRateLimitEntry,aoo_upperRateLimitEntry,aoo_atrialAmplitudeEntry,aoo_atrialPulseWidthEntry)
+    
+    elif (state == "vooConfirm"):
+        data_out = voo_data_output(voo_lowerRateLimitEntry,voo_upperRateLimitEntry,voo_ventricularAmplitudeEntry,voo_ventricularPulseWidthEntry)
+    
+    elif (state == "aaiConfirm"):
+        data_out = aai_data_output(aai_lowerRateLimitEntry,aai_upperRateLimitEntry,aai_atrialAmplitudeEntry,aai_atrialPulseWidthEntry,aai_atrialSensitivityEntry,aai_ARPEntry,aai_PVARPEntry,aai_hysteresisEntry,aai_rateSmoothingEntry)
+    
+    elif (state == "vviConfirm"):
+        data_out = vvi_data_output(vvi_lowerRateLimitEntry,vvi_upperRateLimitEntry,vvi_ventricularAmplitudeEntry,vvi_ventricularPulseWidthEntry,vvi_ventricularSensitivityEntry,vvi_VRPEntry,0,vvi_hysteresisEntry,vvi_rateSmoothingEntry)
+
+    elif (state == "dooConfirm"):
+        data_out = doo_data_output(doo_lowerRateLimitEntry, doo_upperRateLimitEntry, doo_atrialAmplitudeEntry, doo_atrialPulseWidthEntry, doo_ventricularAmplitudeEntry, doo_ventricularPulseWidthEntry, doo_fixedAVDelayEntry)
+
+    elif (state == "aoorConfirm"):
+        data_out = aoor_data_output(aoor_lowerRateLimitEntry, aoor_upperRateLimitEntry, aoor_atrialAmplitudeEntry, aoor_atrialPulseWidthEntry, aoor_maximumSensorRateEntry, aoor_activityThresholdEntry, aoor_reactionTimeEntry, aoor_responseFactorEntry, aoor_recoveryTimeEntry)
+
+    elif (state == "voorConfirm"):
+        data_out = voor_data_output(voor_lowerRateLimitEntry, voor_upperRateLimitEntry, voor_ventricularAmplitudeEntry, voor_ventricularPulseWidthEntry, voor_maximumSensorRateEntry, voor_activityThresholdEntry, voor_reactionTimeEntry, voor_responseFactorEntry, voor_recoveryTimeEntry)
+    
+    elif (state == "aairConfirm"):
+        data_out = aair_data_output(aair_lowerRateLimitEntry, aair_upperRateLimitEntry, aair_atrialAmplitudeEntry, aair_atrialPulseWidthEntry, aair_atrialSensitivityEntry, aair_ARPEntry, aair_PVARPEntry, aair_hysteresisEntry, aair_rateSmoothingEntry, aair_maximumSensorRateEntry, aair_activityThresholdEntry, aair_reactionTimeEntry, aair_responseFactorEntry, aair_recoveryTimeEntry)
+
+    elif (state == "vvirConfirm"):
+        data_out = vvir_data_output(vvir_lowerRateLimitEntry, vvir_upperRateLimitEntry, vvir_ventricularAmplitudeEntry, vvir_ventricularPulseWidthEntry, vvir_ventricularSensitivityEntry, vvir_VRPEntry, vvir_hysteresisEntry, vvir_rateSmoothingEntry, vvir_maximumSensorRateEntry, vvir_activityThresholdEntry, vvir_reactionTimeEntry, vvir_responseFactorEntry, vvir_recoveryTimeEntry)
+
+    elif (state == "doorConfirm"): 
+        data_out = door_data_output(door_lowerRateLimitEntry, door_upperRateLimitEntry, door_atrialAmplitudeEntry, door_atrialPulseWidthEntry, door_ventricularAmplitudeEntry, door_ventricularPulseWidthEntry, door_maximumSensorRateEntry, door_fixedAVDelayEntry, door_activityThresholdEntry, door_reactionTimeEntry, door_responseFactorEntry, door_recoveryTimeEntry)
+
     ser = serial.Serial()
     ser.baudrate = 115200
     ser.port = 'COM3'
     ser.open()
-    data = ser.readLine() # this is the data we will analyze 
 
-    print(ser.name)         # check which port was really used
-    ser.write(b'hello')     # write a string
+    ser.write(data_out)
 
-    if (state == "aooConfirm"):
-        aoo_data_output(aoo_lowerRateLimitEntry,aoo_upperRateLimitEntry,aoo_atrialAmplitudeEntry,aoo_atrialPulseWidthEntry)
-
-    elif (state == "vooConfirm"):
-        voo_data_output(voo_lowerRateLimitEntry,voo_upperRateLimitEntry,voo_ventricularAmplitudeEntry,voo_ventricularPulseWidthEntry)
-
-    elif (state == "aaiConfirm"):
-        aai_data_output(aai_lowerRateLimitEntry,aai_upperRateLimitEntry,aai_atrialAmplitudeEntry,aai_atrialPulseWidthEntry,aai_atrialSensitivityEntry,aai_ARPEntry,aai_PVARPEntry,aai_hysteresisEntry,aai_rateSmoothingEntry)
-
-    elif (state == "vviConfirm"):
-        vvi_data_output(vvi_lowerRateLimitEntry,vvi_upperRateLimitEntry,vvi_ventricularAmplitudeEntry,vvi_ventricularPulseWidthEntry,vvi_ventricularSensitivityEntry,vvi_VRPEntry,0,vvi_hysteresisEntry,vvi_rateSmoothingEntry)
-
-    elif (state == "dooConfirm"):
-        doo_data_output(doo_lowerRateLimitEntry, doo_upperRateLimitEntry, doo_atrialAmplitudeEntry, doo_atrialPulseWidthEntry, doo_ventricularAmplitudeEntry, doo_ventricularPulseWidthEntry, doo_fixedAVDelayEntry)
-
-    elif (state == "aoorConfirm"):
-        aoor_data_output(aoor_lowerRateLimitEntry, aoor_upperRateLimitEntry, aoor_atrialAmplitudeEntry, aoor_atrialPulseWidthEntry, aoor_maximumSensorRateEntry, aoor_activityThresholdEntry, aoor_reactionTimeEntry, aoor_responseFactorEntry, aoor_recoveryTimeEntry)
-
-    elif (state == "voorConfirm"):
-        voor_data_output(voor_lowerRateLimitEntry, voor_upperRateLimitEntry, voor_ventricularAmplitudeEntry, voor_ventricularPulseWidthEntry, voor_maximumSensorRateEntry, voor_activityThresholdEntry, voor_reactionTimeEntry, voor_responseFactorEntry, voor_recoveryTimeEntry)
-    
-    elif (state == "aairConfirm"):
-        aair_data_output(aair_lowerRateLimitEntry, aair_upperRateLimitEntry, aair_atrialAmplitudeEntry, aair_atrialPulseWidthEntry, aair_atrialSensitivityEntry, aair_ARPEntry, aair_PVARPEntry, aair_hysteresisEntry, aair_rateSmoothingEntry, aair_maximumSensorRateEntry, aair_activityThresholdEntry, aair_reactionTimeEntry, aair_responseFactorEntry, aair_recoveryTimeEntry)
-
-    elif (state == "vvirConfirm"):
-        vvir_data_output(vvir_lowerRateLimitEntry, vvir_upperRateLimitEntry, vvir_ventricularAmplitudeEntry, vvir_ventricularPulseWidthEntry, vvir_ventricularSensitivityEntry, vvir_VRPEntry, vvir_hysteresisEntry, vvir_rateSmoothingEntry, vvir_maximumSensorRateEntry, vvir_activityThresholdEntry, vvir_reactionTimeEntry, vvir_responseFactorEntry, vvir_recoveryTimeEntry)
-
-    elif (state == "doorConfirm"): 
-        door_data_output(door_lowerRateLimitEntry, door_upperRateLimitEntry, door_atrialAmplitudeEntry, door_atrialPulseWidthEntry, door_ventricularAmplitudeEntry, door_ventricularPulseWidthEntry, door_maximumSensorRateEntry, door_fixedAVDelayEntry, door_activityThresholdEntry, door_reactionTimeEntry, door_responseFactorEntry, door_recoveryTimeEntry)
-    
-    ser.close() # close port at the end of our transmission
+    ser.close() 
 
     
 
