@@ -14,6 +14,7 @@ db.execute("CREATE TABLE IF NOT EXISTS users (user TEXT NOT NULL, password TEXT 
 currentuser = ''
 
 #Initializing all global variables with "0"
+userlog = ''
 #AOO
 aoo_lowerRateLimitEntry,aoo_upperRateLimitEntry,aoo_atrialAmplitudeEntry,aoo_atrialPulseWidthEntry = "0","0","0","0"
 
@@ -30,16 +31,16 @@ vvi_lowerRateLimitEntry,vvi_upperRateLimitEntry,vvi_ventricularAmplitudeEntry,vv
 doo_lowerRateLimitEntry, doo_upperRateLimitEntry, doo_atrialAmplitudeEntry, doo_atrialPulseWidthEntry, doo_ventricularAmplitudeEntry, doo_ventricularPulseWidthEntry, doo_fixedAVDelayEntry = "0","0","0","0","0","0","0"
 
 #AOOR
-aoor_lowerRateLimitEntry, aoor_upperRateLimitEntry, aoor_atrialAmplitudeEntry, aoor_atrialPulseWidthEntry, aoor_maximumSensorRateEntry, aoor_activityThresholdEntry, aoor_reactionTimeEntry, aoor_responseFactorEntry, aoor_recoveryTimeEntry = "0","0","0","0","0","0","0","0","0"
+aoor_lowerRateLimitEntry, aoor_upperRateLimitEntry, aoor_atrialAmplitudeEntry, aoor_atrialPulseWidthEntry, aoor_maximumSensorRateEntry, aoor_activityThresholdEntry, aoor_reactionTimeEntry, aoor_responseFactorEntry, aoor_recoveryTimeEntry = "0","0","0","0","0","","0","0","0"
 
 #VOOR
-voor_lowerRateLimitEntry, voor_upperRateLimitEntry, voor_ventricularAmplitudeEntry, voor_ventricularPulseWidthEntry, voor_maximumSensorRateEntry, voor_activityThresholdEntry, voor_reactionTimeEntry, voor_responseFactorEntry, voor_recoveryTimeEntry = "0","0","0","0","0","0","0","0","0"
+voor_lowerRateLimitEntry, voor_upperRateLimitEntry, voor_ventricularAmplitudeEntry, voor_ventricularPulseWidthEntry, voor_maximumSensorRateEntry, voor_activityThresholdEntry, voor_reactionTimeEntry, voor_responseFactorEntry, voor_recoveryTimeEntry = "0","0","0","0","0","","0","0","0"
 
 #AAIR
-aair_lowerRateLimitEntry, aair_upperRateLimitEntry, aair_atrialAmplitudeEntry, aair_atrialPulseWidthEntry, aair_atrialSensitivityEntry, aair_ARPEntry, aair_PVARPEntry, aair_hysteresisEntry, aair_rateSmoothingEntry, aair_maximumSensorRateEntry, aair_activityThresholdEntry, aair_reactionTimeEntry, aair_responseFactorEntry, aair_recoveryTimeEntry = "0","0","0","0","0","0","0","0","0","0","0","0","0","0"
+aair_lowerRateLimitEntry, aair_upperRateLimitEntry, aair_atrialAmplitudeEntry, aair_atrialPulseWidthEntry, aair_atrialSensitivityEntry, aair_ARPEntry, aair_PVARPEntry, aair_hysteresisEntry, aair_rateSmoothingEntry, aair_maximumSensorRateEntry, aair_activityThresholdEntry, aair_reactionTimeEntry, aair_responseFactorEntry, aair_recoveryTimeEntry = "0","0","0","0","0","0","0","0","0","0","","0","0","0"
 
 #VVIR
-vvir_lowerRateLimitEntry, vvir_upperRateLimitEntry, vvir_ventricularAmplitudeEntry, vvir_ventricularPulseWidthEntry, vvir_ventricularSensitivityEntry, vvir_VRPEntry, vvir_hysteresisEntry, vvir_rateSmoothingEntry, vvir_maximumSensorRateEntry, vvir_activityThresholdEntry, vvir_reactionTimeEntry, vvir_responseFactorEntry, vvir_recoveryTimeEntry = "0","0","0","0","0","0","0","0","0","0","0","0","0"
+vvir_lowerRateLimitEntry, vvir_upperRateLimitEntry, vvir_ventricularAmplitudeEntry, vvir_ventricularPulseWidthEntry, vvir_ventricularSensitivityEntry, vvir_VRPEntry, vvir_hysteresisEntry, vvir_rateSmoothingEntry, vvir_maximumSensorRateEntry, vvir_activityThresholdEntry, vvir_reactionTimeEntry, vvir_responseFactorEntry, vvir_recoveryTimeEntry = "0","0","0","0","0","0","0","0","0","","0","0","0"
 
 #DOOR
 door_lowerRateLimitEntry, door_upperRateLimitEntry, door_atrialAmplitudeEntry, door_atrialPulseWidthEntry, door_ventricularAmplitudeEntry, door_ventricularPulseWidthEntry, door_maximumSensorRateEntry, door_fixedAVDelayEntry, door_activityThresholdEntry, door_reactionTimeEntry, door_responseFactorEntry, door_recoveryTimeEntry = "0","0","0","0","0","0","0","0","0","0","0","0"
@@ -47,7 +48,6 @@ door_lowerRateLimitEntry, door_upperRateLimitEntry, door_atrialAmplitudeEntry, d
 #Creating Initial Welcome Frame
 class WelcomeFrame:
     def __init__(self, master):
-        
         #General paramters
         self.master = master
         self.master.configure(background='grey')
@@ -89,9 +89,7 @@ class WelcomeFrame:
 
 #Login Frame window
 class LoginFrame:
-
     def __init__(self, master):
-
         #General parameters
         self.master = master
         self.master.configure(background='grey')
@@ -240,18 +238,17 @@ class AddUserWindow:
                     elif (counter2 > 10):
                         messagebox.showerror("Error", "Maximum allowed user limit reached")
                     else:
-                        userlog = 'No Mode Set'
                         db.execute("CREATE TABLE "+counters+" (userlog TEXT NOT NULL, "
                             "aoo_lowerRateLimitEntry INTEGER NOT NULL, aoo_upperRateLimitEntry INTEGER NOT NULL, aoo_atrialAmplitudeEntry REAL NOT NULL, aoo_atrialPulseWidthEntry INTEGER NOT NULL, "
                             "voo_lowerRateLimitEntry INTEGER NOT NULL, voo_upperRateLimitEntry INTEGER NOT NULL, voo_ventricularAmplitudeEntry REAL NOT NULL, voo_ventricularPulseWidthEntry INTEGER NOT NULL, "
                             "aai_lowerRateLimitEntry INTEGER NOT NULL, aai_upperRateLimitEntry INTEGER NOT NULL, aai_atrialAmplitudeEntry REAL NOT NULL, aai_atrialPulseWidthEntry INTEGER NOT NULL, aai_atrialSensitivityEntry REAL NOT NULL, aai_ARPEntry INTEGER NOT NULL, aai_PVARPEntry INTEGER NOT NULL, aai_hysteresisEntry INTEGER NOT NULL, aai_rateSmoothingEntry INTEGER NOT NULL, "
                             "vvi_lowerRateLimitEntry INTEGER NOT NULL, vvi_upperRateLimitEntry INTEGER NOT NULL, vvi_ventricularAmplitudeEntry REAL NOT NULL, vvi_ventricularPulseWidthEntry INTEGER NOT NULL, vvi_ventricularSensitivityEntry REAL NOT NULL, vvi_VRPEntry INTEGER NOT NULL, vvi_hysteresisEntry INTEGER NOT NULL, vvi_rateSmoothingEntry INTEGER NOT NULL, "
                             "doo_lowerRateLimitEntry INTEGER NOT NULL, doo_upperRateLimitEntry INTEGER NOT NULL, doo_atrialAmplitudeEntry REAL NOT NULL, doo_atrialPulseWidthEntry INTEGER NOT NULL, doo_ventricularAmplitudeEntry REAL NOT NULL, doo_ventricularPulseWidthEntry INTEGER NOT NULL, doo_fixedAVDelayEntry INTEGER NOT NULL, "
-                            "aoor_lowerRateLimitEntry INTEGER NOT NULL, aoor_upperRateLimitEntry INTEGER NOT NULL, aoor_atrialAmplitudeEntry REAL NOT NULL, aoor_atrialPulseWidthEntry INTEGER NOT NULL, aoor_maximumSensorRateEntry INTEGER NOT NULL, aoor_activityThresholdEntry INTEGER NOT NULL, aoor_reactionTimeEntry INTEGER NOT NULL, aoor_responseFactorEntry INTEGER NOT NULL, aoor_recoveryTimeEntry INTEGER NOT NULL, "
-                            "voor_lowerRateLimitEntry INTEGER NOT NULL, voor_upperRateLimitEntry INTEGER NOT NULL, voor_ventricularAmplitudeEntry REAL NOT NULL, voor_ventricularPulseWidthEntry INTEGER NOT NULL, voor_maximumSensorRateEntry INTEGER NOT NULL, voor_activityThresholdEntry INTEGER NOT NULL, voor_reactionTimeEntry INTEGER NOT NULL, voor_responseFactorEntry INTEGER NOT NULL, voor_recoveryTimeEntry INTEGER NOT NULL, "
-                            "aair_lowerRateLimitEntry INTEGER NOT NULL, aair_upperRateLimitEntry INTEGER NOT NULL, aair_atriaAmplitudeEntry REAL NOT NULL, aair_atrialPulseWidthEntry INTEGER NOT NULL, aair_atrialSensitivityEntry REAL NOT NULL, aair_ARPEntry INTEGER NOT NULL, aair_PVARPEntry INTEGER NOT NULL, aair_hysteresisEntry INTEGER NOT NULL, aair_rateSmoothingEntry INTEGER NOT NULL, aair_maximumSensorRateEntry INTEGER NOT NULL, aair_activityThresholdEntry INTEGER NOT NULL, aair_reactionTimeEntry INTEGER NOT NULL, aair_responseFactorEntry INTEGER NOT NULL, aair_recoveryTimeEntry INTEGER NOT NULL, "
-                            "vvir_lowerRateLimitEntry INTEGER NOT NULL, vvir_upperRateLimitEntry INTEGER NOT NULL, vvir_ventricularAmplitudeEntry REAL NOT NULL, vvir_ventricularPulseWidthEntry INTEGER NOT NULL, vvir_ventricularSensitivityEntry REAL NOT NULL, vvir_VRPEntry INTEGER NOT NULL, vvir_hysteresisEntry INTEGER NOT NULL, vvir_rateSmoothingEntry INTEGER NOT NULL, vvir_maximumSensorRateEntry INTEGER NOT NULL, vvir_activityThresholdEntry INTEGER NOT NULL, vvir_reactionTimeEntry INTEGER NOT NULL, vvir_responseFactorEntry INTEGER NOT NULL, vvir_recoveryTimeEntry INTEGER NOT NULL, "
-                            "door_lowerRateLimitEntry INTEGER NOT NULL, door_upperRateLimitEntry INTEGER NOT NULL, door_atrialAmplitudeEntry REAL NOT NULL, door_atrialPulseWidthEntry INTEGER NOT NULL, door_ventricularAmplitudeEntry REAL NOT NULL, door_ventricularPulseWidthEntry INTEGER NOT NULL, door_maximumSensorRateEntry INTEGER NOT NULL, door_fixedAVDelayEntry INTEGER NOT NULL, door_activityThresholdEntry INTEGER NOT NULL, door_reactionTimeEntry INTEGER NOT NULL, door_responseFactorEntry INTEGER NOT NULL, door_recoveryTimeEntry INTEGER NOT NULL)")
+                            "aoor_lowerRateLimitEntry INTEGER NOT NULL, aoor_upperRateLimitEntry INTEGER NOT NULL, aoor_atrialAmplitudeEntry REAL NOT NULL, aoor_atrialPulseWidthEntry INTEGER NOT NULL, aoor_maximumSensorRateEntry INTEGER NOT NULL, aoor_activityThresholdEntry TEXT NOT NULL, aoor_reactionTimeEntry INTEGER NOT NULL, aoor_responseFactorEntry INTEGER NOT NULL, aoor_recoveryTimeEntry INTEGER NOT NULL, "
+                            "voor_lowerRateLimitEntry INTEGER NOT NULL, voor_upperRateLimitEntry INTEGER NOT NULL, voor_ventricularAmplitudeEntry REAL NOT NULL, voor_ventricularPulseWidthEntry INTEGER NOT NULL, voor_maximumSensorRateEntry INTEGER NOT NULL, voor_activityThresholdEntry TEXT NOT NULL, voor_reactionTimeEntry INTEGER NOT NULL, voor_responseFactorEntry INTEGER NOT NULL, voor_recoveryTimeEntry INTEGER NOT NULL, "
+                            "aair_lowerRateLimitEntry INTEGER NOT NULL, aair_upperRateLimitEntry INTEGER NOT NULL, aair_atriaAmplitudeEntry REAL NOT NULL, aair_atrialPulseWidthEntry INTEGER NOT NULL, aair_atrialSensitivityEntry REAL NOT NULL, aair_ARPEntry INTEGER NOT NULL, aair_PVARPEntry INTEGER NOT NULL, aair_hysteresisEntry INTEGER NOT NULL, aair_rateSmoothingEntry INTEGER NOT NULL, aair_maximumSensorRateEntry INTEGER NOT NULL, aair_activityThresholdEntry TEXT NOT NULL, aair_reactionTimeEntry INTEGER NOT NULL, aair_responseFactorEntry INTEGER NOT NULL, aair_recoveryTimeEntry INTEGER NOT NULL, "
+                            "vvir_lowerRateLimitEntry INTEGER NOT NULL, vvir_upperRateLimitEntry INTEGER NOT NULL, vvir_ventricularAmplitudeEntry REAL NOT NULL, vvir_ventricularPulseWidthEntry INTEGER NOT NULL, vvir_ventricularSensitivityEntry REAL NOT NULL, vvir_VRPEntry INTEGER NOT NULL, vvir_hysteresisEntry INTEGER NOT NULL, vvir_rateSmoothingEntry INTEGER NOT NULL, vvir_maximumSensorRateEntry INTEGER NOT NULL, vvir_activityThresholdEntry TEXT NOT NULL, vvir_reactionTimeEntry INTEGER NOT NULL, vvir_responseFactorEntry INTEGER NOT NULL, vvir_recoveryTimeEntry INTEGER NOT NULL, "
+                            "door_lowerRateLimitEntry INTEGER NOT NULL, door_upperRateLimitEntry INTEGER NOT NULL, door_atrialAmplitudeEntry REAL NOT NULL, door_atrialPulseWidthEntry INTEGER NOT NULL, door_ventricularAmplitudeEntry REAL NOT NULL, door_ventricularPulseWidthEntry INTEGER NOT NULL, door_maximumSensorRateEntry INTEGER NOT NULL, door_fixedAVDelayEntry INTEGER NOT NULL, door_activityThresholdEntry TEXT NOT NULL, door_reactionTimeEntry INTEGER NOT NULL, door_responseFactorEntry INTEGER NOT NULL, door_recoveryTimeEntry INTEGER NOT NULL)")
                         db.execute("INSERT INTO users VALUES(?, ?, ?)", (username, password, counters))
                         db.execute("INSERT INTO "+counters+" VALUES(?, " #log
                             "?,?,?,?, " #aoo
@@ -264,17 +261,17 @@ class AddUserWindow:
                             "?,?,?,?,?,?,?,?,?,?,?,?,?,?, " #aair
                             "?,?,?,?,?,?,?,?,?,?,?,?,?, " #vvir
                             "?,?,?,?,?,?,?,?,?,?,?,?)", #door
-                            (userlog, 
+                            ("No Mode Set", 
                             60, 120, 3.5, 0.4, #aoo
                             60, 120, 3.5, 0.4, #voo
                             60, 120, 3.5, 0.4, 0.75, 250, 250, 0, 0, #aai
                             60, 120, 3.5, 0.4, 2.5, 320, 0, 0, #vvi
                             60, 120, 3.5, 0.4, 3.5, 0.4 ,150, #doo
-                            60, 120, 3.5, 0.4, 120,4,30,8,5, #aoor
-                            60, 120, 3.5, 0.4, 120,4,30,8,5, #voor
-                            60, 120, 3.5, 0.4, 3.3, 250, 250, 0, 0, 120,4,30,8,5, #aair
-                            60, 120, 3.5, 0.4, 3.3, 320, 0, 0, 120,4,30,8,5, #vvir
-                            60, 120, 3.5, 0.4, 3.5, 0.4 ,150 ,120,4,30,8,5)) #door
+                            60, 120, 3.5, 0.4, 120,"Med",30,8,5, #aoor
+                            60, 120, 3.5, 0.4, 120,"Med",30,8,5, #voor
+                            60, 120, 3.5, 0.4, 3.3, 250, 250, 0, 0, 120,"Med",30,8,5, #aair
+                            60, 120, 3.5, 0.4, 3.3, 320, 0, 0, 120,"Med",30,8,5, #vvir
+                            60, 120, 3.5, 0.4, 3.5, 0.4 ,150 ,120,"Med",30,8,5)) #door
                         messagebox.showinfo("Success", "User Added")
                         self.quitButton.focus()
 
@@ -295,14 +292,14 @@ class AddUserWindow:
 class MainWindow:
     def __init__(self, master):
         #General window setup
-        self.content = tk.Entry()
         self.master = master
-        self.master.geometry('750x570')
+        self.master.geometry('1500x800')
         self.master.protocol("WM_DELETE_WINDOW", self.on_exit)
         self.menubar = tk.Menu(self.master)
         self.filemenu = tk.Menu(self.menubar, tearoff=0)
         self.master.config(menu=self.menubar)
         self.frame = tk.Frame(self.master)
+        self.content = tk.Entry()
 
         # Tabs created for AOO, VOO, AAI, VVI, and DOO
         # Also AOOR, VOOR, AAIR, VVIR, and DOOR 
@@ -820,7 +817,9 @@ class MainWindow:
         self.aoorAtrialAmplitudeEntry = tk.Spinbox(self.aoor,from_=0.0,to=7.0,format="%.1f",increment=0.1)
         self.aoorAtrialPulseWidthEntry = tk.Spinbox(self.aoor,from_=0.05,to=1.9,format="%.2f",increment=0.1)
         self.aoorMaximumSensorRateEntry = tk.Spinbox(self.aoor,from_=50,to=175,increment=5)
-        self.aoorActivityThresholdEntry = tk.Spinbox(self.aoor,from_=1,to=7,increment=1)
+        self.aoorActivityThresholdEntry = ttk.Combobox(self.aoor)
+        self.aoorActivityThresholdEntry['values']= ("V-Low", "Low", "Med-Low", "Med", "Med-High", "High","V-High")
+        self.aoorActivityThresholdEntry.current(3)
         self.aoorReactionTimeEntry = tk.Spinbox(self.aoor,from_=10,to=50,increment=10)
         self.aoorResponseFactorEntry = tk.Spinbox(self.aoor,from_=1,to=16,increment=1)
         self.aoorRecoveryTimeEntry = tk.Spinbox(self.aoor,from_=2,to=16,increment=1)
@@ -868,30 +867,30 @@ class MainWindow:
         self.aoorAtrialPulseWidthButton.grid(row=3, column=2, padx=15, pady=15)
         self.aoorAtrialPulseWidthValue.grid(row=3, column=3, padx=15, pady=15)
         
-        self.aoorMaximumSensorRateLabel.grid(row=4, column=0, padx=15, pady=15)
-        self.aoorMaximumSensorRateEntry.grid(row=4, column=1, padx=15, pady=15)
-        self.aoorMaximumSensorRateButton.grid(row=4, column=2, padx=15, pady=15)
-        self.aoorMaximumSensorRateValue.grid(row=4, column=3, padx=15, pady=15)
+        self.aoorMaximumSensorRateLabel.grid(row=0, column=5, padx=15, pady=15)
+        self.aoorMaximumSensorRateEntry.grid(row=0, column=6, padx=15, pady=15)
+        self.aoorMaximumSensorRateButton.grid(row=0, column=7, padx=15, pady=15)
+        self.aoorMaximumSensorRateValue.grid(row=0, column=8, padx=15, pady=15)
 
-        self.aoorActivityThresholdLabel.grid(row=5, column=0, padx=15, pady=15)
-        self.aoorActivityThresholdEntry.grid(row=5, column=1, padx=15, pady=15)
-        self.aoorActivityThresholdButton.grid(row=5, column=2, padx=15, pady=15)
-        self.aoorActivityThresholdValue.grid(row=5, column=3, padx=15, pady=15)
+        self.aoorActivityThresholdLabel.grid(row=1, column=5, padx=15, pady=15)
+        self.aoorActivityThresholdEntry.grid(row=1, column=6, padx=15, pady=15)
+        self.aoorActivityThresholdButton.grid(row=1, column=7, padx=15, pady=15)
+        self.aoorActivityThresholdValue.grid(row=1, column=8, padx=15, pady=15)
 
-        self.aoorReactionTimeLabel.grid(row=6, column=0, padx=15, pady=15)
-        self.aoorReactionTimeEntry.grid(row=6, column=1, padx=15, pady=15)
-        self.aoorReactionTimeButton.grid(row=6, column=2, padx=15, pady=15)
-        self.aoorReactionTimeValue.grid(row=6, column=3, padx=15, pady=15)
+        self.aoorReactionTimeLabel.grid(row=2, column=5, padx=15, pady=15)
+        self.aoorReactionTimeEntry.grid(row=2, column=6, padx=15, pady=15)
+        self.aoorReactionTimeButton.grid(row=2, column=7, padx=15, pady=15)
+        self.aoorReactionTimeValue.grid(row=2, column=8, padx=15, pady=15)
 
-        self.aoorResponseFactorLabel.grid(row=7, column=0, padx=15, pady=15)
-        self.aoorResponseFactorEntry.grid(row=7, column=1, padx=15, pady=15)
-        self.aoorResponseFactorButton.grid(row=7, column=2, padx=15, pady=15)
-        self.aoorResponseFactorValue.grid(row=7, column=3, padx=15, pady=15)
+        self.aoorResponseFactorLabel.grid(row=3, column=5, padx=15, pady=15)
+        self.aoorResponseFactorEntry.grid(row=3, column=6, padx=15, pady=15)
+        self.aoorResponseFactorButton.grid(row=3, column=7, padx=15, pady=15)
+        self.aoorResponseFactorValue.grid(row=3, column=8, padx=15, pady=15)
 
-        self.aoorRecoveryTimeLabel.grid(row=8, column=0, padx=15, pady=15)
-        self.aoorRecoveryTimeEntry.grid(row=8, column=1, padx=15, pady=15)
-        self.aoorRecoveryTimeButton.grid(row=8, column=2, padx=15, pady=15)
-        self.aoorRecoveryTimeValue.grid(row=8, column=3, padx=15, pady=15)
+        self.aoorRecoveryTimeLabel.grid(row=4, column=5, padx=15, pady=15)
+        self.aoorRecoveryTimeEntry.grid(row=4, column=6, padx=15, pady=15)
+        self.aoorRecoveryTimeButton.grid(row=4, column=7, padx=15, pady=15)
+        self.aoorRecoveryTimeValue.grid(row=4, column=8, padx=15, pady=15)
         #AOOR END-------------------------------------------------------------------------------------------------------------------------------
 
         #VOOR BEGIN----------------------------------------------------------------------------------------------------------------------------- 
@@ -912,7 +911,9 @@ class MainWindow:
         self.voorVentricularAmplitudeEntry = tk.Spinbox(self.voor,from_=0.5,to=7.0,format="%.1f",increment=0.1)
         self.voorVentricularPulseWidthEntry = tk.Spinbox(self.voor,from_=0.05,to=1.9,format="%.2f",increment=0.1)
         self.voorMaximumSensorRateEntry = tk.Spinbox(self.voor,from_=50,to=175,increment=5)
-        self.voorActivityThresholdEntry = tk.Spinbox(self.voor,from_=1,to=7,increment=1)
+        self.voorActivityThresholdEntry = ttk.Combobox(self.voor)
+        self.voorActivityThresholdEntry['values']= ("V-Low", "Low", "Med-Low", "Med", "Med-High", "High","V-High")
+        self.voorActivityThresholdEntry.current(3)
         self.voorReactionTimeEntry = tk.Spinbox(self.voor,from_=10,to=50,increment=10)
         self.voorResponseFactorEntry = tk.Spinbox(self.voor,from_=1,to=16,increment=1)
         self.voorRecoveryTimeEntry = tk.Spinbox(self.voor,from_=2,to=16,increment=1)
@@ -960,30 +961,30 @@ class MainWindow:
         self.voorVentricularPulseWidthButton.grid(row=3, column=2, padx=15, pady=15)
         self.voorVentricularPulseWidthValue.grid(row=3, column=3, padx=15, pady=15)
         
-        self.voorMaximumSensorRateLabel.grid(row=4, column=0, padx=15, pady=15)
-        self.voorMaximumSensorRateEntry.grid(row=4, column=1, padx=15, pady=15)
-        self.voorMaximumSensorRateButton.grid(row=4, column=2, padx=15, pady=15)
-        self.voorMaximumSensorRateValue.grid(row=4, column=3, padx=15, pady=15)
+        self.voorMaximumSensorRateLabel.grid(row=0, column=5, padx=15, pady=15)
+        self.voorMaximumSensorRateEntry.grid(row=0, column=6, padx=15, pady=15)
+        self.voorMaximumSensorRateButton.grid(row=0, column=7, padx=15, pady=15)
+        self.voorMaximumSensorRateValue.grid(row=0, column=8, padx=15, pady=15)
 
-        self.voorActivityThresholdLabel.grid(row=5, column=0, padx=15, pady=15)
-        self.voorActivityThresholdEntry.grid(row=5, column=1, padx=15, pady=15)
-        self.voorActivityThresholdButton.grid(row=5, column=2, padx=15, pady=15)
-        self.voorActivityThresholdValue.grid(row=5, column=3, padx=15, pady=15)
+        self.voorActivityThresholdLabel.grid(row=1, column=5, padx=15, pady=15)
+        self.voorActivityThresholdEntry.grid(row=1, column=6, padx=15, pady=15)
+        self.voorActivityThresholdButton.grid(row=1, column=7, padx=15, pady=15)
+        self.voorActivityThresholdValue.grid(row=1, column=8, padx=15, pady=15)
 
-        self.voorReactionTimeLabel.grid(row=6, column=0, padx=15, pady=15)
-        self.voorReactionTimeEntry.grid(row=6, column=1, padx=15, pady=15)
-        self.voorReactionTimeButton.grid(row=6, column=2, padx=15, pady=15)
-        self.voorReactionTimeValue.grid(row=6, column=3, padx=15, pady=15)
+        self.voorReactionTimeLabel.grid(row=2, column=5, padx=15, pady=15)
+        self.voorReactionTimeEntry.grid(row=2, column=6, padx=15, pady=15)
+        self.voorReactionTimeButton.grid(row=2, column=7, padx=15, pady=15)
+        self.voorReactionTimeValue.grid(row=2, column=8, padx=15, pady=15)
 
-        self.voorResponseFactorLabel.grid(row=7, column=0, padx=15, pady=15)
-        self.voorResponseFactorEntry.grid(row=7, column=1, padx=15, pady=15)
-        self.voorResponseFactorButton.grid(row=7, column=2, padx=15, pady=15)
-        self.voorResponseFactorValue.grid(row=7, column=3, padx=15, pady=15)
+        self.voorResponseFactorLabel.grid(row=3, column=5, padx=15, pady=15)
+        self.voorResponseFactorEntry.grid(row=3, column=6, padx=15, pady=15)
+        self.voorResponseFactorButton.grid(row=3, column=7, padx=15, pady=15)
+        self.voorResponseFactorValue.grid(row=3, column=8, padx=15, pady=15)
 
-        self.voorRecoveryTimeLabel.grid(row=8, column=0, padx=15, pady=15)
-        self.voorRecoveryTimeEntry.grid(row=8, column=1, padx=15, pady=15)
-        self.voorRecoveryTimeButton.grid(row=8, column=2, padx=15, pady=15)
-        self.voorRecoveryTimeValue.grid(row=8, column=3, padx=15, pady=15)
+        self.voorRecoveryTimeLabel.grid(row=4, column=5, padx=15, pady=15)
+        self.voorRecoveryTimeEntry.grid(row=4, column=6, padx=15, pady=15)
+        self.voorRecoveryTimeButton.grid(row=4, column=7, padx=15, pady=15)
+        self.voorRecoveryTimeValue.grid(row=4, column=8, padx=15, pady=15)
         #VOOR END------------------------------------------------------------------------------------------------------------------------------
 
         #AAIR BEGIN----------------------------------------------------------------------------------------------------------------------------
@@ -1014,7 +1015,9 @@ class MainWindow:
         self.aairHysteresisEntry = tk.Spinbox(self.aair,from_=0,to=25,increment=5)
         self.aairRateSmoothingEntry = tk.Spinbox(self.aair,from_=0,to=25,increment=3)
         self.aairMaximumSensorRateEntry = tk.Spinbox(self.aair,from_=50,to=175,increment=5)
-        self.aairActivityThresholdEntry = tk.Spinbox(self.aair,from_=1,to=7,increment=1)
+        self.aairActivityThresholdEntry = ttk.Combobox(self.aair)
+        self.aairActivityThresholdEntry['values']= ("V-Low", "Low", "Med-Low", "Med", "Med-High", "High","V-High")
+        self.aairActivityThresholdEntry.current(3)
         self.aairReactionTimeEntry = tk.Spinbox(self.aair,from_=10,to=50,increment=10)
         self.aairResponseFactorEntry = tk.Spinbox(self.aair,from_=1,to=16,increment=1)
         self.aairRecoveryTimeEntry = tk.Spinbox(self.aair,from_=2,to=16,increment=1)
@@ -1097,30 +1100,30 @@ class MainWindow:
         self.aairRateSmoothingButton.grid(row=8, column=2, padx=15, pady=15)
         self.aairRateSmoothingValue.grid(row=8, column=3, padx=15, pady=15)
 
-        self.aairMaximumSensorRateLabel.grid(row=9, column=0, padx=15, pady=15)
-        self.aairMaximumSensorRateEntry.grid(row=9, column=1, padx=15, pady=15)
-        self.aairMaximumSensorRateButton.grid(row=9, column=2, padx=15, pady=15)
-        self.aairMaximumSensorRateValue.grid(row=9, column=3, padx=15, pady=15)
+        self.aairMaximumSensorRateLabel.grid(row=0, column=5, padx=15, pady=15)
+        self.aairMaximumSensorRateEntry.grid(row=0, column=6, padx=15, pady=15)
+        self.aairMaximumSensorRateButton.grid(row=0, column=7, padx=15, pady=15)
+        self.aairMaximumSensorRateValue.grid(row=0, column=8, padx=15, pady=15)
 
-        self.aairActivityThresholdLabel.grid(row=10, column=0, padx=15, pady=15)
-        self.aairActivityThresholdEntry.grid(row=10, column=1, padx=15, pady=15)
-        self.aairActivityThresholdButton.grid(row=10, column=2, padx=15, pady=15)
-        self.aairActivityThresholdValue.grid(row=10, column=3, padx=15, pady=15)
+        self.aairActivityThresholdLabel.grid(row=1, column=5, padx=15, pady=15)
+        self.aairActivityThresholdEntry.grid(row=1, column=6, padx=15, pady=15)
+        self.aairActivityThresholdButton.grid(row=1, column=7, padx=15, pady=15)
+        self.aairActivityThresholdValue.grid(row=1, column=8, padx=15, pady=15)
 
-        self.aairReactionTimeLabel.grid(row=11, column=0, padx=15, pady=15)
-        self.aairReactionTimeEntry.grid(row=11, column=1, padx=15, pady=15)
-        self.aairReactionTimeButton.grid(row=11, column=2, padx=15, pady=15)
-        self.aairReactionTimeValue.grid(row=11, column=3, padx=15, pady=15)
+        self.aairReactionTimeLabel.grid(row=2, column=5, padx=15, pady=15)
+        self.aairReactionTimeEntry.grid(row=2, column=6, padx=15, pady=15)
+        self.aairReactionTimeButton.grid(row=2, column=7, padx=15, pady=15)
+        self.aairReactionTimeValue.grid(row=2, column=8, padx=15, pady=15)
 
-        self.aairResponseFactorLabel.grid(row=12, column=0, padx=15, pady=15)
-        self.aairResponseFactorEntry.grid(row=12, column=1, padx=15, pady=15)
-        self.aairResponseFactorButton.grid(row=12, column=2, padx=15, pady=15)
-        self.aairResponseFactorValue.grid(row=12, column=3, padx=15, pady=15)
+        self.aairResponseFactorLabel.grid(row=3, column=5, padx=15, pady=15)
+        self.aairResponseFactorEntry.grid(row=3, column=6, padx=15, pady=15)
+        self.aairResponseFactorButton.grid(row=3, column=7, padx=15, pady=15)
+        self.aairResponseFactorValue.grid(row=3, column=8, padx=15, pady=15)
 
-        self.aairRecoveryTimeLabel.grid(row=13, column=0, padx=15, pady=15)
-        self.aairRecoveryTimeEntry.grid(row=13, column=1, padx=15, pady=15)
-        self.aairRecoveryTimeButton.grid(row=13, column=2, padx=15, pady=15)
-        self.aairRecoveryTimeValue.grid(row=13, column=3, padx=15, pady=15)
+        self.aairRecoveryTimeLabel.grid(row=4, column=5, padx=15, pady=15)
+        self.aairRecoveryTimeEntry.grid(row=4, column=6, padx=15, pady=15)
+        self.aairRecoveryTimeButton.grid(row=4, column=7, padx=15, pady=15)
+        self.aairRecoveryTimeValue.grid(row=4, column=8, padx=15, pady=15)
         #AAIR END------------------------------------------------------------------------------------------------------------------------------
 
         #VVIR BEGIN----------------------------------------------------------------------------------------------------------------------------
@@ -1149,7 +1152,9 @@ class MainWindow:
         self.vvirHysteresisEntry = tk.Spinbox(self.vvir,from_=0,to=25,increment=5)
         self.vvirRateSmoothingEntry = tk.Spinbox(self.vvir,from_=0,to=25,increment=3)
         self.vvirMaximumSensorRateEntry = tk.Spinbox(self.vvir,from_=50,to=175,increment=5)
-        self.vvirActivityThresholdEntry = tk.Spinbox(self.vvir,from_=1,to=7,increment=1)
+        self.vvirActivityThresholdEntry = ttk.Combobox(self.vvir)
+        self.vvirActivityThresholdEntry['values']= ("V-Low", "Low", "Med-Low", "Med", "Med-High", "High","V-High")
+        self.vvirActivityThresholdEntry.current(3)
         self.vvirReactionTimeEntry = tk.Spinbox(self.vvir,from_=10,to=50,increment=10)
         self.vvirResponseFactorEntry = tk.Spinbox(self.vvir,from_=1,to=16,increment=1)
         self.vvirRecoveryTimeEntry = tk.Spinbox(self.vvir,from_=2,to=16,increment=1)
@@ -1225,30 +1230,30 @@ class MainWindow:
         self.vvirRateSmoothingButton.grid(row=7, column=2, padx=15, pady=15)
         self.vvirRateSmoothingValue.grid(row=7, column=3, padx=15, pady=15)
 
-        self.vvirMaximumSensorRateLabel.grid(row=8, column=0, padx=15, pady=15)
-        self.vvirMaximumSensorRateEntry.grid(row=8, column=1, padx=15, pady=15)
-        self.vvirMaximumSensorRateButton.grid(row=8, column=2, padx=15, pady=15)
-        self.vvirMaximumSensorRateValue.grid(row=8, column=3, padx=15, pady=15)
+        self.vvirMaximumSensorRateLabel.grid(row=0, column=5, padx=15, pady=15)
+        self.vvirMaximumSensorRateEntry.grid(row=0, column=6, padx=15, pady=15)
+        self.vvirMaximumSensorRateButton.grid(row=0, column=7, padx=15, pady=15)
+        self.vvirMaximumSensorRateValue.grid(row=0, column=8, padx=15, pady=15)
 
-        self.vvirActivityThresholdLabel.grid(row=9, column=0, padx=15, pady=15)
-        self.vvirActivityThresholdEntry.grid(row=9, column=1, padx=15, pady=15)
-        self.vvirActivityThresholdButton.grid(row=9, column=2, padx=15, pady=15)
-        self.vvirActivityThresholdValue.grid(row=9, column=3, padx=15, pady=15)
+        self.vvirActivityThresholdLabel.grid(row=1, column=5, padx=15, pady=15)
+        self.vvirActivityThresholdEntry.grid(row=1, column=6, padx=15, pady=15)
+        self.vvirActivityThresholdButton.grid(row=1, column=7, padx=15, pady=15)
+        self.vvirActivityThresholdValue.grid(row=1, column=8, padx=15, pady=15)
 
-        self.vvirReactionTimeLabel.grid(row=10, column=0, padx=15, pady=15)
-        self.vvirReactionTimeEntry.grid(row=10, column=1, padx=15, pady=15)
-        self.vvirReactionTimeButton.grid(row=10, column=2, padx=15, pady=15)
-        self.vvirReactionTimeValue.grid(row=10, column=3, padx=15, pady=15)
+        self.vvirReactionTimeLabel.grid(row=2, column=5, padx=15, pady=15)
+        self.vvirReactionTimeEntry.grid(row=2, column=6, padx=15, pady=15)
+        self.vvirReactionTimeButton.grid(row=2, column=7, padx=15, pady=15)
+        self.vvirReactionTimeValue.grid(row=2, column=8, padx=15, pady=15)
 
-        self.vvirResponseFactorLabel.grid(row=11, column=0, padx=15, pady=15)
-        self.vvirResponseFactorEntry.grid(row=11, column=1, padx=15, pady=15)
-        self.vvirResponseFactorButton.grid(row=11, column=2, padx=15, pady=15)
-        self.vvirResponseFactorValue.grid(row=11, column=3, padx=15, pady=15)
+        self.vvirResponseFactorLabel.grid(row=3, column=5, padx=15, pady=15)
+        self.vvirResponseFactorEntry.grid(row=3, column=6, padx=15, pady=15)
+        self.vvirResponseFactorButton.grid(row=3, column=7, padx=15, pady=15)
+        self.vvirResponseFactorValue.grid(row=3, column=8, padx=15, pady=15)
 
-        self.vvirRecoveryTimeLabel.grid(row=12, column=0, padx=15, pady=15)
-        self.vvirRecoveryTimeEntry.grid(row=12, column=1, padx=15, pady=15)
-        self.vvirRecoveryTimeButton.grid(row=12, column=2, padx=15, pady=15)
-        self.vvirRecoveryTimeValue.grid(row=12, column=3, padx=15, pady=15)
+        self.vvirRecoveryTimeLabel.grid(row=4, column=5, padx=15, pady=15)
+        self.vvirRecoveryTimeEntry.grid(row=4, column=6, padx=15, pady=15)
+        self.vvirRecoveryTimeButton.grid(row=4, column=7, padx=15, pady=15)
+        self.vvirRecoveryTimeValue.grid(row=4, column=8, padx=15, pady=15)
         #VVIR END------------------------------------------------------------------------------------------------------------------------------
 
         #DOOR BEGIN----------------------------------------------------------------------------------------------------------------------------
@@ -1275,7 +1280,9 @@ class MainWindow:
         self.doorVentricularPulseWidthEntry = tk.Spinbox(self.door,from_=0.05,to=1.9,format="%.2f",increment=0.1)
         self.doorFixedAVDelayEntry = tk.Spinbox(self.door,from_=70,to=300,increment=10)
         self.doorMaximumSensorRateEntry = tk.Spinbox(self.door,from_=50,to=175,increment=5)
-        self.doorActivityThresholdEntry = tk.Spinbox(self.door,from_=1,to=7,increment=1)
+        self.doorActivityThresholdEntry = ttk.Combobox(self.door)
+        self.doorActivityThresholdEntry['values']= ("V-Low", "Low", "Med-Low", "Med", "Med-High", "High","V-High")
+        self.doorActivityThresholdEntry.current(3)
         self.doorReactionTimeEntry = tk.Spinbox(self.door,from_=10,to=50,increment=10)
         self.doorResponseFactorEntry = tk.Spinbox(self.door,from_=1,to=16,increment=1)
         self.doorRecoveryTimeEntry = tk.Spinbox(self.door,from_=2,to=16,increment=1)
@@ -1344,122 +1351,123 @@ class MainWindow:
         self.doorFixedAVDelayButton.grid(row=6, column=2, padx=15, pady=15)
         self.doorFixedAVDelayValue.grid(row=6, column=3, padx=15, pady=15)
 
-        self.doorMaximumSensorRateLabel.grid(row=7, column=0, padx=15, pady=15)
-        self.doorMaximumSensorRateEntry.grid(row=7, column=1, padx=15, pady=15)
-        self.doorMaximumSensorRateButton.grid(row=7, column=2, padx=15, pady=15)
-        self.doorMaximumSensorRateValue.grid(row=7, column=3, padx=15, pady=15)
+        self.doorMaximumSensorRateLabel.grid(row=0, column=5, padx=15, pady=15)
+        self.doorMaximumSensorRateEntry.grid(row=0, column=6, padx=15, pady=15)
+        self.doorMaximumSensorRateButton.grid(row=0, column=7, padx=15, pady=15)
+        self.doorMaximumSensorRateValue.grid(row=0, column=8, padx=15, pady=15)
 
-        self.doorActivityThresholdLabel.grid(row=8, column=0, padx=15, pady=15)
-        self.doorActivityThresholdEntry.grid(row=8, column=1, padx=15, pady=15)
-        self.doorActivityThresholdButton.grid(row=8, column=2, padx=15, pady=15)
-        self.doorActivityThresholdValue.grid(row=8, column=3, padx=15, pady=15)
+        self.doorActivityThresholdLabel.grid(row=1, column=5, padx=15, pady=15)
+        self.doorActivityThresholdEntry.grid(row=1, column=6, padx=15, pady=15)
+        self.doorActivityThresholdButton.grid(row=1, column=7, padx=15, pady=15)
+        self.doorActivityThresholdValue.grid(row=1, column=8, padx=15, pady=15)
 
-        self.doorReactionTimeLabel.grid(row=9, column=0, padx=15, pady=15)
-        self.doorReactionTimeEntry.grid(row=9, column=1, padx=15, pady=15)
-        self.doorReactionTimeButton.grid(row=9, column=2, padx=15, pady=15)
-        self.doorReactionTimeValue.grid(row=9, column=3, padx=15, pady=15)
+        self.doorReactionTimeLabel.grid(row=2, column=5, padx=15, pady=15)
+        self.doorReactionTimeEntry.grid(row=2, column=6, padx=15, pady=15)
+        self.doorReactionTimeButton.grid(row=2, column=7, padx=15, pady=15)
+        self.doorReactionTimeValue.grid(row=2, column=8, padx=15, pady=15)
 
-        self.doorResponseFactorLabel.grid(row=10, column=0, padx=15, pady=15)
-        self.doorResponseFactorEntry.grid(row=10, column=1, padx=15, pady=15)
-        self.doorResponseFactorButton.grid(row=10, column=2, padx=15, pady=15)
-        self.doorResponseFactorValue.grid(row=10, column=3, padx=15, pady=15)
+        self.doorResponseFactorLabel.grid(row=3, column=5, padx=15, pady=15)
+        self.doorResponseFactorEntry.grid(row=3, column=6, padx=15, pady=15)
+        self.doorResponseFactorButton.grid(row=3, column=7, padx=15, pady=15)
+        self.doorResponseFactorValue.grid(row=3, column=8, padx=15, pady=15)
 
-        self.doorRecoveryTimeLabel.grid(row=11, column=0, padx=15, pady=15)
-        self.doorRecoveryTimeEntry.grid(row=11, column=1, padx=15, pady=15)
-        self.doorRecoveryTimeButton.grid(row=11, column=2, padx=15, pady=15)
-        self.doorRecoveryTimeValue.grid(row=11, column=3, padx=15, pady=15)
+        self.doorRecoveryTimeLabel.grid(row=4, column=5, padx=15, pady=15)
+        self.doorRecoveryTimeEntry.grid(row=4, column=6, padx=15, pady=15)
+        self.doorRecoveryTimeButton.grid(row=4, column=7, padx=15, pady=15)
+        self.doorRecoveryTimeValue.grid(row=4, column=8, padx=15, pady=15)
         #DOOR END------------------------------------------------------------------------------------------------------------------------------
-
-        
 
         #Track the process
         self.aooLogTitle = tk.Label(self.aoo, text = "Current Mode")
-        self.aooLogTitle.grid(row=0, column=4, padx=15, pady=15)
         self.aooLog = tk.Label(self.aoo, text = userlog)
-        self.aooLog.grid(row=1, column=4, padx=15, pady=15)
         self.vooLogTitle = tk.Label(self.voo, text = "Current Mode")
-        self.vooLogTitle.grid(row=0, column=4, padx=15, pady=15)
         self.vooLog = tk.Label(self.voo, text = userlog)
-        self.vooLog.grid(row=1, column=4, padx=15, pady=15)
         self.aaiLogTitle = tk.Label(self.aai, text = "Current Mode")
-        self.aaiLogTitle.grid(row=0, column=4, padx=15, pady=15)
         self.aaiLog = tk.Label(self.aai, text = userlog)
-        self.aaiLog.grid(row=1, column=4, padx=15, pady=15)
         self.vviLogTitle = tk.Label(self.vvi, text = "Current Mode")
-        self.vviLogTitle.grid(row=0, column=4, padx=15, pady=15)
         self.vviLog = tk.Label(self.vvi, text = userlog)
-        self.vviLog.grid(row=1, column=4, padx=15, pady=15)
         self.dooLogTitle = tk.Label(self.doo, text = "Current Mode")
-        self.dooLogTitle.grid(row=0, column=4, padx=15, pady=15)
         self.dooLog = tk.Label(self.doo, text = userlog)
-        self.dooLog.grid(row=1, column=4, padx=15, pady=15)
-
         self.aoorLogTitle = tk.Label(self.aoor, text = "Current Mode")
-        self.aoorLogTitle.grid(row=0, column=4, padx=15, pady=15)
         self.aoorLog = tk.Label(self.aoor, text = userlog)
-        self.aoorLog.grid(row=1, column=4, padx=15, pady=15)
         self.voorLogTitle = tk.Label(self.voor, text = "Current Mode")
-        self.voorLogTitle.grid(row=0, column=4, padx=15, pady=15)
         self.voorLog = tk.Label(self.voor, text = userlog)
-        self.voorLog.grid(row=1, column=4, padx=15, pady=15)
         self.aairLogTitle = tk.Label(self.aair, text = "Current Mode")
-        self.aairLogTitle.grid(row=0, column=4, padx=15, pady=15)
         self.aairLog = tk.Label(self.aair, text = userlog)
-        self.aairLog.grid(row=1, column=4, padx=15, pady=15)
         self.vvirLogTitle = tk.Label(self.vvir, text = "Current Mode")
-        self.vvirLogTitle.grid(row=0, column=4, padx=15, pady=15)
         self.vvirLog = tk.Label(self.vvir, text = userlog)
-        self.vvirLog.grid(row=1, column=4, padx=15, pady=15)
         self.doorLogTitle = tk.Label(self.door, text = "Current Mode")
-        self.doorLogTitle.grid(row=0, column=4, padx=15, pady=15)
         self.doorLog = tk.Label(self.door, text = userlog)
-        self.doorLog.grid(row=1, column=4, padx=15, pady=15)
 
         #Setup confirm buttons
         self.aooConfirmButton = tk.Button(self.aoo, text = 'Confirm', width = 20, command = lambda: self.confirmChanges("aooConfirm"))
-        self.aooConfirmButton.grid(row=2, column=4)
         self.vooConfirmButton = tk.Button(self.voo, text = 'Confirm', width = 20, command = lambda: self.confirmChanges("vooConfirm"))
-        self.vooConfirmButton.grid(row=2, column=4)
         self.aaiConfirmButton = tk.Button(self.aai, text = 'Confirm', width = 20, command = lambda: self.confirmChanges("aaiConfirm"))
-        self.aaiConfirmButton.grid(row=2, column=4)
         self.vviConfirmButton = tk.Button(self.vvi, text = 'Confirm', width = 20, command = lambda: self.confirmChanges("vviConfirm"))
-        self.vviConfirmButton.grid(row=2, column=4)
         self.dooConfirmButton = tk.Button(self.doo, text = 'Confirm', width = 20, command = lambda: self.confirmChanges("dooConfirm"))
-        self.dooConfirmButton.grid(row=2, column=4)
-        
         self.aoorConfirmButton = tk.Button(self.aoor, text = 'Confirm', width = 20, command = lambda: self.confirmChanges("aoorConfirm"))
-        self.aoorConfirmButton.grid(row=2, column=4)
         self.voorConfirmButton = tk.Button(self.voor, text = 'Confirm', width = 20, command = lambda: self.confirmChanges("voorConfirm"))
-        self.voorConfirmButton.grid(row=2, column=4)
         self.aairConfirmButton = tk.Button(self.aair, text = 'Confirm', width = 20, command = lambda: self.confirmChanges("aairConfirm"))
-        self.aairConfirmButton.grid(row=2, column=4)
         self.vvirConfirmButton = tk.Button(self.vvir, text = 'Confirm', width = 20, command = lambda: self.confirmChanges("vvirConfirm"))
-        self.vvirConfirmButton.grid(row=2, column=4)
         self.doorConfirmButton = tk.Button(self.door, text = 'Confirm', width = 20, command = lambda: self.confirmChanges("doorConfirm"))
-        self.doorConfirmButton.grid(row=2, column=4)
-
-        #Setup logoff button
-        self.aooQuitButton = tk.Button(self.aoo, text = 'LogOff', width = 12, command = self.logOff)
-        self.aooQuitButton.grid(row=3,column=4,pady=5)
-        self.vooQuitButton = tk.Button(self.voo, text = 'LogOff', width = 12, command = self.logOff)
-        self.vooQuitButton.grid(row=3,column=4,pady=5)
-        self.aaiQuitButton = tk.Button(self.aai, text = 'LogOff', width = 12, command = self.logOff)
-        self.aaiQuitButton.grid(row=3,column=4,pady=5)
-        self.vviQuitButton = tk.Button(self.vvi, text = 'LogOff', width = 12, command = self.logOff)
-        self.vviQuitButton.grid(row=3,column=4,pady=5)
-        self.dooQuitButton = tk.Button(self.doo, text = 'LogOff', width = 12, command = self.logOff)
-        self.dooQuitButton.grid(row=3,column=4,pady=5)
         
-        self.aoorQuitButton = tk.Button(self.aoor, text = 'LogOff', width = 12, command = self.logOff)
-        self.aoorQuitButton.grid(row=3,column=4,pady=5)
-        self.voorQuitButton = tk.Button(self.voor, text = 'LogOff', width = 12, command = self.logOff)
-        self.voorQuitButton.grid(row=3,column=4,pady=5)
-        self.aairQuitButton = tk.Button(self.aair, text = 'LogOff', width = 12, command = self.logOff)
-        self.aairQuitButton.grid(row=3,column=4,pady=5)
-        self.vvirQuitButton = tk.Button(self.vvir, text = 'LogOff', width = 12, command = self.logOff)
-        self.vvirQuitButton.grid(row=3,column=4,pady=5)
-        self.doorQuitButton = tk.Button(self.door, text = 'LogOff', width = 12, command = self.logOff)
-        self.doorQuitButton.grid(row=3,column=4,pady=5)
+        #Setup logoff button
+        self.aooLogoffButton = tk.Button(self.aoo, text = 'LogOff', width = 12, command = self.logOff)
+        self.vooLogoffButton = tk.Button(self.voo, text = 'LogOff', width = 12, command = self.logOff)
+        self.aaiLogoffButton = tk.Button(self.aai, text = 'LogOff', width = 12, command = self.logOff)
+        self.vviLogoffButton = tk.Button(self.vvi, text = 'LogOff', width = 12, command = self.logOff)
+        self.dooLogoffButton = tk.Button(self.doo, text = 'LogOff', width = 12, command = self.logOff)
+        self.aoorLogoffButton = tk.Button(self.aoor, text = 'LogOff', width = 12, command = self.logOff)
+        self.voorLogoffButton = tk.Button(self.voor, text = 'LogOff', width = 12, command = self.logOff)
+        self.aairLogoffButton = tk.Button(self.aair, text = 'LogOff', width = 12, command = self.logOff)
+        self.vvirLogoffButton = tk.Button(self.vvir, text = 'LogOff', width = 12, command = self.logOff)
+        self.doorLogoffButton = tk.Button(self.door, text = 'LogOff', width = 12, command = self.logOff)
+        
+        #Adjust positioning
+        self.aooLogTitle.grid(row=8, column=4, padx=15, pady=15)
+        self.vooLogTitle.grid(row=8, column=4, padx=15, pady=15)
+        self.aaiLogTitle.grid(row=8, column=4, padx=15, pady=15)
+        self.vviLogTitle.grid(row=8, column=4, padx=15, pady=15)
+        self.dooLogTitle.grid(row=8, column=4, padx=15, pady=15)
+        self.aoorLogTitle.grid(row=8, column=4, padx=15, pady=15)
+        self.voorLogTitle.grid(row=8, column=4, padx=15, pady=15)
+        self.aairLogTitle.grid(row=8, column=4, padx=15, pady=15)
+        self.vvirLogTitle.grid(row=8, column=4, padx=15, pady=15)
+        self.doorLogTitle.grid(row=8, column=4, padx=15, pady=15)
+
+        self.aooLog.grid(row=9, column=4, padx=15, pady=15)
+        self.vooLog.grid(row=9, column=4, padx=15, pady=15)
+        self.aaiLog.grid(row=9, column=4, padx=15, pady=15)
+        self.vviLog.grid(row=9, column=4, padx=15, pady=15)
+        self.dooLog.grid(row=9, column=4, padx=15, pady=15)
+        self.aoorLog.grid(row=9, column=4, padx=15, pady=15)
+        self.voorLog.grid(row=9, column=4, padx=15, pady=15)
+        self.aairLog.grid(row=9, column=4, padx=15, pady=15)       
+        self.vvirLog.grid(row=9, column=4, padx=15, pady=15)
+        self.doorLog.grid(row=9, column=4, padx=15, pady=15)
+
+        self.aooConfirmButton.grid(row=10, column=4)
+        self.vooConfirmButton.grid(row=10, column=4)
+        self.aaiConfirmButton.grid(row=10, column=4)
+        self.vviConfirmButton.grid(row=10, column=4)
+        self.dooConfirmButton.grid(row=10, column=4)
+        self.aoorConfirmButton.grid(row=10, column=4)
+        self.voorConfirmButton.grid(row=10, column=4)
+        self.aairConfirmButton.grid(row=10, column=4)
+        self.vvirConfirmButton.grid(row=10, column=4)
+        self.doorConfirmButton.grid(row=10, column=4)
+
+        self.aooLogoffButton.grid(row=11,column=4,pady=5)
+        self.vooLogoffButton.grid(row=11,column=4,pady=5)
+        self.aaiLogoffButton.grid(row=11,column=4,pady=5)
+        self.vviLogoffButton.grid(row=11,column=4,pady=5)
+        self.dooLogoffButton.grid(row=11,column=4,pady=5)
+        self.aoorLogoffButton.grid(row=11,column=4,pady=5)
+        self.voorLogoffButton.grid(row=11,column=4,pady=5)
+        self.aairLogoffButton.grid(row=11,column=4,pady=5)
+        self.vvirLogoffButton.grid(row=11,column=4,pady=5)
+        self.doorLogoffButton.grid(row=11,column=4,pady=5)
+        
 
     #Confirm changes method
     def confirmChanges(self,value):
@@ -1637,7 +1645,7 @@ class MainWindow:
         #VVI
         global vvi_lowerRateLimitEntry,vvi_upperRateLimitEntry,vvi_ventricularAmplitudeEntry,vvi_ventricularPulseWidthEntry,vvi_ventricularSensitivityEntry,vvi_VRPEntry,vvi_hysteresisEntry,vvi_rateSmoothingEntry
         #DOO
-        global doo_lowerRateLimitEntry, doo_upperRateLimitEntry, doo_atrialAmplitudeEntry, doo_atrialPulseWidthEntry, doo_ventricularAmplitudeEntry, doo_ventricularPulseWidthEntry, doo_fixedAVDelayEntry
+        global doo_lowerRateLimitEntry,doo_upperRateLimitEntry,doo_atrialAmplitudeEntry,doo_atrialPulseWidthEntry,doo_ventricularAmplitudeEntry,doo_ventricularPulseWidthEntry,doo_fixedAVDelayEntry
 
         #AOOR
         global aoor_lowerRateLimitEntry, aoor_upperRateLimitEntry, aoor_atrialAmplitudeEntry, aoor_atrialPulseWidthEntry, aoor_maximumSensorRateEntry, aoor_activityThresholdEntry, aoor_reactionTimeEntry, aoor_responseFactorEntry, aoor_recoveryTimeEntry
@@ -2390,7 +2398,210 @@ class MainWindow:
         #VVI END-------------------------------------------------------------------------------------------------------------------------------
 
         #DOO BEGIN-----------------------------------------------------------------------------------------------------------------------------
+        #dooLowerRateLimit
+        if(value == "dooLowerRateLimit"):
+            temp = self.dooLowerRateLimitEntry.get()
+            #Try/access to sanitize user input and ask for confirmation if there are no errors
+            try:
+                int(temp)
+                if (temp == '' or int(temp)<0):
+                    messagebox.showinfo("Error","Please enter a valid value")
+                    pass
+
+                #Ensure upper limit is larger than lower limit
+                elif(int(self.dooLowerRateLimitEntry.get()) >= int(doo_upperRateLimitEntry) and int(doo_upperRateLimitEntry) != 0 ):
+                    messagebox.showinfo("Error","Please ensure your lower rate limit is lower than your upper rate limit")
+                    pass
+
+                #Ensure value is in limited range
+                elif(int(temp) < 30 or int(temp) > 175):
+                    messagebox.showinfo("Error","The range is between 30 and 175")
+                    pass
+
+                #If everything is good update current value
+                else:
+                    if messagebox.askyesno("Confirmation", "Replace current value?"):
+                        messagebox.showinfo("Done", "Success")
+                        doo_lowerRateLimitEntry = temp
+                        self.dooLowerRateLimitValue.config(text="Current Value: " + doo_lowerRateLimitEntry)
+                        db.execute("UPDATE "+currentuser+" SET doo_lowerRateLimitEntry = ?", (doo_lowerRateLimitEntry,))
+                        db.commit()
+
+            except:
+                messagebox.showinfo("Error","Please enter a valid value")
+                pass
+
+        #dooUpperRateLimit
+        if(value == "dooUpperRateLimit"):
+            temp = self.dooUpperRateLimitEntry.get()
+            #Try/access to sanitize user input and ask for confirmation if there are no errors
+            try:
+                int(temp)
+                if (temp == '' or int(temp)<0):
+                    messagebox.showinfo("Error","Please enter a valid value")
+                    pass
+
+                #Ensure upper limit is larger than lower limit
+                elif(int(doo_lowerRateLimitEntry) >= int(self.dooUpperRateLimitEntry.get()) and int(doo_lowerRateLimitEntry) != 0 ):
+                    messagebox.showinfo("Error","Please ensure your upper rate limit is higher than your lower rate limit")
+                    pass
+
+                #Ensure value is in limited range
+                elif(int(temp) < 50 or int(temp) > 175):
+                    messagebox.showinfo("Error","The range is between 50 and 175")
+                    pass
+
+                #If everything is good update current value
+                else:
+                    if messagebox.askyesno("Confirmation", "Replace current value?"):
+                        messagebox.showinfo("Done", "Success")
+                        doo_upperRateLimitEntry = temp
+                        self.dooUpperRateLimitValue.config(text="Current Value: " + doo_upperRateLimitEntry)
+                        db.execute("UPDATE "+currentuser+" SET doo_upperRateLimitEntry = ?", (doo_upperRateLimitEntry,))
+                        db.commit()
+
+            except:
+                messagebox.showinfo("Error","Please enter a valid value")
+                pass
+
+        #dooAtrialAmplitude
+        if(value == "dooAtrialAmplitude"):
+            temp = self.dooAtrialAmplitudeEntry.get()
+            #Try/access to sanitize user input and ask for confirmation if there are no errors
+            try:
+                float(temp)
+                if (temp == '' or float(temp)<0):
+                    messagebox.showinfo("Error","Please enter a valid value")
+                    pass
+                #Ensure value is in limited range
+                elif(float(temp) < 0 or float(temp) > 7.0):
+                    messagebox.showinfo("Error","The range is between 0(off) and 7.0")
+                    pass
+
+                #If everything is good update current value
+                else:
+                    if messagebox.askyesno("Confirmation", "Replace current value?"):
+                        messagebox.showinfo("Done", "Success")
+                        doo_atrialAmplitudeEntry = temp
+                        self.dooAtrialAmplitudeValue.config(text="Current Value: " + doo_atrialAmplitudeEntry)
+                        db.execute("UPDATE "+currentuser+" SET doo_atrialAmplitudeEntry = ?", (doo_atrialAmplitudeEntry,))
+                        db.commit()
+
+            except:
+                messagebox.showinfo("Error","Please enter a valid value")
+                pass
+
+        #dooAtrialPulseWidth
+        if(value == "dooAtrialPulseWidth"):
+            temp = self.dooAtrialPulseWidthEntry.get()
+            #Try/access to sanitize user input and ask for confirmation if there are no errors
+            try:
+                float(temp)
+                if (temp == '' or float(temp)<0):
+                    messagebox.showinfo("Error","Please enter a valid value")
+                    pass
+
+                #Ensure value is in limited range
+                elif(float(temp) < 0.05 or float(temp) > 1.9):
+                    messagebox.showinfo("Error","The range is between 0.05 and 1.9")
+                    pass
+
+                #If everything is good update current value
+                else:
+                    if messagebox.askyesno("Confirmation", "Replace current value?"):
+                        messagebox.showinfo("Done", "Success")
+                        doo_atrialPulseWidthEntry = temp
+                        self.dooAtrialPulseWidthValue.config(text="Current Value: " + doo_atrialPulseWidthEntry)
+                        db.execute("UPDATE "+currentuser+" SET doo_atrialPulseWidthEntry = ?", (doo_atrialPulseWidthEntry,))
+                        db.commit()
+
+            except:
+                messagebox.showinfo("Error","Please enter a valid value")
+                pass
         
+        #dooVentricularAmplitude
+        if(value == "dooVentricularAmplitude"):
+            temp = self.dooVentricularAmplitudeEntry.get()
+            #Try/access to sanitize user input and ask for confirmation if there are no errors
+            try:
+                float(temp)
+                if (temp == '' or float(temp)<0):
+                    messagebox.showinfo("Error","Please enter a valid value")
+                    pass
+
+                #Ensure value is in limited range
+                elif(float(temp) < 0 or float(temp) > 7.0):
+                    messagebox.showinfo("Error","The range is between 0(off) and 7.0")
+                    pass
+
+                #If everything is good update current value
+                else:
+                    if messagebox.askyesno("Confirmation", "Replace current value?"):
+                        messagebox.showinfo("Done", "Success")
+                        doo_ventricularAmplitudeEntry = temp
+                        self.dooVentricularAmplitudeValue.config(text="Current Value: " + doo_ventricularAmplitudeEntry)
+                        db.execute("UPDATE "+currentuser+" SET doo_ventricularAmplitudeEntry = ?", (doo_ventricularAmplitudeEntry,))
+                        db.commit()
+
+            except:
+                messagebox.showinfo("Error","Please enter a valid value")
+                pass
+
+        #dooVentricularPulseWidth
+        if(value == "dooVentricularPulseWidth"):
+            temp = self.dooVentricularPulseWidthEntry.get()
+            #Try/access to sanitize user input and ask for confirmation if there are no errors
+            try:
+                float(temp)
+                if (temp == '' or float(temp)<0):
+                    messagebox.showinfo("Error","Please enter a valid value")
+                    pass
+
+                #Ensure value is in limited range
+                elif(float(temp) < 0.05 or float(temp) > 1.9):
+                    messagebox.showinfo("Error","The range is between 0.05 and 1.9")
+                    pass
+
+                #If everything is good update current value
+                else:
+                    if messagebox.askyesno("Confirmation", "Replace current value?"):
+                        messagebox.showinfo("Done", "Success")
+                        doo_ventricularPulseWidthEntry = temp
+                        self.dooVentricularPulseWidthValue.config(text="Current Value: " + doo_ventricularPulseWidthEntry)
+                        db.execute("UPDATE "+currentuser+" SET doo_ventricularPulseWidthEntry = ?", (doo_ventricularPulseWidthEntry,))
+                        db.commit()
+
+            except:
+                messagebox.showinfo("Error","Please enter a valid value")
+                pass
+        
+        #dooFixedAVDelay
+        if(value == "dooFixedAVDelay"):
+            temp = self.dooFixedAVDelayEntry.get()
+            #Try/access to sanitize user input and ask for confirmation if there are no errors
+            try:
+                int(temp)
+                if (temp == '' or int(temp)<0):
+                    messagebox.showinfo("Error","Please enter a valid value")
+                    pass
+
+                #Ensure value is in limited range
+                elif(int(temp) < 70 or int(temp) > 300):
+                    messagebox.showinfo("Error","The range is between 70 and 300")
+                    pass
+
+                #If everything is good update current value
+                else:
+                    if messagebox.askyesno("Confirmation", "Replace current value?"):
+                        messagebox.showinfo("Done", "Success")
+                        doo_fixedAVDelayEntry = temp
+                        self.dooFixedAVDelayValue.config(text="Current Value: " + doo_fixedAVDelayEntry)
+                        db.execute("UPDATE "+currentuser+" SET doo_fixedAVDelayEntry = ?", (doo_fixedAVDelayEntry,))
+                        db.commit()
+
+            except:
+                messagebox.showinfo("Error","Please enter a valid value")
+                pass
         #DOO END-------------------------------------------------------------------------------------------------------------------------------
 
         #AOOR BEGIN----------------------------------------------------------------------------------------------------------------------------
@@ -2423,8 +2634,7 @@ class MainWindow:
                         db.execute("UPDATE "+currentuser+" SET aoor_lowerRateLimitEntry = ?", (aoor_lowerRateLimitEntry,))
                         db.commit()
 
-            except Exception as e:
-                print(e)
+            except:
                 messagebox.showinfo("Error","Please enter a valid value")
                 pass
 
@@ -2510,6 +2720,141 @@ class MainWindow:
                         aoor_atrialPulseWidthEntry = temp
                         self.aoorAtrialPulseWidthValue.config(text="Current Value: " + aoor_atrialPulseWidthEntry)
                         db.execute("UPDATE "+currentuser+" SET aoor_atrialPulseWidthEntry = ?", (aoor_atrialPulseWidthEntry,))
+                        db.commit()
+
+            except:
+                messagebox.showinfo("Error","Please enter a valid value")
+                pass
+
+        #aoorMaximumSensorRate
+        if(value == "aoorMaximumSensorRate"):
+            temp = self.aoorMaximumSensorRateEntry.get()
+            #Try/access to sanitize user input and ask for confirmation if there are no errors
+            try:
+                int(temp)
+                if (temp == '' or int(temp)<0):
+                    messagebox.showinfo("Error","Please enter a valid value")
+                    pass
+
+                #Ensure value is in limited range
+                elif(int(temp) < 50 or int(temp) > 175):
+                    messagebox.showinfo("Error","The range is between 50 and 175")
+                    pass
+
+                #If everything is good update current value
+                else:
+                    if messagebox.askyesno("Confirmation", "Replace current value?"):
+                        messagebox.showinfo("Done", "Success")
+                        aoor_maximumSensorRateEntry = temp
+                        self.aoorMaximumSensorRateValue.config(text="Current Value: " + aoor_maximumSensorRateEntry)
+                        db.execute("UPDATE "+currentuser+" SET aoor_maximumSensorRateEntry = ?", (aoor_maximumSensorRateEntry,))
+                        db.commit()
+
+            except:
+                messagebox.showinfo("Error","Please enter a valid value")
+                pass
+
+        #aoorActivityThreshold
+        if(value == "aoorActivityThreshold"):
+            temp = self.aoorActivityThresholdEntry.get()
+            #Try/access to sanitize user input and ask for confirmation if there are no errors
+            try:
+                str(temp)
+                if(str(temp) != "V-Low" and str(temp) != "Low" and str(temp) != "Med-Low" and str(temp) != "Med" and str(temp) != "Med-High" and str(temp) != "High" and str(temp) != "V-High"):
+                    messagebox.showinfo("Error","The range is between V-Low and V-High")
+                    pass
+
+                #If everything is good update current value
+                else:
+                    if messagebox.askyesno("Confirmation", "Replace current value?"):
+                        messagebox.showinfo("Done", "Success")
+                        aoor_activityThresholdEntry = temp
+                        self.aoorActivityThresholdValue.config(text="Current Value: " + aoor_activityThresholdEntry)
+                        db.execute("UPDATE "+currentuser+" SET aoor_activityThresholdEntry = ?", (aoor_activityThresholdEntry,))
+                        db.commit()
+
+            except:
+                messagebox.showinfo("Error","Please enter a valid value")
+                pass
+
+        #aoorReactionTime
+        if(value == "aoorReactionTime"):
+            temp = self.aoorReactionTimeEntry.get()
+            #Try/access to sanitize user input and ask for confirmation if there are no errors
+            try:
+                int(temp)
+                if (temp == '' or int(temp)<0):
+                    messagebox.showinfo("Error","Please enter a valid value")
+                    pass
+
+                #Ensure value is in limited range
+                elif(int(temp) < 10 or int(temp) > 50):
+                    messagebox.showinfo("Error","The range is between 10 and 50")
+                    pass
+
+                #If everything is good update current value
+                else:
+                    if messagebox.askyesno("Confirmation", "Replace current value?"):
+                        messagebox.showinfo("Done", "Success")
+                        aoor_reactionTimeEntry = temp
+                        self.aoorReactionTimeValue.config(text="Current Value: " + aoor_reactionTimeEntry)
+                        db.execute("UPDATE "+currentuser+" SET aoor_reactionTimeEntry = ?", (aoor_reactionTimeEntry,))
+                        db.commit()
+
+            except:
+                messagebox.showinfo("Error","Please enter a valid value")
+                pass
+
+        #aoorResponseFactor
+        if(value == "aoorResponseFactor"):
+            temp = self.aoorResponseFactorEntry.get()
+            #Try/access to sanitize user input and ask for confirmation if there are no errors
+            try:
+                int(temp)
+                if (temp == '' or int(temp)<0):
+                    messagebox.showinfo("Error","Please enter a valid value")
+                    pass
+
+                #Ensure value is in limited range
+                elif(int(temp) < 1 or int(temp) > 16):
+                    messagebox.showinfo("Error","The range is between 1 and 16")
+                    pass
+
+                #If everything is good update current value
+                else:
+                    if messagebox.askyesno("Confirmation", "Replace current value?"):
+                        messagebox.showinfo("Done", "Success")
+                        aoor_responseFactorEntry = temp
+                        self.aoorResponseFactorValue.config(text="Current Value: " + aoor_responseFactorEntry)
+                        db.execute("UPDATE "+currentuser+" SET aoor_responseFactorEntry = ?", (aoor_responseFactorEntry,))
+                        db.commit()
+
+            except:
+                messagebox.showinfo("Error","Please enter a valid value")
+                pass
+
+        #aoorRecoveryTime
+        if(value == "aoorRecoveryTime"):
+            temp = self.aoorRecoveryTimeEntry.get()
+            #Try/access to sanitize user input and ask for confirmation if there are no errors
+            try:
+                int(temp)
+                if (temp == '' or int(temp)<0):
+                    messagebox.showinfo("Error","Please enter a valid value")
+                    pass
+
+                #Ensure value is in limited range
+                elif(int(temp) < 2 or int(temp) > 16):
+                    messagebox.showinfo("Error","The range is between 2 and 16")
+                    pass
+
+                #If everything is good update current value
+                else:
+                    if messagebox.askyesno("Confirmation", "Replace current value?"):
+                        messagebox.showinfo("Done", "Success")
+                        aoor_recoveryTimeEntry = temp
+                        self.aoorRecoveryTimeValue.config(text="Current Value: " + aoor_recoveryTimeEntry)
+                        db.execute("UPDATE "+currentuser+" SET aoor_recoveryTimeEntry = ?", (aoor_recoveryTimeEntry,))
                         db.commit()
 
             except:
@@ -2634,6 +2979,141 @@ class MainWindow:
                         voor_ventricularPulseWidthEntry = temp
                         self.voorVentricularPulseWidthValue.config(text="Current Value: " + voor_ventricularPulseWidthEntry)
                         db.execute("UPDATE "+currentuser+" SET voor_ventricularPulseWidthEntry = ?", (voor_ventricularPulseWidthEntry,))
+                        db.commit()
+
+            except:
+                messagebox.showinfo("Error","Please enter a valid value")
+                pass
+
+        #voorMaximumSensorRate
+        if(value == "voorMaximumSensorRate"):
+            temp = self.voorMaximumSensorRateEntry.get()
+            #Try/access to sanitize user input and ask for confirmation if there are no errors
+            try:
+                int(temp)
+                if (temp == '' or int(temp)<0):
+                    messagebox.showinfo("Error","Please enter a valid value")
+                    pass
+
+                #Ensure value is in limited range
+                elif(int(temp) < 50 or int(temp) > 175):
+                    messagebox.showinfo("Error","The range is between 50 and 175")
+                    pass
+
+                #If everything is good update current value
+                else:
+                    if messagebox.askyesno("Confirmation", "Replace current value?"):
+                        messagebox.showinfo("Done", "Success")
+                        voor_maximumSensorRateEntry = temp
+                        self.voorMaximumSensorRateValue.config(text="Current Value: " + voor_maximumSensorRateEntry)
+                        db.execute("UPDATE "+currentuser+" SET voor_maximumSensorRateEntry = ?", (voor_maximumSensorRateEntry,))
+                        db.commit()
+
+            except:
+                messagebox.showinfo("Error","Please enter a valid value")
+                pass
+
+        #voorActivityThreshold
+        if(value == "voorActivityThreshold"):
+            temp = self.voorActivityThresholdEntry.get()
+            #Try/access to sanitize user input and ask for confirmation if there are no errors
+            try:
+                str(temp)
+                if(str(temp) != "V-Low" and str(temp) != "Low" and str(temp) != "Med-Low" and str(temp) != "Med" and str(temp) != "Med-High" and str(temp) != "High" and str(temp) != "V-High"):
+                    messagebox.showinfo("Error","The range is between V-Low and V-High")
+                    pass
+
+                #If everything is good update current value
+                else:
+                    if messagebox.askyesno("Confirmation", "Replace current value?"):
+                        messagebox.showinfo("Done", "Success")
+                        voor_activityThresholdEntry = temp
+                        self.voorActivityThresholdValue.config(text="Current Value: " + voor_activityThresholdEntry)
+                        db.execute("UPDATE "+currentuser+" SET voor_activityThresholdEntry = ?", (voor_activityThresholdEntry,))
+                        db.commit()
+
+            except:
+                messagebox.showinfo("Error","Please enter a valid value")
+                pass
+
+        #voorReactionTime
+        if(value == "voorReactionTime"):
+            temp = self.voorReactionTimeEntry.get()
+            #Try/access to sanitize user input and ask for confirmation if there are no errors
+            try:
+                int(temp)
+                if (temp == '' or int(temp)<0):
+                    messagebox.showinfo("Error","Please enter a valid value")
+                    pass
+
+                #Ensure value is in limited range
+                elif(int(temp) < 10 or int(temp) > 50):
+                    messagebox.showinfo("Error","The range is between 10 and 50")
+                    pass
+
+                #If everything is good update current value
+                else:
+                    if messagebox.askyesno("Confirmation", "Replace current value?"):
+                        messagebox.showinfo("Done", "Success")
+                        voor_reactionTimeEntry = temp
+                        self.voorReactionTimeValue.config(text="Current Value: " + voor_reactionTimeEntry)
+                        db.execute("UPDATE "+currentuser+" SET voor_reactionTimeEntry = ?", (voor_reactionTimeEntry,))
+                        db.commit()
+
+            except:
+                messagebox.showinfo("Error","Please enter a valid value")
+                pass
+
+        #voorResponseFactor
+        if(value == "voorResponseFactor"):
+            temp = self.voorResponseFactorEntry.get()
+            #Try/access to sanitize user input and ask for confirmation if there are no errors
+            try:
+                int(temp)
+                if (temp == '' or int(temp)<0):
+                    messagebox.showinfo("Error","Please enter a valid value")
+                    pass
+
+                #Ensure value is in limited range
+                elif(int(temp) < 1 or int(temp) > 16):
+                    messagebox.showinfo("Error","The range is between 1 and 16")
+                    pass
+
+                #If everything is good update current value
+                else:
+                    if messagebox.askyesno("Confirmation", "Replace current value?"):
+                        messagebox.showinfo("Done", "Success")
+                        voor_responseFactorEntry = temp
+                        self.voorResponseFactorValue.config(text="Current Value: " + voor_responseFactorEntry)
+                        db.execute("UPDATE "+currentuser+" SET voor_responseFactorEntry = ?", (voor_responseFactorEntry,))
+                        db.commit()
+
+            except:
+                messagebox.showinfo("Error","Please enter a valid value")
+                pass
+
+        #voorRecoveryTime
+        if(value == "voorRecoveryTime"):
+            temp = self.voorRecoveryTimeEntry.get()
+            #Try/access to sanitize user input and ask for confirmation if there are no errors
+            try:
+                int(temp)
+                if (temp == '' or int(temp)<0):
+                    messagebox.showinfo("Error","Please enter a valid value")
+                    pass
+
+                #Ensure value is in limited range
+                elif(int(temp) < 2 or int(temp) > 16):
+                    messagebox.showinfo("Error","The range is between 2 and 16")
+                    pass
+
+                #If everything is good update current value
+                else:
+                    if messagebox.askyesno("Confirmation", "Replace current value?"):
+                        messagebox.showinfo("Done", "Success")
+                        voor_recoveryTimeEntry = temp
+                        self.voorRecoveryTimeValue.config(text="Current Value: " + voor_recoveryTimeEntry)
+                        db.execute("UPDATE "+currentuser+" SET voor_recoveryTimeEntry = ?", (voor_recoveryTimeEntry,))
                         db.commit()
 
             except:
@@ -2896,6 +3376,141 @@ class MainWindow:
             except:
                 messagebox.showinfo("Error","Please enter a valid value")
                 pass
+        
+        #aairMaximumSensorRate
+        if(value == "aairMaximumSensorRate"):
+            temp = self.aairMaximumSensorRateEntry.get()
+            #Try/access to sanitize user input and ask for confirmation if there are no errors
+            try:
+                int(temp)
+                if (temp == '' or int(temp)<0):
+                    messagebox.showinfo("Error","Please enter a valid value")
+                    pass
+
+                #Ensure value is in limited range
+                elif(int(temp) < 50 or int(temp) > 175):
+                    messagebox.showinfo("Error","The range is between 50 and 175")
+                    pass
+
+                #If everything is good update current value
+                else:
+                    if messagebox.askyesno("Confirmation", "Replace current value?"):
+                        messagebox.showinfo("Done", "Success")
+                        aair_maximumSensorRateEntry = temp
+                        self.aairMaximumSensorRateValue.config(text="Current Value: " + aair_maximumSensorRateEntry)
+                        db.execute("UPDATE "+currentuser+" SET aair_maximumSensorRateEntry = ?", (aair_maximumSensorRateEntry,))
+                        db.commit()
+
+            except:
+                messagebox.showinfo("Error","Please enter a valid value")
+                pass
+
+        #aairActivityThreshold
+        if(value == "aairActivityThreshold"):
+            temp = self.aairActivityThresholdEntry.get()
+            #Try/access to sanitize user input and ask for confirmation if there are no errors
+            try:
+                str(temp)
+                if(str(temp) != "V-Low" and str(temp) != "Low" and str(temp) != "Med-Low" and str(temp) != "Med" and str(temp) != "Med-High" and str(temp) != "High" and str(temp) != "V-High"):
+                    messagebox.showinfo("Error","The range is between V-Low and V-High")
+                    pass
+
+                #If everything is good update current value
+                else:
+                    if messagebox.askyesno("Confirmation", "Replace current value?"):
+                        messagebox.showinfo("Done", "Success")
+                        aair_activityThresholdEntry = temp
+                        self.aairActivityThresholdValue.config(text="Current Value: " + aair_activityThresholdEntry)
+                        db.execute("UPDATE "+currentuser+" SET aair_activityThresholdEntry = ?", (aair_activityThresholdEntry,))
+                        db.commit()
+
+            except:
+                messagebox.showinfo("Error","Please enter a valid value")
+                pass
+
+        #aairReactionTime
+        if(value == "aairReactionTime"):
+            temp = self.aairReactionTimeEntry.get()
+            #Try/access to sanitize user input and ask for confirmation if there are no errors
+            try:
+                int(temp)
+                if (temp == '' or int(temp)<0):
+                    messagebox.showinfo("Error","Please enter a valid value")
+                    pass
+
+                #Ensure value is in limited range
+                elif(int(temp) < 10 or int(temp) > 50):
+                    messagebox.showinfo("Error","The range is between 10 and 50")
+                    pass
+
+                #If everything is good update current value
+                else:
+                    if messagebox.askyesno("Confirmation", "Replace current value?"):
+                        messagebox.showinfo("Done", "Success")
+                        aair_reactionTimeEntry = temp
+                        self.aairReactionTimeValue.config(text="Current Value: " + aair_reactionTimeEntry)
+                        db.execute("UPDATE "+currentuser+" SET aair_reactionTimeEntry = ?", (aair_reactionTimeEntry,))
+                        db.commit()
+
+            except:
+                messagebox.showinfo("Error","Please enter a valid value")
+                pass
+
+        #aairResponseFactor
+        if(value == "aairResponseFactor"):
+            temp = self.aairResponseFactorEntry.get()
+            #Try/access to sanitize user input and ask for confirmation if there are no errors
+            try:
+                int(temp)
+                if (temp == '' or int(temp)<0):
+                    messagebox.showinfo("Error","Please enter a valid value")
+                    pass
+
+                #Ensure value is in limited range
+                elif(int(temp) < 1 or int(temp) > 16):
+                    messagebox.showinfo("Error","The range is between 1 and 16")
+                    pass
+
+                #If everything is good update current value
+                else:
+                    if messagebox.askyesno("Confirmation", "Replace current value?"):
+                        messagebox.showinfo("Done", "Success")
+                        aair_responseFactorEntry = temp
+                        self.aairResponseFactorValue.config(text="Current Value: " + aair_responseFactorEntry)
+                        db.execute("UPDATE "+currentuser+" SET aair_responseFactorEntry = ?", (aair_responseFactorEntry,))
+                        db.commit()
+
+            except:
+                messagebox.showinfo("Error","Please enter a valid value")
+                pass
+
+        #aairRecoveryTime
+        if(value == "aairRecoveryTime"):
+            temp = self.aairRecoveryTimeEntry.get()
+            #Try/access to sanitize user input and ask for confirmation if there are no errors
+            try:
+                int(temp)
+                if (temp == '' or int(temp)<0):
+                    messagebox.showinfo("Error","Please enter a valid value")
+                    pass
+
+                #Ensure value is in limited range
+                elif(int(temp) < 2 or int(temp) > 16):
+                    messagebox.showinfo("Error","The range is between 2 and 16")
+                    pass
+
+                #If everything is good update current value
+                else:
+                    if messagebox.askyesno("Confirmation", "Replace current value?"):
+                        messagebox.showinfo("Done", "Success")
+                        aair_recoveryTimeEntry = temp
+                        self.aairRecoveryTimeValue.config(text="Current Value: " + aair_recoveryTimeEntry)
+                        db.execute("UPDATE "+currentuser+" SET aair_recoveryTimeEntry = ?", (aair_recoveryTimeEntry,))
+                        db.commit()
+
+            except:
+                messagebox.showinfo("Error","Please enter a valid value")
+                pass
         #AAIR END------------------------------------------------------------------------------------------------------------------------------
 
         #VVIR BEGIN----------------------------------------------------------------------------------------------------------------------------
@@ -3127,10 +3742,483 @@ class MainWindow:
             except:
                 messagebox.showinfo("Error","Please enter a valid value")
                 pass
+        
+        #vvirMaximumSensorRate
+        if(value == "vvirMaximumSensorRate"):
+            temp = self.vvirMaximumSensorRateEntry.get()
+            #Try/access to sanitize user input and ask for confirmation if there are no errors
+            try:
+                int(temp)
+                if (temp == '' or int(temp)<0):
+                    messagebox.showinfo("Error","Please enter a valid value")
+                    pass
+
+                #Ensure value is in limited range
+                elif(int(temp) < 50 or int(temp) > 175):
+                    messagebox.showinfo("Error","The range is between 50 and 175")
+                    pass
+
+                #If everything is good update current value
+                else:
+                    if messagebox.askyesno("Confirmation", "Replace current value?"):
+                        messagebox.showinfo("Done", "Success")
+                        vvir_maximumSensorRateEntry = temp
+                        self.vvirMaximumSensorRateValue.config(text="Current Value: " + vvir_maximumSensorRateEntry)
+                        db.execute("UPDATE "+currentuser+" SET vvir_maximumSensorRateEntry = ?", (vvir_maximumSensorRateEntry,))
+                        db.commit()
+
+            except:
+                messagebox.showinfo("Error","Please enter a valid value")
+                pass
+
+        #vvirActivityThreshold
+        if(value == "vvirActivityThreshold"):
+            temp = self.vvirActivityThresholdEntry.get()
+            #Try/access to sanitize user input and ask for confirmation if there are no errors
+            try:
+                str(temp)
+                if(str(temp) != "V-Low" and str(temp) != "Low" and str(temp) != "Med-Low" and str(temp) != "Med" and str(temp) != "Med-High" and str(temp) != "High" and str(temp) != "V-High"):
+                    messagebox.showinfo("Error","The range is between V-Low and V-High")
+                    pass
+
+                #If everything is good update current value
+                else:
+                    if messagebox.askyesno("Confirmation", "Replace current value?"):
+                        messagebox.showinfo("Done", "Success")
+                        vvir_activityThresholdEntry = temp
+                        self.vvirActivityThresholdValue.config(text="Current Value: " + vvir_activityThresholdEntry)
+                        db.execute("UPDATE "+currentuser+" SET vvir_activityThresholdEntry = ?", (vvir_activityThresholdEntry,))
+                        db.commit()
+
+            except:
+                messagebox.showinfo("Error","Please enter a valid value")
+                pass
+
+        #vvirReactionTime
+        if(value == "vvirReactionTime"):
+            temp = self.vvirReactionTimeEntry.get()
+            #Try/access to sanitize user input and ask for confirmation if there are no errors
+            try:
+                int(temp)
+                if (temp == '' or int(temp)<0):
+                    messagebox.showinfo("Error","Please enter a valid value")
+                    pass
+
+                #Ensure value is in limited range
+                elif(int(temp) < 10 or int(temp) > 50):
+                    messagebox.showinfo("Error","The range is between 10 and 50")
+                    pass
+
+                #If everything is good update current value
+                else:
+                    if messagebox.askyesno("Confirmation", "Replace current value?"):
+                        messagebox.showinfo("Done", "Success")
+                        vvir_reactionTimeEntry = temp
+                        self.vvirReactionTimeValue.config(text="Current Value: " + vvir_reactionTimeEntry)
+                        db.execute("UPDATE "+currentuser+" SET vvir_reactionTimeEntry = ?", (vvir_reactionTimeEntry,))
+                        db.commit()
+
+            except:
+                messagebox.showinfo("Error","Please enter a valid value")
+                pass
+
+        #vvirResponseFactor
+        if(value == "vvirResponseFactor"):
+            temp = self.vvirResponseFactorEntry.get()
+            #Try/access to sanitize user input and ask for confirmation if there are no errors
+            try:
+                int(temp)
+                if (temp == '' or int(temp)<0):
+                    messagebox.showinfo("Error","Please enter a valid value")
+                    pass
+
+                #Ensure value is in limited range
+                elif(int(temp) < 1 or int(temp) > 16):
+                    messagebox.showinfo("Error","The range is between 1 and 16")
+                    pass
+
+                #If everything is good update current value
+                else:
+                    if messagebox.askyesno("Confirmation", "Replace current value?"):
+                        messagebox.showinfo("Done", "Success")
+                        vvir_responseFactorEntry = temp
+                        self.vvirResponseFactorValue.config(text="Current Value: " + vvir_responseFactorEntry)
+                        db.execute("UPDATE "+currentuser+" SET vvir_responseFactorEntry = ?", (vvir_responseFactorEntry,))
+                        db.commit()
+
+            except:
+                messagebox.showinfo("Error","Please enter a valid value")
+                pass
+
+        #vvirRecoveryTime
+        if(value == "vvirRecoveryTime"):
+            temp = self.vvirRecoveryTimeEntry.get()
+            #Try/access to sanitize user input and ask for confirmation if there are no errors
+            try:
+                int(temp)
+                if (temp == '' or int(temp)<0):
+                    messagebox.showinfo("Error","Please enter a valid value")
+                    pass
+
+                #Ensure value is in limited range
+                elif(int(temp) < 2 or int(temp) > 16):
+                    messagebox.showinfo("Error","The range is between 2 and 16")
+                    pass
+
+                #If everything is good update current value
+                else:
+                    if messagebox.askyesno("Confirmation", "Replace current value?"):
+                        messagebox.showinfo("Done", "Success")
+                        vvir_recoveryTimeEntry = temp
+                        self.vvirRecoveryTimeValue.config(text="Current Value: " + vvir_recoveryTimeEntry)
+                        db.execute("UPDATE "+currentuser+" SET vvir_recoveryTimeEntry = ?", (vvir_recoveryTimeEntry,))
+                        db.commit()
+
+            except:
+                messagebox.showinfo("Error","Please enter a valid value")
+                pass
         #VVIR END------------------------------------------------------------------------------------------------------------------------------
 
         #DOOR BEGIN----------------------------------------------------------------------------------------------------------------------------
+        #doorLowerRateLimit
+        if(value == "doorLowerRateLimit"):
+            temp = self.doorLowerRateLimitEntry.get()
+            #Try/access to sanitize user input and ask for confirmation if there are no errors
+            try:
+                int(temp)
+                if (temp == '' or int(temp)<0):
+                    messagebox.showinfo("Error","Please enter a valid value")
+                    pass
+
+                #Ensure upper limit is larger than lower limit
+                elif(int(self.doorLowerRateLimitEntry.get()) >= int(door_upperRateLimitEntry) and int(door_upperRateLimitEntry) != 0 ):
+                    messagebox.showinfo("Error","Please ensure your lower rate limit is lower than your upper rate limit")
+                    pass
+
+                #Ensure value is in limited range
+                elif(int(temp) < 30 or int(temp) > 175):
+                    messagebox.showinfo("Error","The range is between 30 and 175")
+                    pass
+
+                #If everything is good update current value
+                else:
+                    if messagebox.askyesno("Confirmation", "Replace current value?"):
+                        messagebox.showinfo("Done", "Success")
+                        door_lowerRateLimitEntry = temp
+                        self.doorLowerRateLimitValue.config(text="Current Value: " + door_lowerRateLimitEntry)
+                        db.execute("UPDATE "+currentuser+" SET door_lowerRateLimitEntry = ?", (door_lowerRateLimitEntry,))
+                        db.commit()
+
+            except:
+                messagebox.showinfo("Error","Please enter a valid value")
+                pass
+
+        #doorUpperRateLimit
+        if(value == "doorUpperRateLimit"):
+            temp = self.doorUpperRateLimitEntry.get()
+            #Try/access to sanitize user input and ask for confirmation if there are no errors
+            try:
+                int(temp)
+                if (temp == '' or int(temp)<0):
+                    messagebox.showinfo("Error","Please enter a valid value")
+                    pass
+
+                #Ensure upper limit is larger than lower limit
+                elif(int(door_lowerRateLimitEntry) >= int(self.doorUpperRateLimitEntry.get()) and int(door_lowerRateLimitEntry) != 0 ):
+                    messagebox.showinfo("Error","Please ensure your upper rate limit is higher than your lower rate limit")
+                    pass
+
+                #Ensure value is in limited range
+                elif(int(temp) < 50 or int(temp) > 175):
+                    messagebox.showinfo("Error","The range is between 50 and 175")
+                    pass
+
+                #If everything is good update current value
+                else:
+                    if messagebox.askyesno("Confirmation", "Replace current value?"):
+                        messagebox.showinfo("Done", "Success")
+                        door_upperRateLimitEntry = temp
+                        self.doorUpperRateLimitValue.config(text="Current Value: " + door_upperRateLimitEntry)
+                        db.execute("UPDATE "+currentuser+" SET door_upperRateLimitEntry = ?", (door_upperRateLimitEntry,))
+                        db.commit()
+
+            except:
+                messagebox.showinfo("Error","Please enter a valid value")
+                pass
+
+        #doorAtrialAmplitude
+        if(value == "doorAtrialAmplitude"):
+            temp = self.doorAtrialAmplitudeEntry.get()
+            #Try/access to sanitize user input and ask for confirmation if there are no errors
+            try:
+                float(temp)
+                if (temp == '' or float(temp)<0):
+                    messagebox.showinfo("Error","Please enter a valid value")
+                    pass
+                #Ensure value is in limited range
+                elif(float(temp) < 0 or float(temp) > 7.0):
+                    messagebox.showinfo("Error","The range is between 0(off) and 7.0")
+                    pass
+
+                #If everything is good update current value
+                else:
+                    if messagebox.askyesno("Confirmation", "Replace current value?"):
+                        messagebox.showinfo("Done", "Success")
+                        door_atrialAmplitudeEntry = temp
+                        self.doorAtrialAmplitudeValue.config(text="Current Value: " + door_atrialAmplitudeEntry)
+                        db.execute("UPDATE "+currentuser+" SET door_atrialAmplitudeEntry = ?", (door_atrialAmplitudeEntry,))
+                        db.commit()
+
+            except:
+                messagebox.showinfo("Error","Please enter a valid value")
+                pass
+
+        #doorAtrialPulseWidth
+        if(value == "doorAtrialPulseWidth"):
+            temp = self.doorAtrialPulseWidthEntry.get()
+            #Try/access to sanitize user input and ask for confirmation if there are no errors
+            try:
+                float(temp)
+                if (temp == '' or float(temp)<0):
+                    messagebox.showinfo("Error","Please enter a valid value")
+                    pass
+
+                #Ensure value is in limited range
+                elif(float(temp) < 0.05 or float(temp) > 1.9):
+                    messagebox.showinfo("Error","The range is between 0.05 and 1.9")
+                    pass
+
+                #If everything is good update current value
+                else:
+                    if messagebox.askyesno("Confirmation", "Replace current value?"):
+                        messagebox.showinfo("Done", "Success")
+                        door_atrialPulseWidthEntry = temp
+                        self.doorAtrialPulseWidthValue.config(text="Current Value: " + door_atrialPulseWidthEntry)
+                        db.execute("UPDATE "+currentuser+" SET door_atrialPulseWidthEntry = ?", (door_atrialPulseWidthEntry,))
+                        db.commit()
+
+            except:
+                messagebox.showinfo("Error","Please enter a valid value")
+                pass
         
+        #doorVentricularAmplitude
+        if(value == "doorVentricularAmplitude"):
+            temp = self.doorVentricularAmplitudeEntry.get()
+            #Try/access to sanitize user input and ask for confirmation if there are no errors
+            try:
+                float(temp)
+                if (temp == '' or float(temp)<0):
+                    messagebox.showinfo("Error","Please enter a valid value")
+                    pass
+
+                #Ensure value is in limited range
+                elif(float(temp) < 0 or float(temp) > 7.0):
+                    messagebox.showinfo("Error","The range is between 0(off) and 7.0")
+                    pass
+
+                #If everything is good update current value
+                else:
+                    if messagebox.askyesno("Confirmation", "Replace current value?"):
+                        messagebox.showinfo("Done", "Success")
+                        door_ventricularAmplitudeEntry = temp
+                        self.doorVentricularAmplitudeValue.config(text="Current Value: " + door_ventricularAmplitudeEntry)
+                        db.execute("UPDATE "+currentuser+" SET door_ventricularAmplitudeEntry = ?", (door_ventricularAmplitudeEntry,))
+                        db.commit()
+
+            except:
+                messagebox.showinfo("Error","Please enter a valid value")
+                pass
+
+        #doorVentricularPulseWidth
+        if(value == "doorVentricularPulseWidth"):
+            temp = self.doorVentricularPulseWidthEntry.get()
+            #Try/access to sanitize user input and ask for confirmation if there are no errors
+            try:
+                float(temp)
+                if (temp == '' or float(temp)<0):
+                    messagebox.showinfo("Error","Please enter a valid value")
+                    pass
+
+                #Ensure value is in limited range
+                elif(float(temp) < 0.05 or float(temp) > 1.9):
+                    messagebox.showinfo("Error","The range is between 0.05 and 1.9")
+                    pass
+
+                #If everything is good update current value
+                else:
+                    if messagebox.askyesno("Confirmation", "Replace current value?"):
+                        messagebox.showinfo("Done", "Success")
+                        door_ventricularPulseWidthEntry = temp
+                        self.doorVentricularPulseWidthValue.config(text="Current Value: " + door_ventricularPulseWidthEntry)
+                        db.execute("UPDATE "+currentuser+" SET door_ventricularPulseWidthEntry = ?", (door_ventricularPulseWidthEntry,))
+                        db.commit()
+
+            except:
+                messagebox.showinfo("Error","Please enter a valid value")
+                pass
+        
+        #doorFixedAVDelay
+        if(value == "doorFixedAVDelay"):
+            temp = self.doorFixedAVDelayEntry.get()
+            #Try/access to sanitize user input and ask for confirmation if there are no errors
+            try:
+                int(temp)
+                if (temp == '' or int(temp)<0):
+                    messagebox.showinfo("Error","Please enter a valid value")
+                    pass
+
+                #Ensure value is in limited range
+                elif(int(temp) < 70 or int(temp) > 300):
+                    messagebox.showinfo("Error","The range is between 70 and 300")
+                    pass
+
+                #If everything is good update current value
+                else:
+                    if messagebox.askyesno("Confirmation", "Replace current value?"):
+                        messagebox.showinfo("Done", "Success")
+                        door_fixedAVDelayEntry = temp
+                        self.doorFixedAVDelayValue.config(text="Current Value: " + door_fixedAVDelayEntry)
+                        db.execute("UPDATE "+currentuser+" SET door_fixedAVDelayEntry = ?", (door_fixedAVDelayEntry,))
+                        db.commit()
+
+            except:
+                messagebox.showinfo("Error","Please enter a valid value")
+                pass
+        
+        #doorMaximumSensorRate
+        if(value == "doorMaximumSensorRate"):
+            temp = self.doorMaximumSensorRateEntry.get()
+            #Try/access to sanitize user input and ask for confirmation if there are no errors
+            try:
+                int(temp)
+                if (temp == '' or int(temp)<0):
+                    messagebox.showinfo("Error","Please enter a valid value")
+                    pass
+
+                #Ensure value is in limited range
+                elif(int(temp) < 50 or int(temp) > 175):
+                    messagebox.showinfo("Error","The range is between 50 and 175")
+                    pass
+
+                #If everything is good update current value
+                else:
+                    if messagebox.askyesno("Confirmation", "Replace current value?"):
+                        messagebox.showinfo("Done", "Success")
+                        door_maximumSensorRateEntry = temp
+                        self.doorMaximumSensorRateValue.config(text="Current Value: " + door_maximumSensorRateEntry)
+                        db.execute("UPDATE "+currentuser+" SET door_maximumSensorRateEntry = ?", (door_maximumSensorRateEntry,))
+                        db.commit()
+
+            except:
+                messagebox.showinfo("Error","Please enter a valid value")
+                pass
+
+        #doorActivityThreshold
+        if(value == "doorActivityThreshold"):
+            temp = self.doorActivityThresholdEntry.get()
+            #Try/access to sanitize user input and ask for confirmation if there are no errors
+            try:
+                str(temp)
+                if(str(temp) != "V-Low" and str(temp) != "Low" and str(temp) != "Med-Low" and str(temp) != "Med" and str(temp) != "Med-High" and str(temp) != "High" and str(temp) != "V-High"):
+                    messagebox.showinfo("Error","The range is between V-Low and V-High")
+                    pass
+
+                #If everything is good update current value
+                else:
+                    if messagebox.askyesno("Confirmation", "Replace current value?"):
+                        messagebox.showinfo("Done", "Success")
+                        door_activityThresholdEntry = temp
+                        self.doorActivityThresholdValue.config(text="Current Value: " + door_activityThresholdEntry)
+                        db.execute("UPDATE "+currentuser+" SET door_activityThresholdEntry = ?", (door_activityThresholdEntry,))
+                        db.commit()
+
+            except:
+                messagebox.showinfo("Error","Please enter a valid value")
+                pass
+
+        #doorReactionTime
+        if(value == "doorReactionTime"):
+            temp = self.doorReactionTimeEntry.get()
+            #Try/access to sanitize user input and ask for confirmation if there are no errors
+            try:
+                int(temp)
+                if (temp == '' or int(temp)<0):
+                    messagebox.showinfo("Error","Please enter a valid value")
+                    pass
+
+                #Ensure value is in limited range
+                elif(int(temp) < 10 or int(temp) > 50):
+                    messagebox.showinfo("Error","The range is between 10 and 50")
+                    pass
+
+                #If everything is good update current value
+                else:
+                    if messagebox.askyesno("Confirmation", "Replace current value?"):
+                        messagebox.showinfo("Done", "Success")
+                        door_reactionTimeEntry = temp
+                        self.doorReactionTimeValue.config(text="Current Value: " + door_reactionTimeEntry)
+                        db.execute("UPDATE "+currentuser+" SET door_reactionTimeEntry = ?", (door_reactionTimeEntry,))
+                        db.commit()
+
+            except:
+                messagebox.showinfo("Error","Please enter a valid value")
+                pass
+
+        #doorResponseFactor
+        if(value == "doorResponseFactor"):
+            temp = self.doorResponseFactorEntry.get()
+            #Try/access to sanitize user input and ask for confirmation if there are no errors
+            try:
+                int(temp)
+                if (temp == '' or int(temp)<0):
+                    messagebox.showinfo("Error","Please enter a valid value")
+                    pass
+
+                #Ensure value is in limited range
+                elif(int(temp) < 1 or int(temp) > 16):
+                    messagebox.showinfo("Error","The range is between 1 and 16")
+                    pass
+
+                #If everything is good update current value
+                else:
+                    if messagebox.askyesno("Confirmation", "Replace current value?"):
+                        messagebox.showinfo("Done", "Success")
+                        door_responseFactorEntry = temp
+                        self.doorResponseFactorValue.config(text="Current Value: " + door_responseFactorEntry)
+                        db.execute("UPDATE "+currentuser+" SET door_responseFactorEntry = ?", (door_responseFactorEntry,))
+                        db.commit()
+
+            except:
+                messagebox.showinfo("Error","Please enter a valid value")
+                pass
+
+        #doorRecoveryTime
+        if(value == "doorRecoveryTime"):
+            temp = self.doorRecoveryTimeEntry.get()
+            #Try/access to sanitize user input and ask for confirmation if there are no errors
+            try:
+                int(temp)
+                if (temp == '' or int(temp)<0):
+                    messagebox.showinfo("Error","Please enter a valid value")
+                    pass
+
+                #Ensure value is in limited range
+                elif(int(temp) < 2 or int(temp) > 16):
+                    messagebox.showinfo("Error","The range is between 2 and 16")
+                    pass
+
+                #If everything is good update current value
+                else:
+                    if messagebox.askyesno("Confirmation", "Replace current value?"):
+                        messagebox.showinfo("Done", "Success")
+                        door_recoveryTimeEntry = temp
+                        self.doorRecoveryTimeValue.config(text="Current Value: " + door_recoveryTimeEntry)
+                        db.execute("UPDATE "+currentuser+" SET door_recoveryTimeEntry = ?", (door_recoveryTimeEntry,))
+                        db.commit()
+
+            except:
+                messagebox.showinfo("Error","Please enter a valid value")
+                pass
         #DOOR END------------------------------------------------------------------------------------------------------------------------------
 
     #Method used to log off user
