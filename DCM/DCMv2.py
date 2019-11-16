@@ -48,7 +48,6 @@ door_lowerRateLimitEntry, door_upperRateLimitEntry, door_atrialAmplitudeEntry, d
 #Creating Initial Welcome Frame
 class WelcomeFrame:
     def __init__(self, master):
-        
         #General paramters
         self.master = master
         self.master.configure(background='grey')
@@ -90,9 +89,7 @@ class WelcomeFrame:
 
 #Login Frame window
 class LoginFrame:
-
     def __init__(self, master):
-
         #General parameters
         self.master = master
         self.master.configure(background='grey')
@@ -295,14 +292,14 @@ class AddUserWindow:
 class MainWindow:
     def __init__(self, master):
         #General window setup
-        self.content = tk.Entry()
         self.master = master
-        self.master.geometry('750x800')
+        self.master.geometry('1500x800')
         self.master.protocol("WM_DELETE_WINDOW", self.on_exit)
         self.menubar = tk.Menu(self.master)
         self.filemenu = tk.Menu(self.menubar, tearoff=0)
         self.master.config(menu=self.menubar)
         self.frame = tk.Frame(self.master)
+        self.content = tk.Entry()
 
         # Tabs created for AOO, VOO, AAI, VVI, and DOO
         # Also AOOR, VOOR, AAIR, VVIR, and DOOR 
@@ -870,30 +867,30 @@ class MainWindow:
         self.aoorAtrialPulseWidthButton.grid(row=3, column=2, padx=15, pady=15)
         self.aoorAtrialPulseWidthValue.grid(row=3, column=3, padx=15, pady=15)
         
-        self.aoorMaximumSensorRateLabel.grid(row=4, column=0, padx=15, pady=15)
-        self.aoorMaximumSensorRateEntry.grid(row=4, column=1, padx=15, pady=15)
-        self.aoorMaximumSensorRateButton.grid(row=4, column=2, padx=15, pady=15)
-        self.aoorMaximumSensorRateValue.grid(row=4, column=3, padx=15, pady=15)
+        self.aoorMaximumSensorRateLabel.grid(row=0, column=5, padx=15, pady=15)
+        self.aoorMaximumSensorRateEntry.grid(row=0, column=6, padx=15, pady=15)
+        self.aoorMaximumSensorRateButton.grid(row=0, column=7, padx=15, pady=15)
+        self.aoorMaximumSensorRateValue.grid(row=0, column=8, padx=15, pady=15)
 
-        self.aoorActivityThresholdLabel.grid(row=5, column=0, padx=15, pady=15)
-        self.aoorActivityThresholdEntry.grid(row=5, column=1, padx=15, pady=15)
-        self.aoorActivityThresholdButton.grid(row=5, column=2, padx=15, pady=15)
-        self.aoorActivityThresholdValue.grid(row=5, column=3, padx=15, pady=15)
+        self.aoorActivityThresholdLabel.grid(row=1, column=5, padx=15, pady=15)
+        self.aoorActivityThresholdEntry.grid(row=1, column=6, padx=15, pady=15)
+        self.aoorActivityThresholdButton.grid(row=1, column=7, padx=15, pady=15)
+        self.aoorActivityThresholdValue.grid(row=1, column=8, padx=15, pady=15)
 
-        self.aoorReactionTimeLabel.grid(row=6, column=0, padx=15, pady=15)
-        self.aoorReactionTimeEntry.grid(row=6, column=1, padx=15, pady=15)
-        self.aoorReactionTimeButton.grid(row=6, column=2, padx=15, pady=15)
-        self.aoorReactionTimeValue.grid(row=6, column=3, padx=15, pady=15)
+        self.aoorReactionTimeLabel.grid(row=2, column=5, padx=15, pady=15)
+        self.aoorReactionTimeEntry.grid(row=2, column=6, padx=15, pady=15)
+        self.aoorReactionTimeButton.grid(row=2, column=7, padx=15, pady=15)
+        self.aoorReactionTimeValue.grid(row=2, column=8, padx=15, pady=15)
 
-        self.aoorResponseFactorLabel.grid(row=7, column=0, padx=15, pady=15)
-        self.aoorResponseFactorEntry.grid(row=7, column=1, padx=15, pady=15)
-        self.aoorResponseFactorButton.grid(row=7, column=2, padx=15, pady=15)
-        self.aoorResponseFactorValue.grid(row=7, column=3, padx=15, pady=15)
+        self.aoorResponseFactorLabel.grid(row=3, column=5, padx=15, pady=15)
+        self.aoorResponseFactorEntry.grid(row=3, column=6, padx=15, pady=15)
+        self.aoorResponseFactorButton.grid(row=3, column=7, padx=15, pady=15)
+        self.aoorResponseFactorValue.grid(row=3, column=8, padx=15, pady=15)
 
-        self.aoorRecoveryTimeLabel.grid(row=8, column=0, padx=15, pady=15)
-        self.aoorRecoveryTimeEntry.grid(row=8, column=1, padx=15, pady=15)
-        self.aoorRecoveryTimeButton.grid(row=8, column=2, padx=15, pady=15)
-        self.aoorRecoveryTimeValue.grid(row=8, column=3, padx=15, pady=15)
+        self.aoorRecoveryTimeLabel.grid(row=4, column=5, padx=15, pady=15)
+        self.aoorRecoveryTimeEntry.grid(row=4, column=6, padx=15, pady=15)
+        self.aoorRecoveryTimeButton.grid(row=4, column=7, padx=15, pady=15)
+        self.aoorRecoveryTimeValue.grid(row=4, column=8, padx=15, pady=15)
         #AOOR END-------------------------------------------------------------------------------------------------------------------------------
 
         #VOOR BEGIN----------------------------------------------------------------------------------------------------------------------------- 
@@ -964,30 +961,30 @@ class MainWindow:
         self.voorVentricularPulseWidthButton.grid(row=3, column=2, padx=15, pady=15)
         self.voorVentricularPulseWidthValue.grid(row=3, column=3, padx=15, pady=15)
         
-        self.voorMaximumSensorRateLabel.grid(row=4, column=0, padx=15, pady=15)
-        self.voorMaximumSensorRateEntry.grid(row=4, column=1, padx=15, pady=15)
-        self.voorMaximumSensorRateButton.grid(row=4, column=2, padx=15, pady=15)
-        self.voorMaximumSensorRateValue.grid(row=4, column=3, padx=15, pady=15)
+        self.voorMaximumSensorRateLabel.grid(row=0, column=5, padx=15, pady=15)
+        self.voorMaximumSensorRateEntry.grid(row=0, column=6, padx=15, pady=15)
+        self.voorMaximumSensorRateButton.grid(row=0, column=7, padx=15, pady=15)
+        self.voorMaximumSensorRateValue.grid(row=0, column=8, padx=15, pady=15)
 
-        self.voorActivityThresholdLabel.grid(row=5, column=0, padx=15, pady=15)
-        self.voorActivityThresholdEntry.grid(row=5, column=1, padx=15, pady=15)
-        self.voorActivityThresholdButton.grid(row=5, column=2, padx=15, pady=15)
-        self.voorActivityThresholdValue.grid(row=5, column=3, padx=15, pady=15)
+        self.voorActivityThresholdLabel.grid(row=1, column=5, padx=15, pady=15)
+        self.voorActivityThresholdEntry.grid(row=1, column=6, padx=15, pady=15)
+        self.voorActivityThresholdButton.grid(row=1, column=7, padx=15, pady=15)
+        self.voorActivityThresholdValue.grid(row=1, column=8, padx=15, pady=15)
 
-        self.voorReactionTimeLabel.grid(row=6, column=0, padx=15, pady=15)
-        self.voorReactionTimeEntry.grid(row=6, column=1, padx=15, pady=15)
-        self.voorReactionTimeButton.grid(row=6, column=2, padx=15, pady=15)
-        self.voorReactionTimeValue.grid(row=6, column=3, padx=15, pady=15)
+        self.voorReactionTimeLabel.grid(row=2, column=5, padx=15, pady=15)
+        self.voorReactionTimeEntry.grid(row=2, column=6, padx=15, pady=15)
+        self.voorReactionTimeButton.grid(row=2, column=7, padx=15, pady=15)
+        self.voorReactionTimeValue.grid(row=2, column=8, padx=15, pady=15)
 
-        self.voorResponseFactorLabel.grid(row=7, column=0, padx=15, pady=15)
-        self.voorResponseFactorEntry.grid(row=7, column=1, padx=15, pady=15)
-        self.voorResponseFactorButton.grid(row=7, column=2, padx=15, pady=15)
-        self.voorResponseFactorValue.grid(row=7, column=3, padx=15, pady=15)
+        self.voorResponseFactorLabel.grid(row=3, column=5, padx=15, pady=15)
+        self.voorResponseFactorEntry.grid(row=3, column=6, padx=15, pady=15)
+        self.voorResponseFactorButton.grid(row=3, column=7, padx=15, pady=15)
+        self.voorResponseFactorValue.grid(row=3, column=8, padx=15, pady=15)
 
-        self.voorRecoveryTimeLabel.grid(row=8, column=0, padx=15, pady=15)
-        self.voorRecoveryTimeEntry.grid(row=8, column=1, padx=15, pady=15)
-        self.voorRecoveryTimeButton.grid(row=8, column=2, padx=15, pady=15)
-        self.voorRecoveryTimeValue.grid(row=8, column=3, padx=15, pady=15)
+        self.voorRecoveryTimeLabel.grid(row=4, column=5, padx=15, pady=15)
+        self.voorRecoveryTimeEntry.grid(row=4, column=6, padx=15, pady=15)
+        self.voorRecoveryTimeButton.grid(row=4, column=7, padx=15, pady=15)
+        self.voorRecoveryTimeValue.grid(row=4, column=8, padx=15, pady=15)
         #VOOR END------------------------------------------------------------------------------------------------------------------------------
 
         #AAIR BEGIN----------------------------------------------------------------------------------------------------------------------------
@@ -1103,30 +1100,30 @@ class MainWindow:
         self.aairRateSmoothingButton.grid(row=8, column=2, padx=15, pady=15)
         self.aairRateSmoothingValue.grid(row=8, column=3, padx=15, pady=15)
 
-        self.aairMaximumSensorRateLabel.grid(row=9, column=0, padx=15, pady=15)
-        self.aairMaximumSensorRateEntry.grid(row=9, column=1, padx=15, pady=15)
-        self.aairMaximumSensorRateButton.grid(row=9, column=2, padx=15, pady=15)
-        self.aairMaximumSensorRateValue.grid(row=9, column=3, padx=15, pady=15)
+        self.aairMaximumSensorRateLabel.grid(row=0, column=5, padx=15, pady=15)
+        self.aairMaximumSensorRateEntry.grid(row=0, column=6, padx=15, pady=15)
+        self.aairMaximumSensorRateButton.grid(row=0, column=7, padx=15, pady=15)
+        self.aairMaximumSensorRateValue.grid(row=0, column=8, padx=15, pady=15)
 
-        self.aairActivityThresholdLabel.grid(row=10, column=0, padx=15, pady=15)
-        self.aairActivityThresholdEntry.grid(row=10, column=1, padx=15, pady=15)
-        self.aairActivityThresholdButton.grid(row=10, column=2, padx=15, pady=15)
-        self.aairActivityThresholdValue.grid(row=10, column=3, padx=15, pady=15)
+        self.aairActivityThresholdLabel.grid(row=1, column=5, padx=15, pady=15)
+        self.aairActivityThresholdEntry.grid(row=1, column=6, padx=15, pady=15)
+        self.aairActivityThresholdButton.grid(row=1, column=7, padx=15, pady=15)
+        self.aairActivityThresholdValue.grid(row=1, column=8, padx=15, pady=15)
 
-        self.aairReactionTimeLabel.grid(row=11, column=0, padx=15, pady=15)
-        self.aairReactionTimeEntry.grid(row=11, column=1, padx=15, pady=15)
-        self.aairReactionTimeButton.grid(row=11, column=2, padx=15, pady=15)
-        self.aairReactionTimeValue.grid(row=11, column=3, padx=15, pady=15)
+        self.aairReactionTimeLabel.grid(row=2, column=5, padx=15, pady=15)
+        self.aairReactionTimeEntry.grid(row=2, column=6, padx=15, pady=15)
+        self.aairReactionTimeButton.grid(row=2, column=7, padx=15, pady=15)
+        self.aairReactionTimeValue.grid(row=2, column=8, padx=15, pady=15)
 
-        self.aairResponseFactorLabel.grid(row=12, column=0, padx=15, pady=15)
-        self.aairResponseFactorEntry.grid(row=12, column=1, padx=15, pady=15)
-        self.aairResponseFactorButton.grid(row=12, column=2, padx=15, pady=15)
-        self.aairResponseFactorValue.grid(row=12, column=3, padx=15, pady=15)
+        self.aairResponseFactorLabel.grid(row=3, column=5, padx=15, pady=15)
+        self.aairResponseFactorEntry.grid(row=3, column=6, padx=15, pady=15)
+        self.aairResponseFactorButton.grid(row=3, column=7, padx=15, pady=15)
+        self.aairResponseFactorValue.grid(row=3, column=8, padx=15, pady=15)
 
-        self.aairRecoveryTimeLabel.grid(row=13, column=0, padx=15, pady=15)
-        self.aairRecoveryTimeEntry.grid(row=13, column=1, padx=15, pady=15)
-        self.aairRecoveryTimeButton.grid(row=13, column=2, padx=15, pady=15)
-        self.aairRecoveryTimeValue.grid(row=13, column=3, padx=15, pady=15)
+        self.aairRecoveryTimeLabel.grid(row=4, column=5, padx=15, pady=15)
+        self.aairRecoveryTimeEntry.grid(row=4, column=6, padx=15, pady=15)
+        self.aairRecoveryTimeButton.grid(row=4, column=7, padx=15, pady=15)
+        self.aairRecoveryTimeValue.grid(row=4, column=8, padx=15, pady=15)
         #AAIR END------------------------------------------------------------------------------------------------------------------------------
 
         #VVIR BEGIN----------------------------------------------------------------------------------------------------------------------------
@@ -1233,30 +1230,30 @@ class MainWindow:
         self.vvirRateSmoothingButton.grid(row=7, column=2, padx=15, pady=15)
         self.vvirRateSmoothingValue.grid(row=7, column=3, padx=15, pady=15)
 
-        self.vvirMaximumSensorRateLabel.grid(row=8, column=0, padx=15, pady=15)
-        self.vvirMaximumSensorRateEntry.grid(row=8, column=1, padx=15, pady=15)
-        self.vvirMaximumSensorRateButton.grid(row=8, column=2, padx=15, pady=15)
-        self.vvirMaximumSensorRateValue.grid(row=8, column=3, padx=15, pady=15)
+        self.vvirMaximumSensorRateLabel.grid(row=0, column=5, padx=15, pady=15)
+        self.vvirMaximumSensorRateEntry.grid(row=0, column=6, padx=15, pady=15)
+        self.vvirMaximumSensorRateButton.grid(row=0, column=7, padx=15, pady=15)
+        self.vvirMaximumSensorRateValue.grid(row=0, column=8, padx=15, pady=15)
 
-        self.vvirActivityThresholdLabel.grid(row=9, column=0, padx=15, pady=15)
-        self.vvirActivityThresholdEntry.grid(row=9, column=1, padx=15, pady=15)
-        self.vvirActivityThresholdButton.grid(row=9, column=2, padx=15, pady=15)
-        self.vvirActivityThresholdValue.grid(row=9, column=3, padx=15, pady=15)
+        self.vvirActivityThresholdLabel.grid(row=1, column=5, padx=15, pady=15)
+        self.vvirActivityThresholdEntry.grid(row=1, column=6, padx=15, pady=15)
+        self.vvirActivityThresholdButton.grid(row=1, column=7, padx=15, pady=15)
+        self.vvirActivityThresholdValue.grid(row=1, column=8, padx=15, pady=15)
 
-        self.vvirReactionTimeLabel.grid(row=10, column=0, padx=15, pady=15)
-        self.vvirReactionTimeEntry.grid(row=10, column=1, padx=15, pady=15)
-        self.vvirReactionTimeButton.grid(row=10, column=2, padx=15, pady=15)
-        self.vvirReactionTimeValue.grid(row=10, column=3, padx=15, pady=15)
+        self.vvirReactionTimeLabel.grid(row=2, column=5, padx=15, pady=15)
+        self.vvirReactionTimeEntry.grid(row=2, column=6, padx=15, pady=15)
+        self.vvirReactionTimeButton.grid(row=2, column=7, padx=15, pady=15)
+        self.vvirReactionTimeValue.grid(row=2, column=8, padx=15, pady=15)
 
-        self.vvirResponseFactorLabel.grid(row=11, column=0, padx=15, pady=15)
-        self.vvirResponseFactorEntry.grid(row=11, column=1, padx=15, pady=15)
-        self.vvirResponseFactorButton.grid(row=11, column=2, padx=15, pady=15)
-        self.vvirResponseFactorValue.grid(row=11, column=3, padx=15, pady=15)
+        self.vvirResponseFactorLabel.grid(row=3, column=5, padx=15, pady=15)
+        self.vvirResponseFactorEntry.grid(row=3, column=6, padx=15, pady=15)
+        self.vvirResponseFactorButton.grid(row=3, column=7, padx=15, pady=15)
+        self.vvirResponseFactorValue.grid(row=3, column=8, padx=15, pady=15)
 
-        self.vvirRecoveryTimeLabel.grid(row=12, column=0, padx=15, pady=15)
-        self.vvirRecoveryTimeEntry.grid(row=12, column=1, padx=15, pady=15)
-        self.vvirRecoveryTimeButton.grid(row=12, column=2, padx=15, pady=15)
-        self.vvirRecoveryTimeValue.grid(row=12, column=3, padx=15, pady=15)
+        self.vvirRecoveryTimeLabel.grid(row=4, column=5, padx=15, pady=15)
+        self.vvirRecoveryTimeEntry.grid(row=4, column=6, padx=15, pady=15)
+        self.vvirRecoveryTimeButton.grid(row=4, column=7, padx=15, pady=15)
+        self.vvirRecoveryTimeValue.grid(row=4, column=8, padx=15, pady=15)
         #VVIR END------------------------------------------------------------------------------------------------------------------------------
 
         #DOOR BEGIN----------------------------------------------------------------------------------------------------------------------------
@@ -1354,122 +1351,123 @@ class MainWindow:
         self.doorFixedAVDelayButton.grid(row=6, column=2, padx=15, pady=15)
         self.doorFixedAVDelayValue.grid(row=6, column=3, padx=15, pady=15)
 
-        self.doorMaximumSensorRateLabel.grid(row=7, column=0, padx=15, pady=15)
-        self.doorMaximumSensorRateEntry.grid(row=7, column=1, padx=15, pady=15)
-        self.doorMaximumSensorRateButton.grid(row=7, column=2, padx=15, pady=15)
-        self.doorMaximumSensorRateValue.grid(row=7, column=3, padx=15, pady=15)
+        self.doorMaximumSensorRateLabel.grid(row=0, column=5, padx=15, pady=15)
+        self.doorMaximumSensorRateEntry.grid(row=0, column=6, padx=15, pady=15)
+        self.doorMaximumSensorRateButton.grid(row=0, column=7, padx=15, pady=15)
+        self.doorMaximumSensorRateValue.grid(row=0, column=8, padx=15, pady=15)
 
-        self.doorActivityThresholdLabel.grid(row=8, column=0, padx=15, pady=15)
-        self.doorActivityThresholdEntry.grid(row=8, column=1, padx=15, pady=15)
-        self.doorActivityThresholdButton.grid(row=8, column=2, padx=15, pady=15)
-        self.doorActivityThresholdValue.grid(row=8, column=3, padx=15, pady=15)
+        self.doorActivityThresholdLabel.grid(row=1, column=5, padx=15, pady=15)
+        self.doorActivityThresholdEntry.grid(row=1, column=6, padx=15, pady=15)
+        self.doorActivityThresholdButton.grid(row=1, column=7, padx=15, pady=15)
+        self.doorActivityThresholdValue.grid(row=1, column=8, padx=15, pady=15)
 
-        self.doorReactionTimeLabel.grid(row=9, column=0, padx=15, pady=15)
-        self.doorReactionTimeEntry.grid(row=9, column=1, padx=15, pady=15)
-        self.doorReactionTimeButton.grid(row=9, column=2, padx=15, pady=15)
-        self.doorReactionTimeValue.grid(row=9, column=3, padx=15, pady=15)
+        self.doorReactionTimeLabel.grid(row=2, column=5, padx=15, pady=15)
+        self.doorReactionTimeEntry.grid(row=2, column=6, padx=15, pady=15)
+        self.doorReactionTimeButton.grid(row=2, column=7, padx=15, pady=15)
+        self.doorReactionTimeValue.grid(row=2, column=8, padx=15, pady=15)
 
-        self.doorResponseFactorLabel.grid(row=10, column=0, padx=15, pady=15)
-        self.doorResponseFactorEntry.grid(row=10, column=1, padx=15, pady=15)
-        self.doorResponseFactorButton.grid(row=10, column=2, padx=15, pady=15)
-        self.doorResponseFactorValue.grid(row=10, column=3, padx=15, pady=15)
+        self.doorResponseFactorLabel.grid(row=3, column=5, padx=15, pady=15)
+        self.doorResponseFactorEntry.grid(row=3, column=6, padx=15, pady=15)
+        self.doorResponseFactorButton.grid(row=3, column=7, padx=15, pady=15)
+        self.doorResponseFactorValue.grid(row=3, column=8, padx=15, pady=15)
 
-        self.doorRecoveryTimeLabel.grid(row=11, column=0, padx=15, pady=15)
-        self.doorRecoveryTimeEntry.grid(row=11, column=1, padx=15, pady=15)
-        self.doorRecoveryTimeButton.grid(row=11, column=2, padx=15, pady=15)
-        self.doorRecoveryTimeValue.grid(row=11, column=3, padx=15, pady=15)
+        self.doorRecoveryTimeLabel.grid(row=4, column=5, padx=15, pady=15)
+        self.doorRecoveryTimeEntry.grid(row=4, column=6, padx=15, pady=15)
+        self.doorRecoveryTimeButton.grid(row=4, column=7, padx=15, pady=15)
+        self.doorRecoveryTimeValue.grid(row=4, column=8, padx=15, pady=15)
         #DOOR END------------------------------------------------------------------------------------------------------------------------------
-
-        
 
         #Track the process
         self.aooLogTitle = tk.Label(self.aoo, text = "Current Mode")
-        self.aooLogTitle.grid(row=0, column=4, padx=15, pady=15)
         self.aooLog = tk.Label(self.aoo, text = userlog)
-        self.aooLog.grid(row=1, column=4, padx=15, pady=15)
         self.vooLogTitle = tk.Label(self.voo, text = "Current Mode")
-        self.vooLogTitle.grid(row=0, column=4, padx=15, pady=15)
         self.vooLog = tk.Label(self.voo, text = userlog)
-        self.vooLog.grid(row=1, column=4, padx=15, pady=15)
         self.aaiLogTitle = tk.Label(self.aai, text = "Current Mode")
-        self.aaiLogTitle.grid(row=0, column=4, padx=15, pady=15)
         self.aaiLog = tk.Label(self.aai, text = userlog)
-        self.aaiLog.grid(row=1, column=4, padx=15, pady=15)
         self.vviLogTitle = tk.Label(self.vvi, text = "Current Mode")
-        self.vviLogTitle.grid(row=0, column=4, padx=15, pady=15)
         self.vviLog = tk.Label(self.vvi, text = userlog)
-        self.vviLog.grid(row=1, column=4, padx=15, pady=15)
         self.dooLogTitle = tk.Label(self.doo, text = "Current Mode")
-        self.dooLogTitle.grid(row=0, column=4, padx=15, pady=15)
         self.dooLog = tk.Label(self.doo, text = userlog)
-        self.dooLog.grid(row=1, column=4, padx=15, pady=15)
-
         self.aoorLogTitle = tk.Label(self.aoor, text = "Current Mode")
-        self.aoorLogTitle.grid(row=0, column=4, padx=15, pady=15)
         self.aoorLog = tk.Label(self.aoor, text = userlog)
-        self.aoorLog.grid(row=1, column=4, padx=15, pady=15)
         self.voorLogTitle = tk.Label(self.voor, text = "Current Mode")
-        self.voorLogTitle.grid(row=0, column=4, padx=15, pady=15)
         self.voorLog = tk.Label(self.voor, text = userlog)
-        self.voorLog.grid(row=1, column=4, padx=15, pady=15)
         self.aairLogTitle = tk.Label(self.aair, text = "Current Mode")
-        self.aairLogTitle.grid(row=0, column=4, padx=15, pady=15)
         self.aairLog = tk.Label(self.aair, text = userlog)
-        self.aairLog.grid(row=1, column=4, padx=15, pady=15)
         self.vvirLogTitle = tk.Label(self.vvir, text = "Current Mode")
-        self.vvirLogTitle.grid(row=0, column=4, padx=15, pady=15)
         self.vvirLog = tk.Label(self.vvir, text = userlog)
-        self.vvirLog.grid(row=1, column=4, padx=15, pady=15)
         self.doorLogTitle = tk.Label(self.door, text = "Current Mode")
-        self.doorLogTitle.grid(row=0, column=4, padx=15, pady=15)
         self.doorLog = tk.Label(self.door, text = userlog)
-        self.doorLog.grid(row=1, column=4, padx=15, pady=15)
 
         #Setup confirm buttons
         self.aooConfirmButton = tk.Button(self.aoo, text = 'Confirm', width = 20, command = lambda: self.confirmChanges("aooConfirm"))
-        self.aooConfirmButton.grid(row=2, column=4)
         self.vooConfirmButton = tk.Button(self.voo, text = 'Confirm', width = 20, command = lambda: self.confirmChanges("vooConfirm"))
-        self.vooConfirmButton.grid(row=2, column=4)
         self.aaiConfirmButton = tk.Button(self.aai, text = 'Confirm', width = 20, command = lambda: self.confirmChanges("aaiConfirm"))
-        self.aaiConfirmButton.grid(row=2, column=4)
         self.vviConfirmButton = tk.Button(self.vvi, text = 'Confirm', width = 20, command = lambda: self.confirmChanges("vviConfirm"))
-        self.vviConfirmButton.grid(row=2, column=4)
         self.dooConfirmButton = tk.Button(self.doo, text = 'Confirm', width = 20, command = lambda: self.confirmChanges("dooConfirm"))
-        self.dooConfirmButton.grid(row=2, column=4)
-        
         self.aoorConfirmButton = tk.Button(self.aoor, text = 'Confirm', width = 20, command = lambda: self.confirmChanges("aoorConfirm"))
-        self.aoorConfirmButton.grid(row=2, column=4)
         self.voorConfirmButton = tk.Button(self.voor, text = 'Confirm', width = 20, command = lambda: self.confirmChanges("voorConfirm"))
-        self.voorConfirmButton.grid(row=2, column=4)
         self.aairConfirmButton = tk.Button(self.aair, text = 'Confirm', width = 20, command = lambda: self.confirmChanges("aairConfirm"))
-        self.aairConfirmButton.grid(row=2, column=4)
         self.vvirConfirmButton = tk.Button(self.vvir, text = 'Confirm', width = 20, command = lambda: self.confirmChanges("vvirConfirm"))
-        self.vvirConfirmButton.grid(row=2, column=4)
         self.doorConfirmButton = tk.Button(self.door, text = 'Confirm', width = 20, command = lambda: self.confirmChanges("doorConfirm"))
-        self.doorConfirmButton.grid(row=2, column=4)
-
-        #Setup logoff button
-        self.aooQuitButton = tk.Button(self.aoo, text = 'LogOff', width = 12, command = self.logOff)
-        self.aooQuitButton.grid(row=3,column=4,pady=5)
-        self.vooQuitButton = tk.Button(self.voo, text = 'LogOff', width = 12, command = self.logOff)
-        self.vooQuitButton.grid(row=3,column=4,pady=5)
-        self.aaiQuitButton = tk.Button(self.aai, text = 'LogOff', width = 12, command = self.logOff)
-        self.aaiQuitButton.grid(row=3,column=4,pady=5)
-        self.vviQuitButton = tk.Button(self.vvi, text = 'LogOff', width = 12, command = self.logOff)
-        self.vviQuitButton.grid(row=3,column=4,pady=5)
-        self.dooQuitButton = tk.Button(self.doo, text = 'LogOff', width = 12, command = self.logOff)
-        self.dooQuitButton.grid(row=3,column=4,pady=5)
         
-        self.aoorQuitButton = tk.Button(self.aoor, text = 'LogOff', width = 12, command = self.logOff)
-        self.aoorQuitButton.grid(row=3,column=4,pady=5)
-        self.voorQuitButton = tk.Button(self.voor, text = 'LogOff', width = 12, command = self.logOff)
-        self.voorQuitButton.grid(row=3,column=4,pady=5)
-        self.aairQuitButton = tk.Button(self.aair, text = 'LogOff', width = 12, command = self.logOff)
-        self.aairQuitButton.grid(row=3,column=4,pady=5)
-        self.vvirQuitButton = tk.Button(self.vvir, text = 'LogOff', width = 12, command = self.logOff)
-        self.vvirQuitButton.grid(row=3,column=4,pady=5)
-        self.doorQuitButton = tk.Button(self.door, text = 'LogOff', width = 12, command = self.logOff)
-        self.doorQuitButton.grid(row=3,column=4,pady=5)
+        #Setup logoff button
+        self.aooLogoffButton = tk.Button(self.aoo, text = 'LogOff', width = 12, command = self.logOff)
+        self.vooLogoffButton = tk.Button(self.voo, text = 'LogOff', width = 12, command = self.logOff)
+        self.aaiLogoffButton = tk.Button(self.aai, text = 'LogOff', width = 12, command = self.logOff)
+        self.vviLogoffButton = tk.Button(self.vvi, text = 'LogOff', width = 12, command = self.logOff)
+        self.dooLogoffButton = tk.Button(self.doo, text = 'LogOff', width = 12, command = self.logOff)
+        self.aoorLogoffButton = tk.Button(self.aoor, text = 'LogOff', width = 12, command = self.logOff)
+        self.voorLogoffButton = tk.Button(self.voor, text = 'LogOff', width = 12, command = self.logOff)
+        self.aairLogoffButton = tk.Button(self.aair, text = 'LogOff', width = 12, command = self.logOff)
+        self.vvirLogoffButton = tk.Button(self.vvir, text = 'LogOff', width = 12, command = self.logOff)
+        self.doorLogoffButton = tk.Button(self.door, text = 'LogOff', width = 12, command = self.logOff)
+        
+        #Adjust positioning
+        self.aooLogTitle.grid(row=8, column=4, padx=15, pady=15)
+        self.vooLogTitle.grid(row=8, column=4, padx=15, pady=15)
+        self.aaiLogTitle.grid(row=8, column=4, padx=15, pady=15)
+        self.vviLogTitle.grid(row=8, column=4, padx=15, pady=15)
+        self.dooLogTitle.grid(row=8, column=4, padx=15, pady=15)
+        self.aoorLogTitle.grid(row=8, column=4, padx=15, pady=15)
+        self.voorLogTitle.grid(row=8, column=4, padx=15, pady=15)
+        self.aairLogTitle.grid(row=8, column=4, padx=15, pady=15)
+        self.vvirLogTitle.grid(row=8, column=4, padx=15, pady=15)
+        self.doorLogTitle.grid(row=8, column=4, padx=15, pady=15)
+
+        self.aooLog.grid(row=9, column=4, padx=15, pady=15)
+        self.vooLog.grid(row=9, column=4, padx=15, pady=15)
+        self.aaiLog.grid(row=9, column=4, padx=15, pady=15)
+        self.vviLog.grid(row=9, column=4, padx=15, pady=15)
+        self.dooLog.grid(row=9, column=4, padx=15, pady=15)
+        self.aoorLog.grid(row=9, column=4, padx=15, pady=15)
+        self.voorLog.grid(row=9, column=4, padx=15, pady=15)
+        self.aairLog.grid(row=9, column=4, padx=15, pady=15)       
+        self.vvirLog.grid(row=9, column=4, padx=15, pady=15)
+        self.doorLog.grid(row=9, column=4, padx=15, pady=15)
+
+        self.aooConfirmButton.grid(row=10, column=4)
+        self.vooConfirmButton.grid(row=10, column=4)
+        self.aaiConfirmButton.grid(row=10, column=4)
+        self.vviConfirmButton.grid(row=10, column=4)
+        self.dooConfirmButton.grid(row=10, column=4)
+        self.aoorConfirmButton.grid(row=10, column=4)
+        self.voorConfirmButton.grid(row=10, column=4)
+        self.aairConfirmButton.grid(row=10, column=4)
+        self.vvirConfirmButton.grid(row=10, column=4)
+        self.doorConfirmButton.grid(row=10, column=4)
+
+        self.aooLogoffButton.grid(row=11,column=4,pady=5)
+        self.vooLogoffButton.grid(row=11,column=4,pady=5)
+        self.aaiLogoffButton.grid(row=11,column=4,pady=5)
+        self.vviLogoffButton.grid(row=11,column=4,pady=5)
+        self.dooLogoffButton.grid(row=11,column=4,pady=5)
+        self.aoorLogoffButton.grid(row=11,column=4,pady=5)
+        self.voorLogoffButton.grid(row=11,column=4,pady=5)
+        self.aairLogoffButton.grid(row=11,column=4,pady=5)
+        self.vvirLogoffButton.grid(row=11,column=4,pady=5)
+        self.doorLogoffButton.grid(row=11,column=4,pady=5)
+        
 
     #Confirm changes method
     def confirmChanges(self,value):
