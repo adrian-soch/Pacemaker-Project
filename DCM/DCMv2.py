@@ -265,16 +265,16 @@ class AddUserWindow:
                             "?,?,?,?,?,?,?,?,?,?,?,?,?, " #vvir
                             "?,?,?,?,?,?,?,?,?,?,?,?)", #door
                             (userlog, 
-                            60, 120, 3.5, 1.5, #aoo
-                            60, 120, 3.5, 1.5, #voo
-                            60, 120, 3.5, 1.5, 3.3, 250, 200, 0, 0, #aai
-                            60, 120, 3.5, 1.5, 3.3, 250, 0, 0, #vvi
-                            0,0,0,0,0,0,0, #doo
-                            60, 120, 3.5, 1.5, 0,0,0,0,0, #aoor
-                            60, 120, 3.5, 1.5, 0,0,0,0,0, #voor
-                            60, 120, 3.5, 1.5, 3.3, 250, 200, 0, 0, 0,0,0,0,0, #aair
-                            60, 120, 3.5, 1.5, 3.3, 250, 0, 0, 0,0,0,0,0, #vvir
-                            0,0,0,0,0,0,0,0,0,0,0,0)) #door
+                            60, 120, 3.5, 0.4, #aoo
+                            60, 120, 3.5, 0.4, #voo
+                            60, 120, 3.5, 0.4, 0.75, 250, 250, 0, 0, #aai
+                            60, 120, 3.5, 0.4, 2.5, 320, 0, 0, #vvi
+                            60, 120, 3.5, 0.4, 3.5, 0.4 ,150, #doo
+                            60, 120, 3.5, 0.4, 120,4,30,8,5, #aoor
+                            60, 120, 3.5, 0.4, 120,4,30,8,5, #voor
+                            60, 120, 3.5, 0.4, 3.3, 250, 250, 0, 0, 120,4,30,8,5, #aair
+                            60, 120, 3.5, 0.4, 3.3, 320, 0, 0, 120,4,30,8,5, #vvir
+                            60, 120, 3.5, 0.4, 3.5, 0.4 ,150 ,120,4,30,8,5)) #door
                         messagebox.showinfo("Success", "User Added")
                         self.quitButton.focus()
 
@@ -469,7 +469,7 @@ class MainWindow:
         #Spinbox for setup
         self.aooLowerRateLimitEntry = tk.Spinbox(self.aoo,from_=30,to=175,increment=5)
         self.aooUpperRateLimitEntry = tk.Spinbox(self.aoo,from_=50,to=175,increment=5)
-        self.aooAtrialAmplitudeEntry = tk.Spinbox(self.aoo,from_=0.5,to=7.0,format="%.1f",increment=0.1)
+        self.aooAtrialAmplitudeEntry = tk.Spinbox(self.aoo,from_=0.0,to=7.0,format="%.1f",increment=0.1)
         self.aooAtrialPulseWidthEntry = tk.Spinbox(self.aoo,from_=0.05,to=1.9,format="%.2f",increment=0.1)
 
         #Setup buttons
@@ -516,7 +516,7 @@ class MainWindow:
         #Spinbox for setup
         self.vooLowerRateLimitEntry = tk.Spinbox(self.voo,from_=30,to=175,increment=5)
         self.vooUpperRateLimitEntry = tk.Spinbox(self.voo,from_=50,to=175,increment=5)
-        self.vooVentricularAmplitudeEntry = tk.Spinbox(self.voo,from_=0.5,to=7.0,format="%.1f",increment=0.1)
+        self.vooVentricularAmplitudeEntry = tk.Spinbox(self.voo,from_=0.0,to=7.0,format="%.1f",increment=0.1)
         self.vooVentricularPulseWidthEntry = tk.Spinbox(self.voo,from_=0.05,to=1.9,format="%.2f",increment=0.1)
         
         #Setup buttons
@@ -568,7 +568,7 @@ class MainWindow:
         #Spinbox for setup
         self.aaiLowerRateLimitEntry = tk.Spinbox(self.aai,from_=30,to=175,increment=5)
         self.aaiUpperRateLimitEntry = tk.Spinbox(self.aai,from_=50,to=175,increment=5)
-        self.aaiAtrialAmplitudeEntry = tk.Spinbox(self.aai,from_=0.5,to=7.0,format="%.1f",increment=0.1)
+        self.aaiAtrialAmplitudeEntry = tk.Spinbox(self.aai,from_=0.0,to=7.0,format="%.1f",increment=0.1)
         self.aaiAtrialPulseWidthEntry = tk.Spinbox(self.aai,from_=0.05,to=1.9,format="%.2f",increment=0.1)
         self.aaiAtrialSensitivityEntry = tk.Spinbox(self.aai,from_=0.25,to=10.0,format="%.2f",increment=0.25)
         self.aaiARPEntry = tk.Spinbox(self.aai,from_=150,to=500,increment=10)
@@ -659,7 +659,7 @@ class MainWindow:
         #Spinbox for setup
         self.vviLowerRateLimitEntry = tk.Spinbox(self.vvi,from_=30,to=175,increment=5)
         self.vviUpperRateLimitEntry = tk.Spinbox(self.vvi,from_=50,to=175,increment=5)
-        self.vviVentricularAmplitudeEntry = tk.Spinbox(self.vvi,from_=0.5,to=7.0,format="%.1f",increment=0.1)
+        self.vviVentricularAmplitudeEntry = tk.Spinbox(self.vvi,from_=0.0,to=7.0,format="%.1f",increment=0.1)
         self.vviVentricularPulseWidthEntry = tk.Spinbox(self.vvi,from_=0.05,to=1.9,format="%.2f",increment=0.1)
         self.vviVentricularSensitivityEntry = tk.Spinbox(self.vvi,from_=0.25,to=10.0,format="%.2f",increment=0.25)
         self.vviVRPEntry = tk.Spinbox(self.vvi,from_=150,to=500,increment=10)
@@ -741,9 +741,9 @@ class MainWindow:
         #Spinbox for setup
         self.dooLowerRateLimitEntry = tk.Spinbox(self.doo,from_=30,to=175,increment=5)
         self.dooUpperRateLimitEntry = tk.Spinbox(self.doo,from_=50,to=175,increment=5)
-        self.dooAtrialAmplitudeEntry = tk.Spinbox(self.doo,from_=0.5,to=7.0,format="%.1f",increment=0.1)
+        self.dooAtrialAmplitudeEntry = tk.Spinbox(self.doo,from_=0.0,to=7.0,format="%.1f",increment=0.1)
         self.dooAtrialPulseWidthEntry = tk.Spinbox(self.doo,from_=0.05,to=1.9,format="%.2f",increment=0.1)
-        self.dooVentricularAmplitudeEntry = tk.Spinbox(self.doo,from_=0.5,to=7.0,format="%.1f",increment=0.1)
+        self.dooVentricularAmplitudeEntry = tk.Spinbox(self.doo,from_=0.0,to=7.0,format="%.1f",increment=0.1)
         self.dooVentricularPulseWidthEntry = tk.Spinbox(self.doo,from_=0.05,to=1.9,format="%.2f",increment=0.1)
         self.dooFixedAVDelayEntry = tk.Spinbox(self.doo,from_=70,to=300,increment=10)
 
@@ -817,13 +817,13 @@ class MainWindow:
         #Spinbox for setup
         self.aoorLowerRateLimitEntry = tk.Spinbox(self.aoor,from_=30,to=175,increment=5)
         self.aoorUpperRateLimitEntry = tk.Spinbox(self.aoor,from_=50,to=175,increment=5)
-        self.aoorAtrialAmplitudeEntry = tk.Spinbox(self.aoor,from_=0.5,to=7.0,format="%.1f",increment=0.1)
+        self.aoorAtrialAmplitudeEntry = tk.Spinbox(self.aoor,from_=0.0,to=7.0,format="%.1f",increment=0.1)
         self.aoorAtrialPulseWidthEntry = tk.Spinbox(self.aoor,from_=0.05,to=1.9,format="%.2f",increment=0.1)
-        self.aoorMaximumSensorRateEntry = tk.Spinbox(self.aoor,from_=30,to=175,increment=5)
-        self.aoorActivityThresholdEntry = tk.Spinbox(self.aoor,from_=50,to=175,increment=5)
-        self.aoorReactionTimeEntry = tk.Spinbox(self.aoor,from_=0.5,to=7.0,format="%.1f",increment=0.1)
-        self.aoorResponseFactorEntry = tk.Spinbox(self.aoor,from_=0.05,to=1.9,format="%.2f",increment=0.1)
-        self.aoorRecoveryTimeEntry = tk.Spinbox(self.aoor,from_=30,to=175,increment=5)
+        self.aoorMaximumSensorRateEntry = tk.Spinbox(self.aoor,from_=50,to=175,increment=5)
+        self.aoorActivityThresholdEntry = tk.Spinbox(self.aoor,from_=1,to=7,increment=1)
+        self.aoorReactionTimeEntry = tk.Spinbox(self.aoor,from_=10,to=50,increment=10)
+        self.aoorResponseFactorEntry = tk.Spinbox(self.aoor,from_=1,to=16,increment=1)
+        self.aoorRecoveryTimeEntry = tk.Spinbox(self.aoor,from_=2,to=16,increment=1)
 
         #Setup buttons
         self.aoorLowerRateLimitButton = tk.Button(self.aoor, text = "Set", command= lambda: self.setValue("aoorLowerRateLimit"))
@@ -911,11 +911,11 @@ class MainWindow:
         self.voorUpperRateLimitEntry = tk.Spinbox(self.voor,from_=50,to=175,increment=5)
         self.voorVentricularAmplitudeEntry = tk.Spinbox(self.voor,from_=0.5,to=7.0,format="%.1f",increment=0.1)
         self.voorVentricularPulseWidthEntry = tk.Spinbox(self.voor,from_=0.05,to=1.9,format="%.2f",increment=0.1)
-        self.voorMaximumSensorRateEntry = tk.Spinbox(self.voor,from_=30,to=175,increment=5)
-        self.voorActivityThresholdEntry = tk.Spinbox(self.voor,from_=50,to=175,increment=5)
-        self.voorReactionTimeEntry = tk.Spinbox(self.voor,from_=0.5,to=7.0,format="%.1f",increment=0.1)
-        self.voorResponseFactorEntry = tk.Spinbox(self.voor,from_=0.05,to=1.9,format="%.2f",increment=0.1)
-        self.voorRecoveryTimeEntry = tk.Spinbox(self.voor,from_=30,to=175,increment=5)
+        self.voorMaximumSensorRateEntry = tk.Spinbox(self.voor,from_=50,to=175,increment=5)
+        self.voorActivityThresholdEntry = tk.Spinbox(self.voor,from_=1,to=7,increment=1)
+        self.voorReactionTimeEntry = tk.Spinbox(self.voor,from_=10,to=50,increment=10)
+        self.voorResponseFactorEntry = tk.Spinbox(self.voor,from_=1,to=16,increment=1)
+        self.voorRecoveryTimeEntry = tk.Spinbox(self.voor,from_=2,to=16,increment=1)
 
         #Setup buttons
         self.voorLowerRateLimitButton = tk.Button(self.voor, text = "Set", command= lambda: self.setValue("voorLowerRateLimit"))
@@ -1013,11 +1013,11 @@ class MainWindow:
         self.aairPVARPEntry = tk.Spinbox(self.aair,from_=150,to=500,increment=10)
         self.aairHysteresisEntry = tk.Spinbox(self.aair,from_=0,to=25,increment=5)
         self.aairRateSmoothingEntry = tk.Spinbox(self.aair,from_=0,to=25,increment=3)
-        self.aairMaximumSensorRateEntry = tk.Spinbox(self.aair,from_=30,to=175,increment=5)
-        self.aairActivityThresholdEntry = tk.Spinbox(self.aair,from_=50,to=175,increment=5)
-        self.aairReactionTimeEntry = tk.Spinbox(self.aair,from_=0.5,to=7.0,format="%.1f",increment=0.1)
-        self.aairResponseFactorEntry = tk.Spinbox(self.aair,from_=0.05,to=1.9,format="%.2f",increment=0.1)
-        self.aairRecoveryTimeEntry = tk.Spinbox(self.aair,from_=30,to=175,increment=5)
+        self.aairMaximumSensorRateEntry = tk.Spinbox(self.aair,from_=50,to=175,increment=5)
+        self.aairActivityThresholdEntry = tk.Spinbox(self.aair,from_=1,to=7,increment=1)
+        self.aairReactionTimeEntry = tk.Spinbox(self.aair,from_=10,to=50,increment=10)
+        self.aairResponseFactorEntry = tk.Spinbox(self.aair,from_=1,to=16,increment=1)
+        self.aairRecoveryTimeEntry = tk.Spinbox(self.aair,from_=2,to=16,increment=1)
 
         #Setup buttons
         self.aairLowerRateLimitButton = tk.Button(self.aair, text = "Set", command= lambda: self.setValue("aairLowerRateLimit"))
@@ -1148,11 +1148,11 @@ class MainWindow:
         self.vvirVRPEntry = tk.Spinbox(self.vvir,from_=150,to=500,increment=10)
         self.vvirHysteresisEntry = tk.Spinbox(self.vvir,from_=0,to=25,increment=5)
         self.vvirRateSmoothingEntry = tk.Spinbox(self.vvir,from_=0,to=25,increment=3)
-        self.vvirMaximumSensorRateEntry = tk.Spinbox(self.vvir,from_=30,to=175,increment=5)
-        self.vvirActivityThresholdEntry = tk.Spinbox(self.vvir,from_=50,to=175,increment=5)
-        self.vvirReactionTimeEntry = tk.Spinbox(self.vvir,from_=0.5,to=7.0,format="%.1f",increment=0.1)
-        self.vvirResponseFactorEntry = tk.Spinbox(self.vvir,from_=0.05,to=1.9,format="%.2f",increment=0.1)
-        self.vvirRecoveryTimeEntry = tk.Spinbox(self.vvir,from_=30,to=175,increment=5)
+        self.vvirMaximumSensorRateEntry = tk.Spinbox(self.vvir,from_=50,to=175,increment=5)
+        self.vvirActivityThresholdEntry = tk.Spinbox(self.vvir,from_=1,to=7,increment=1)
+        self.vvirReactionTimeEntry = tk.Spinbox(self.vvir,from_=10,to=50,increment=10)
+        self.vvirResponseFactorEntry = tk.Spinbox(self.vvir,from_=1,to=16,increment=1)
+        self.vvirRecoveryTimeEntry = tk.Spinbox(self.vvir,from_=2,to=16,increment=1)
         
         #Setup buttons
         self.vvirLowerRateLimitButton = tk.Button(self.vvir, text = "Set", command= lambda: self.setValue("vvirLowerRateLimit"))
@@ -1274,11 +1274,11 @@ class MainWindow:
         self.doorVentricularAmplitudeEntry = tk.Spinbox(self.door,from_=0.5,to=7.0,format="%.1f",increment=0.1)
         self.doorVentricularPulseWidthEntry = tk.Spinbox(self.door,from_=0.05,to=1.9,format="%.2f",increment=0.1)
         self.doorFixedAVDelayEntry = tk.Spinbox(self.door,from_=70,to=300,increment=10)
-        self.doorMaximumSensorRateEntry = tk.Spinbox(self.door,from_=30,to=175,increment=5)
-        self.doorActivityThresholdEntry = tk.Spinbox(self.door,from_=50,to=175,increment=5)
-        self.doorReactionTimeEntry = tk.Spinbox(self.door,from_=0.5,to=7.0,format="%.1f",increment=0.1)
-        self.doorResponseFactorEntry = tk.Spinbox(self.door,from_=0.05,to=1.9,format="%.2f",increment=0.1)
-        self.doorRecoveryTimeEntry = tk.Spinbox(self.door,from_=30,to=175,increment=5)
+        self.doorMaximumSensorRateEntry = tk.Spinbox(self.door,from_=50,to=175,increment=5)
+        self.doorActivityThresholdEntry = tk.Spinbox(self.door,from_=1,to=7,increment=1)
+        self.doorReactionTimeEntry = tk.Spinbox(self.door,from_=10,to=50,increment=10)
+        self.doorResponseFactorEntry = tk.Spinbox(self.door,from_=1,to=16,increment=1)
+        self.doorRecoveryTimeEntry = tk.Spinbox(self.door,from_=2,to=16,increment=1)
         
         #Setup buttons
         self.doorLowerRateLimitButton = tk.Button(self.door, text = "Set", command= lambda: self.setValue("doorLowerRateLimit"))
@@ -1528,7 +1528,103 @@ class MainWindow:
                 self.doorLog.config(text= userlog)
                 db.execute("UPDATE "+currentuser+" SET userlog = ?", (userlog, ))
                 db.commit()
-
+        elif (value == "dooConfirm"):
+            if messagebox.askyesno("Confirmation", "Upload these changes?"):
+                messagebox.showinfo("Done", "Success")
+                userlog = "DOO Was Uploaded"
+                self.aooLog.config(text= userlog)
+                self.vooLog.config(text= userlog)
+                self.aaiLog.config(text= userlog)
+                self.vviLog.config(text= userlog)
+                self.dooLog.config(text= userlog)
+                self.aoorLog.config(text= userlog)
+                self.voorLog.config(text= userlog)
+                self.aairLog.config(text= userlog)
+                self.vvirLog.config(text= userlog)
+                self.doorLog.config(text= userlog)
+                db.execute("UPDATE "+currentuser+" SET userlog = ?", (userlog, ))
+                db.commit()
+        elif (value == "aoorConfirm"):
+            if messagebox.askyesno("Confirmation", "Upload these changes?"):
+                messagebox.showinfo("Done", "Success")
+                userlog = "AOOR Was Uploaded"
+                self.aooLog.config(text= userlog)
+                self.vooLog.config(text= userlog)
+                self.aaiLog.config(text= userlog)
+                self.vviLog.config(text= userlog)
+                self.dooLog.config(text= userlog)
+                self.aoorLog.config(text= userlog)
+                self.voorLog.config(text= userlog)
+                self.aairLog.config(text= userlog)
+                self.vvirLog.config(text= userlog)
+                self.doorLog.config(text= userlog)
+                db.execute("UPDATE "+currentuser+" SET userlog = ?", (userlog, ))
+                db.commit()
+        elif (value == "voorConfirm"):
+            if messagebox.askyesno("Confirmation", "Upload these changes?"):
+                messagebox.showinfo("Done", "Success")
+                userlog = "VOOR Was Uploaded"
+                self.aooLog.config(text= userlog)
+                self.vooLog.config(text= userlog)
+                self.aaiLog.config(text= userlog)
+                self.vviLog.config(text= userlog)
+                self.dooLog.config(text= userlog)
+                self.aoorLog.config(text= userlog)
+                self.voorLog.config(text= userlog)
+                self.aairLog.config(text= userlog)
+                self.vvirLog.config(text= userlog)
+                self.doorLog.config(text= userlog)
+                db.execute("UPDATE "+currentuser+" SET userlog = ?", (userlog, ))
+                db.commit()
+        elif (value == "aairConfirm"):
+            if messagebox.askyesno("Confirmation", "Upload these changes?"):
+                messagebox.showinfo("Done", "Success")
+                userlog = "AAIR Was Uploaded"
+                self.aooLog.config(text= userlog)
+                self.vooLog.config(text= userlog)
+                self.aaiLog.config(text= userlog)
+                self.vviLog.config(text= userlog)
+                self.dooLog.config(text= userlog)
+                self.aoorLog.config(text= userlog)
+                self.voorLog.config(text= userlog)
+                self.aairLog.config(text= userlog)
+                self.vvirLog.config(text= userlog)
+                self.doorLog.config(text= userlog)
+                db.execute("UPDATE "+currentuser+" SET userlog = ?", (userlog, ))
+                db.commit()
+        elif (value == "vvirConfirm"):
+            if messagebox.askyesno("Confirmation", "Upload these changes?"):
+                messagebox.showinfo("Done", "Success")
+                userlog = "VVIR Was Uploaded"
+                self.aooLog.config(text= userlog)
+                self.vooLog.config(text= userlog)
+                self.aaiLog.config(text= userlog)
+                self.vviLog.config(text= userlog)
+                self.dooLog.config(text= userlog)
+                self.aoorLog.config(text= userlog)
+                self.voorLog.config(text= userlog)
+                self.aairLog.config(text= userlog)
+                self.vvirLog.config(text= userlog)
+                self.doorLog.config(text= userlog)
+                db.execute("UPDATE "+currentuser+" SET userlog = ?", (userlog, ))
+                db.commit()
+        elif (value == "doorConfirm"):
+            if messagebox.askyesno("Confirmation", "Upload these changes?"):
+                messagebox.showinfo("Done", "Success")
+                userlog = "DOOR Was Uploaded"
+                self.aooLog.config(text= userlog)
+                self.vooLog.config(text= userlog)
+                self.aaiLog.config(text= userlog)
+                self.vviLog.config(text= userlog)
+                self.dooLog.config(text= userlog)
+                self.aoorLog.config(text= userlog)
+                self.voorLog.config(text= userlog)
+                self.aairLog.config(text= userlog)
+                self.vvirLog.config(text= userlog)
+                self.doorLog.config(text= userlog)
+                db.execute("UPDATE "+currentuser+" SET userlog = ?", (userlog, ))
+                db.commit()
+        
     #Method to set value
     def setValue(self,value):
         #Global Variables
@@ -1540,6 +1636,19 @@ class MainWindow:
         global aai_lowerRateLimitEntry,aai_upperRateLimitEntry,aai_atrialAmplitudeEntry,aai_atrialPulseWidthEntry,aai_atrialSensitivityEntry,aai_ARPEntry,aai_PVARPEntry,aai_hysteresisEntry,aai_rateSmoothingEntry
         #VVI
         global vvi_lowerRateLimitEntry,vvi_upperRateLimitEntry,vvi_ventricularAmplitudeEntry,vvi_ventricularPulseWidthEntry,vvi_ventricularSensitivityEntry,vvi_VRPEntry,vvi_hysteresisEntry,vvi_rateSmoothingEntry
+        #DOO
+        global doo_lowerRateLimitEntry, doo_upperRateLimitEntry, doo_atrialAmplitudeEntry, doo_atrialPulseWidthEntry, doo_ventricularAmplitudeEntry, doo_ventricularPulseWidthEntry, doo_fixedAVDelayEntry
+
+        #AOOR
+        global aoor_lowerRateLimitEntry, aoor_upperRateLimitEntry, aoor_atrialAmplitudeEntry, aoor_atrialPulseWidthEntry, aoor_maximumSensorRateEntry, aoor_activityThresholdEntry, aoor_reactionTimeEntry, aoor_responseFactorEntry, aoor_recoveryTimeEntry
+        #VOOR
+        global voor_lowerRateLimitEntry, voor_upperRateLimitEntry, voor_ventricularAmplitudeEntry, voor_ventricularPulseWidthEntry, voor_maximumSensorRateEntry, voor_activityThresholdEntry, voor_reactionTimeEntry, voor_responseFactorEntry, voor_recoveryTimeEntry
+        #AAIR
+        global aair_lowerRateLimitEntry, aair_upperRateLimitEntry, aair_atrialAmplitudeEntry, aair_atrialPulseWidthEntry, aair_atrialSensitivityEntry, aair_ARPEntry, aair_PVARPEntry, aair_hysteresisEntry, aair_rateSmoothingEntry, aair_maximumSensorRateEntry, aair_activityThresholdEntry, aair_reactionTimeEntry, aair_responseFactorEntry, aair_recoveryTimeEntry
+        #VVIR
+        global vvir_lowerRateLimitEntry, vvir_upperRateLimitEntry, vvir_ventricularAmplitudeEntry, vvir_ventricularPulseWidthEntry, vvir_ventricularSensitivityEntry, vvir_VRPEntry, vvir_hysteresisEntry, vvir_rateSmoothingEntry, vvir_maximumSensorRateEntry, vvir_activityThresholdEntry, vvir_reactionTimeEntry, vvir_responseFactorEntry, vvir_recoveryTimeEntry
+        #DOOR
+        global door_lowerRateLimitEntry, door_upperRateLimitEntry, door_atrialAmplitudeEntry, door_atrialPulseWidthEntry, door_ventricularAmplitudeEntry, door_ventricularPulseWidthEntry, door_maximumSensorRateEntry, door_fixedAVDelayEntry, door_activityThresholdEntry, door_reactionTimeEntry, door_responseFactorEntry, door_recoveryTimeEntry
 
         #Currentuser
         global currentuser
@@ -1591,7 +1700,7 @@ class MainWindow:
 
                 #Ensure upper limit is larger than lower limit
                 elif(int(aoo_lowerRateLimitEntry) >= int(self.aooUpperRateLimitEntry.get()) and int(aoo_lowerRateLimitEntry) != 0 ):
-                    messagebox.showinfo("Error","Please ensure your lower rate limit is lower than your upper rate limit")
+                    messagebox.showinfo("Error","Please ensure your upper rate limit is higher than your lower rate limit")
                     pass
 
                 #Ensure value is in limited range
@@ -1714,7 +1823,7 @@ class MainWindow:
 
                 #Ensure upper limit is larger than lower limit
                 elif(int(voo_lowerRateLimitEntry) >= int(self.vooUpperRateLimitEntry.get()) and int(voo_lowerRateLimitEntry) != 0 ):
-                    messagebox.showinfo("Error","Please ensure your lower rate limit is lower than your upper rate limit")
+                    messagebox.showinfo("Error","Please ensure your upper rate limit is higher than your lower rate limit")
                     pass
 
                 #Ensure value is in limited range
@@ -1836,7 +1945,7 @@ class MainWindow:
                     pass
                 #Ensure upper limit is larger than lower limit
                 elif(int(aai_lowerRateLimitEntry) >= int(self.aaiUpperRateLimitEntry.get()) and int(aai_lowerRateLimitEntry) != 0 ):
-                    messagebox.showinfo("Error","Please ensure your lower rate limit is lower than your upper rate limit")
+                    messagebox.showinfo("Error","Please ensure your upper rate limit is higher than your lower rate limit")
                     pass
 
                 #Ensure value is in limited range
@@ -2095,7 +2204,7 @@ class MainWindow:
 
                 #Ensure upper limit is larger than lower limit
                 elif(int(vvi_lowerRateLimitEntry) >= int(self.vviUpperRateLimitEntry.get()) and int(vvi_lowerRateLimitEntry) != 0 ):
-                    messagebox.showinfo("Error","Please ensure your lower rate limit is lower than your upper rate limit")
+                    messagebox.showinfo("Error","Please ensure your upper rate limit is higher than your lower rate limit")
                     pass
 
                 #Ensure value is in limited range
@@ -2285,19 +2394,739 @@ class MainWindow:
         #DOO END-------------------------------------------------------------------------------------------------------------------------------
 
         #AOOR BEGIN----------------------------------------------------------------------------------------------------------------------------
-        
+        #aoorLowerRateLimit
+        if(value == "aoorLowerRateLimit"):
+            temp = self.aoorLowerRateLimitEntry.get()
+            #Try/access to sanitize user input and ask for confirmation if there are no errors
+            try:
+                int(temp)
+                if (temp == '' or int(temp)<0):
+                    messagebox.showinfo("Error","Please enter a valid value")
+                    pass
+
+                #Ensure upper limit is larger than lower limit
+                elif(int(self.aoorLowerRateLimitEntry.get()) >= int(aoor_upperRateLimitEntry) and int(aoor_upperRateLimitEntry) != 0 ):
+                    messagebox.showinfo("Error","Please ensure your lower rate limit is lower than your upper rate limit")
+                    pass
+
+                #Ensure value is in limited range
+                elif(int(temp) < 30 or int(temp) > 175):
+                    messagebox.showinfo("Error","The range is between 30 and 175")
+                    pass
+
+                #If everything is good update current value
+                else:
+                    if messagebox.askyesno("Confirmation", "Replace current value?"):
+                        messagebox.showinfo("Done", "Success")
+                        aoor_lowerRateLimitEntry = temp
+                        self.aoorLowerRateLimitValue.config(text="Current Value: " + aoor_lowerRateLimitEntry)
+                        db.execute("UPDATE "+currentuser+" SET aoor_lowerRateLimitEntry = ?", (aoor_lowerRateLimitEntry,))
+                        db.commit()
+
+            except Exception as e:
+                print(e)
+                messagebox.showinfo("Error","Please enter a valid value")
+                pass
+
+        #aoorUpperRateLimit
+        if(value == "aoorUpperRateLimit"):
+            temp = self.aoorUpperRateLimitEntry.get()
+            #Try/access to sanitize user input and ask for confirmation if there are no errors
+            try:
+                int(temp)
+                if (temp == '' or int(temp)<0):
+                    messagebox.showinfo("Error","Please enter a valid value")
+                    pass
+
+                #Ensure upper limit is larger than lower limit
+                elif(int(aoor_lowerRateLimitEntry) >= int(self.aoorUpperRateLimitEntry.get()) and int(aoor_lowerRateLimitEntry) != 0 ):
+                    messagebox.showinfo("Error","Please ensure your upper rate limit is higher than your lower rate limit")
+                    pass
+
+                #Ensure value is in limited range
+                elif(int(temp) < 50 or int(temp) > 175):
+                    messagebox.showinfo("Error","The range is between 50 and 175")
+                    pass
+
+                #If everything is good update current value
+                else:
+                    if messagebox.askyesno("Confirmation", "Replace current value?"):
+                        messagebox.showinfo("Done", "Success")
+                        aoor_upperRateLimitEntry = temp
+                        self.aoorUpperRateLimitValue.config(text="Current Value: " + aoor_upperRateLimitEntry)
+                        db.execute("UPDATE "+currentuser+" SET aoor_upperRateLimitEntry = ?", (aoor_upperRateLimitEntry,))
+                        db.commit()
+
+            except:
+                messagebox.showinfo("Error","Please enter a valid value")
+                pass
+
+        #aoorAtrialAmplitude
+        if(value == "aoorAtrialAmplitude"):
+            temp = self.aoorAtrialAmplitudeEntry.get()
+            #Try/access to sanitize user input and ask for confirmation if there are no errors
+            try:
+                float(temp)
+                if (temp == '' or float(temp)<0):
+                    messagebox.showinfo("Error","Please enter a valid value")
+                    pass
+                #Ensure value is in limited range
+                elif(float(temp) < 0 or float(temp) > 7.0):
+                    messagebox.showinfo("Error","The range is between 0(off) and 7.0")
+                    pass
+
+                #If everything is good update current value
+                else:
+                    if messagebox.askyesno("Confirmation", "Replace current value?"):
+                        messagebox.showinfo("Done", "Success")
+                        aoor_atrialAmplitudeEntry = temp
+                        self.aoorAtrialAmplitudeValue.config(text="Current Value: " + aoor_atrialAmplitudeEntry)
+                        db.execute("UPDATE "+currentuser+" SET aoor_atrialAmplitudeEntry = ?", (aoor_atrialAmplitudeEntry,))
+                        db.commit()
+
+            except:
+                messagebox.showinfo("Error","Please enter a valid value")
+                pass
+
+        #aoorAtrialPulseWidth
+        if(value == "aoorAtrialPulseWidth"):
+            temp = self.aoorAtrialPulseWidthEntry.get()
+            #Try/access to sanitize user input and ask for confirmation if there are no errors
+            try:
+                float(temp)
+                if (temp == '' or float(temp)<0):
+                    messagebox.showinfo("Error","Please enter a valid value")
+                    pass
+
+                #Ensure value is in limited range
+                elif(float(temp) < 0.05 or float(temp) > 1.9):
+                    messagebox.showinfo("Error","The range is between 0.05 and 1.9")
+                    pass
+
+                #If everything is good update current value
+                else:
+                    if messagebox.askyesno("Confirmation", "Replace current value?"):
+                        messagebox.showinfo("Done", "Success")
+                        aoor_atrialPulseWidthEntry = temp
+                        self.aoorAtrialPulseWidthValue.config(text="Current Value: " + aoor_atrialPulseWidthEntry)
+                        db.execute("UPDATE "+currentuser+" SET aoor_atrialPulseWidthEntry = ?", (aoor_atrialPulseWidthEntry,))
+                        db.commit()
+
+            except:
+                messagebox.showinfo("Error","Please enter a valid value")
+                pass
         #AOOR END------------------------------------------------------------------------------------------------------------------------------
 
         #VOOR BEGIN----------------------------------------------------------------------------------------------------------------------------
+        #voorLowerRateLimit
+        if(value == "voorLowerRateLimit"):
+            temp = self.voorLowerRateLimitEntry.get()
+            #Try/access to sanitize user input and ask for confirmation if there are no errors
+            try:
+                int(temp)
+                if (temp == '' or int(temp)<0):
+                    messagebox.showinfo("Error","Please enter a valid value")
+                    pass
+
+                #Ensure upper limit is larger than lower limit
+                elif(int(self.voorLowerRateLimitEntry.get()) >= int(voor_upperRateLimitEntry) and int(voor_upperRateLimitEntry) != 0 ):
+                    messagebox.showinfo("Error","Please ensure your lower rate limit is lower than your upper rate limit")
+                    pass
+
+                #Ensure value is in limited range
+                elif(int(temp) < 30 or int(temp) > 175):
+                    messagebox.showinfo("Error","The range is between 30 and 175")
+                    pass
+                
+                #If everything is good update current value
+                else:
+                    if messagebox.askyesno("Confirmation", "Replace current value?"):
+                        messagebox.showinfo("Done", "Success")
+                        voor_lowerRateLimitEntry = temp
+                        self.voorLowerRateLimitValue.config(text="Current Value: " + voor_lowerRateLimitEntry)
+                        db.execute("UPDATE "+currentuser+" SET voor_lowerRateLimitEntry = ?", (voor_lowerRateLimitEntry,))
+                        db.commit()
+                        
+            except:
+                messagebox.showinfo("Error","Please enter a valid value")
+                pass
         
+        #voorUpperRateLimit
+        if(value == "voorUpperRateLimit"):
+            temp = self.voorUpperRateLimitEntry.get()
+            #Try/access to sanitize user input and ask for confirmation if there are no errors
+            try:
+                int(temp)
+                if (temp == '' or int(temp)<0):
+                    messagebox.showinfo("Error","Please enter a valid value")
+                    pass
+
+                #Ensure upper limit is larger than lower limit
+                elif(int(voor_lowerRateLimitEntry) >= int(self.voorUpperRateLimitEntry.get()) and int(voor_lowerRateLimitEntry) != 0 ):
+                    messagebox.showinfo("Error","Please ensure your upper rate limit is higher than your lower rate limit")
+                    pass
+
+                #Ensure value is in limited range
+                elif(int(temp) < 50 or int(temp) > 175):
+                    messagebox.showinfo("Error","The range is between 50 and 175")
+                    pass
+
+                #If everything is good update current value
+                else:
+                    if messagebox.askyesno("Confirmation", "Replace current value?"):
+                        messagebox.showinfo("Done", "Success")
+                        voor_upperRateLimitEntry = temp
+                        self.voorUpperRateLimitValue.config(text="Current Value: " + voor_upperRateLimitEntry)
+                        db.execute("UPDATE "+currentuser+" SET voor_upperRateLimitEntry = ?", (voor_upperRateLimitEntry,))
+                        db.commit()
+
+            except:
+                messagebox.showinfo("Error","Please enter a valid value")
+                pass
+
+        #voorVentricularAmplitude
+        if(value == "voorVentricularAmplitude"):
+            temp = self.voorVentricularAmplitudeEntry.get()
+            #Try/access to sanitize user input and ask for confirmation if there are no errors
+            try:
+                float(temp)
+                if (temp == '' or float(temp)<0):
+                    messagebox.showinfo("Error","Please enter a valid value")
+                    pass
+
+                #Ensure value is in limited range
+                elif(float(temp) < 0 or float(temp) > 7.0):
+                    messagebox.showinfo("Error","The range is between 0(off) and 7.0")
+                    pass
+
+                #If everything is good update current value
+                else:
+                    if messagebox.askyesno("Confirmation", "Replace current value?"):
+                        messagebox.showinfo("Done", "Success")
+                        voor_ventricularAmplitudeEntry = temp
+                        self.voorVentricularAmplitudeValue.config(text="Current Value: " + voor_ventricularAmplitudeEntry)
+                        db.execute("UPDATE "+currentuser+" SET voor_ventricularAmplitudeEntry = ?", (voor_ventricularAmplitudeEntry,))
+                        db.commit()
+
+            except:
+                messagebox.showinfo("Error","Please enter a valid value")
+                pass
+
+        #voorVentricularPulseWidth
+        if(value == "voorVentricularPulseWidth"):
+            temp = self.voorVentricularPulseWidthEntry.get()
+            #Try/access to sanitize user input and ask for confirmation if there are no errors
+            try:
+                float(temp)
+                if (temp == '' or float(temp)<0):
+                    messagebox.showinfo("Error","Please enter a valid value")
+                    pass
+
+                #Ensure value is in limited range
+                elif(float(temp) < 0.05 or float(temp) > 1.9):
+                    messagebox.showinfo("Error","The range is between 0.05 and 1.9")
+                    pass
+
+                #If everything is good update current value
+                else:
+                    if messagebox.askyesno("Confirmation", "Replace current value?"):
+                        messagebox.showinfo("Done", "Success")
+                        voor_ventricularPulseWidthEntry = temp
+                        self.voorVentricularPulseWidthValue.config(text="Current Value: " + voor_ventricularPulseWidthEntry)
+                        db.execute("UPDATE "+currentuser+" SET voor_ventricularPulseWidthEntry = ?", (voor_ventricularPulseWidthEntry,))
+                        db.commit()
+
+            except:
+                messagebox.showinfo("Error","Please enter a valid value")
+                pass
         #VOOR END------------------------------------------------------------------------------------------------------------------------------
 
         #AAIR BEGIN----------------------------------------------------------------------------------------------------------------------------
-        
+        #aairLowerRateLimit
+        if(value == "aairLowerRateLimit"):
+            temp = self.aairLowerRateLimitEntry.get()
+            #Try/access to sanitize user input and ask for confirmation if there are no errors
+            try:
+                int(temp)
+                if (temp == '' or int(temp)<0):
+                    messagebox.showinfo("Error","Please enter a valid value")
+                    pass
+                #Ensure upper limit is larger than lower limit
+                elif(int(self.aairLowerRateLimitEntry.get()) >= int(aair_upperRateLimitEntry) and int(aair_upperRateLimitEntry) != 0 ):
+                    messagebox.showinfo("Error","Please ensure your lower rate limit is lower than your upper rate limit")
+                    pass
+
+                #Ensure value is in limited range
+                elif(int(temp) < 30 or int(temp) > 175):
+                    messagebox.showinfo("Error","The range is between 30 and 175")
+                    pass
+
+                #If everything is good update current value
+                else:
+                    if messagebox.askyesno("Confirmation", "Replace current value?"):
+                        messagebox.showinfo("Done", "Success")
+                        aair_lowerRateLimitEntry = temp
+                        self.aairLowerRateLimitValue.config(text="Current Value: " + aair_lowerRateLimitEntry)
+                        db.execute("UPDATE "+currentuser+" SET aair_lowerRateLimitEntry = ?", (aair_lowerRateLimitEntry,))
+                        db.commit()
+
+            except:
+                messagebox.showinfo("Error","Please enter a valid value")
+                pass
+
+        #aairUpperRateLimit
+        if(value == "aairUpperRateLimit"):
+            temp = self.aairUpperRateLimitEntry.get()
+            #Try/access to sanitize user input and ask for confirmation if there are no errors
+            try:
+                int(temp)
+                if (temp == '' or int(temp)<0):
+                    messagebox.showinfo("Error","Please enter a valid value")
+                    pass
+                #Ensure upper limit is larger than lower limit
+                elif(int(aair_lowerRateLimitEntry) >= int(self.aairUpperRateLimitEntry.get()) and int(aair_lowerRateLimitEntry) != 0 ):
+                    messagebox.showinfo("Error","Please ensure your upper rate limit is higher than your lower rate limit")
+                    pass
+
+                #Ensure value is in limited range
+                elif(int(temp) < 50 or int(temp) > 175):
+                    messagebox.showinfo("Error","The range is between 50 and 175")
+                    pass
+
+                #If everything is good update current value
+                else:
+                    if messagebox.askyesno("Confirmation", "Replace current value?"):
+                        messagebox.showinfo("Done", "Success")
+                        aair_upperRateLimitEntry = temp
+                        self.aairUpperRateLimitValue.config(text="Current Value: " + aair_upperRateLimitEntry)
+                        db.execute("UPDATE "+currentuser+" SET aair_upperRateLimitEntry = ?", (aair_upperRateLimitEntry,))
+                        db.commit()
+
+            except:
+                messagebox.showinfo("Error","Please enter a valid value")
+                pass
+
+        #aairAtrialAmplitude
+        if(value == "aairAtrialAmplitude"):
+            temp = self.aairAtrialAmplitudeEntry .get()
+            #Try/access to sanitize user input and ask for confirmation if there are no errors
+            try:
+                float(temp)
+                if (temp == '' or float(temp)<0):
+                    messagebox.showinfo("Error","Please enter a valid value")
+                    pass
+
+                #Ensure value is in limited range
+                elif(float(temp) < 0 or float(temp) > 7.0):
+                    messagebox.showinfo("Error","The range is between 0(off) and 7.0")
+                    pass
+
+                #If everything is good update current value
+                else:
+                    if messagebox.askyesno("Confirmation", "Replace current value?"):
+                        messagebox.showinfo("Done", "Success")
+                        aair_atrialAmplitudeEntry  = temp
+                        self.aairAtrialAmplitudeValue.config(text="Current Value: " + aair_atrialAmplitudeEntry)
+                        db.execute("UPDATE "+currentuser+" SET aair_atrialAmplitudeEntry = ?", (aair_atrialAmplitudeEntry,))
+                        db.commit()
+
+            except:
+                messagebox.showinfo("Error","Please enter a valid value")
+                pass
+
+        #aairAtrialPulseWidth
+        if(value == "aairAtrialPulseWidth"):
+            temp = self.aairAtrialPulseWidthEntry.get()
+            #Try/access to sanitize user input and ask for confirmation if there are no errors
+            try:
+                float(temp)
+                if (temp == '' or float(temp)<0):
+                    messagebox.showinfo("Error","Please enter a valid value")
+                    pass
+
+                #Ensure value is in limited range
+                elif(float(temp) < 0.05 or float(temp) > 1.9):
+                    messagebox.showinfo("Error","The range is between 0.05 and 1.9")
+                    pass
+
+                #If everything is good update current value
+                else:
+                    if messagebox.askyesno("Confirmation", "Replace current value?"):
+                        messagebox.showinfo("Done", "Success")
+                        aair_atrialPulseWidthEntry = temp
+                        self.aairAtrialPulseWidthValue.config(text="Current Value: " + aair_atrialPulseWidthEntry)
+                        db.execute("UPDATE "+currentuser+" SET aair_atrialPulseWidthEntry = ?", (aair_atrialPulseWidthEntry,))
+                        db.commit()
+
+            except:
+                messagebox.showinfo("Error","Please enter a valid value")
+                pass
+
+        #aairAtrialSensitivity
+        if(value == "aairAtrialSensitivity"):
+            temp = self.aairAtrialSensitivityEntry.get()
+            #Try/access to sanitize user input and ask for confirmation if there are no errors
+            try:
+                float(temp)
+                if (temp == '' or float(temp)<0):
+                    messagebox.showinfo("Error","Please enter a valid value")
+                    pass
+
+                #Ensure value is in limited range
+                elif(float(temp) < 0.25 or float(temp) > 10.0):
+                    messagebox.showinfo("Error","The range is between 0.25 and 10.0")
+                    pass
+
+                #If everything is good update current value
+                else:
+                    if messagebox.askyesno("Confirmation", "Replace current value?"):
+                        messagebox.showinfo("Done", "Success")
+                        aair_atrialSensitivityEntry = temp
+                        self.aairAtrialSensitivityValue.config(text="Current Value: " + aair_atrialSensitivityEntry)
+                        db.execute("UPDATE "+currentuser+" SET aair_atrialSensitivityEntry = ?", (aair_atrialSensitivityEntry,))
+                        db.commit()
+
+            except:
+                messagebox.showinfo("Error","Please enter a valid value")
+                pass
+
+        #aairARP
+        if(value == "aairARP"):
+            temp = self.aairARPEntry.get()
+            #Try/access to sanitize user input and ask for confirmation if there are no errors
+            try:
+                int(temp)
+                if (temp == '' or int(temp)<0):
+                    messagebox.showinfo("Error","Please enter a valid value")
+                    pass
+
+                #Ensure value is in limited range
+                elif(int(temp) < 150 or int(temp) > 500):
+                    messagebox.showinfo("Error","The range is between 150 and 500")
+                    pass
+
+                #If everything is good update current value
+                else:
+                    if messagebox.askyesno("Confirmation", "Replace current value?"):
+                        messagebox.showinfo("Done", "Success")
+                        aair_ARPEntry = temp
+                        self.aairARPValue.config(text="Current Value: " + aair_ARPEntry)
+                        db.execute("UPDATE "+currentuser+" SET aair_ARPEntry = ?", (aair_ARPEntry,))
+                        db.commit()
+
+            except:
+                messagebox.showinfo("Error","Please enter a valid value")
+                pass
+
+        #aairPVARP
+        if(value == "aairPVARP"):
+            temp = self.aairPVARPEntry.get()
+            #Try/access to sanitize user input and ask for confirmation if there are no errors
+            try:
+                int(temp)
+                if (temp == '' or int(temp)<0):
+                    messagebox.showinfo("Error","Please enter a valid value")
+                    pass
+
+                #Ensure value is in limited range
+                elif(int(temp) < 150 or int(temp) > 500):
+                    messagebox.showinfo("Error","The range is between 150 and 500")
+                    pass
+
+                #If everything is good update current value
+                else:
+                    if messagebox.askyesno("Confirmation", "Replace current value?"):
+                        messagebox.showinfo("Done", "Success")
+                        aair_PVARPEntry = temp
+                        self.aairPVARPValue.config(text="Current Value: " + aair_PVARPEntry)
+                        db.execute("UPDATE "+currentuser+" SET aair_PVARPEntry = ?", (aair_PVARPEntry,))
+                        db.commit()
+
+            except:
+                messagebox.showinfo("Error","Please enter a valid value")
+                pass
+
+        #aairHysteresis
+        if(value == "aairHysteresis"):
+            temp = self.aairHysteresisEntry.get()
+            #Try/access to sanitize user input and ask for confirmation if there are no errors
+            try:
+                int(temp)
+                if (temp == '' or int(temp)<0):
+                    messagebox.showinfo("Error","Please enter a valid value")
+                    pass
+
+                #If everything is good update current value
+                else:
+                    if messagebox.askyesno("Confirmation", "Replace current value?"):
+                        messagebox.showinfo("Done", "Success")
+                        aair_hysteresisEntry = temp
+                        self.aairHysteresisValue.config(text="Current Value: " + aair_hysteresisEntry)
+                        db.execute("UPDATE "+currentuser+" SET aair_hysteresisEntry = ?", (aair_hysteresisEntry,))
+                        db.commit()
+
+            except:
+                messagebox.showinfo("Error","Please enter a valid value")
+                pass
+
+        #aairRateSmoothing
+        if(value == "aairRateSmoothing"):
+            temp = self.aairRateSmoothingEntry.get()
+            #Try/access to sanitize user input and ask for confirmation if there are no errors
+            try:
+                int(temp)
+                if (temp == '' or int(temp)<0):
+                    messagebox.showinfo("Error","Please enter a valid value")
+                    pass
+
+                #Ensure value is in limited range
+                elif(int(temp) < 0 or int(temp) > 25):
+                    messagebox.showinfo("Error","The range is between 0(off) and 25")
+                    pass
+
+                #If everything is good update current value
+                else:
+                    if messagebox.askyesno("Confirmation", "Replace current value?"):
+                        messagebox.showinfo("Done", "Success")
+                        aair_rateSmoothingEntry = temp
+                        self.aairRateSmoothingValue.config(text="Current Value: " + aair_rateSmoothingEntry)
+                        db.execute("UPDATE "+currentuser+" SET aair_rateSmoothingEntry = ?", (aair_rateSmoothingEntry,))
+                        db.commit()
+
+            except:
+                messagebox.showinfo("Error","Please enter a valid value")
+                pass
         #AAIR END------------------------------------------------------------------------------------------------------------------------------
 
         #VVIR BEGIN----------------------------------------------------------------------------------------------------------------------------
-        
+        #vvirLowerRateLimit
+        if(value == "vvirLowerRateLimit"):
+            temp = self.vvirLowerRateLimitEntry.get()
+            #Try/access to sanitize user input and ask for confirmation if there are no errors
+            try:
+                int(temp)
+                if (temp == '' or int(temp)<0):
+                    messagebox.showinfo("Error","Please enter a valid value")
+                    pass
+
+                #Ensure upper limit is larger than lower limit
+                elif(int(self.vvirLowerRateLimitEntry.get()) >= int(vvir_upperRateLimitEntry) and int(vvir_upperRateLimitEntry) != 0 ):
+                    messagebox.showinfo("Error","Please ensure your lower rate limit is lower than your upper rate limit")
+                    pass
+
+                #Ensure value is in limited range
+                elif(int(temp) < 30 or int(temp) > 175):
+                    messagebox.showinfo("Error","The range is between 30 and 175")
+                    pass
+
+                #If everything is good update current value
+                else:
+                    if messagebox.askyesno("Confirmation", "Replace current value?"):
+                        messagebox.showinfo("Done", "Success")
+                        vvir_lowerRateLimitEntry = temp
+                        self.vvirLowerRateLimitValue.config(text="Current Value: " + vvir_lowerRateLimitEntry)
+                        db.execute("UPDATE "+currentuser+" SET vvir_lowerRateLimitEntry = ?", (vvir_lowerRateLimitEntry,))
+                        db.commit()
+
+            except:
+                messagebox.showinfo("Error","Please enter a valid value")
+                pass
+
+        #vvirUpperRateLimit
+        if(value == "vvirUpperRateLimit"):
+            temp = self.vvirUpperRateLimitEntry.get() 
+            #Try/access to sanitize user input and ask for confirmation if there are no errors
+            try:
+                int(temp)
+                if (temp == '' or int(temp)<0):
+                    messagebox.showinfo("Error","Please enter a valid value")
+                    pass
+
+                #Ensure upper limit is larger than lower limit
+                elif(int(vvir_lowerRateLimitEntry) >= int(self.vvirUpperRateLimitEntry.get()) and int(vvir_lowerRateLimitEntry) != 0 ):
+                    messagebox.showinfo("Error","Please ensure your upper rate limit is higher than your lower rate limit")
+                    pass
+
+                #Ensure value is in limited range
+                elif(int(temp) < 50 or int(temp) > 175):
+                    messagebox.showinfo("Error","The range is between 50 and 175")
+                    pass
+
+                #If everything is good update current value
+                else:
+                    if messagebox.askyesno("Confirmation", "Replace current value?"):
+                        messagebox.showinfo("Done", "Success")
+                        vvir_upperRateLimitEntry = temp
+                        self.vvirUpperRateLimitValue.config(text="Current Value: " + vvir_upperRateLimitEntry)
+                        db.execute("UPDATE "+currentuser+" SET vvir_upperRateLimitEntry = ?", (vvir_upperRateLimitEntry,))
+                        db.commit()
+
+            except:
+                messagebox.showinfo("Error","Please enter a valid value")
+                pass
+
+        #vvirVentricularAmplitude
+        if(value == "vvirVentricularAmplitude"):
+            temp = self.vvirVentricularAmplitudeEntry.get() 
+            #Try/access to sanitize user input and ask for confirmation if there are no errors
+            try:
+                float(temp)
+                if (temp == '' or float(temp)<0):
+                    messagebox.showinfo("Error","Please enter a valid value")
+                    pass
+
+                #Ensure value is in limited range
+                elif(float(temp) < 0 or float(temp) > 7.0):
+                    messagebox.showinfo("Error","The range is between 0(off) and 7.0")
+                    pass
+
+                #If everything is good update current value
+                else:
+                    if messagebox.askyesno("Confirmation", "Replace current value?"):
+                        messagebox.showinfo("Done", "Success")
+                        vvir_ventricularAmplitudeEntry = temp
+                        self.vvirVentricularAmplitudeValue.config(text="Current Value: " + vvir_ventricularAmplitudeEntry)
+                        db.execute("UPDATE "+currentuser+" SET vvir_ventricularAmplitudeEntry = ?", (vvir_ventricularAmplitudeEntry,))
+                        db.commit()
+
+            except:
+                messagebox.showinfo("Error","Please enter a valid value")
+                pass
+
+        #vvirVentricularPulseWidth
+        if(value == "vvirVentricularPulseWidth"):
+            temp = self.vvirVentricularPulseWidthEntry.get() 
+            #Try/access to sanitize user input and ask for confirmation if there are no errors
+            try:
+                float(temp)
+                if (temp == '' or float(temp)<0):
+                    messagebox.showinfo("Error","Please enter a valid value")
+                    pass
+
+                #Ensure value is in limited range
+                elif(float(temp) < 0.05 or float(temp) > 1.9):
+                    messagebox.showinfo("Error","The range is between 0.05 and 1.9")
+                    pass
+
+                #If everything is good update current value
+                else:
+                    if messagebox.askyesno("Confirmation", "Replace current value?"):
+                        messagebox.showinfo("Done", "Success")
+                        vvir_ventricularPulseWidthEntry = temp
+                        self.vvirVentricularPulseWidthValue.config(text="Current Value: " + vvir_ventricularPulseWidthEntry)
+                        db.execute("UPDATE "+currentuser+" SET vvir_ventricularPulseWidthEntry = ?", (vvir_ventricularPulseWidthEntry,))
+                        db.commit()
+
+            except:
+                messagebox.showinfo("Error","Please enter a valid value")
+                pass
+
+        #vvirVentricularSensitivity
+        if(value == "vvirVentricularSensitivity"):
+            temp = self.vvirVentricularSensitivityEntry.get()
+            #Try/access to sanitize user input and ask for confirmation if there are no errors
+            try:
+                float(temp)
+                if (temp == '' or float(temp)<0):
+                    messagebox.showinfo("Error","Please enter a valid value")
+                    pass
+
+                #Ensure value is in limited range
+                elif(float(temp) < 0.25 or float(temp) > 10.0):
+                    messagebox.showinfo("Error","The range is between 0.25 and 10.0")
+                    pass
+
+                #If everything is good update current value
+                else:
+                    if messagebox.askyesno("Confirmation", "Replace current value?"):
+                        messagebox.showinfo("Done", "Success")
+                        vvir_ventricularSensitivityEntry = temp
+                        self.vvirVentricularSensitivityValue.config(text="Current Value: " + vvir_ventricularSensitivityEntry)
+                        db.execute("UPDATE "+currentuser+" SET vvir_ventricularSensitivityEntry = ?", (vvir_ventricularSensitivityEntry,))
+                        db.commit()
+
+            except:
+                messagebox.showinfo("Error","Please enter a valid value")
+                pass
+
+        #vvirVRP
+        if(value == "vvirVRP"):
+            temp = self.vvirVRPEntry.get() 
+            #Try/access to sanitize user input and ask for confirmation if there are no errors
+            try:
+                int(temp)
+                if (temp == '' or int(temp)<0):
+                    messagebox.showinfo("Error","Please enter a valid value")
+                    pass
+
+                #Ensure value is in limited range
+                elif(int(temp) < 150 or int(temp) > 500):
+                    messagebox.showinfo("Error","The range is between 150 and 500")
+                    pass
+
+                #If everything is good update current value
+                else:
+                    if messagebox.askyesno("Confirmation", "Replace current value?"):
+                        messagebox.showinfo("Done", "Success")
+                        vvir_VRPEntry = temp
+                        self.vvirVRPValue.config(text="Current Value: " + vvir_VRPEntry)
+                        db.execute("UPDATE "+currentuser+" SET vvir_VRPEntry = ?", (vvir_VRPEntry,))
+                        db.commit()
+
+            except:
+                messagebox.showinfo("Error","Please enter a valid value")
+                pass
+
+        #vvirHysteresis
+        if(value == "vvirHysteresis"):
+            temp = self.vvirHysteresisEntry.get() 
+            #Try/access to sanitize user input and ask for confirmation if there are no errors
+            try:
+                int(temp)
+                if (temp == '' or int(temp)<0):
+                    messagebox.showinfo("Error","Please enter a valid value")
+                    pass
+
+                #If everything is good update current value
+                else:
+                    if messagebox.askyesno("Confirmation", "Replace current value?"):
+                        messagebox.showinfo("Done", "Success")
+                        vvir_hysteresisEntry = temp
+                        self.vvirHysteresisValue.config(text="Current Value: " + vvir_hysteresisEntry)
+                        db.execute("UPDATE "+currentuser+" SET vvir_hysteresisEntry = ?", (vvir_hysteresisEntry,))
+                        db.commit()
+
+            except:
+                messagebox.showinfo("Error","Please enter a valid value")
+                pass
+
+        #vvirRateSmoothing
+        if(value == "vvirRateSmoothing"):
+            temp = self.vvirRateSmoothingEntry.get()
+            #Try/access to sanitize user input and ask for confirmation if there are no errors
+            try:
+                int(temp)
+                if (temp == '' or int(temp)<0):
+                    messagebox.showinfo("Error","Please enter a valid value")
+                    pass
+
+                #Ensure value is in limited range
+                elif(int(temp) < 0 or int(temp) > 25):
+                    messagebox.showinfo("Error","The range is between 0(off) and 25")
+                    pass
+
+                #If everything is good update current value
+                else:
+                    if messagebox.askyesno("Confirmation", "Replace current value?"):
+                        messagebox.showinfo("Done", "Success")
+                        vvir_rateSmoothingEntry = temp
+                        self.vvirRateSmoothingValue.config(text="Current Value: " + vvir_rateSmoothingEntry)
+                        db.execute("UPDATE "+currentuser+" SET vvir_rateSmoothingEntry = ?", (vvir_rateSmoothingEntry,))
+                        db.commit()
+
+            except:
+                messagebox.showinfo("Error","Please enter a valid value")
+                pass
         #VVIR END------------------------------------------------------------------------------------------------------------------------------
 
         #DOOR BEGIN----------------------------------------------------------------------------------------------------------------------------
