@@ -132,7 +132,7 @@ def vvir_data_output(vvir_lowerRateLimitEntry, vvir_upperRateLimitEntry, vvir_ve
     VRP = vvir_VRPEntry
     maximumSensorRate = vvir_maximumSensorRateEntry
     activityThreshold = vvir_activityThresholdEntry
-    reactionTimeEntry = vir_reactionTimeEntry
+    reactionTimeEntry = vvir_reactionTimeEntry
     responseFactorEntry = vvir_responseFactorEntry
     recoveryTimeEntry = vvir_recoveryTimeEntry
 
