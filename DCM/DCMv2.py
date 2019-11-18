@@ -1639,7 +1639,7 @@ class MainWindow:
                 ATR_PULSE_WIDTH = doo_atrialPulseWidthEntry
                 AV_DELAY = doo_fixedAVDelayEntry
 
-                data_output = [MODE, LOWER_RATE_LIMIT, UPPER_RATE_LIMIT, ATR_AMP, VENT_AMP, ATR_AMP, AV_DELAY]
+                data_output = [MODE, LOWER_RATE_LIMIT, UPPER_RATE_LIMIT, ATR_AMP, VENT_AMP, ATR_PULSE_WIDTH, AV_DELAY]
                 serial_data_output = str(data_output)
                 serial_data_output = str.encode(serial_data_output)
 
@@ -1697,13 +1697,13 @@ class MainWindow:
                 UPPER_RATE_LIMIT = voor_upperRateLimitEntry
                 VENT_AMP = voor_ventricularAmplitudeEntry
                 VENT_PULSE_WIDTH = voor_ventricularPulseWidthEntry
-                maximumSensorRate = voor_maximumSensorRateEntry
+                MSR = voor_maximumSensorRateEntry
                 activityThresholdEntry = voor_activityThresholdEntry
                 REACTION_TIME = voor_reactionTimeEntry
                 RESPONSE_FACTOR = voor_responseFactorEntry
                 RECOVERY_TIME = voor_recoveryTimeEntry
     
-                data_output = [MODE, LOWER_RATE_LIMIT, UPPER_RATE_LIMIT, VENT_AMP, VENT_PULSE_WIDTH, maximumSensorRate, activityThresholdEntry, REACTION_TIME, RESPONSE_FACTOR, RECOVERY_TIME]
+                data_output = [MODE, LOWER_RATE_LIMIT, UPPER_RATE_LIMIT, VENT_AMP, VENT_PULSE_WIDTH, MSR, activityThresholdEntry, REACTION_TIME, RESPONSE_FACTOR, RECOVERY_TIME]
                 serial_data_output = str(data_output)
                 serial_data_output = str.encode(serial_data_output)
 
@@ -1731,13 +1731,13 @@ class MainWindow:
                 ATR_SENSITIVITY = aair_atrialSensitivityEntry
                 ARP = aair_ARPEntry
                 PVARP = aair_PVARPEntry
-                maximumSensorRate = aair_maximumSensorRateEntry
+                MSR = aair_maximumSensorRateEntry
                 ACTIVITY_THRESH = aair_activityThresholdEntry
                 REACTION_TIME = aair_reactionTimeEntry
                 RESPONSE_FACTOR = aair_responseFactorEntry
                 RECOVERY_TIME = aair_recoveryTimeEntry
 
-                data_output = [MODE, LOWER_RATE_LIMIT, UPPER_RATE_LIMIT, ATR_AMP, ATR_PULSE_WIDTH, ATR_SENSITIVITY, ARP, PVARP, maximumSensorRate, ACTIVITY_THRESH, REACTION_TIME, RESPONSE_FACTOR, RECOVERY_TIME]
+                data_output = [MODE, LOWER_RATE_LIMIT, UPPER_RATE_LIMIT, ATR_AMP, ATR_PULSE_WIDTH, ATR_SENSITIVITY, ARP, PVARP, MSR, ACTIVITY_THRESH, REACTION_TIME, RESPONSE_FACTOR, RECOVERY_TIME]
                 serial_data_output = str(data_output)
                 serial_data_output = str.encode(serial_data_output)
                 
@@ -1765,13 +1765,13 @@ class MainWindow:
                 VENT_PULSE_WIDTH = vvir_ventricularPulseWidthEntry
                 VENT_SENSITIVITY = vvir_ventricularSensitivityEntry
                 VRP = vvir_VRPEntry
-                maximumSensorRate = vvir_maximumSensorRateEntry
+                MSR = vvir_maximumSensorRateEntry
                 ACTIVITY_THRESH = vvir_activityThresholdEntry
                 reactionTimeEntry = vir_reactionTimeEntry
                 responseFactorEntry = vvir_responseFactorEntry
                 recoveryTimeEntry = vvir_recoveryTimeEntry
 
-                data_output = [MODE, LOWER_RATE_LIMIT, UPPER_RATE_LIMIT, VENT_AMP, VENT_PULSE_WIDTH, VENT_SENSITIVITY, VRP, maximumSensorRate, AV_DELAY, ACTIVITY_THRESH, REACTION_TIME, RESPONSE_FACTOR, RECOVERY_TIME]
+                data_output = [MODE, LOWER_RATE_LIMIT, UPPER_RATE_LIMIT, VENT_AMP, VENT_PULSE_WIDTH, VENT_SENSITIVITY, VRP, MSR, AV_DELAY, ACTIVITY_THRESH, REACTION_TIME, RESPONSE_FACTOR, RECOVERY_TIME]
                 serial_data_output = str(data_output)
                 serial_data_output = str.encode(serial_data_output)
 
@@ -1799,14 +1799,14 @@ class MainWindow:
                 ATR_PULSE_WIDTH = door_atrialPulseWidthEntry
                 VENT_AMP = door_ventricularAmplitudeEntry
                 VENT_PULSE_WIDTH = door_ventricularPulseWidthEntry
-                maximumSensorRate = door_maximumSensorRateEntry
+                MSR = door_maximumSensorRateEntry
                 AV_DELAY = door_fixedAVDelayEntry
                 ACTIVITY_THRESH = door_activityThresholdEntry
                 REACTION_TIME = door_reactionTimeEntry
                 RESPONSE_FACTOR = door_responseFactorEntry
                 RECOVERY_TIME = door_recoveryTimeEntry
 
-                data_output = [MODE, LOWER_RATE_LIMIT, UPPER_RATE_LIMIT, ATR_AMP, ATR_PULSE_WIDTH, VENT_AMP, VENT_PULSE_WIDTH, maximumSensorRate, AV_DELAY, ACTIVITY_THRESH, REACTION_TIME, RESPONSE_FACTOR, RECOVERY_TIME]
+                data_output = [MODE, LOWER_RATE_LIMIT, UPPER_RATE_LIMIT, ATR_AMP, ATR_PULSE_WIDTH, VENT_AMP, VENT_PULSE_WIDTH, MSR, AV_DELAY, ACTIVITY_THRESH, REACTION_TIME, RESPONSE_FACTOR, RECOVERY_TIME]
                 serial_data_output = str(data_output)
                 serial_data_output = str.encode(serial_data_output)
 
