@@ -16,7 +16,7 @@ db.execute("CREATE TABLE IF NOT EXISTS users (user TEXT NOT NULL, password TEXT 
 currentuser = ''
 
 #State
-MODE = ''fstat
+MODE = ''
 
 #Initializing all global variables with "0"
 userlog = ''
@@ -1768,7 +1768,7 @@ class MainWindow:
                 VRP = vvir_VRPEntry
                 MSR = vvir_maximumSensorRateEntry
                 ACTIVITY_THRESH = vvir_activityThresholdEntry
-                reactionTimeEntry = vir_reactionTimeEntry
+                reactionTimeEntry = vvir_reactionTimeEntry
                 responseFactorEntry = vvir_responseFactorEntry
                 recoveryTimeEntry = vvir_recoveryTimeEntry
 
