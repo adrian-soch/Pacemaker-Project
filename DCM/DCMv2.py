@@ -16,10 +16,11 @@ db.execute("CREATE TABLE IF NOT EXISTS users (user TEXT NOT NULL, password TEXT 
 currentuser = ''
 
 #State
-MODE = ''fstat
+MODE = ''
 
 #Initializing all global variables with "0"
 userlog = ''
+
 #AOO
 aoo_lowerRateLimitEntry,aoo_upperRateLimitEntry,aoo_atrialAmplitudeEntry,aoo_atrialPulseWidthEntry = "0","0","0","0"
 
