@@ -5,13 +5,11 @@ import matplotlib
 matplotlib.use("TkAgg")
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2Tk
 from matplotlib.figure import Figure
-
+import math
 import tkinter as tk
 from tkinter import ttk
 
-
 LARGE_FONT= ("Verdana", 12)
-
 
 class SeaofBTCapp(tk.Tk):
 
