@@ -1521,12 +1521,12 @@ class MainWindow:
                 self.doorLog.config(text= userlog)
                 db.execute("UPDATE "+currentuser+" SET userlog = ?", (userlog, ))
                 db.commit()
-                MODE = "aoo"
+                MODE = 1
                 LOWER_RATE_LIMIT = aoo_lowerRateLimitEntry
                 UPPER_RATE_LIMIT = aoo_upperRateLimitEntry
                 ATR_AMP = aoo_atrialAmplitudeEntry
                 ATR_PULSE_WIDTH = aoo_atrialPulseWidthEntry
-                data_output = [MODE, LOWER_RATE_LIMIT, UPPER_RATE_LIMIT,ATR_AMP, ATR_PULSE_WIDTH]
+                data_output = [69, MODE, LOWER_RATE_LIMIT, UPPER_RATE_LIMIT,ATR_AMP, ATR_PULSE_WIDTH]
                 serial_data_output = str(data_output)
                 serial_data_output = str.encode(serial_data_output)
 
@@ -1546,13 +1546,13 @@ class MainWindow:
                 self.doorLog.config(text= userlog)
                 db.execute("UPDATE "+currentuser+" SET userlog = ?", (userlog, ))
                 db.commit()
-                MODE = "voo"
+                MODE = 2
                 LOWER_RATE_LIMIT = voo_lowerRateLimitEntry
                 UPPER_RATE_LIMIT = voo_upperRateLimitEntry
                 VENT_AMP = voo_ventricularAmplitudeEntry
                 VENT_PULSE_WIDTH = voo_ventricularPulseWidthEntry
 
-                data_output = [MODE, LOWER_RATE_LIMIT, UPPER_RATE_LIMIT, VENT_AMP, VENT_PULSE_WIDTH]
+                data_output = [69, MODE, LOWER_RATE_LIMIT, UPPER_RATE_LIMIT, VENT_AMP, VENT_PULSE_WIDTH]
                 serial_data_output = str(data_output)
                 serial_data_output = str.encode(serial_data_output)
 
@@ -1572,7 +1572,7 @@ class MainWindow:
                 self.doorLog.config(text= userlog)
                 db.execute("UPDATE "+currentuser+" SET userlog = ?", (userlog, ))
                 db.commit()
-                MODE = "aai"
+                MODE = 3
                 LOWER_RATE_LIMIT = aai_lowerRateLimitEntry
                 UPPER_RATE_LIMIT = aai_upperRateLimitEntry
                 ATR_AMP = aai_atrialAmplitudeEntry
@@ -1581,7 +1581,7 @@ class MainWindow:
                 ARP = aai_ARPEntry
                 PVRAP = aai_PVARPEntry
 
-                data_output = [MODE, LOWER_RATE_LIMIT, UPPER_RATE_LIMIT, ATR_AMP, ATR_PULSE_WIDTH, ATR_SENSITIVITY, ARP, PVRAP]
+                data_output = [69, MODE, LOWER_RATE_LIMIT, UPPER_RATE_LIMIT, ATR_AMP, ATR_PULSE_WIDTH, ATR_SENSITIVITY, ARP, PVRAP]
                 serial_data_output = str(data_output)
                 serial_data_output = str.encode(serial_data_output)
 
@@ -1602,7 +1602,7 @@ class MainWindow:
                 self.doorLog.config(text= userlog)
                 db.execute("UPDATE "+currentuser+" SET userlog = ?", (userlog, ))
                 db.commit()
-                MODE = "vvi"
+                MODE = 4
                 LOWER_RATE_LIMIT = vvi_lowerRateLimitEntry
                 UPPER_RATE_LIMIT = vvi_upperRateLimitEntry
                 VENT_AMP = vvi_ventricularAmplitudeEntry
@@ -1610,7 +1610,7 @@ class MainWindow:
                 VENT_SENSITIVITY = vvi_ventricularSensitivityEntry
                 VRP = vvi_VRPEntry
 
-                data_output = [MODE, LOWER_RATE_LIMIT, UPPER_RATE_LIMIT, VENT_AMP, VENT_PULSE_WIDTH, VENT_SENSITIVITY, VRP]
+                data_output = [69, MODE, LOWER_RATE_LIMIT, UPPER_RATE_LIMIT, VENT_AMP, VENT_PULSE_WIDTH, VENT_SENSITIVITY, VRP]
                 serial_data_output = str(data_output)
                 serial_data_output = str.encode(serial_data_output)
 
@@ -1631,7 +1631,7 @@ class MainWindow:
                 self.doorLog.config(text= userlog)
                 db.execute("UPDATE "+currentuser+" SET userlog = ?", (userlog, ))
                 db.commit()
-                MODE = "doo"
+                MODE = 5
                 LOWER_RATE_LIMIT = doo_lowerRateLimitEntry
                 UPPER_RATE_LIMIT = doo_upperRateLimitEntry
                 ATR_AMP = doo_atrialAmplitudeEntry
@@ -1639,7 +1639,7 @@ class MainWindow:
                 ATR_PULSE_WIDTH = doo_atrialPulseWidthEntry
                 AV_DELAY = doo_fixedAVDelayEntry
 
-                data_output = [MODE, LOWER_RATE_LIMIT, UPPER_RATE_LIMIT, ATR_AMP, VENT_AMP, ATR_PULSE_WIDTH, AV_DELAY]
+                data_output = [69, MODE, LOWER_RATE_LIMIT, UPPER_RATE_LIMIT, ATR_AMP, VENT_AMP, ATR_PULSE_WIDTH, AV_DELAY]
                 serial_data_output = str(data_output)
                 serial_data_output = str.encode(serial_data_output)
 
@@ -1660,7 +1660,7 @@ class MainWindow:
                 self.doorLog.config(text= userlog)
                 db.execute("UPDATE "+currentuser+" SET userlog = ?", (userlog, ))
                 db.commit()
-                MODE = "aoor"
+                MODE = 6
                 LOWER_RATE_LIMIT = aoor_lowerRateLimitEntry
                 UPPER_RATE_LIMIT = aoor_upperRateLimitEntry
                 ATR_AMP = aoor_atrialAmplitudeEntry
@@ -1671,7 +1671,7 @@ class MainWindow:
                 RESPONSE_FACTOR  = aoor_responseFactorEntry
                 RECOVERY_TIME = aoor_recoveryTimeEntry
 
-                data_output = [MODE, LOWER_RATE_LIMIT, UPPER_RATE_LIMIT, ATR_AMP, ATR_PULSE_WIDTH, ATR_SENSE_THRESH, ACTIVITY_THRESH, REACTION_TIME, RESPONSE_FACTOR, RECOVERY_TIME]
+                data_output = [69, MODE, LOWER_RATE_LIMIT, UPPER_RATE_LIMIT, ATR_AMP, ATR_PULSE_WIDTH, ATR_SENSE_THRESH, ACTIVITY_THRESH, REACTION_TIME, RESPONSE_FACTOR, RECOVERY_TIME]
                 serial_data_output = str(data_output)
                 serial_data_output = str.encode(serial_data_output)
 
@@ -1692,7 +1692,7 @@ class MainWindow:
                 db.execute("UPDATE "+currentuser+" SET userlog = ?", (userlog, ))
                 db.commit()
 
-                MODE = "voor"
+                MODE = 7
                 LOWER_RATE_LIMIT = voor_lowerRateLimitEntry
                 UPPER_RATE_LIMIT = voor_upperRateLimitEntry
                 VENT_AMP = voor_ventricularAmplitudeEntry
@@ -1703,7 +1703,7 @@ class MainWindow:
                 RESPONSE_FACTOR = voor_responseFactorEntry
                 RECOVERY_TIME = voor_recoveryTimeEntry
     
-                data_output = [MODE, LOWER_RATE_LIMIT, UPPER_RATE_LIMIT, VENT_AMP, VENT_PULSE_WIDTH, MSR, activityThresholdEntry, REACTION_TIME, RESPONSE_FACTOR, RECOVERY_TIME]
+                data_output = [69, MODE, LOWER_RATE_LIMIT, UPPER_RATE_LIMIT, VENT_AMP, VENT_PULSE_WIDTH, MSR, activityThresholdEntry, REACTION_TIME, RESPONSE_FACTOR, RECOVERY_TIME]
                 serial_data_output = str(data_output)
                 serial_data_output = str.encode(serial_data_output)
 
@@ -1723,7 +1723,8 @@ class MainWindow:
                 self.doorLog.config(text= userlog)
                 db.execute("UPDATE "+currentuser+" SET userlog = ?", (userlog, ))
                 db.commit()
-                MODE = "aair"
+                
+                MODE = 8
                 LOWER_RATE_LIMIT = aair_lowerRateLimitEntry
                 UPPER_RATE_LIMIT = aair_upperRateLimitEntry
                 ATR_AMP = aair_atrialAmplitudeEntry
@@ -1737,7 +1738,7 @@ class MainWindow:
                 RESPONSE_FACTOR = aair_responseFactorEntry
                 RECOVERY_TIME = aair_recoveryTimeEntry
 
-                data_output = [MODE, LOWER_RATE_LIMIT, UPPER_RATE_LIMIT, ATR_AMP, ATR_PULSE_WIDTH, ATR_SENSITIVITY, ARP, PVARP, MSR, ACTIVITY_THRESH, REACTION_TIME, RESPONSE_FACTOR, RECOVERY_TIME]
+                data_output = [69, MODE, LOWER_RATE_LIMIT, UPPER_RATE_LIMIT, ATR_AMP, ATR_PULSE_WIDTH, ATR_SENSITIVITY, ARP, PVARP, MSR, ACTIVITY_THRESH, REACTION_TIME, RESPONSE_FACTOR, RECOVERY_TIME]
                 serial_data_output = str(data_output)
                 serial_data_output = str.encode(serial_data_output)
                 
@@ -1757,8 +1758,8 @@ class MainWindow:
                 self.doorLog.config(text= userlog)
                 db.execute("UPDATE "+currentuser+" SET userlog = ?", (userlog, ))
                 db.commit()
-
-                MODE = "vvir"
+                
+                MODE = 9
                 LOWER_RATE_LIMIT = vvir_lowerRateLimitEntry
                 UPPER_RATE_LIMIT = vvir_upperRateLimitEntry
                 VENT_AMP = vvir_ventricularAmplitudeEntry
@@ -1771,7 +1772,7 @@ class MainWindow:
                 responseFactorEntry = vvir_responseFactorEntry
                 recoveryTimeEntry = vvir_recoveryTimeEntry
 
-                data_output = [MODE, LOWER_RATE_LIMIT, UPPER_RATE_LIMIT, VENT_AMP, VENT_PULSE_WIDTH, VENT_SENSITIVITY, VRP, MSR, AV_DELAY, ACTIVITY_THRESH, REACTION_TIME, RESPONSE_FACTOR, RECOVERY_TIME]
+                data_output = [69, MODE, LOWER_RATE_LIMIT, UPPER_RATE_LIMIT, VENT_AMP, VENT_PULSE_WIDTH, VENT_SENSITIVITY, VRP, MSR, AV_DELAY, ACTIVITY_THRESH, REACTION_TIME, RESPONSE_FACTOR, RECOVERY_TIME]
                 serial_data_output = str(data_output)
                 serial_data_output = str.encode(serial_data_output)
 
@@ -1792,7 +1793,7 @@ class MainWindow:
                 db.execute("UPDATE "+currentuser+" SET userlog = ?", (userlog, ))
                 db.commit()
 
-                MODE = "door"
+                MODE = 10
                 LOWER_RATE_LIMIT = door_lowerRateLimitEntry
                 UPPER_RATE_LIMIT = door_upperRateLimitEntry
                 ATR_AMP = door_atrialAmplitudeEntry
@@ -1806,7 +1807,7 @@ class MainWindow:
                 RESPONSE_FACTOR = door_responseFactorEntry
                 RECOVERY_TIME = door_recoveryTimeEntry
 
-                data_output = [MODE, LOWER_RATE_LIMIT, UPPER_RATE_LIMIT, ATR_AMP, ATR_PULSE_WIDTH, VENT_AMP, VENT_PULSE_WIDTH, MSR, AV_DELAY, ACTIVITY_THRESH, REACTION_TIME, RESPONSE_FACTOR, RECOVERY_TIME]
+                data_output = [69, MODE, LOWER_RATE_LIMIT, UPPER_RATE_LIMIT, ATR_AMP, ATR_PULSE_WIDTH, VENT_AMP, VENT_PULSE_WIDTH, MSR, AV_DELAY, ACTIVITY_THRESH, REACTION_TIME, RESPONSE_FACTOR, RECOVERY_TIME]
                 serial_data_output = str(data_output)
                 serial_data_output = str.encode(serial_data_output)
 
