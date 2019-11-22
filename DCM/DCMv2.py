@@ -5,6 +5,10 @@ import numpy
 from tkinter import ttk
 from tkinter import messagebox
 import sqlite3
+import sys
+import usb.core
+from threading import Thread
+
 
 #Creating sqlite3 database
 db = sqlite3.connect("DCM.sqlite", detect_types= sqlite3.PARSE_DECLTYPES)
@@ -4436,14 +4440,30 @@ class MainWindow:
         self.master.destroy()
         exit()
 
+def test():
+    dev = usb.core.find(find_all=True)
+    for cfg in dev:
+        if (cfg.idVendor == 4966):
+            var = cfg.idVendor
+    return var
+
+def run():
+    while(1):
+        if (len(test()) > 0):
+            print(test())
+        else:
+            print("Not Connected")
 
 #Main function that runs everything
 def main():
-
     #Run Tkinter
     root = tk.Tk()
     app = WelcomeFrame(root)
     root.mainloop()
 
 if __name__ == '__main__':
-    main()
+    # Runs tkinter
+    Thread(target = main).start()
+
+    #Run USB Connected
+    Thread(target = run).start()
