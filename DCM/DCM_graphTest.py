@@ -1483,16 +1483,16 @@ class MainWindow:
         self.doorLogoffButton.grid(row=11,column=4,pady=5)
 
 
-        self.aooGraph = tk.Button(self.aoo, text = "Graph", command=self._graph_btn_clicked)
-        self.vooGraph = tk.Button(self.voo, text = "Graph", command=self._graph_btn_clicked)
-        self.aaiGraph = tk.Button(self.aai, text = "Graph", command=self._graph_btn_clicked)
-        self.vviGraph = tk.Button(self.vvi, text = "Graph", command=self._graph_btn_clicked)
-        self.dooGraph = tk.Button(self.doo, text = "Graph", command=self._graph_btn_clicked)
-        self.aoorGraph = tk.Button(self.aoor, text = "Graph", command=self._graph_btn_clicked)
-        self.voorGraph = tk.Button(self.voor, text = "Graph", command=self._graph_btn_clicked)
-        self.aairGraph = tk.Button(self.aair, text = "Graph", command=self._graph_btn_clicked)
-        self.vvirGraph = tk.Button(self.vvir, text = "Graph", command=self._graph_btn_clicked)
-        self.doorGraph = tk.Button(self.door, text = "Graph", command=self._graph_btn_clicked)
+        self.aooGraph = tk.Button(self.aoo, text = "Graph", command=lambda: self.DCMgraph("aoo"))
+        self.vooGraph = tk.Button(self.voo, text = "Graph", command=lambda: self.DCMgraph("voo"))
+        self.aaiGraph = tk.Button(self.aai, text = "Graph", command=lambda: self.DCMgraph("aai"))
+        self.vviGraph = tk.Button(self.vvi, text = "Graph", command=lambda: self.DCMgraph("vvi"))
+        self.dooGraph = tk.Button(self.doo, text = "Graph", command=lambda: self.DCMgraph("doo"))
+        self.aoorGraph = tk.Button(self.aoor, text = "Graph", command=lambda: self.DCMgraph("aoor"))
+        self.voorGraph = tk.Button(self.voor, text = "Graph", command=lambda: self.DCMgraph("voor"))
+        self.aairGraph = tk.Button(self.aair, text = "Graph", command=lambda: self.DCMgraph("aair"))
+        self.vvirGraph = tk.Button(self.vvir, text = "Graph", command=lambda: self.DCMgraph("vvir"))
+        self.doorGraph = tk.Button(self.door, text = "Graph", command=lambda: self.DCMgraph("door"))
         
         self.aooGraph.grid(row=11,column=6,pady=5)
         self.vooGraph.grid(row=11,column=6,pady=5)
@@ -1505,9 +1505,6 @@ class MainWindow:
         self.vvirGraph.grid(row=11,column=6,pady=5)
         self.doorGraph.grid(row=11,column=6,pady=5)
     
-    def _graph_btn_clicked(self):
-        self.new_window(Graph)
-
     #Confirm changes method
     def confirmChanges(self,value):
         global currentuser
@@ -4282,6 +4279,337 @@ class MainWindow:
         self.master.destroy()
         exit()
 
+
+    """def _graph_btn_clicked(self):
+    self.new_window(Graph)"""
+
+    def DCMgraph(self,value):
+        #Global Variables
+        #AOO
+        global aoo_lowerRateLimitEntry,aoo_upperRateLimitEntry,aoo_atrialAmplitudeEntry,aoo_atrialPulseWidthEntry 
+        #VOO
+        global voo_lowerRateLimitEntry,voo_upperRateLimitEntry,voo_ventricularAmplitudeEntry,voo_ventricularPulseWidthEntry
+        #AAI
+        global aai_lowerRateLimitEntry,aai_upperRateLimitEntry,aai_atrialAmplitudeEntry,aai_atrialPulseWidthEntry,aai_atrialSensitivityEntry,aai_ARPEntry,aai_PVARPEntry,aai_hysteresisEntry,aai_rateSmoothingEntry
+        #VVI
+        global vvi_lowerRateLimitEntry,vvi_upperRateLimitEntry,vvi_ventricularAmplitudeEntry,vvi_ventricularPulseWidthEntry,vvi_ventricularSensitivityEntry,vvi_VRPEntry,vvi_hysteresisEntry,vvi_rateSmoothingEntry
+        #DOO
+        global doo_lowerRateLimitEntry,doo_upperRateLimitEntry,doo_atrialAmplitudeEntry,doo_atrialPulseWidthEntry,doo_ventricularAmplitudeEntry,doo_ventricularPulseWidthEntry,doo_fixedAVDelayEntry
+
+        #AOOR
+        global aoor_lowerRateLimitEntry, aoor_upperRateLimitEntry, aoor_atrialAmplitudeEntry, aoor_atrialPulseWidthEntry, aoor_maximumSensorRateEntry, aoor_activityThresholdEntry, aoor_reactionTimeEntry, aoor_responseFactorEntry, aoor_recoveryTimeEntry
+        #VOOR
+        global voor_lowerRateLimitEntry, voor_upperRateLimitEntry, voor_ventricularAmplitudeEntry, voor_ventricularPulseWidthEntry, voor_maximumSensorRateEntry, voor_activityThresholdEntry, voor_reactionTimeEntry, voor_responseFactorEntry, voor_recoveryTimeEntry
+        #AAIR
+        global aair_lowerRateLimitEntry, aair_upperRateLimitEntry, aair_atrialAmplitudeEntry, aair_atrialPulseWidthEntry, aair_atrialSensitivityEntry, aair_ARPEntry, aair_PVARPEntry, aair_hysteresisEntry, aair_rateSmoothingEntry, aair_maximumSensorRateEntry, aair_activityThresholdEntry, aair_reactionTimeEntry, aair_responseFactorEntry, aair_recoveryTimeEntry
+        #VVIR
+        global vvir_lowerRateLimitEntry, vvir_upperRateLimitEntry, vvir_ventricularAmplitudeEntry, vvir_ventricularPulseWidthEntry, vvir_ventricularSensitivityEntry, vvir_VRPEntry, vvir_hysteresisEntry, vvir_rateSmoothingEntry, vvir_maximumSensorRateEntry, vvir_activityThresholdEntry, vvir_reactionTimeEntry, vvir_responseFactorEntry, vvir_recoveryTimeEntry
+        #DOOR
+        global door_lowerRateLimitEntry, door_upperRateLimitEntry, door_atrialAmplitudeEntry, door_atrialPulseWidthEntry, door_ventricularAmplitudeEntry, door_ventricularPulseWidthEntry, door_maximumSensorRateEntry, door_fixedAVDelayEntry, door_activityThresholdEntry, door_reactionTimeEntry, door_responseFactorEntry, door_recoveryTimeEntry
+        
+        fig = plt.figure()
+        AtrialAX = fig.add_subplot(1,2,1)
+        VentricularAX = fig.add_subplot(1,2,2)
+        fig.show()
+
+        i = 0
+        timeList = []
+        AtrialAMP, VentricularAMP = [], []
+
+        if (value == "aoo"):
+            PulseWidth = float(aoo_atrialPulseWidthEntry)
+            AtrialPulseAMP = float(aoo_atrialAmplitudeEntry)
+            VentricularPulseAMP = 0
+
+            while i!=10:
+                timeList.append(i)
+                if (i%PulseWidth==0):
+                    AtrialAMP.append(AtrialPulseAMP)
+                    VentricularAMP.append(VentricularPulseAMP)
+                else:
+                    AtrialAMP.append(0)
+                    VentricularAMP.append(0)
+
+
+                AtrialAX.plot(timeList, AtrialAMP, color='r')
+
+                VentricularAX.plot(timeList, VentricularAMP, color='b')
+
+                fig.canvas.draw()
+
+                AtrialAX.set_xlim(left=max(0, i-10), right=i+10)
+                VentricularAX.set_xlim(left=max(0, i-10), right=i+10)
+
+                time.sleep(0.5)
+
+                i += 1
+
+        if (value == "voo"):
+            PulseWidth = float(voo_ventricularPulseWidthEntry)
+            AtrialPulseAMP = 0
+            VentricularPulseAMP = float(voo_ventricularAmplitudeEntry)
+
+            while i!=10:
+                timeList.append(i)
+                if (i%PulseWidth==0):
+                    AtrialAMP.append(AtrialPulseAMP)
+                    VentricularAMP.append( VentricularPulseAMP)
+                else:
+                    AtrialAMP.append(0)
+                    VentricularAMP.append(0)
+
+
+                AtrialAX.plot(timeList, AtrialAMP, color='r')
+
+                VentricularAX.plot(timeList, VentricularAMP, color='b')
+
+                fig.canvas.draw()
+
+                AtrialAX.set_xlim(left=max(0, i-10), right=i+10)
+                VentricularAX.set_xlim(left=max(0, i-10), right=i+10)
+
+                time.sleep(0.5)
+
+                i += 1
+        
+        if (value == "aai"):
+            PulseWidth = float(aai_atrialPulseWidthEntry)
+            AtrialPulseAMP = float(aai_atrialAmplitudeEntry)
+            VentricularPulseAMP = 0
+
+            while i!=10:
+                timeList.append(i)
+                if (i%PulseWidth==0):
+                    AtrialAMP.append(AtrialPulseAMP)
+                    VentricularAMP.append(VentricularPulseAMP)
+                else:
+                    AtrialAMP.append(0)
+                    VentricularAMP.append(0)
+
+
+                AtrialAX.plot(timeList, AtrialAMP, color='r')
+
+                VentricularAX.plot(timeList, VentricularAMP, color='b')
+
+                fig.canvas.draw()
+
+                AtrialAX.set_xlim(left=max(0, i-10), right=i+10)
+                VentricularAX.set_xlim(left=max(0, i-10), right=i+10)
+
+                time.sleep(0.5)
+
+                i += 1
+        
+        if (value == "vvi"):
+            PulseWidth = float(vvi_ventricularPulseWidthEntry)
+            AtrialPulseAMP = 0
+            VentricularPulseAMP = float(vvi_ventricularAmplitudeEntry)
+
+            while i!=10:
+                timeList.append(i)
+                if (i%PulseWidth==0):
+                    AtrialAMP.append(AtrialPulseAMP)
+                    VentricularAMP.append( VentricularPulseAMP)
+                else:
+                    AtrialAMP.append(0)
+                    VentricularAMP.append(0)
+
+
+                AtrialAX.plot(timeList, AtrialAMP, color='r')
+
+                VentricularAX.plot(timeList, VentricularAMP, color='b')
+
+                fig.canvas.draw()
+
+                AtrialAX.set_xlim(left=max(0, i-10), right=i+10)
+                VentricularAX.set_xlim(left=max(0, i-10), right=i+10)
+
+                time.sleep(0.5)
+
+                i += 1
+        
+        if (value == "doo"):
+            AtrialPulseAMP = float(doo_atrialAmplitudeEntry)
+            AtrialPulsePulseWidth = float(doo_atrialPulseWidthEntry)
+            
+            VentricularPulseAMP = float(doo_ventricularAmplitudeEntry)
+            VentricularPulseWidth = float(doo_ventricularPulseWidthEntry)
+
+            while i!=10:
+                timeList.append(i)
+                if (i%AtrialPulsePulseWidth==0):
+                    AtrialAMP.append(AtrialPulseAMP)
+                else:
+                    AtrialAMP.append(0)
+                    
+                if (i%VentricularPulseWidth==0):
+                    VentricularAMP.append(VentricularPulseAMP)
+                else:
+                    VentricularAMP.append(0)
+                   
+
+                AtrialAX.plot(timeList, AtrialAMP, color='r')
+
+                VentricularAX.plot(timeList, VentricularAMP, color='b')
+
+                fig.canvas.draw()
+
+                AtrialAX.set_xlim(left=max(0, i-10), right=i+10)
+                VentricularAX.set_xlim(left=max(0, i-10), right=i+10)
+
+                time.sleep(0.5)
+
+                i += 1
+        
+        if (value == "aoor"):
+            PulseWidth = float(aoor_atrialPulseWidthEntry)
+            AtrialPulseAMP = float(aoor_atrialAmplitudeEntry)
+            VentricularPulseAMP = 0
+
+            while i!=10:
+                timeList.append(i)
+                if (i%PulseWidth==0):
+                    AtrialAMP.append(AtrialPulseAMP)
+                    VentricularAMP.append(VentricularPulseAMP)
+                else:
+                    AtrialAMP.append(0)
+                    VentricularAMP.append(0)
+
+
+                AtrialAX.plot(timeList, AtrialAMP, color='r')
+
+                VentricularAX.plot(timeList, VentricularAMP, color='b')
+
+                fig.canvas.draw()
+
+                AtrialAX.set_xlim(left=max(0, i-10), right=i+10)
+                VentricularAX.set_xlim(left=max(0, i-10), right=i+10)
+
+                time.sleep(0.5)
+
+                i += 1
+
+        if (value == "voor"):
+            PulseWidth = float(voor_ventricularPulseWidthEntry)
+            AtrialPulseAMP = 0
+            VentricularPulseAMP = float(voor_ventricularAmplitudeEntry)
+
+            while i!=10:
+                timeList.append(i)
+                if (i%PulseWidth==0):
+                    AtrialAMP.append(AtrialPulseAMP)
+                    VentricularAMP.append( VentricularPulseAMP)
+                else:
+                    AtrialAMP.append(0)
+                    VentricularAMP.append(0)
+
+
+                AtrialAX.plot(timeList, AtrialAMP, color='r')
+
+                VentricularAX.plot(timeList, VentricularAMP, color='b')
+
+                fig.canvas.draw()
+
+                AtrialAX.set_xlim(left=max(0, i-10), right=i+10)
+                VentricularAX.set_xlim(left=max(0, i-10), right=i+10)
+
+                time.sleep(0.5)
+
+                i += 1
+        
+        if (value == "aair"):
+            PulseWidth = float(aair_atrialPulseWidthEntry)
+            AtrialPulseAMP = float(aair_atrialAmplitudeEntry)
+            VentricularPulseAMP = 0
+
+            while i!=10:
+                timeList.append(i)
+                if (i%PulseWidth==0):
+                    AtrialAMP.append(AtrialPulseAMP)
+                    VentricularAMP.append(VentricularPulseAMP)
+                else:
+                    AtrialAMP.append(0)
+                    VentricularAMP.append(0)
+
+
+                AtrialAX.plot(timeList, AtrialAMP, color='r')
+
+                VentricularAX.plot(timeList, VentricularAMP, color='b')
+
+                fig.canvas.draw()
+
+                AtrialAX.set_xlim(left=max(0, i-10), right=i+10)
+                VentricularAX.set_xlim(left=max(0, i-10), right=i+10)
+
+                time.sleep(0.5)
+
+                i += 1
+        
+        if (value == "vvir"):
+            PulseWidth = float(vvir_ventricularPulseWidthEntry)
+            AtrialPulseAMP = 0
+            VentricularPulseAMP = float(vvir_ventricularAmplitudeEntry)
+
+            while i!=10:
+                timeList.append(i)
+                if (i%PulseWidth==0):
+                    AtrialAMP.append(AtrialPulseAMP)
+                    VentricularAMP.append( VentricularPulseAMP)
+                else:
+                    AtrialAMP.append(0)
+                    VentricularAMP.append(0)
+
+
+                AtrialAX.plot(timeList, AtrialAMP, color='r')
+
+                VentricularAX.plot(timeList, VentricularAMP, color='b')
+
+                fig.canvas.draw()
+
+                AtrialAX.set_xlim(left=max(0, i-10), right=i+10)
+                VentricularAX.set_xlim(left=max(0, i-10), right=i+10)
+
+                time.sleep(0.5)
+
+                i += 1
+        
+        if (value == "door"):
+            AtrialPulseAMP = float(door_atrialAmplitudeEntry)
+            AtrialPulsePulseWidth = float(door_atrialPulseWidthEntry)
+            
+            VentricularPulseAMP = float(door_ventricularAmplitudeEntry)
+            VentricularPulseWidth = float(door_ventricularPulseWidthEntry)
+
+            while i!=10:
+                timeList.append(i)
+                if (i%AtrialPulsePulseWidth==0):
+                    AtrialAMP.append(AtrialPulseAMP)
+                else:
+                    AtrialAMP.append(0)
+                    
+                if (i%VentricularPulseWidth==0):
+                    VentricularAMP.append(VentricularPulseAMP)
+                else:
+                    VentricularAMP.append(0)
+                   
+
+                AtrialAX.plot(timeList, AtrialAMP, color='r')
+
+                VentricularAX.plot(timeList, VentricularAMP, color='b')
+
+                fig.canvas.draw()
+
+                AtrialAX.set_xlim(left=max(0, i-10), right=i+10)
+                VentricularAX.set_xlim(left=max(0, i-10), right=i+10)
+
+                time.sleep(0.5)
+
+                i += 1
+
+
+
+        plt.show()
+
 """class Graph:
     def __init__(self, master):
         #General paramters
@@ -4289,38 +4617,48 @@ class MainWindow:
         self.master.title("Graph")
         self.frame = tk.Frame(self.master)
         self.master.resizable(width=False, height=False)
-
-        f = Figure(figsize=(5,5), dpi=100)
-        a = f.add_subplot(111)
-        a.plot([1,2,3,4,5,6,7,8],[5,6,1,3,8,9,3,5])
-
-        canvas = FigureCanvasTkAgg(f, self)
-        canvas.draw()
-        canvas.get_tk_widget().pack(side=tk.BOTTOM, fill=tk.BOTH, expand=True)
-
-        toolbar = NavigationToolbar2Tk(canvas, self)
-        toolbar.update()
-        canvas._tkcanvas.pack(side=tk.TOP, fill=tk.BOTH, expand=True)"""
-
-class Graph:
-    def __init__(self, master):
-        #General paramters
-        self.master = master
-        self.master.title("Graph")
-        self.frame = tk.Frame(self.master)
-        self.master.resizable(width=False, height=False)
+        self.DCMgraph()
+    
+    def DCMgraph(self):
         
-        f = Figure(figsize=(5,5), dpi=100)
-        a = f.add_subplot(111)
-        a.plot([1,2,3,4,5,6,7,8],[5,6,1,3,8,9,3,5])
+        fig = plt.figure()
+        AtrialAX = fig.add_subplot(1,2,1)
+        VentricularAX = fig.add_subplot(1,2,2)
+        fig.show()
 
-        canvas = FigureCanvasTkAgg(f, self)
-        canvas.draw()
-        canvas.get_tk_widget().pack(side=tk.BOTTOM, fill=tk.BOTH, expand=True)
+        i = 0
+        timeList = []
+        AtrialAMP, VentricularAMP = [], []
 
-        toolbar = NavigationToolbar2Tk(canvas, self)
-        toolbar.update()
-        canvas._tkcanvas.pack(side=tk.TOP, fill=tk.BOTH, expand=True)
+
+        PulseWidth = 5
+        AtrialPulseAMP = 6
+        VentricularPulseAMP = 0
+
+        while i!=10:
+            timeList.append(i)
+            if (i%PulseWidth==0):
+                AtrialAMP.append(AtrialPulseAMP)
+                VentricularAMP.append( VentricularPulseAMP)
+            else:
+                AtrialAMP.append(0)
+                VentricularAMP.append(0)
+
+
+            AtrialAX.plot(timeList, AtrialAMP, color='r')
+
+            VentricularAX.plot(timeList, VentricularAMP, color='b')
+
+            fig.canvas.draw()
+
+            AtrialAX.set_xlim(left=max(0, i-10), right=i+10)
+            VentricularAX.set_xlim(left=max(0, i-10), right=i+10)
+
+            time.sleep(0.5)
+
+            i += 1
+
+        plt.show()"""
 
 #Main function that runs everything
 def main():
