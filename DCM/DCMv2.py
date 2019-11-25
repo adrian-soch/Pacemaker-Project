@@ -14,11 +14,12 @@ import struct
 #Serial Detials
 portName = "/dev/tty.usbmodem000621000000" #Change to our port
 connectionStatus = "Not Connected To Placemaker"
+status = ''
 
 
 
 #Creating sqlite3 database
-db = sqlite3.connect("DCM.sqlite", detect_types= sqlite3.PARSE_DECLTYPES)
+db = sqlite3.connect("DCM.sqlite", detect_types= sqlite3.PARSE_DECLTYPES, check_same_thread=False)
 
 #Create seperate table for each MODE within database
 db.execute("CREATE TABLE IF NOT EXISTS users (user TEXT NOT NULL, password TEXT NOT NULL, codename TEXT NOT NULL)")
@@ -357,6 +358,7 @@ class MainWindow:
         
         #Current Mode
         global userlog
+        global status
         userlog                           = str(row[0][0])
 
         #Global Variables setup with current user parameters
@@ -4401,6 +4403,23 @@ class MainWindow:
         exit()
 
             
+def test():
+    dev = usb.core.find(find_all=True)
+    var = ''
+    for cfg in dev:
+        if (cfg.idVendor == 4966):
+            var = cfg.idVendor
+    return var
+
+def run():
+    global status
+    while(1):
+        if (len(test()) > 0):
+            status = test()
+        else:
+            status = "Not Connected"
+        print(status)
+
 
 #Main function that runs everything
 def main():
@@ -4411,5 +4430,9 @@ def main():
     root.mainloop()
 
 if __name__ == '__main__':
-    # Runs tkinter
+    
+    #Run USB Connected
+    Thread(target = run).start()
+
+    #DCM Main (can't multithread when using sqlite)
     Thread(target = main).start()
