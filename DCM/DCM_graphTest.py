@@ -4321,9 +4321,9 @@ class MainWindow:
             AtrialPulseAMP = float(aoo_atrialAmplitudeEntry)
             VentricularPulseAMP = 0
 
-            while i!=10:
+            while i!=(PulseWidth*100):
                 timeList.append(i)
-                if (i%PulseWidth==0):
+                if (i%(PulseWidth*10)==0):
                     AtrialAMP.append(AtrialPulseAMP)
                     VentricularAMP.append(VentricularPulseAMP)
                 else:
@@ -4337,10 +4337,10 @@ class MainWindow:
 
                 fig.canvas.draw()
 
-                AtrialAX.set_xlim(left=max(0, i-10), right=i+10)
-                VentricularAX.set_xlim(left=max(0, i-10), right=i+10)
+                AtrialAX.set_xlim(left=max(0, i-5), right=i+5)
+                VentricularAX.set_xlim(left=max(0, i-5), right=i+5)
 
-                time.sleep(0.5)
+                time.sleep(0.1)
 
                 i += 1
 
@@ -4349,9 +4349,9 @@ class MainWindow:
             AtrialPulseAMP = 0
             VentricularPulseAMP = float(voo_ventricularAmplitudeEntry)
 
-            while i!=10:
+            while i!=(PulseWidth*100):
                 timeList.append(i)
-                if (i%PulseWidth==0):
+                if (i%(PulseWidth*10)==0):
                     AtrialAMP.append(AtrialPulseAMP)
                     VentricularAMP.append( VentricularPulseAMP)
                 else:
@@ -4365,10 +4365,10 @@ class MainWindow:
 
                 fig.canvas.draw()
 
-                AtrialAX.set_xlim(left=max(0, i-10), right=i+10)
-                VentricularAX.set_xlim(left=max(0, i-10), right=i+10)
+                AtrialAX.set_xlim(left=max(0, i-5), right=i+5)
+                VentricularAX.set_xlim(left=max(0, i-5), right=i+5)
 
-                time.sleep(0.5)
+                time.sleep(0.1)
 
                 i += 1
         
@@ -4377,9 +4377,9 @@ class MainWindow:
             AtrialPulseAMP = float(aai_atrialAmplitudeEntry)
             VentricularPulseAMP = 0
 
-            while i!=10:
+            while i!=(PulseWidth*100):
                 timeList.append(i)
-                if (i%PulseWidth==0):
+                if (i%(PulseWidth*10)==0):
                     AtrialAMP.append(AtrialPulseAMP)
                     VentricularAMP.append(VentricularPulseAMP)
                 else:
@@ -4393,10 +4393,10 @@ class MainWindow:
 
                 fig.canvas.draw()
 
-                AtrialAX.set_xlim(left=max(0, i-10), right=i+10)
-                VentricularAX.set_xlim(left=max(0, i-10), right=i+10)
+                AtrialAX.set_xlim(left=max(0, i-5), right=i+5)
+                VentricularAX.set_xlim(left=max(0, i-5), right=i+5)
 
-                time.sleep(0.5)
+                time.sleep(0.1)
 
                 i += 1
         
@@ -4405,9 +4405,9 @@ class MainWindow:
             AtrialPulseAMP = 0
             VentricularPulseAMP = float(vvi_ventricularAmplitudeEntry)
 
-            while i!=10:
+            while i!=(PulseWidth*100):
                 timeList.append(i)
-                if (i%PulseWidth==0):
+                if (i%(PulseWidth*10)==0):
                     AtrialAMP.append(AtrialPulseAMP)
                     VentricularAMP.append( VentricularPulseAMP)
                 else:
@@ -4421,10 +4421,10 @@ class MainWindow:
 
                 fig.canvas.draw()
 
-                AtrialAX.set_xlim(left=max(0, i-10), right=i+10)
-                VentricularAX.set_xlim(left=max(0, i-10), right=i+10)
+                AtrialAX.set_xlim(left=max(0, i-5), right=i+5)
+                VentricularAX.set_xlim(left=max(0, i-5), right=i+5)
 
-                time.sleep(0.5)
+                time.sleep(0.1)
 
                 i += 1
         
@@ -4435,7 +4435,7 @@ class MainWindow:
             VentricularPulseAMP = float(doo_ventricularAmplitudeEntry)
             VentricularPulseWidth = float(doo_ventricularPulseWidthEntry)
 
-            while i!=10:
+            while i!=(PulseWidth*100):
                 timeList.append(i)
                 if (i%AtrialPulsePulseWidth==0):
                     AtrialAMP.append(AtrialPulseAMP)
@@ -4454,10 +4454,10 @@ class MainWindow:
 
                 fig.canvas.draw()
 
-                AtrialAX.set_xlim(left=max(0, i-10), right=i+10)
-                VentricularAX.set_xlim(left=max(0, i-10), right=i+10)
+                AtrialAX.set_xlim(left=max(0, i-5), right=i+5)
+                VentricularAX.set_xlim(left=max(0, i-5), right=i+5)
 
-                time.sleep(0.5)
+                time.sleep(0.1)
 
                 i += 1
         
@@ -4466,9 +4466,9 @@ class MainWindow:
             AtrialPulseAMP = float(aoor_atrialAmplitudeEntry)
             VentricularPulseAMP = 0
 
-            while i!=10:
+            while i!=(PulseWidth*100):
                 timeList.append(i)
-                if (i%PulseWidth==0):
+                if (i%(PulseWidth*10)==0):
                     AtrialAMP.append(AtrialPulseAMP)
                     VentricularAMP.append(VentricularPulseAMP)
                 else:
@@ -4482,10 +4482,10 @@ class MainWindow:
 
                 fig.canvas.draw()
 
-                AtrialAX.set_xlim(left=max(0, i-10), right=i+10)
-                VentricularAX.set_xlim(left=max(0, i-10), right=i+10)
+                AtrialAX.set_xlim(left=max(0, i-5), right=i+5)
+                VentricularAX.set_xlim(left=max(0, i-5), right=i+5)
 
-                time.sleep(0.5)
+                time.sleep(0.1)
 
                 i += 1
 
@@ -4494,9 +4494,9 @@ class MainWindow:
             AtrialPulseAMP = 0
             VentricularPulseAMP = float(voor_ventricularAmplitudeEntry)
 
-            while i!=10:
+            while i!=(PulseWidth*100):
                 timeList.append(i)
-                if (i%PulseWidth==0):
+                if (i%(PulseWidth*10)==0):
                     AtrialAMP.append(AtrialPulseAMP)
                     VentricularAMP.append( VentricularPulseAMP)
                 else:
@@ -4510,10 +4510,10 @@ class MainWindow:
 
                 fig.canvas.draw()
 
-                AtrialAX.set_xlim(left=max(0, i-10), right=i+10)
-                VentricularAX.set_xlim(left=max(0, i-10), right=i+10)
+                AtrialAX.set_xlim(left=max(0, i-5), right=i+5)
+                VentricularAX.set_xlim(left=max(0, i-5), right=i+5)
 
-                time.sleep(0.5)
+                time.sleep(0.1)
 
                 i += 1
         
@@ -4522,9 +4522,9 @@ class MainWindow:
             AtrialPulseAMP = float(aair_atrialAmplitudeEntry)
             VentricularPulseAMP = 0
 
-            while i!=10:
+            while i!=(PulseWidth*100):
                 timeList.append(i)
-                if (i%PulseWidth==0):
+                if (i%(PulseWidth*10)==0):
                     AtrialAMP.append(AtrialPulseAMP)
                     VentricularAMP.append(VentricularPulseAMP)
                 else:
@@ -4538,10 +4538,10 @@ class MainWindow:
 
                 fig.canvas.draw()
 
-                AtrialAX.set_xlim(left=max(0, i-10), right=i+10)
-                VentricularAX.set_xlim(left=max(0, i-10), right=i+10)
+                AtrialAX.set_xlim(left=max(0, i-5), right=i+5)
+                VentricularAX.set_xlim(left=max(0, i-5), right=i+5)
 
-                time.sleep(0.5)
+                time.sleep(0.1)
 
                 i += 1
         
@@ -4550,9 +4550,9 @@ class MainWindow:
             AtrialPulseAMP = 0
             VentricularPulseAMP = float(vvir_ventricularAmplitudeEntry)
 
-            while i!=10:
+            while i!=(PulseWidth*100):
                 timeList.append(i)
-                if (i%PulseWidth==0):
+                if (i%(PulseWidth*10)==0):
                     AtrialAMP.append(AtrialPulseAMP)
                     VentricularAMP.append( VentricularPulseAMP)
                 else:
@@ -4566,10 +4566,10 @@ class MainWindow:
 
                 fig.canvas.draw()
 
-                AtrialAX.set_xlim(left=max(0, i-10), right=i+10)
-                VentricularAX.set_xlim(left=max(0, i-10), right=i+10)
+                AtrialAX.set_xlim(left=max(0, i-5), right=i+5)
+                VentricularAX.set_xlim(left=max(0, i-5), right=i+5)
 
-                time.sleep(0.5)
+                time.sleep(0.1)
 
                 i += 1
         
@@ -4580,7 +4580,7 @@ class MainWindow:
             VentricularPulseAMP = float(door_ventricularAmplitudeEntry)
             VentricularPulseWidth = float(door_ventricularPulseWidthEntry)
 
-            while i!=10:
+            while i!=(PulseWidth*100):
                 timeList.append(i)
                 if (i%AtrialPulsePulseWidth==0):
                     AtrialAMP.append(AtrialPulseAMP)
@@ -4599,10 +4599,10 @@ class MainWindow:
 
                 fig.canvas.draw()
 
-                AtrialAX.set_xlim(left=max(0, i-10), right=i+10)
-                VentricularAX.set_xlim(left=max(0, i-10), right=i+10)
+                AtrialAX.set_xlim(left=max(0, i-5), right=i+5)
+                VentricularAX.set_xlim(left=max(0, i-5), right=i+5)
 
-                time.sleep(0.5)
+                time.sleep(0.1)
 
                 i += 1
 
@@ -4626,7 +4626,7 @@ class MainWindow:
         VentricularAX = fig.add_subplot(1,2,2)
         fig.show()
 
-        i = 0
+        i = 0.1
         timeList = []
         AtrialAMP, VentricularAMP = [], []
 
@@ -4635,9 +4635,9 @@ class MainWindow:
         AtrialPulseAMP = 6
         VentricularPulseAMP = 0
 
-        while i!=10:
+        while i!=(PulseWidth*100):
             timeList.append(i)
-            if (i%PulseWidth==0):
+            if (i%(PulseWidth*10)==0):
                 AtrialAMP.append(AtrialPulseAMP)
                 VentricularAMP.append( VentricularPulseAMP)
             else:
@@ -4651,10 +4651,10 @@ class MainWindow:
 
             fig.canvas.draw()
 
-            AtrialAX.set_xlim(left=max(0, i-10), right=i+10)
-            VentricularAX.set_xlim(left=max(0, i-10), right=i+10)
+            AtrialAX.set_xlim(left=max(0, i-5), right=i+5)
+            VentricularAX.set_xlim(left=max(0, i-5), right=i+5)
 
-            time.sleep(0.5)
+            time.sleep(0.1)
 
             i += 1
 
