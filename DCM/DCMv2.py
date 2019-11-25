@@ -9,6 +9,8 @@ import sys
 import usb.core
 from threading import Thread
 
+PORTNAME = "CUM"
+BAUDRATE = 115200
 
 #Creating sqlite3 database
 db = sqlite3.connect("DCM.sqlite", detect_types= sqlite3.PARSE_DECLTYPES)
@@ -4428,6 +4430,35 @@ class MainWindow:
         self.master.destroy()
         exit()
 
+
+def send():
+    try:
+        sercom = serial.Serial(
+        stopBit = serial.STOPBITS_ONE, 
+        byteSize=serial.EIGHTBITS,
+        port = PORTNAME,
+        baudrate = BAUDRATE)
+        
+        #Initialize Variable
+        print("open up serial baby", ser.isOpen())
+        # H = uint16, d = double, B = uint8
+        var = ('<BBHHHHHHHdddHHdddHddHHH', 69, 21, 1, 60, 120, 200, 100, 5, 250, 3, 2, 2, 10, 250, 3, 2, 2, 10, 8, 1.8, 20, 120, 0)
+
+
+        print("To send (in binary): ", var)
+        print("Size of string representation is {}.".format(struct.calcsize('<BBHHHHHHHdddHHdddHddHHH')))
+        print("To send (in decimal): ", struct.unpack('<BBHHHHHHHdddHHdddHddHHH',var))
+        print("send1",ser.write(var))   # struct.pack already packs into byte array in binary, so we can just send that over serial
+
+        time.sleep(1)
+        ser.close()
+        print("Serial Port Closed")
+
+    except:
+        print("uh oh")
+        pass
+            
+        
 def test():
     dev = usb.core.find(find_all=True)
     for cfg in dev:
@@ -4444,6 +4475,9 @@ def run():
 
 #Main function that runs everything
 def main():
+    
+    send()
+    
     #Run Tkinter
     root = tk.Tk()
     app = WelcomeFrame(root)
