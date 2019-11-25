@@ -1,6 +1,7 @@
 #Imports
 import tkinter as tk
 import serial
+from serial import Serial
 import numpy
 from tkinter import ttk
 from tkinter import messagebox
@@ -8,6 +9,7 @@ import sqlite3
 import sys
 import usb.core
 from threading import Thread
+import struct
 
 #Serial Detials
 portName = "/dev/tty.usbmodem000621000000" #Change to our port
