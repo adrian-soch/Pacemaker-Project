@@ -1559,7 +1559,10 @@ class MainWindow:
 
                 #Binary Representation
                 serialvar = struct.pack('<BBddddddBdddddddd',startbyte, 7, mode,URL,LRL,aAmp,vAmp,vWid,aWid,mode,VRP,ARP,hyst,respFac,MSR,actThr,rxnTim,recTim) 
-                
+                serialvar = struct.pack('<BBHHHHHHHdddHHdddHddHHH',startbyte, 7, mode,URL,LRL,aAmp,vAmp,vWid,aWid,mode,VRP,ARP,hyst,respFac,MSR,actThr,rxnTim,recTim) 
+
+
+
                 #Send over Serial
                 ser.write(serialvar)
 
@@ -1583,8 +1586,10 @@ class MainWindow:
                 mode = 2
                 
                 #Binary Representation
-                serialvar = struct.pack('<BBddddddBdddddddd',startbyte,mode,URL,LRL,aAmp,vAmp,vWid,aWid,mode,VRP,ARP,hyst,respFac,MSR,actThr,rxnTim,recTim) 
-                
+                serialvar = struct.pack('<BBddddddBdddddddd',startbyte, 7, mode,URL,LRL,aAmp,vAmp,vWid,aWid,mode,VRP,ARP,hyst,respFac,MSR,actThr,rxnTim,recTim) 
+                serialvar = struct.pack('<BBHHHHHHHdddHHdddHddHHH',startbyte, 7, mode,URL,LRL,aAmp,vAmp,vWid,aWid,mode,VRP,ARP,hyst,respFac,MSR,actThr,rxnTim,recTim) 
+
+
                 #Send over Serial
                 ser.write(serialvar)
 
@@ -1607,7 +1612,8 @@ class MainWindow:
                 mode = 3
                 
                 #Binary Representation
-                serialvar = struct.pack('<BBddddddBdddddddd',startbyte,mode,URL,LRL,aAmp,vAmp,vWid,aWid,mode,VRP,ARP,hyst,respFac,MSR,actThr,rxnTim,recTim) 
+                serialvar = struct.pack('<BBddddddBdddddddd',startbyte, 7, mode,URL,LRL,aAmp,vAmp,vWid,aWid,mode,VRP,ARP,hyst,respFac,MSR,actThr,rxnTim,recTim) 
+                serialvar = struct.pack('<BBHHHHHHHdddHHdddHddHHH',startbyte, 7, mode,URL,LRL,aAmp,vAmp,vWid,aWid,mode,VRP,ARP,hyst,respFac,MSR,actThr,rxnTim,recTim) 
                 
                 #Send over Serial
                 ser.write(serialvar)
@@ -1632,7 +1638,8 @@ class MainWindow:
                 mode = 4
                 
                 #Binary Representation
-                serialvar = struct.pack('<BBddddddBdddddddd',startbyte,mode,URL,LRL,aAmp,vAmp,vWid,aWid,mode,VRP,ARP,hyst,respFac,MSR,actThr,rxnTim,recTim) 
+                serialvar = struct.pack('<BBddddddBdddddddd',startbyte, 7, mode,URL,LRL,aAmp,vAmp,vWid,aWid,mode,VRP,ARP,hyst,respFac,MSR,actThr,rxnTim,recTim)
+                serialvar = struct.pack('<BBHHHHHHHdddHHdddHddHHH',startbyte, 7, mode,URL,LRL,aAmp,vAmp,vWid,aWid,mode,VRP,ARP,hyst,respFac,MSR,actThr,rxnTim,recTim) 
                 
                 #Send over Serial
                 ser.write(serialvar)
@@ -1657,7 +1664,9 @@ class MainWindow:
                 mode = 5
                 
                 #Binary Representation
-                serialvar = struct.pack('<BBddddddBdddddddd',startbyte,mode,URL,LRL,aAmp,vAmp,vWid,aWid,mode,VRP,ARP,hyst,respFac,MSR,actThr,rxnTim,recTim) 
+                serialvar = struct.pack('<BBddddddBdddddddd',startbyte, 7, mode,URL,LRL,aAmp,vAmp,vWid,aWid,mode,VRP,ARP,hyst,respFac,MSR,actThr,rxnTim,recTim) 
+                serialvar = struct.pack('<BBHHHHHHHdddHHdddHddHHH',startbyte, 7, mode,URL,LRL,aAmp,vAmp,vWid,aWid,mode,VRP,ARP,hyst,respFac,MSR,actThr,rxnTim,recTim) 
+
                 
                 #Send over Serial
                 ser.write(serialvar)
@@ -1682,7 +1691,9 @@ class MainWindow:
                 mode = 6
                 
                 #Binary Representation
-                serialvar = struct.pack('<BBddddddBdddddddd',startbyte,mode,URL,LRL,aAmp,vAmp,vWid,aWid,mode,VRP,ARP,hyst,respFac,MSR,actThr,rxnTim,recTim) 
+                serialvar = struct.pack('<BBddddddBdddddddd',startbyte, 7, mode,URL,LRL,aAmp,vAmp,vWid,aWid,mode,VRP,ARP,hyst,respFac,MSR,actThr,rxnTim,recTim) 
+                serialvar = struct.pack('<BBHHHHHHHdddHHdddHddHHH',startbyte, 7, mode,URL,LRL,aAmp,vAmp,vWid,aWid,mode,VRP,ARP,hyst,respFac,MSR,actThr,rxnTim,recTim) 
+
                 
                 #Send over Serial
                 ser.write(serialvar)
@@ -1706,7 +1717,9 @@ class MainWindow:
                 mode = 7
                 
                 #Binary Representation
-                serialvar = struct.pack('<BBddddddBdddddddd',startbyte,mode,URL,LRL,aAmp,vAmp,vWid,aWid,mode,VRP,ARP,hyst,respFac,MSR,actThr,rxnTim,recTim) 
+                serialvar = struct.pack('<BBddddddBdddddddd',startbyte, 7, mode,URL,LRL,aAmp,vAmp,vWid,aWid,mode,VRP,ARP,hyst,respFac,MSR,actThr,rxnTim,recTim) 
+                serialvar = struct.pack('<BBHHHHHHHdddHHdddHddHHH',startbyte, 7, mode,URL,LRL,aAmp,vAmp,vWid,aWid,mode,VRP,ARP,hyst,respFac,MSR,actThr,rxnTim,recTim) 
+
                 
                 #Send over Serial
                 ser.write(serialvar)
@@ -1730,7 +1743,9 @@ class MainWindow:
                 mode = 8
                 
                 #Binary Representation
-                serialvar = struct.pack('<BBddddddBdddddddd',startbyte,mode,URL,LRL,aAmp,vAmp,vWid,aWid,mode,VRP,ARP,hyst,respFac,MSR,actThr,rxnTim,recTim) 
+                serialvar = struct.pack('<BBddddddBdddddddd',startbyte, 7, mode,URL,LRL,aAmp,vAmp,vWid,aWid,mode,VRP,ARP,hyst,respFac,MSR,actThr,rxnTim,recTim) 
+                serialvar = struct.pack('<BBHHHHHHHdddHHdddHddHHH',startbyte, 7, mode,URL,LRL,aAmp,vAmp,vWid,aWid,mode,VRP,ARP,hyst,respFac,MSR,actThr,rxnTim,recTim) 
+
                 
                 #Send over Serial
                 ser.write(serialvar)
@@ -1754,7 +1769,9 @@ class MainWindow:
                 mode = 9
                 
                 #Binary Representation
-                serialvar = struct.pack('<BBddddddBdddddddd',startbyte,mode,URL,LRL,aAmp,vAmp,vWid,aWid,mode,VRP,ARP,hyst,respFac,MSR,actThr,rxnTim,recTim) 
+                serialvar = struct.pack('<BBddddddBdddddddd',startbyte, 7, mode,URL,LRL,aAmp,vAmp,vWid,aWid,mode,VRP,ARP,hyst,respFac,MSR,actThr,rxnTim,recTim) 
+                serialvar = struct.pack('<BBHHHHHHHdddHHdddHddHHH',startbyte, 7, mode,URL,LRL,aAmp,vAmp,vWid,aWid,mode,VRP,ARP,hyst,respFac,MSR,actThr,rxnTim,recTim) 
+
                 
                 #Send over Serial
                 ser.write(serialvar)
@@ -1778,7 +1795,9 @@ class MainWindow:
                 mode = 10
                 
                 #Binary Representation
-                serialvar = struct.pack('<BBddddddBdddddddd',startbyte,mode,URL,LRL,aAmp,vAmp,vWid,aWid,mode,VRP,ARP,hyst,respFac,MSR,actThr,rxnTim,recTim) 
+                serialvar = struct.pack('<BBddddddBdddddddd',startbyte, 7, mode,URL,LRL,aAmp,vAmp,vWid,aWid,mode,VRP,ARP,hyst,respFac,MSR,actThr,rxnTim,recTim) 
+                serialvar = struct.pack('<BBHHHHHHHdddHHdddHddHHH',startbyte, 7, mode,URL,LRL,aAmp,vAmp,vWid,aWid,mode,VRP,ARP,hyst,respFac,MSR,actThr,rxnTim,recTim) 
+
                 
                 #Send over Serial
                 ser.write(serialvar)
