@@ -1,6 +1,7 @@
 #Imports
 import tkinter as tk
 import serial
+from serial import Serial
 import numpy
 from tkinter import ttk
 from tkinter import messagebox
@@ -8,8 +9,9 @@ import sqlite3
 import sys
 import usb.core
 from threading import Thread
+import struct
 
-PORTNAME = "CUM"
+PORTNAME = "COM6"
 BAUDRATE = 115200
 
 #Creating sqlite3 database
@@ -4432,31 +4434,28 @@ class MainWindow:
 
 
 def send():
-    try:
-        sercom = serial.Serial(
-        stopBit = serial.STOPBITS_ONE, 
-        byteSize=serial.EIGHTBITS,
-        port = PORTNAME,
-        baudrate = BAUDRATE)
-        
-        #Initialize Variable
-        print("open up serial baby", ser.isOpen())
-        # H = uint16, d = double, B = uint8
-        var = ('<BBHHHHHHHdddHHdddHddHHH', 69, 21, 1, 60, 120, 200, 100, 5, 250, 3, 2, 2, 10, 250, 3, 2, 2, 10, 8, 1.8, 20, 120, 0)
+
+    sercom = serial.Serial(
+    stopbits = serial.STOPBITS_ONE, 
+    bytesize=serial.EIGHTBITS,
+    port = "COM6",
+    baudrate = 115200)
+    
+    #Initialize Variable
+    print("open up serial baby", sercom.isOpen())
+    # H = uint16, d = double, B = uint8
+    var = ('<BBHHHHHHHdddHHdddHddHHH', 69, 21, 1, 60, 120, 200, 100, 5, 250, 3, 2, 2, 10, 250, 3, 2, 2, 10, 8, 1.8, 20, 120, 0)
 
 
-        print("To send (in binary): ", var)
-        print("Size of string representation is {}.".format(struct.calcsize('<BBHHHHHHHdddHHdddHddHHH')))
-        print("To send (in decimal): ", struct.unpack('<BBHHHHHHHdddHHdddHddHHH',var))
-        print("send1",ser.write(var))   # struct.pack already packs into byte array in binary, so we can just send that over serial
+    print("To send (in binary): ", var)
+    print("Size of string representation is {}.".format(struct.calcsize('<BBHHHHHHHdddHHdddHddHHH')))
+    print("To send (in decimal): ", struct.unpack('<BBHHHHHHHdddHHdddHddHHH',var))
+    print("send1",sercom.write(var))   # struct.pack already packs into byte array in binary, so we can just send that over serial
 
-        time.sleep(1)
-        ser.close()
-        print("Serial Port Closed")
+    time.sleep(1)
+    ser.close()
+    print("Serial Port Closed")
 
-    except:
-        print("uh oh")
-        pass
             
         
 def test():
@@ -4488,4 +4487,4 @@ if __name__ == '__main__':
     Thread(target = main).start()
 
     #Run USB Connected
-    Thread(target = run).start()
+    #Thread(target = run).start()
