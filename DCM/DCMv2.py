@@ -9,6 +9,9 @@ import sys
 import usb.core
 from threading import Thread
 
+#Serial Detials
+portName = "/dev/tty.usbmodem000621000000" #Change to our port
+connectionStatus = "Not Connected To Placemaker"
 
 #Creating sqlite3 database
 db = sqlite3.connect("DCM.sqlite", detect_types= sqlite3.PARSE_DECLTYPES)
@@ -19,8 +22,11 @@ db.execute("CREATE TABLE IF NOT EXISTS users (user TEXT NOT NULL, password TEXT 
 #Current User
 currentuser = ''
 
-#State
-MODE = ''
+#State 1
+mode = 0
+startbyte = 69
+serialtype = 0
+serialvar = ''
 
 #Initializing all global variables with "0"
 userlog = ''
@@ -1486,6 +1492,10 @@ class MainWindow:
     def confirmChanges(self,value):
         #CurrentUser
         global currentuser
+
+        #Mode
+        global mode
+
         #AOO
         global aoo_lowerRateLimitEntry,aoo_upperRateLimitEntry,aoo_atrialAmplitudeEntry,aoo_atrialPulseWidthEntry 
         #VOO
@@ -1507,8 +1517,22 @@ class MainWindow:
         #DOOR
         global door_lowerRateLimitEntry, door_upperRateLimitEntry, door_atrialAmplitudeEntry, door_atrialPulseWidthEntry, door_ventricularAmplitudeEntry, door_ventricularPulseWidthEntry, door_maximumSensorRateEntry, door_fixedAVDelayEntry, door_activityThresholdEntry, door_reactionTimeEntry, door_responseFactorEntry, door_recoveryTimeEntry
         
-        global MODE
-        MODE = value
+        #State 1
+        global mode
+        global startbyte
+        global connectionStatus
+        global serialtype
+        global serialvar
+
+        #Start Serial Component
+        ser = serial.Serial(
+            stopbits=serial.STOPBITS_ONE,
+            bytesize=serial.EIGHTBITS,
+            port = portName,
+            baudrate=115200
+            )
+        print("Is Serial Port Open:", ser.isOpen())
+
 
         if (value == "aooConfirm"):
             if messagebox.askyesno("CONFIRMATION", "Upload these changes?"):
@@ -1526,15 +1550,15 @@ class MainWindow:
                 self.doorLog.config(text= userlog)
                 db.execute("UPDATE "+currentuser+" SET userlog = ?", (userlog, ))
                 db.commit()
-                # MODE = 1
-                # LOWER_RATE_LIMIT = aoo_lowerRateLimitEntry
-                # UPPER_RATE_LIMIT = aoo_upperRateLimitEntry
-                # ATR_AMP = aoo_atrialAmplitudeEntry
-                # ATR_PULSE_WIDTH = aoo_atrialPulseWidthEntry
-                # data_output = [69, MODE, LOWER_RATE_LIMIT, UPPER_RATE_LIMIT,ATR_AMP, ATR_PULSE_WIDTH]
-                # serial_data_output = str(data_output)
-                # serial_data_output = str.encode(serial_data_output)
+                mode = 1
 
+                #Binary Representation
+                serialvar = struct.pack('<BBddddddBdddddddd',startbyte, 7, mode,URL,LRL,aAmp,vAmp,vWid,aWid,mode,VRP,ARP,hyst,respFac,MSR,actThr,rxnTim,recTim) 
+                
+                #Send over Serial
+                ser.write(serialvar)
+
+                
         elif (value == "vooConfirm"):
             if messagebox.askyesno("CONFIRMATION", "Upload these changes?"):
                 messagebox.showinfo("DONE", "Success")
@@ -1551,14 +1575,13 @@ class MainWindow:
                 self.doorLog.config(text= userlog)
                 db.execute("UPDATE "+currentuser+" SET userlog = ?", (userlog, ))
                 db.commit()
-                # MODE = 2
-                # LOWER_RATE_LIMIT = voo_lowerRateLimitEntry
-                # UPPER_RATE_LIMIT = voo_upperRateLimitEntry
-                # VENT_AMP = voo_ventricularAmplitudeEntry
-                # VENT_PULSE_WIDTH = voo_ventricularPulseWidthEntry
-                # data_output = [69, MODE, LOWER_RATE_LIMIT, UPPER_RATE_LIMIT, VENT_AMP, VENT_PULSE_WIDTH]
-                # serial_data_output = str(data_output)
-                # serial_data_output = str.encode(serial_data_output)
+                mode = 2
+                
+                #Binary Representation
+                serialvar = struct.pack('<BBddddddBdddddddd',startbyte,mode,URL,LRL,aAmp,vAmp,vWid,aWid,mode,VRP,ARP,hyst,respFac,MSR,actThr,rxnTim,recTim) 
+                
+                #Send over Serial
+                ser.write(serialvar)
 
         elif (value == "aaiConfirm"):
             if messagebox.askyesno("CONFIRMATION", "Upload these changes?"):
@@ -1576,17 +1599,13 @@ class MainWindow:
                 self.doorLog.config(text= userlog)
                 db.execute("UPDATE "+currentuser+" SET userlog = ?", (userlog, ))
                 db.commit()
-                # MODE = 3
-                # LOWER_RATE_LIMIT = aai_lowerRateLimitEntry
-                # UPPER_RATE_LIMIT = aai_upperRateLimitEntry
-                # ATR_AMP = aai_atrialAmplitudeEntry
-                # ATR_PULSE_WIDTH = aai_atrialPulseWidthEntry
-                # ATR_SENSITIVITY = aai_atrialSensitivityEntry
-                # ARP = aai_ARPEntry
-                # PVRAP = aai_PVARPEntry
-                # data_output = [69, MODE, LOWER_RATE_LIMIT, UPPER_RATE_LIMIT, ATR_AMP, ATR_PULSE_WIDTH, ATR_SENSITIVITY, ARP, PVRAP]
-                # serial_data_output = str(data_output)
-                # serial_data_output = str.encode(serial_data_output)
+                mode = 3
+                
+                #Binary Representation
+                serialvar = struct.pack('<BBddddddBdddddddd',startbyte,mode,URL,LRL,aAmp,vAmp,vWid,aWid,mode,VRP,ARP,hyst,respFac,MSR,actThr,rxnTim,recTim) 
+                
+                #Send over Serial
+                ser.write(serialvar)
 
 
         elif (value == "vviConfirm"):
@@ -1605,16 +1624,13 @@ class MainWindow:
                 self.doorLog.config(text= userlog)
                 db.execute("UPDATE "+currentuser+" SET userlog = ?", (userlog, ))
                 db.commit()
-                # MODE = 4
-                # LOWER_RATE_LIMIT = vvi_lowerRateLimitEntry
-                # UPPER_RATE_LIMIT = vvi_upperRateLimitEntry
-                # VENT_AMP = vvi_ventricularAmplitudeEntry
-                # VENT_PULSE_WIDTH = vvi_ventricularPulseWidthEntry
-                # VENT_SENSITIVITY = vvi_ventricularSensitivityEntry
-                # VRP = vvi_VRPEntry
-                # data_output = [69, MODE, LOWER_RATE_LIMIT, UPPER_RATE_LIMIT, VENT_AMP, VENT_PULSE_WIDTH, VENT_SENSITIVITY, VRP]
-                # serial_data_output = str(data_output)
-                # serial_data_output = str.encode(serial_data_output)
+                mode = 4
+                
+                #Binary Representation
+                serialvar = struct.pack('<BBddddddBdddddddd',startbyte,mode,URL,LRL,aAmp,vAmp,vWid,aWid,mode,VRP,ARP,hyst,respFac,MSR,actThr,rxnTim,recTim) 
+                
+                #Send over Serial
+                ser.write(serialvar)
 
 
         elif (value == "dooConfirm"):
@@ -1633,16 +1649,13 @@ class MainWindow:
                 self.doorLog.config(text= userlog)
                 db.execute("UPDATE "+currentuser+" SET userlog = ?", (userlog, ))
                 db.commit()
-                # MODE = 5
-                # LOWER_RATE_LIMIT = doo_lowerRateLimitEntry
-                # UPPER_RATE_LIMIT = doo_upperRateLimitEntry
-                # ATR_AMP = doo_atrialAmplitudeEntry
-                # VENT_AMP = doo_ventricularAmplitudeEntry
-                # ATR_PULSE_WIDTH = doo_atrialPulseWidthEntry
-                # AV_DELAY = doo_fixedAVDelayEntry
-                # data_output = [69, MODE, LOWER_RATE_LIMIT, UPPER_RATE_LIMIT, ATR_AMP, VENT_AMP, ATR_PULSE_WIDTH, AV_DELAY]
-                # serial_data_output = str(data_output)
-                # serial_data_output = str.encode(serial_data_output)
+                mode = 5
+                
+                #Binary Representation
+                serialvar = struct.pack('<BBddddddBdddddddd',startbyte,mode,URL,LRL,aAmp,vAmp,vWid,aWid,mode,VRP,ARP,hyst,respFac,MSR,actThr,rxnTim,recTim) 
+                
+                #Send over Serial
+                ser.write(serialvar)
 
 
         elif (value == "aoorConfirm"):
@@ -1661,19 +1674,13 @@ class MainWindow:
                 self.doorLog.config(text= userlog)
                 db.execute("UPDATE "+currentuser+" SET userlog = ?", (userlog, ))
                 db.commit()
-                # MODE = 6
-                # LOWER_RATE_LIMIT = aoor_lowerRateLimitEntry
-                # UPPER_RATE_LIMIT = aoor_upperRateLimitEntry
-                # ATR_AMP = aoor_atrialAmplitudeEntry
-                # ATR_PULSE_WIDTH = aoor_atrialPulseWidthEntry
-                # ATR_SENSE_THRESH = aoor_maximumSensorRateEntry
-                # ACTIVITY_THRESH = aoor_activityThresholdEntry
-                # REACTION_TIME = aoor_reactionTimeEntry
-                # RESPONSE_FACTOR  = aoor_responseFactorEntry
-                # RECOVERY_TIME = aoor_recoveryTimeEntry
-                # data_output = [69, MODE, LOWER_RATE_LIMIT, UPPER_RATE_LIMIT, ATR_AMP, ATR_PULSE_WIDTH, ATR_SENSE_THRESH, ACTIVITY_THRESH, REACTION_TIME, RESPONSE_FACTOR, RECOVERY_TIME]
-                # serial_data_output = str(data_output)
-                # serial_data_output = str.encode(serial_data_output)
+                mode = 6
+                
+                #Binary Representation
+                serialvar = struct.pack('<BBddddddBdddddddd',startbyte,mode,URL,LRL,aAmp,vAmp,vWid,aWid,mode,VRP,ARP,hyst,respFac,MSR,actThr,rxnTim,recTim) 
+                
+                #Send over Serial
+                ser.write(serialvar)
 
         elif (value == "voorConfirm"):
             if messagebox.askyesno("CONFIRMATION", "Upload these changes?"):
@@ -1691,20 +1698,13 @@ class MainWindow:
                 self.doorLog.config(text= userlog)
                 db.execute("UPDATE "+currentuser+" SET userlog = ?", (userlog, ))
                 db.commit()
-                # MODE = 7
-                # LOWER_RATE_LIMIT = voor_lowerRateLimitEntry
-                # UPPER_RATE_LIMIT = voor_upperRateLimitEntry
-                # VENT_AMP = voor_ventricularAmplitudeEntry
-                # VENT_PULSE_WIDTH = voor_ventricularPulseWidthEntry
-                # MSR = voor_maximumSensorRateEntry
-                # activityThresholdEntry = voor_activityThresholdEntry
-                # REACTION_TIME = voor_reactionTimeEntry
-                # RESPONSE_FACTOR = voor_responseFactorEntry
-                # RECOVERY_TIME = voor_recoveryTimeEntry
-
-                # data_output = [69, MODE, LOWER_RATE_LIMIT, UPPER_RATE_LIMIT, VENT_AMP, VENT_PULSE_WIDTH, MSR, activityThresholdEntry, REACTION_TIME, RESPONSE_FACTOR, RECOVERY_TIME]
-                # serial_data_output = str(data_output)
-                # serial_data_output = str.encode(serial_data_output)
+                mode = 7
+                
+                #Binary Representation
+                serialvar = struct.pack('<BBddddddBdddddddd',startbyte,mode,URL,LRL,aAmp,vAmp,vWid,aWid,mode,VRP,ARP,hyst,respFac,MSR,actThr,rxnTim,recTim) 
+                
+                #Send over Serial
+                ser.write(serialvar)
 
         elif (value == "aairConfirm"):
             if messagebox.askyesno("CONFIRMATION", "Upload these changes?"):
@@ -1722,22 +1722,13 @@ class MainWindow:
                 self.doorLog.config(text= userlog)
                 db.execute("UPDATE "+currentuser+" SET userlog = ?", (userlog, ))
                 db.commit()
-                MODE = 8
-                # LOWER_RATE_LIMIT = aair_lowerRateLimitEntry
-                # UPPER_RATE_LIMIT = aair_upperRateLimitEntry
-                # ATR_AMP = aair_atrialAmplitudeEntry
-                # ATR_PULSE_WIDTH = aair_atrialPulseWidthEntry
-                # ATR_SENSITIVITY = aair_atrialSensitivityEntry
-                # ARP = aair_ARPEntry
-                # PVARP = aair_PVARPEntry
-                # MSR = aair_maximumSensorRateEntry
-                # ACTIVITY_THRESH = aair_activityThresholdEntry
-                # REACTION_TIME = aair_reactionTimeEntry
-                # RESPONSE_FACTOR = aair_responseFactorEntry
-                # RECOVERY_TIME = aair_recoveryTimeEntry
-                # data_output = [69, MODE, LOWER_RATE_LIMIT, UPPER_RATE_LIMIT, ATR_AMP, ATR_PULSE_WIDTH, ATR_SENSITIVITY, ARP, PVARP, MSR, ACTIVITY_THRESH, REACTION_TIME, RESPONSE_FACTOR, RECOVERY_TIME]
-                # serial_data_output = str(data_output)
-                # serial_data_output = str.encode(serial_data_output)
+                mode = 8
+                
+                #Binary Representation
+                serialvar = struct.pack('<BBddddddBdddddddd',startbyte,mode,URL,LRL,aAmp,vAmp,vWid,aWid,mode,VRP,ARP,hyst,respFac,MSR,actThr,rxnTim,recTim) 
+                
+                #Send over Serial
+                ser.write(serialvar)
                 
         elif (value == "vvirConfirm"):
             if messagebox.askyesno("CONFIRMATION", "Upload these changes?"):
@@ -1755,21 +1746,13 @@ class MainWindow:
                 self.doorLog.config(text= userlog)
                 db.execute("UPDATE "+currentuser+" SET userlog = ?", (userlog, ))
                 db.commit()
-                # MODE = 9
-                # LOWER_RATE_LIMIT = vvir_lowerRateLimitEntry
-                # UPPER_RATE_LIMIT = vvir_upperRateLimitEntry
-                # VENT_AMP = vvir_ventricularAmplitudeEntry
-                # VENT_PULSE_WIDTH = vvir_ventricularPulseWidthEntry
-                # VENT_SENSITIVITY = vvir_ventricularSensitivityEntry
-                # VRP = vvir_VRPEntry
-                # MSR = vvir_maximumSensorRateEntry
-                # ACTIVITY_THRESH = vvir_activityThresholdEntry
-                # reactionTimeEntry = vvir_reactionTimeEntry
-                # responseFactorEntry = vvir_responseFactorEntry
-                # recoveryTimeEntry = vvir_recoveryTimeEntry
-                # data_output = [69, MODE, LOWER_RATE_LIMIT, UPPER_RATE_LIMIT, VENT_AMP, VENT_PULSE_WIDTH, VENT_SENSITIVITY, VRP, MSR, AV_DELAY, ACTIVITY_THRESH, REACTION_TIME, RESPONSE_FACTOR, RECOVERY_TIME]
-                # serial_data_output = str(data_output)
-                # serial_data_output = str.encode(serial_data_output)
+                mode = 9
+                
+                #Binary Representation
+                serialvar = struct.pack('<BBddddddBdddddddd',startbyte,mode,URL,LRL,aAmp,vAmp,vWid,aWid,mode,VRP,ARP,hyst,respFac,MSR,actThr,rxnTim,recTim) 
+                
+                #Send over Serial
+                ser.write(serialvar)
 
         elif (value == "doorConfirm"):
             if messagebox.askyesno("CONFIRMATION", "Upload these changes?"):
@@ -1787,32 +1770,19 @@ class MainWindow:
                 self.doorLog.config(text= userlog)
                 db.execute("UPDATE "+currentuser+" SET userlog = ?", (userlog, ))
                 db.commit()
-                # MODE = 10
-                # LOWER_RATE_LIMIT = door_lowerRateLimitEntry
-                # UPPER_RATE_LIMIT = door_upperRateLimitEntry
-                # ATR_AMP = door_atrialAmplitudeEntry
-                # ATR_PULSE_WIDTH = door_atrialPulseWidthEntry
-                # VENT_AMP = door_ventricularAmplitudeEntry
-                # VENT_PULSE_WIDTH = door_ventricularPulseWidthEntry
-                # MSR = door_maximumSensorRateEntry
-                # AV_DELAY = door_fixedAVDelayEntry
-                # ACTIVITY_THRESH = door_activityThresholdEntry
-                # REACTION_TIME = door_reactionTimeEntry
-                # RESPONSE_FACTOR = door_responseFactorEntry
-                # RECOVERY_TIME = door_recoveryTimeEntry
-                # data_output = [69, MODE, LOWER_RATE_LIMIT, UPPER_RATE_LIMIT, ATR_AMP, ATR_PULSE_WIDTH, VENT_AMP, VENT_PULSE_WIDTH, MSR, AV_DELAY, ACTIVITY_THRESH, REACTION_TIME, RESPONSE_FACTOR, RECOVERY_TIME]
-                # serial_data_output = str(data_output)
-                # serial_data_output = str.encode(serial_data_output)
+                mode = 10
+                
+                #Binary Representation
+                serialvar = struct.pack('<BBddddddBdddddddd',startbyte,mode,URL,LRL,aAmp,vAmp,vWid,aWid,mode,VRP,ARP,hyst,respFac,MSR,actThr,rxnTim,recTim) 
+                
+                #Send over Serial
+                ser.write(serialvar)
 
        
-        # ser = serial.Serial()
-        # ser.baudrate = 115200
-        # ser.port = 'COM3'
-        # ser.open()
-
-        # ser.write(serial_data_output)
-        # print(serial_data_output)
-        # ser.close() 
+            time.sleep(1)
+            ser.close()
+            print("Serial Port Closed")
+            connectionStatus = "Transfer Complete, Pacemaker Connected"
         
     #Method to set value
     def setValue(self,value):
@@ -1842,9 +1812,7 @@ class MainWindow:
         #Currentuser
         global currentuser
 
-        #State
-        global MODE
-        MODE = value
+        
 
         #AOO BEGIN-----------------------------------------------------------------------------------------------------------------------------
         #aooLowerRateLimit
