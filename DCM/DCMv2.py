@@ -13,6 +13,8 @@ from threading import Thread
 portName = "/dev/tty.usbmodem000621000000" #Change to our port
 connectionStatus = "Not Connected To Placemaker"
 
+
+
 #Creating sqlite3 database
 db = sqlite3.connect("DCM.sqlite", detect_types= sqlite3.PARSE_DECLTYPES)
 
@@ -4396,22 +4398,11 @@ class MainWindow:
         self.master.destroy()
         exit()
 
-def test():
-    dev = usb.core.find(find_all=True)
-    for cfg in dev:
-        if (cfg.idVendor == 4966):
-            var = cfg.idVendor
-    return var
-
-def run():
-    while(1):
-        if (len(test()) > 0):
-            print(test())
-        else:
-            print("Not Connected")
+            
 
 #Main function that runs everything
 def main():
+    
     #Run Tkinter
     root = tk.Tk()
     app = WelcomeFrame(root)
@@ -4420,6 +4411,3 @@ def main():
 if __name__ == '__main__':
     # Runs tkinter
     Thread(target = main).start()
-
-    #Run USB Connected
-    Thread(target = run).start()
