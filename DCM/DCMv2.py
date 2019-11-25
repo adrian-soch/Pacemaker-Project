@@ -358,7 +358,6 @@ class MainWindow:
         
         #Current Mode
         global userlog
-        global status
         userlog                           = str(row[0][0])
 
         #Global Variables setup with current user parameters
