@@ -1560,12 +1560,18 @@ class MainWindow:
                     print("Point 1")
                     #Binary Representation
                     #serialvar = struct.pack('<BBddddddBdddddddd',startbyte, 7, mode,URL,LRL,aAmp,vAmp,vWid,aWid,mode,VRP,ARP,hyst,respFac,MSR,actThr,rxnTim,recTim) 
-                    serialvar = struct.pack('<BBHHHHHHHdddHHdddHddHHH', 69, 21, 1, 60, 120, 200, 100, 5, 250, 3, 2, 2, 10, 250, 3, 2, 2, 10, 8, 1.8, 20, 120, 0)
+                    serialvar = struct.pack('<BBHHHHHHHdddHHdddHddHHH', 1,7,1, 60, 120, 200, 100, 5, 250, 3, 2, 2, 10, 250, 3, 2, 2, 10, 8, 1.8, 20, 120, 0)
                     #serialvar = struct.pack('<BBHHHHHHHdddHHdddHddHHH', 69, 21, 1, 60, 120, 200, 100, 5, 250, 3, 2, 2, 10, 250, 3, 2, 2, 10, 8, 1.8, 20, 120, 0)
 
                     print("Point 2")
+                    transList = [0] * len(serialvar)
+                    i = 0
+                    while i<len(serialvar):
+                        transList[i] = serialvar[i]
+                        i += 1
+
                     #Send over Serial
-                    ser.write(serialvar)
+                    ser.write(transList)
                     print("Point 3")
 
                     
@@ -1586,14 +1592,17 @@ class MainWindow:
                     db.execute("UPDATE "+currentuser+" SET userlog = ?", (userlog, ))
                     db.commit()
                     mode = 2
-                    
+                    print("Point 1")
                     #Binary Representation
                     #serialvar = struct.pack('<BBddddddBdddddddd',startbyte, 7, mode,URL,LRL,aAmp,vAmp,vWid,aWid,mode,VRP,ARP,hyst,respFac,MSR,actThr,rxnTim,recTim) 
-                    serialvar = struct.pack('<BBHHHHHHHdddHHdddHddHHH',startbyte, 7, mode, voo_upperRateLimitEntry,voo_lowerRateLimitEntry,0) 
+                    #serialvar = struct.pack('<BBHHHHHHHdddHHdddHddHHH',startbyte, 7, mode, voo_upperRateLimitEntry,voo_lowerRateLimitEntry,0) 
                     #voo_ventricularAmplitudeEntry,voo_ventricularPulseWidthEntry
+                    serialvar = struct.pack('<BBBBHHHHHHdddHHdddHddHHH', 69,7,1,2,60, 120, 200, 100, 5, 250, 3, 2, 2, 10, 250, 3, 2, 2, 10, 8, 1.8, 20, 120, 0)
 
+                    print("Point 2")
                     #Send over Serial
                     ser.write(serialvar)
+                    print("Point 3")
 
             elif (value == "aaiConfirm"):
                 if messagebox.askyesno("CONFIRMATION", "Upload these changes?"):
@@ -1812,8 +1821,7 @@ class MainWindow:
             print("Serial Port Closed")
             connectionStatus = "Transfer Complete, Pacemaker Connected"
 
-        except:
-            print("An error has occured")
+        except Exception as e: print(e)
         
     #Method to set value
     def setValue(self,value):
