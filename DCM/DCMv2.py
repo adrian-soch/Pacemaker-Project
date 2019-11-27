@@ -7,12 +7,13 @@ from tkinter import ttk
 from tkinter import messagebox
 import sqlite3
 import sys
+import time
 import usb.core
 from threading import Thread
 import struct
 
 #Serial Detials
-portName = "/dev/tty.usbmodem000621000000" #Change to our port
+portName = "COM6" #Change to our port
 connectionStatus = "Not Connected To Placemaker"
 status = ''
 
@@ -1538,275 +1539,281 @@ class MainWindow:
             )
         print("Is Serial Port Open:", ser.isOpen())
 
+        try:
+            if (value == "aooConfirm"):
+                if messagebox.askyesno("CONFIRMATION", "Upload these changes?"):
+                    messagebox.showinfo("DONE", "Success")
+                    userlog = "AOO Was Uploaded"
+                    self.aooLog.config(text= userlog)
+                    self.vooLog.config(text= userlog)
+                    self.aaiLog.config(text= userlog)
+                    self.vviLog.config(text= userlog)
+                    self.dooLog.config(text= userlog)
+                    self.aoorLog.config(text= userlog)
+                    self.voorLog.config(text= userlog)
+                    self.aairLog.config(text= userlog)
+                    self.vvirLog.config(text= userlog)
+                    self.doorLog.config(text= userlog)
+                    db.execute("UPDATE "+currentuser+" SET userlog = ?", (userlog, ))
+                    db.commit()
+                    mode = 1
+                    print("Point 1")
+                    #Binary Representation
+                    #serialvar = struct.pack('<BBddddddBdddddddd',startbyte, 7, mode,URL,LRL,aAmp,vAmp,vWid,aWid,mode,VRP,ARP,hyst,respFac,MSR,actThr,rxnTim,recTim) 
+                    serialvar = struct.pack('<BBHHHHHHHdddHHdddHddHHH', 69, 21, 1, 60, 120, 200, 100, 5, 250, 3, 2, 2, 10, 250, 3, 2, 2, 10, 8, 1.8, 20, 120, 0)
+                    #serialvar = struct.pack('<BBHHHHHHHdddHHdddHddHHH', 69, 21, 1, 60, 120, 200, 100, 5, 250, 3, 2, 2, 10, 250, 3, 2, 2, 10, 8, 1.8, 20, 120, 0)
 
-        if (value == "aooConfirm"):
-            if messagebox.askyesno("CONFIRMATION", "Upload these changes?"):
-                messagebox.showinfo("DONE", "Success")
-                userlog = "AOO Was Uploaded"
-                self.aooLog.config(text= userlog)
-                self.vooLog.config(text= userlog)
-                self.aaiLog.config(text= userlog)
-                self.vviLog.config(text= userlog)
-                self.dooLog.config(text= userlog)
-                self.aoorLog.config(text= userlog)
-                self.voorLog.config(text= userlog)
-                self.aairLog.config(text= userlog)
-                self.vvirLog.config(text= userlog)
-                self.doorLog.config(text= userlog)
-                db.execute("UPDATE "+currentuser+" SET userlog = ?", (userlog, ))
-                db.commit()
-                mode = 1
+                    print("Point 2")
+                    #Send over Serial
+                    ser.write(serialvar)
+                    print("Point 3")
 
-                #Binary Representation
-                #serialvar = struct.pack('<BBddddddBdddddddd',startbyte, 7, mode,URL,LRL,aAmp,vAmp,vWid,aWid,mode,VRP,ARP,hyst,respFac,MSR,actThr,rxnTim,recTim) 
-                serialvar = struct.pack('<BBHHHHHHHdddHHdddHddHHH', 69, 21, 1, 60, 120, 200, 100, 5, 250, 3, 2, 2, 10, 250, 3, 2, 2, 10, 8, 1.8, 20, 120, 0)
-                #serialvar = struct.pack('<BBHHHHHHHdddHHdddHddHHH', 69, 21, 1, 60, 120, 200, 100, 5, 250, 3, 2, 2, 10, 250, 3, 2, 2, 10, 8, 1.8, 20, 120, 0)
+                    
+            elif (value == "vooConfirm"):
+                if messagebox.askyesno("CONFIRMATION", "Upload these changes?"):
+                    messagebox.showinfo("DONE", "Success")
+                    userlog = "VOO Was Uploaded"
+                    self.aooLog.config(text= userlog)
+                    self.vooLog.config(text= userlog)
+                    self.aaiLog.config(text= userlog)
+                    self.vviLog.config(text= userlog)
+                    self.dooLog.config(text= userlog)
+                    self.aoorLog.config(text= userlog)
+                    self.voorLog.config(text= userlog)
+                    self.aairLog.config(text= userlog)
+                    self.vvirLog.config(text= userlog)
+                    self.doorLog.config(text= userlog)
+                    db.execute("UPDATE "+currentuser+" SET userlog = ?", (userlog, ))
+                    db.commit()
+                    mode = 2
+                    
+                    #Binary Representation
+                    #serialvar = struct.pack('<BBddddddBdddddddd',startbyte, 7, mode,URL,LRL,aAmp,vAmp,vWid,aWid,mode,VRP,ARP,hyst,respFac,MSR,actThr,rxnTim,recTim) 
+                    serialvar = struct.pack('<BBHHHHHHHdddHHdddHddHHH',startbyte, 7, mode, voo_upperRateLimitEntry,voo_lowerRateLimitEntry,0) 
+                    #voo_ventricularAmplitudeEntry,voo_ventricularPulseWidthEntry
+
+                    #Send over Serial
+                    ser.write(serialvar)
+
+            elif (value == "aaiConfirm"):
+                if messagebox.askyesno("CONFIRMATION", "Upload these changes?"):
+                    messagebox.showinfo("DONE", "Success")
+                    userlog = "AAI Was Uploaded"
+                    self.aooLog.config(text= userlog)
+                    self.vooLog.config(text= userlog)
+                    self.aaiLog.config(text= userlog)
+                    self.vviLog.config(text= userlog)
+                    self.dooLog.config(text= userlog)
+                    self.aoorLog.config(text= userlog)
+                    self.voorLog.config(text= userlog)
+                    self.aairLog.config(text= userlog)
+                    self.vvirLog.config(text= userlog)
+                    self.doorLog.config(text= userlog)
+                    db.execute("UPDATE "+currentuser+" SET userlog = ?", (userlog, ))
+                    db.commit()
+                    mode = 3
+                    
+                    #Binary Representation
+                    serialvar = struct.pack('<BBddddddBdddddddd',startbyte, 7, mode,URL,LRL,aAmp,vAmp,vWid,aWid,mode,VRP,ARP,hyst,respFac,MSR,actThr,rxnTim,recTim) 
+                    serialvar = struct.pack('<BBHHHHHHHdddHHdddHddHHH',startbyte, 7, mode,URL,LRL,aAmp,vAmp,vWid,aWid,mode,VRP,ARP,hyst,respFac,MSR,actThr,rxnTim,recTim) 
+                    
+                    #Send over Serial
+                    ser.write(serialvar)
 
 
-                #Send over Serial
-                ser.write(serialvar)
+            elif (value == "vviConfirm"):
+                if messagebox.askyesno("CONFIRMATION", "Upload these changes?"):
+                    messagebox.showinfo("DONE", "Success")
+                    userlog = "VVI Was Uploaded"
+                    self.aooLog.config(text= userlog)
+                    self.vooLog.config(text= userlog)
+                    self.aaiLog.config(text= userlog)
+                    self.vviLog.config(text= userlog)
+                    self.dooLog.config(text= userlog)
+                    self.aoorLog.config(text= userlog)
+                    self.voorLog.config(text= userlog)
+                    self.aairLog.config(text= userlog)
+                    self.vvirLog.config(text= userlog)
+                    self.doorLog.config(text= userlog)
+                    db.execute("UPDATE "+currentuser+" SET userlog = ?", (userlog, ))
+                    db.commit()
+                    mode = 4
+                    
+                    #Binary Representation
+                    serialvar = struct.pack('<BBddddddBdddddddd',startbyte, 7, mode,URL,LRL,aAmp,vAmp,vWid,aWid,mode,VRP,ARP,hyst,respFac,MSR,actThr,rxnTim,recTim)
+                    serialvar = struct.pack('<BBHHHHHHHdddHHdddHddHHH',startbyte, 7, mode,URL,LRL,aAmp,vAmp,vWid,aWid,mode,VRP,ARP,hyst,respFac,MSR,actThr,rxnTim,recTim) 
+                    
+                    #Send over Serial
+                    ser.write(serialvar)
 
+
+            elif (value == "dooConfirm"):
+                if messagebox.askyesno("CONFIRMATION", "Upload these changes?"):
+                    messagebox.showinfo("DONE", "Success")
+                    userlog = "DOO Was Uploaded"
+                    self.aooLog.config(text= userlog)
+                    self.vooLog.config(text= userlog)
+                    self.aaiLog.config(text= userlog)
+                    self.vviLog.config(text= userlog)
+                    self.dooLog.config(text= userlog)
+                    self.aoorLog.config(text= userlog)
+                    self.voorLog.config(text= userlog)
+                    self.aairLog.config(text= userlog)
+                    self.vvirLog.config(text= userlog)
+                    self.doorLog.config(text= userlog)
+                    db.execute("UPDATE "+currentuser+" SET userlog = ?", (userlog, ))
+                    db.commit()
+                    mode = 5
+                    
+                    #Binary Representation
+                    serialvar = struct.pack('<BBddddddBdddddddd',startbyte, 7, mode,URL,LRL,aAmp,vAmp,vWid,aWid,mode,VRP,ARP,hyst,respFac,MSR,actThr,rxnTim,recTim) 
+                    serialvar = struct.pack('<BBHHHHHHHdddHHdddHddHHH',startbyte, 7, mode,URL,LRL,aAmp,vAmp,vWid,aWid,mode,VRP,ARP,hyst,respFac,MSR,actThr,rxnTim,recTim) 
+
+                    
+                    #Send over Serial
+                    ser.write(serialvar)
+
+
+            elif (value == "aoorConfirm"):
+                if messagebox.askyesno("CONFIRMATION", "Upload these changes?"):
+                    messagebox.showinfo("DONE", "Success")
+                    userlog = "AOOR Was Uploaded"
+                    self.aooLog.config(text= userlog)
+                    self.vooLog.config(text= userlog)
+                    self.aaiLog.config(text= userlog)
+                    self.vviLog.config(text= userlog)
+                    self.dooLog.config(text= userlog)
+                    self.aoorLog.config(text= userlog)
+                    self.voorLog.config(text= userlog)
+                    self.aairLog.config(text= userlog)
+                    self.vvirLog.config(text= userlog)
+                    self.doorLog.config(text= userlog)
+                    db.execute("UPDATE "+currentuser+" SET userlog = ?", (userlog, ))
+                    db.commit()
+                    mode = 6
+                    
+                    #Binary Representation
+                    serialvar = struct.pack('<BBddddddBdddddddd',startbyte, 7, mode,URL,LRL,aAmp,vAmp,vWid,aWid,mode,VRP,ARP,hyst,respFac,MSR,actThr,rxnTim,recTim) 
+                    serialvar = struct.pack('<BBHHHHHHHdddHHdddHddHHH',startbyte, 7, mode,URL,LRL,aAmp,vAmp,vWid,aWid,mode,VRP,ARP,hyst,respFac,MSR,actThr,rxnTim,recTim) 
+
+                    
+                    #Send over Serial
+                    ser.write(serialvar)
+
+            elif (value == "voorConfirm"):
+                if messagebox.askyesno("CONFIRMATION", "Upload these changes?"):
+                    messagebox.showinfo("DONE", "Success")
+                    userlog = "VOOR Was Uploaded"
+                    self.aooLog.config(text= userlog)
+                    self.vooLog.config(text= userlog)
+                    self.aaiLog.config(text= userlog)
+                    self.vviLog.config(text= userlog)
+                    self.dooLog.config(text= userlog)
+                    self.aoorLog.config(text= userlog)
+                    self.voorLog.config(text= userlog)
+                    self.aairLog.config(text= userlog)
+                    self.vvirLog.config(text= userlog)
+                    self.doorLog.config(text= userlog)
+                    db.execute("UPDATE "+currentuser+" SET userlog = ?", (userlog, ))
+                    db.commit()
+                    mode = 7
+                    
+                    #Binary Representation
+                    serialvar = struct.pack('<BBddddddBdddddddd',startbyte, 7, mode,URL,LRL,aAmp,vAmp,vWid,aWid,mode,VRP,ARP,hyst,respFac,MSR,actThr,rxnTim,recTim) 
+                    serialvar = struct.pack('<BBHHHHHHHdddHHdddHddHHH',startbyte, 7, mode,URL,LRL,aAmp,vAmp,vWid,aWid,mode,VRP,ARP,hyst,respFac,MSR,actThr,rxnTim,recTim) 
+
+                    
+                    #Send over Serial
+                    ser.write(serialvar)
+
+            elif (value == "aairConfirm"):
+                if messagebox.askyesno("CONFIRMATION", "Upload these changes?"):
+                    messagebox.showinfo("DONE", "Success")
+                    userlog = "AAIR Was Uploaded"
+                    self.aooLog.config(text= userlog)
+                    self.vooLog.config(text= userlog)
+                    self.aaiLog.config(text= userlog)
+                    self.vviLog.config(text= userlog)
+                    self.dooLog.config(text= userlog)
+                    self.aoorLog.config(text= userlog)
+                    self.voorLog.config(text= userlog)
+                    self.aairLog.config(text= userlog)
+                    self.vvirLog.config(text= userlog)
+                    self.doorLog.config(text= userlog)
+                    db.execute("UPDATE "+currentuser+" SET userlog = ?", (userlog, ))
+                    db.commit()
+                    mode = 8
+                    
+                    #Binary Representation
+                    serialvar = struct.pack('<BBddddddBdddddddd',startbyte, 7, mode,URL,LRL,aAmp,vAmp,vWid,aWid,mode,VRP,ARP,hyst,respFac,MSR,actThr,rxnTim,recTim) 
+                    serialvar = struct.pack('<BBHHHHHHHdddHHdddHddHHH',startbyte, 7, mode,URL,LRL,aAmp,vAmp,vWid,aWid,mode,VRP,ARP,hyst,respFac,MSR,actThr,rxnTim,recTim) 
+
+                    
+                    #Send over Serial
+                    ser.write(serialvar)
+                    
+            elif (value == "vvirConfirm"):
+                if messagebox.askyesno("CONFIRMATION", "Upload these changes?"):
+                    messagebox.showinfo("DONE", "Success")
+                    userlog = "VVIR Was Uploaded"
+                    self.aooLog.config(text= userlog)
+                    self.vooLog.config(text= userlog)
+                    self.aaiLog.config(text= userlog)
+                    self.vviLog.config(text= userlog)
+                    self.dooLog.config(text= userlog)
+                    self.aoorLog.config(text= userlog)
+                    self.voorLog.config(text= userlog)
+                    self.aairLog.config(text= userlog)
+                    self.vvirLog.config(text= userlog)
+                    self.doorLog.config(text= userlog)
+                    db.execute("UPDATE "+currentuser+" SET userlog = ?", (userlog, ))
+                    db.commit()
+                    mode = 9
+                    
+                    #Binary Representation
+                    serialvar = struct.pack('<BBddddddBdddddddd',startbyte, 7, mode,URL,LRL,aAmp,vAmp,vWid,aWid,mode,VRP,ARP,hyst,respFac,MSR,actThr,rxnTim,recTim) 
+                    serialvar = struct.pack('<BBHHHHHHHdddHHdddHddHHH',startbyte, 7, mode,URL,LRL,aAmp,vAmp,vWid,aWid,mode,VRP,ARP,hyst,respFac,MSR,actThr,rxnTim,recTim) 
+
+                    
+                    #Send over Serial
+                    ser.write(serialvar)
+
+            elif (value == "doorConfirm"):
+                if messagebox.askyesno("CONFIRMATION", "Upload these changes?"):
+                    messagebox.showinfo("DONE", "Success")
+                    userlog = "DOOR Was Uploaded"
+                    self.aooLog.config(text= userlog)
+                    self.vooLog.config(text= userlog)
+                    self.aaiLog.config(text= userlog)
+                    self.vviLog.config(text= userlog)
+                    self.dooLog.config(text= userlog)
+                    self.aoorLog.config(text= userlog)
+                    self.voorLog.config(text= userlog)
+                    self.aairLog.config(text= userlog)
+                    self.vvirLog.config(text= userlog)
+                    self.doorLog.config(text= userlog)
+                    db.execute("UPDATE "+currentuser+" SET userlog = ?", (userlog, ))
+                    db.commit()
+                    mode = 10
+                    
+                    #Binary Representation
+                    #serialvar = struct.pack('<BBddddddBdddddddd',startbyte, 7, mode,door_upperRateLimitEntry,door_lowerRateLimitEntry,) 
+                    serialvar = struct.pack('<BBHHHHHHHdddHHdddHddHHH', startbyte, 7, mode, door_upperRateLimitEntry,door_lowerRateLimitEntry, 0, door_fixedAVDelayEntry, 0, door_atrialPulseWidthEntry, 0, door_atrialAmplitudeEntry, 0, 0, door_ventricularPulseWidthEntry, 0, door_ventricularAmplitudeEntry, 0,0, door_reactionTimeEntry, door_responseFactorEntry, door_activityThresholdEntry, door_recoveryTimeEntry, door_maximumSensorRateEntry) 
+
+                    
+                    #Send over Serial
+                    ser.write(serialvar)
                 
-        elif (value == "vooConfirm"):
-            if messagebox.askyesno("CONFIRMATION", "Upload these changes?"):
-                messagebox.showinfo("DONE", "Success")
-                userlog = "VOO Was Uploaded"
-                self.aooLog.config(text= userlog)
-                self.vooLog.config(text= userlog)
-                self.aaiLog.config(text= userlog)
-                self.vviLog.config(text= userlog)
-                self.dooLog.config(text= userlog)
-                self.aoorLog.config(text= userlog)
-                self.voorLog.config(text= userlog)
-                self.aairLog.config(text= userlog)
-                self.vvirLog.config(text= userlog)
-                self.doorLog.config(text= userlog)
-                db.execute("UPDATE "+currentuser+" SET userlog = ?", (userlog, ))
-                db.commit()
-                mode = 2
-                
-                #Binary Representation
-                serialvar = struct.pack('<BBddddddBdddddddd',startbyte, 7, mode,URL,LRL,aAmp,vAmp,vWid,aWid,mode,VRP,ARP,hyst,respFac,MSR,actThr,rxnTim,recTim) 
-                serialvar = struct.pack('<BBHHHHHHHdddHHdddHddHHH',startbyte, 7, mode, voo_upperRateLimitEntry,voo_lowerRateLimitEntry,0) 
-                #voo_ventricularAmplitudeEntry,voo_ventricularPulseWidthEntry
-
-                #Send over Serial
-                ser.write(serialvar)
-
-        elif (value == "aaiConfirm"):
-            if messagebox.askyesno("CONFIRMATION", "Upload these changes?"):
-                messagebox.showinfo("DONE", "Success")
-                userlog = "AAI Was Uploaded"
-                self.aooLog.config(text= userlog)
-                self.vooLog.config(text= userlog)
-                self.aaiLog.config(text= userlog)
-                self.vviLog.config(text= userlog)
-                self.dooLog.config(text= userlog)
-                self.aoorLog.config(text= userlog)
-                self.voorLog.config(text= userlog)
-                self.aairLog.config(text= userlog)
-                self.vvirLog.config(text= userlog)
-                self.doorLog.config(text= userlog)
-                db.execute("UPDATE "+currentuser+" SET userlog = ?", (userlog, ))
-                db.commit()
-                mode = 3
-                
-                #Binary Representation
-                serialvar = struct.pack('<BBddddddBdddddddd',startbyte, 7, mode,URL,LRL,aAmp,vAmp,vWid,aWid,mode,VRP,ARP,hyst,respFac,MSR,actThr,rxnTim,recTim) 
-                serialvar = struct.pack('<BBHHHHHHHdddHHdddHddHHH',startbyte, 7, mode,URL,LRL,aAmp,vAmp,vWid,aWid,mode,VRP,ARP,hyst,respFac,MSR,actThr,rxnTim,recTim) 
-                
-                #Send over Serial
-                ser.write(serialvar)
-
-
-        elif (value == "vviConfirm"):
-            if messagebox.askyesno("CONFIRMATION", "Upload these changes?"):
-                messagebox.showinfo("DONE", "Success")
-                userlog = "VVI Was Uploaded"
-                self.aooLog.config(text= userlog)
-                self.vooLog.config(text= userlog)
-                self.aaiLog.config(text= userlog)
-                self.vviLog.config(text= userlog)
-                self.dooLog.config(text= userlog)
-                self.aoorLog.config(text= userlog)
-                self.voorLog.config(text= userlog)
-                self.aairLog.config(text= userlog)
-                self.vvirLog.config(text= userlog)
-                self.doorLog.config(text= userlog)
-                db.execute("UPDATE "+currentuser+" SET userlog = ?", (userlog, ))
-                db.commit()
-                mode = 4
-                
-                #Binary Representation
-                serialvar = struct.pack('<BBddddddBdddddddd',startbyte, 7, mode,URL,LRL,aAmp,vAmp,vWid,aWid,mode,VRP,ARP,hyst,respFac,MSR,actThr,rxnTim,recTim)
-                serialvar = struct.pack('<BBHHHHHHHdddHHdddHddHHH',startbyte, 7, mode,URL,LRL,aAmp,vAmp,vWid,aWid,mode,VRP,ARP,hyst,respFac,MSR,actThr,rxnTim,recTim) 
-                
-                #Send over Serial
-                ser.write(serialvar)
-
-
-        elif (value == "dooConfirm"):
-            if messagebox.askyesno("CONFIRMATION", "Upload these changes?"):
-                messagebox.showinfo("DONE", "Success")
-                userlog = "DOO Was Uploaded"
-                self.aooLog.config(text= userlog)
-                self.vooLog.config(text= userlog)
-                self.aaiLog.config(text= userlog)
-                self.vviLog.config(text= userlog)
-                self.dooLog.config(text= userlog)
-                self.aoorLog.config(text= userlog)
-                self.voorLog.config(text= userlog)
-                self.aairLog.config(text= userlog)
-                self.vvirLog.config(text= userlog)
-                self.doorLog.config(text= userlog)
-                db.execute("UPDATE "+currentuser+" SET userlog = ?", (userlog, ))
-                db.commit()
-                mode = 5
-                
-                #Binary Representation
-                serialvar = struct.pack('<BBddddddBdddddddd',startbyte, 7, mode,URL,LRL,aAmp,vAmp,vWid,aWid,mode,VRP,ARP,hyst,respFac,MSR,actThr,rxnTim,recTim) 
-                serialvar = struct.pack('<BBHHHHHHHdddHHdddHddHHH',startbyte, 7, mode,URL,LRL,aAmp,vAmp,vWid,aWid,mode,VRP,ARP,hyst,respFac,MSR,actThr,rxnTim,recTim) 
-
-                
-                #Send over Serial
-                ser.write(serialvar)
-
-
-        elif (value == "aoorConfirm"):
-            if messagebox.askyesno("CONFIRMATION", "Upload these changes?"):
-                messagebox.showinfo("DONE", "Success")
-                userlog = "AOOR Was Uploaded"
-                self.aooLog.config(text= userlog)
-                self.vooLog.config(text= userlog)
-                self.aaiLog.config(text= userlog)
-                self.vviLog.config(text= userlog)
-                self.dooLog.config(text= userlog)
-                self.aoorLog.config(text= userlog)
-                self.voorLog.config(text= userlog)
-                self.aairLog.config(text= userlog)
-                self.vvirLog.config(text= userlog)
-                self.doorLog.config(text= userlog)
-                db.execute("UPDATE "+currentuser+" SET userlog = ?", (userlog, ))
-                db.commit()
-                mode = 6
-                
-                #Binary Representation
-                serialvar = struct.pack('<BBddddddBdddddddd',startbyte, 7, mode,URL,LRL,aAmp,vAmp,vWid,aWid,mode,VRP,ARP,hyst,respFac,MSR,actThr,rxnTim,recTim) 
-                serialvar = struct.pack('<BBHHHHHHHdddHHdddHddHHH',startbyte, 7, mode,URL,LRL,aAmp,vAmp,vWid,aWid,mode,VRP,ARP,hyst,respFac,MSR,actThr,rxnTim,recTim) 
-
-                
-                #Send over Serial
-                ser.write(serialvar)
-
-        elif (value == "voorConfirm"):
-            if messagebox.askyesno("CONFIRMATION", "Upload these changes?"):
-                messagebox.showinfo("DONE", "Success")
-                userlog = "VOOR Was Uploaded"
-                self.aooLog.config(text= userlog)
-                self.vooLog.config(text= userlog)
-                self.aaiLog.config(text= userlog)
-                self.vviLog.config(text= userlog)
-                self.dooLog.config(text= userlog)
-                self.aoorLog.config(text= userlog)
-                self.voorLog.config(text= userlog)
-                self.aairLog.config(text= userlog)
-                self.vvirLog.config(text= userlog)
-                self.doorLog.config(text= userlog)
-                db.execute("UPDATE "+currentuser+" SET userlog = ?", (userlog, ))
-                db.commit()
-                mode = 7
-                
-                #Binary Representation
-                serialvar = struct.pack('<BBddddddBdddddddd',startbyte, 7, mode,URL,LRL,aAmp,vAmp,vWid,aWid,mode,VRP,ARP,hyst,respFac,MSR,actThr,rxnTim,recTim) 
-                serialvar = struct.pack('<BBHHHHHHHdddHHdddHddHHH',startbyte, 7, mode,URL,LRL,aAmp,vAmp,vWid,aWid,mode,VRP,ARP,hyst,respFac,MSR,actThr,rxnTim,recTim) 
-
-                
-                #Send over Serial
-                ser.write(serialvar)
-
-        elif (value == "aairConfirm"):
-            if messagebox.askyesno("CONFIRMATION", "Upload these changes?"):
-                messagebox.showinfo("DONE", "Success")
-                userlog = "AAIR Was Uploaded"
-                self.aooLog.config(text= userlog)
-                self.vooLog.config(text= userlog)
-                self.aaiLog.config(text= userlog)
-                self.vviLog.config(text= userlog)
-                self.dooLog.config(text= userlog)
-                self.aoorLog.config(text= userlog)
-                self.voorLog.config(text= userlog)
-                self.aairLog.config(text= userlog)
-                self.vvirLog.config(text= userlog)
-                self.doorLog.config(text= userlog)
-                db.execute("UPDATE "+currentuser+" SET userlog = ?", (userlog, ))
-                db.commit()
-                mode = 8
-                
-                #Binary Representation
-                serialvar = struct.pack('<BBddddddBdddddddd',startbyte, 7, mode,URL,LRL,aAmp,vAmp,vWid,aWid,mode,VRP,ARP,hyst,respFac,MSR,actThr,rxnTim,recTim) 
-                serialvar = struct.pack('<BBHHHHHHHdddHHdddHddHHH',startbyte, 7, mode,URL,LRL,aAmp,vAmp,vWid,aWid,mode,VRP,ARP,hyst,respFac,MSR,actThr,rxnTim,recTim) 
-
-                
-                #Send over Serial
-                ser.write(serialvar)
-                
-        elif (value == "vvirConfirm"):
-            if messagebox.askyesno("CONFIRMATION", "Upload these changes?"):
-                messagebox.showinfo("DONE", "Success")
-                userlog = "VVIR Was Uploaded"
-                self.aooLog.config(text= userlog)
-                self.vooLog.config(text= userlog)
-                self.aaiLog.config(text= userlog)
-                self.vviLog.config(text= userlog)
-                self.dooLog.config(text= userlog)
-                self.aoorLog.config(text= userlog)
-                self.voorLog.config(text= userlog)
-                self.aairLog.config(text= userlog)
-                self.vvirLog.config(text= userlog)
-                self.doorLog.config(text= userlog)
-                db.execute("UPDATE "+currentuser+" SET userlog = ?", (userlog, ))
-                db.commit()
-                mode = 9
-                
-                #Binary Representation
-                serialvar = struct.pack('<BBddddddBdddddddd',startbyte, 7, mode,URL,LRL,aAmp,vAmp,vWid,aWid,mode,VRP,ARP,hyst,respFac,MSR,actThr,rxnTim,recTim) 
-                serialvar = struct.pack('<BBHHHHHHHdddHHdddHddHHH',startbyte, 7, mode,URL,LRL,aAmp,vAmp,vWid,aWid,mode,VRP,ARP,hyst,respFac,MSR,actThr,rxnTim,recTim) 
-
-                
-                #Send over Serial
-                ser.write(serialvar)
-
-        elif (value == "doorConfirm"):
-            if messagebox.askyesno("CONFIRMATION", "Upload these changes?"):
-                messagebox.showinfo("DONE", "Success")
-                userlog = "DOOR Was Uploaded"
-                self.aooLog.config(text= userlog)
-                self.vooLog.config(text= userlog)
-                self.aaiLog.config(text= userlog)
-                self.vviLog.config(text= userlog)
-                self.dooLog.config(text= userlog)
-                self.aoorLog.config(text= userlog)
-                self.voorLog.config(text= userlog)
-                self.aairLog.config(text= userlog)
-                self.vvirLog.config(text= userlog)
-                self.doorLog.config(text= userlog)
-                db.execute("UPDATE "+currentuser+" SET userlog = ?", (userlog, ))
-                db.commit()
-                mode = 10
-                
-                #Binary Representation
-                #serialvar = struct.pack('<BBddddddBdddddddd',startbyte, 7, mode,door_upperRateLimitEntry,door_lowerRateLimitEntry,) 
-                serialvar = struct.pack('<BBHHHHHHHdddHHdddHddHHH', startbyte, 7, mode, door_upperRateLimitEntry,door_lowerRateLimitEntry, 0, door_fixedAVDelayEntry, 0, door_atrialPulseWidthEntry, 0, door_atrialAmplitudeEntry, 0, 0, door_ventricularPulseWidthEntry, 0, door_ventricularAmplitudeEntry, 0,0, door_reactionTimeEntry, door_responseFactorEntry, door_activityThresholdEntry, door_recoveryTimeEntry, door_maximumSensorRateEntry) 
-
-                
-                #Send over Serial
-                ser.write(serialvar)
-               
-       
+            print("Point 4")
             time.sleep(1)
+            print("Point 5")
             ser.close()
+            print("Point 6")
             print("Serial Port Closed")
             connectionStatus = "Transfer Complete, Pacemaker Connected"
+
+        except:
+            print("An error has occured")
         
     #Method to set value
     def setValue(self,value):
@@ -4450,7 +4457,7 @@ def main():
 if __name__ == '__main__':
     
     #Run USB Connected
-    Thread(target = run).start()
+    #Thread(target = run).start()
 
     #DCM Main (can't multithread when using sqlite)
     Thread(target = main).start()
