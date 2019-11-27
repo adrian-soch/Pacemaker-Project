@@ -1558,9 +1558,9 @@ class MainWindow:
                 mode = 1
 
                 #Binary Representation
-                serialvar = struct.pack('<BBddddddBdddddddd',startbyte, 7, mode,URL,LRL,aAmp,vAmp,vWid,aWid,mode,VRP,ARP,hyst,respFac,MSR,actThr,rxnTim,recTim) 
-                serialvar = struct.pack('<BBHHHHHHHdddHHdddHddHHH',startbyte, 7, mode,URL,LRL,aAmp,vAmp,vWid,aWid,mode,VRP,ARP,hyst,respFac,MSR,actThr,rxnTim,recTim) 
-
+                #serialvar = struct.pack('<BBddddddBdddddddd',startbyte, 7, mode,URL,LRL,aAmp,vAmp,vWid,aWid,mode,VRP,ARP,hyst,respFac,MSR,actThr,rxnTim,recTim) 
+                serialvar = struct.pack('<BBHHHHHHHdddHHdddHddHHH', 69, 21, 1, 60, 120, 200, 100, 5, 250, 3, 2, 2, 10, 250, 3, 2, 2, 10, 8, 1.8, 20, 120, 0)
+                #serialvar = struct.pack('<BBHHHHHHHdddHHdddHddHHH', 69, 21, 1, 60, 120, 200, 100, 5, 250, 3, 2, 2, 10, 250, 3, 2, 2, 10, 8, 1.8, 20, 120, 0)
 
 
                 #Send over Serial
@@ -1587,8 +1587,8 @@ class MainWindow:
                 
                 #Binary Representation
                 serialvar = struct.pack('<BBddddddBdddddddd',startbyte, 7, mode,URL,LRL,aAmp,vAmp,vWid,aWid,mode,VRP,ARP,hyst,respFac,MSR,actThr,rxnTim,recTim) 
-                serialvar = struct.pack('<BBHHHHHHHdddHHdddHddHHH',startbyte, 7, mode,URL,LRL,aAmp,vAmp,vWid,aWid,mode,VRP,ARP,hyst,respFac,MSR,actThr,rxnTim,recTim) 
-
+                serialvar = struct.pack('<BBHHHHHHHdddHHdddHddHHH',startbyte, 7, mode, voo_upperRateLimitEntry,voo_lowerRateLimitEntry,0) 
+                #voo_ventricularAmplitudeEntry,voo_ventricularPulseWidthEntry
 
                 #Send over Serial
                 ser.write(serialvar)
@@ -1795,13 +1795,13 @@ class MainWindow:
                 mode = 10
                 
                 #Binary Representation
-                serialvar = struct.pack('<BBddddddBdddddddd',startbyte, 7, mode,URL,LRL,aAmp,vAmp,vWid,aWid,mode,VRP,ARP,hyst,respFac,MSR,actThr,rxnTim,recTim) 
-                serialvar = struct.pack('<BBHHHHHHHdddHHdddHddHHH',startbyte, 7, mode,URL,LRL,aAmp,vAmp,vWid,aWid,mode,VRP,ARP,hyst,respFac,MSR,actThr,rxnTim,recTim) 
+                #serialvar = struct.pack('<BBddddddBdddddddd',startbyte, 7, mode,door_upperRateLimitEntry,door_lowerRateLimitEntry,) 
+                serialvar = struct.pack('<BBHHHHHHHdddHHdddHddHHH', startbyte, 7, mode, door_upperRateLimitEntry,door_lowerRateLimitEntry, 0, door_fixedAVDelayEntry, 0, door_atrialPulseWidthEntry, 0, door_atrialAmplitudeEntry, 0, 0, door_ventricularPulseWidthEntry, 0, door_ventricularAmplitudeEntry, 0,0, door_reactionTimeEntry, door_responseFactorEntry, door_activityThresholdEntry, door_recoveryTimeEntry, door_maximumSensorRateEntry) 
 
                 
                 #Send over Serial
                 ser.write(serialvar)
-
+               
        
             time.sleep(1)
             ser.close()
