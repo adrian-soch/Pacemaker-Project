@@ -1,56 +1,49 @@
-#Imports
-import tkinter as tk
-import serial
-from serial import Serial
-import numpy
-from tkinter import ttk
-from tkinter import messagebox
-import sqlite3
-import sys
-import time
-import usb.core
-from threading import Thread
 import struct
+import time
+from serial import Serial
 
-
-portName = "COM6" #Change to our port
-
-#State 1
-mode = 0
-startbyte = 69
-serialtype = 0
-serialvar = ''
-
-
-#Start Serial Component
-ser = serial.Serial(
-    stopbits=serial.STOPBITS_ONE,
-    bytesize=serial.EIGHTBITS,
-    port = portName,
-    baudrate=115200
-    )
+ser = Serial()
+ser.port = 'COM8'
+ser.baudrate = 115200
+ser.timeout = 0.5
+ser.dtr = 0
+ser.open()
 print("Is Serial Port Open:", ser.isOpen())
 
-try:
-    mode = 1
-    print("Point 1")
+var = struct.pack('<BBB', 69,7,1)  # B for unsigned char, takes an int
+                                                                                                                                # d for double, takes a float
+                                                                                                                                # < for little-endian, as programmed on FRDM board thru Simulink
+print("To send (in binary): ", var)
+print("Size of string representation is {}.".format(struct.calcsize('<BBB')))
+print("To send (in decimal): ", struct.unpack('<BBB',var))
+#var = struct.unpack('<BBB',var)
+print("send1",ser.write(var))   
 
-    serialvar = struct.pack('<B', 1)
+time.sleep(1)
+ser.close()
+print("Serial Port Closed")
 
-    print("Point 2")
-    transList = [0] * len(serialvar)
-    i = 0
-    while i<len(serialvar):
-        transList[i] = serialvar[i]
-        i += 1
-    print("Point 3")
-    ser.write(transList)
-    print("Point 4")
-    time.sleep(1)
-    print("Point 5")
-    ser.close()
-    print("Point 6")
-    print("Serial Port Closed")
+# try:
+#     mode = 1
+#     print("Point 1")
 
-except Exception as e: 
-    print(e)
+#     serialvar = struct.pack('<B', 1)
+
+#     print("Point 2")
+#     transList = [0] * len(serialvar)
+#     i = 0
+#     while i<len(serialvar):
+#         transList[i] = serialvar[i]
+#         i += 1
+#     print("Point 3")
+#     ser.write(transList)
+#     #ser.write(serialvar)
+#     print("Point 4")
+#     time.sleep(1)
+#     print("Point 5")
+#     ser.close()
+#     print("Point 6")
+#     print("Serial Port Closed")
+
+# except Exception as e: 
+#     print(e)

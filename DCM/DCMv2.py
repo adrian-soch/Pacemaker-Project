@@ -13,7 +13,7 @@ from threading import Thread
 import struct
 
 #Serial Details
-portName = "COM6" #Change to our port
+portName = "COM8" #Change to our port
 connectionStatus = "Not Connected To Placemaker"
 status = ''
 
@@ -1560,7 +1560,9 @@ class MainWindow:
                     print("Point 1")
                     #Binary Representation
                     #serialvar = struct.pack('<BBddddddBdddddddd',startbyte, 7, mode,URL,LRL,aAmp,vAmp,vWid,aWid,mode,VRP,ARP,hyst,respFac,MSR,actThr,rxnTim,recTim) 
-                    serialvar = struct.pack('<BBHHHHHHHdddHHdddHddHHH', 1,7,1, 60, 120, 200, 100, 5, 250, 3, 2, 2, 10, 250, 3, 2, 2, 10, 8, 1.8, 20, 120, 0)
+                    serialvar = struct.pack('<BBHHHHHHHdddHHdddHddHHH', 69,7,1,
+                    
+                    60, 120, 200, 100, 5, 250, 3, 2, 2, 10, 250, 3, 2, 2, 10, 8, 1.8, 20, 120, 0)
                     #serialvar = struct.pack('<BBHHHHHHHdddHHdddHddHHH', 69, 21, 1, 60, 120, 200, 100, 5, 250, 3, 2, 2, 10, 250, 3, 2, 2, 10, 8, 1.8, 20, 120, 0)
 
                     print("Point 2")
