@@ -12,7 +12,7 @@ import usb.core
 from threading import Thread
 import struct
 
-#Serial Detials
+#Serial Details
 portName = "COM6" #Change to our port
 connectionStatus = "Not Connected To Placemaker"
 status = ''
