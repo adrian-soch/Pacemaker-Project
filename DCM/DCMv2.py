@@ -492,7 +492,7 @@ class MainWindow:
         self.aooLowerRateLimitEntry = tk.Spinbox(self.aoo,from_=30,to=175,increment=5)
         self.aooUpperRateLimitEntry = tk.Spinbox(self.aoo,from_=50,to=175,increment=5)
         self.aooAtrialAmplitudeEntry = tk.Spinbox(self.aoo,from_=0.0,to=7.0,format="%.1f",increment=0.1)
-        self.aooAtrialPulseWidthEntry = tk.Spinbox(self.aoo,from_=0.05,to=1.9,format="%.2f",increment=0.1)
+        self.aooAtrialPulseWidthEntry = tk.Spinbox(self.aoo,from_=1,to=20,increment=1)
 
         #Setup buttons
         self.aooLowerRateLimitButton = tk.Button(self.aoo, text = "Set", command= lambda: self.setValue("aooLowerRateLimit"))
@@ -1558,6 +1558,10 @@ class MainWindow:
                     db.commit()
                     mode = 1
                     print("Point 1")
+                    aoo_lowerRateLimitEntry = int(aoo_lowerRateLimitEntry)
+                    aoo_upperRateLimitEntry = int(aoo_upperRateLimitEntry)
+                    aoo_atrialAmplitudeEntry = float(aoo_atrialAmplitudeEntry)
+                    aoo_atrialPulseWidthEntry = int(aoo_atrialPulseWidthEntry)
                     serialvar = struct.pack('<BBHHHHHHHdddHHdddHddHHH', startbyte,7,mode, aoo_lowerRateLimitEntry,aoo_upperRateLimitEntry, 0, 0, aoo_atrialPulseWidthEntry, 0, aoo_atrialAmplitudeEntry, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
                     print("Point 2")
                     #Send over Serial
@@ -1940,8 +1944,8 @@ class MainWindow:
                     pass
 
                 #Ensure value is in limited range
-                elif(float(temp) < 0.05 or float(temp) > 1.9):
-                    messagebox.showinfo("ERROR","The range is between 0.05 and 1.9")
+                elif(float(temp) < 0.00 or float(temp) > 20):
+                    messagebox.showinfo("ERROR","The range is between 0 and 20")
                     pass
 
                 #If everything is good update current value
