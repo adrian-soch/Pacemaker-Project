@@ -10,12 +10,12 @@ ser.dtr = 0
 ser.open()
 print("Is Serial Port Open:", ser.isOpen())
 
-var = struct.pack('<BBB', 69,7,1)  # B for unsigned char, takes an int
+var = struct.pack('<BBHHHHHHHdddHHdddHddHHH', 69,7,1,30,120, 250,150,10,200,3.5,2,2.4,5,200,2.5,1.9,2.4,10,8,2,20,120,0)  # B for unsigned char, takes an int
                                                                                                                                 # d for double, takes a float
                                                                                                                                 # < for little-endian, as programmed on FRDM board thru Simulink
 print("To send (in binary): ", var)
 print("Size of string representation is {}.".format(struct.calcsize('<BBB')))
-print("To send (in decimal): ", struct.unpack('<BBB',var))
+#print("To send (in decimal): ", struct.unpack('<BBB',var))
 #var = struct.unpack('<BBB',var)
 print("send1",ser.write(var))   
 
