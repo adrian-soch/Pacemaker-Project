@@ -12,8 +12,9 @@ import usb.core
 from threading import Thread
 import struct
 
+
 #Serial Details
-portName = "COM8" #Change to our port
+portName = "COM6" #Change to our port
 connectionStatus = "Not Connected To Placemaker"
 status = ''
 
@@ -286,16 +287,16 @@ class AddUserWindow:
                             "?,?,?,?,?,?,?,?,?,?,?,?,?, " #vvir
                             "?,?,?,?,?,?,?,?,?,?,?,?)", #door
                             ("No Mode Set", #log
-                            60, 120, 3.5, 0.4, #aoo
-                            60, 120, 3.5, 0.4, #voo
-                            60, 120, 3.5, 0.4, 0.75, 250, 250, 0, 0, #aai
-                            60, 120, 3.5, 0.4, 2.5, 320, 0, 0, #vvi
-                            60, 120, 3.5, 0.4, 3.5, 0.4 ,150, #doo
-                            60, 120, 3.5, 0.4, 120,"Med",30,8,5, #aoor
-                            60, 120, 3.5, 0.4, 120,"Med",30,8,5, #voor
-                            60, 120, 3.5, 0.4, 3.3, 250, 250, 0, 0, 120,"Med",30,8,5, #aair
-                            60, 120, 3.5, 0.4, 3.3, 320, 0, 0, 120,"Med",30,8,5, #vvir
-                            60, 120, 3.5, 0.4, 3.5, 0.4 ,150 ,120,"Med",30,8,5)) #door
+                            60, 120, 3.5, 1, #aoo
+                            60, 120, 3.5, 1, #voo
+                            60, 120, 3.5, 1, 0.75, 250, 250, 0, 0, #aai
+                            60, 120, 3.5, 1, 2.5, 320, 0, 0, #vvi
+                            60, 120, 3.5, 1, 3.5, 1 ,150, #doo
+                            60, 120, 3.5, 1, 120,"Med",30,8,5, #aoor
+                            60, 120, 3.5, 1, 120,"Med",30,8,5, #voor
+                            60, 120, 3.5, 1, 3.3, 250, 250, 0, 0, 120,"Med",30,8,5, #aair
+                            60, 120, 3.5, 1, 3.3, 320, 0, 0, 120,"Med",30,8,5, #vvir
+                            60, 120, 3.5, 1, 3.5, 1 ,150 ,120,"Med",30,8,5)) #door
                         messagebox.showinfo("SUCCESS", "User Added")
                         self.quitButton.focus()
 
@@ -539,7 +540,7 @@ class MainWindow:
         self.vooLowerRateLimitEntry = tk.Spinbox(self.voo,from_=30,to=175,increment=5)
         self.vooUpperRateLimitEntry = tk.Spinbox(self.voo,from_=50,to=175,increment=5)
         self.vooVentricularAmplitudeEntry = tk.Spinbox(self.voo,from_=0.0,to=7.0,format="%.1f",increment=0.1)
-        self.vooVentricularPulseWidthEntry = tk.Spinbox(self.voo,from_=0.05,to=1.9,format="%.2f",increment=0.1)
+        self.vooVentricularPulseWidthEntry = tk.Spinbox(self.voo,from_=1,to=20,format="%.2f",increment=0.1)
         
         #Setup buttons
         self.vooLowerRateLimitButton = tk.Button(self.voo, text = "Set", command= lambda: self.setValue("vooLowerRateLimit"))
@@ -591,7 +592,7 @@ class MainWindow:
         self.aaiLowerRateLimitEntry = tk.Spinbox(self.aai,from_=30,to=175,increment=5)
         self.aaiUpperRateLimitEntry = tk.Spinbox(self.aai,from_=50,to=175,increment=5)
         self.aaiAtrialAmplitudeEntry = tk.Spinbox(self.aai,from_=0.0,to=7.0,format="%.1f",increment=0.1)
-        self.aaiAtrialPulseWidthEntry = tk.Spinbox(self.aai,from_=0.05,to=1.9,format="%.2f",increment=0.1)
+        self.aaiAtrialPulseWidthEntry = tk.Spinbox(self.aai,from_=1,to=20,format="%.2f",increment=0.1)
         self.aaiAtrialSensitivityEntry = tk.Spinbox(self.aai,from_=0.25,to=10.0,format="%.2f",increment=0.25)
         self.aaiARPEntry = tk.Spinbox(self.aai,from_=150,to=500,increment=10)
         self.aaiPVARPEntry = tk.Spinbox(self.aai,from_=150,to=500,increment=10)
@@ -682,7 +683,7 @@ class MainWindow:
         self.vviLowerRateLimitEntry = tk.Spinbox(self.vvi,from_=30,to=175,increment=5)
         self.vviUpperRateLimitEntry = tk.Spinbox(self.vvi,from_=50,to=175,increment=5)
         self.vviVentricularAmplitudeEntry = tk.Spinbox(self.vvi,from_=0.0,to=7.0,format="%.1f",increment=0.1)
-        self.vviVentricularPulseWidthEntry = tk.Spinbox(self.vvi,from_=0.05,to=1.9,format="%.2f",increment=0.1)
+        self.vviVentricularPulseWidthEntry = tk.Spinbox(self.vvi,from_=1,to=20,format="%.2f",increment=0.1)
         self.vviVentricularSensitivityEntry = tk.Spinbox(self.vvi,from_=0.25,to=10.0,format="%.2f",increment=0.25)
         self.vviVRPEntry = tk.Spinbox(self.vvi,from_=150,to=500,increment=10)
         self.vviHysteresisEntry = tk.Spinbox(self.vvi,from_=0,to=25,increment=5)
@@ -764,9 +765,9 @@ class MainWindow:
         self.dooLowerRateLimitEntry = tk.Spinbox(self.doo,from_=30,to=175,increment=5)
         self.dooUpperRateLimitEntry = tk.Spinbox(self.doo,from_=50,to=175,increment=5)
         self.dooAtrialAmplitudeEntry = tk.Spinbox(self.doo,from_=0.0,to=7.0,format="%.1f",increment=0.1)
-        self.dooAtrialPulseWidthEntry = tk.Spinbox(self.doo,from_=0.05,to=1.9,format="%.2f",increment=0.1)
+        self.dooAtrialPulseWidthEntry = tk.Spinbox(self.doo,from_=1,to=20,format="%.2f",increment=0.1)
         self.dooVentricularAmplitudeEntry = tk.Spinbox(self.doo,from_=0.0,to=7.0,format="%.1f",increment=0.1)
-        self.dooVentricularPulseWidthEntry = tk.Spinbox(self.doo,from_=0.05,to=1.9,format="%.2f",increment=0.1)
+        self.dooVentricularPulseWidthEntry = tk.Spinbox(self.doo,from_=1,to=20,format="%.2f",increment=0.1)
         self.dooFixedAVDelayEntry = tk.Spinbox(self.doo,from_=70,to=300,increment=10)
 
         #Setup buttons
@@ -840,7 +841,7 @@ class MainWindow:
         self.aoorLowerRateLimitEntry = tk.Spinbox(self.aoor,from_=30,to=175,increment=5)
         self.aoorUpperRateLimitEntry = tk.Spinbox(self.aoor,from_=50,to=175,increment=5)
         self.aoorAtrialAmplitudeEntry = tk.Spinbox(self.aoor,from_=0.0,to=7.0,format="%.1f",increment=0.1)
-        self.aoorAtrialPulseWidthEntry = tk.Spinbox(self.aoor,from_=0.05,to=1.9,format="%.2f",increment=0.1)
+        self.aoorAtrialPulseWidthEntry = tk.Spinbox(self.aoor,from_=1,to=20,format="%.2f",increment=0.1)
         self.aoorMaximumSensorRateEntry = tk.Spinbox(self.aoor,from_=50,to=175,increment=5)
         self.aoorActivityThresholdEntry = ttk.Combobox(self.aoor)
         self.aoorActivityThresholdEntry['values']= ("V-Low", "Low", "Med-Low", "Med", "Med-High", "High","V-High")
@@ -934,7 +935,7 @@ class MainWindow:
         self.voorLowerRateLimitEntry = tk.Spinbox(self.voor,from_=30,to=175,increment=5)
         self.voorUpperRateLimitEntry = tk.Spinbox(self.voor,from_=50,to=175,increment=5)
         self.voorVentricularAmplitudeEntry = tk.Spinbox(self.voor,from_=0.5,to=7.0,format="%.1f",increment=0.1)
-        self.voorVentricularPulseWidthEntry = tk.Spinbox(self.voor,from_=0.05,to=1.9,format="%.2f",increment=0.1)
+        self.voorVentricularPulseWidthEntry = tk.Spinbox(self.voor,from_=1,to=20,format="%.2f",increment=0.1)
         self.voorMaximumSensorRateEntry = tk.Spinbox(self.voor,from_=50,to=175,increment=5)
         self.voorActivityThresholdEntry = ttk.Combobox(self.voor)
         self.voorActivityThresholdEntry['values']= ("V-Low", "Low", "Med-Low", "Med", "Med-High", "High","V-High")
@@ -1033,7 +1034,7 @@ class MainWindow:
         self.aairLowerRateLimitEntry = tk.Spinbox(self.aair,from_=30,to=175,increment=5)
         self.aairUpperRateLimitEntry = tk.Spinbox(self.aair,from_=50,to=175,increment=5)
         self.aairAtrialAmplitudeEntry = tk.Spinbox(self.aair,from_=0.5,to=7.0,format="%.1f",increment=0.1)
-        self.aairAtrialPulseWidthEntry = tk.Spinbox(self.aair,from_=0.05,to=1.9,format="%.2f",increment=0.1)
+        self.aairAtrialPulseWidthEntry = tk.Spinbox(self.aair,from_=1,to=20,format="%.2f",increment=0.1)
         self.aairAtrialSensitivityEntry = tk.Spinbox(self.aair,from_=0.25,to=10.0,format="%.2f",increment=0.25)
         self.aairARPEntry = tk.Spinbox(self.aair,from_=150,to=500,increment=10)
         self.aairPVARPEntry = tk.Spinbox(self.aair,from_=150,to=500,increment=10)
@@ -1171,7 +1172,7 @@ class MainWindow:
         self.vvirLowerRateLimitEntry = tk.Spinbox(self.vvir,from_=30,to=175,increment=5)
         self.vvirUpperRateLimitEntry = tk.Spinbox(self.vvir,from_=50,to=175,increment=5)
         self.vvirVentricularAmplitudeEntry = tk.Spinbox(self.vvir,from_=0.5,to=7.0,format="%.1f",increment=0.1)
-        self.vvirVentricularPulseWidthEntry = tk.Spinbox(self.vvir,from_=0.05,to=1.9,format="%.2f",increment=0.1)
+        self.vvirVentricularPulseWidthEntry = tk.Spinbox(self.vvir,from_=1,to=20,format="%.2f",increment=0.1)
         self.vvirVentricularSensitivityEntry = tk.Spinbox(self.vvir,from_=0.25,to=10.0,format="%.2f",increment=0.25)
         self.vvirVRPEntry = tk.Spinbox(self.vvir,from_=150,to=500,increment=10)
         self.vvirHysteresisEntry = tk.Spinbox(self.vvir,from_=0,to=25,increment=5)
@@ -1300,9 +1301,9 @@ class MainWindow:
         self.doorLowerRateLimitEntry = tk.Spinbox(self.door,from_=30,to=175,increment=5)
         self.doorUpperRateLimitEntry = tk.Spinbox(self.door,from_=50,to=175,increment=5)
         self.doorAtrialAmplitudeEntry = tk.Spinbox(self.door,from_=0.5,to=7.0,format="%.1f",increment=0.1)
-        self.doorAtrialPulseWidthEntry = tk.Spinbox(self.door,from_=0.05,to=1.9,format="%.2f",increment=0.1)
+        self.doorAtrialPulseWidthEntry = tk.Spinbox(self.door,from_=1,to=20,format="%.2f",increment=0.1)
         self.doorVentricularAmplitudeEntry = tk.Spinbox(self.door,from_=0.5,to=7.0,format="%.1f",increment=0.1)
-        self.doorVentricularPulseWidthEntry = tk.Spinbox(self.door,from_=0.05,to=1.9,format="%.2f",increment=0.1)
+        self.doorVentricularPulseWidthEntry = tk.Spinbox(self.door,from_=1,to=20,format="%.2f",increment=0.1)
         self.doorFixedAVDelayEntry = tk.Spinbox(self.door,from_=70,to=300,increment=10)
         self.doorMaximumSensorRateEntry = tk.Spinbox(self.door,from_=50,to=175,increment=5)
         self.doorActivityThresholdEntry = ttk.Combobox(self.door)
@@ -1559,13 +1560,20 @@ class MainWindow:
                     mode = 1
                     print("Point 1")
                     aoo_lowerRateLimitEntry = int(aoo_lowerRateLimitEntry)
+                    #print(aoo_lowerRateLimitEntry, type(aoo_lowerRateLimitEntry))
                     aoo_upperRateLimitEntry = int(aoo_upperRateLimitEntry)
+                    #print(aoo_upperRateLimitEntry, type(aoo_upperRateLimitEntry))
                     aoo_atrialAmplitudeEntry = float(aoo_atrialAmplitudeEntry)
+                    #print(aoo_atrialAmplitudeEntry, type(aoo_atrialAmplitudeEntry))
                     aoo_atrialPulseWidthEntry = int(aoo_atrialPulseWidthEntry)
-                    serialvar = struct.pack('<BBHHHHHHHdddHHdddHHdHHH', startbyte,7,mode, aoo_lowerRateLimitEntry,aoo_upperRateLimitEntry, 0, 0, aoo_atrialPulseWidthEntry, 0, aoo_atrialAmplitudeEntry, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+                    #print(aoo_atrialPulseWidthEntry, type(aoo_atrialPulseWidthEntry))
+                    serialvar = struct.pack('<BBHHHHHHHdddHHdddHHdHHH', startbyte,7,mode, aoo_lowerRateLimitEntry,aoo_upperRateLimitEntry, 250, 150, aoo_atrialPulseWidthEntry, 200, aoo_atrialAmplitudeEntry, 2, 2.4, 5, 200, 2.5, 1.9, 2.4, 10, 8, 2, 20, 120,0)
+                    #serialvar2 = struct.pack('<BBHHHHHHHdddHHdddHHdHHH', 69,7,1,30,120,250,150,10,200,3.5,2,2.4,5,200,2.5,1.9,2.4,10,8,2,20,120,0) 
                     print("Point 2")
                     #Send over Serial
                     ser.write(serialvar)
+                    print("To send (in binary): ", serialvar)
+                    print("send1",ser.write(serialvar))   
                     print("Point 3")
 
                     
@@ -1587,8 +1595,15 @@ class MainWindow:
                     db.commit()
                     mode = 2
                     print("Point 1")
-                    serialvar = struct.pack('<BBHHHHHHHdddHHdddHHdHHH', startbyte,7,mode, voo_lowerRateLimitEntry,voo_upperRateLimitEntry, 0,0,0,0,0,0,0,voo_ventricularPulseWidthEntry,0,voo_ventricularAmplitudeEntry,0,0,0,0,0,0,0)
+                    voo_lowerRateLimitEntry = int(voo_lowerRateLimitEntry)
+                    voo_upperRateLimitEntry = int(voo_upperRateLimitEntry)
+                    voo_ventricularAmplitudeEntry = float(voo_ventricularAmplitudeEntry)
+                    voo_ventricularPulseWidthEntry = int(voo_ventricularPulseWidthEntry)
+                    #PLS CHECK THIS IT IS 100% WRONG
+                    serialvar = struct.pack('<BBHHHHHHHdddHHdddHHdHHH', startbyte,7,mode, voo_lowerRateLimitEntry,voo_upperRateLimitEntry, 250,150,0,200,0,2,2.4,voo_ventricularPulseWidthEntry,200,voo_ventricularAmplitudeEntry, 1.9, 2.4, 10, 9, 2, 20, 120, 0)
                     print("Point 2")
+                    print("To send (in binary): ", serialvar)
+                    print("send1",ser.write(serialvar))   
                     #Send over Serial
                     ser.write(serialvar)
                     print("Point 3")
@@ -2068,8 +2083,8 @@ class MainWindow:
                     pass
 
                 #Ensure value is in limited range
-                elif(float(temp) < 0.05 or float(temp) > 1.9):
-                    messagebox.showinfo("ERROR","The range is between 0.05 and 1.9")
+                elif(float(temp) < 1 or float(temp) > 20):
+                    messagebox.showinfo("ERROR","The range is between 1 and 20")
                     pass
 
                 #If everything is good update current value
@@ -2190,8 +2205,8 @@ class MainWindow:
                     pass
 
                 #Ensure value is in limited range
-                elif(float(temp) < 0.05 or float(temp) > 1.9):
-                    messagebox.showinfo("ERROR","The range is between 0.05 and 1.9")
+                elif(float(temp) < 1 or float(temp) > 20):
+                    messagebox.showinfo("ERROR","The range is between 1 and 20")
                     pass
 
                 #If everything is good update current value
@@ -2449,8 +2464,8 @@ class MainWindow:
                     pass
 
                 #Ensure value is in limited range
-                elif(float(temp) < 0.05 or float(temp) > 1.9):
-                    messagebox.showinfo("ERROR","The range is between 0.05 and 1.9")
+                elif(float(temp) < 1 or float(temp) > 20):
+                    messagebox.showinfo("ERROR","The range is between 1 and 20")
                     pass
 
                 #If everything is good update current value
@@ -2679,8 +2694,8 @@ class MainWindow:
                     pass
 
                 #Ensure value is in limited range
-                elif(float(temp) < 0.05 or float(temp) > 1.9):
-                    messagebox.showinfo("ERROR","The range is between 0.05 and 1.9")
+                elif(float(temp) < 1 or float(temp) > 20):
+                    messagebox.showinfo("ERROR","The range is between 1 and 20")
                     pass
 
                 #If everything is good update current value
@@ -2735,8 +2750,8 @@ class MainWindow:
                     pass
 
                 #Ensure value is in limited range
-                elif(float(temp) < 0.05 or float(temp) > 1.9):
-                    messagebox.showinfo("ERROR","The range is between 0.05 and 1.9")
+                elif(float(temp) < 1 or float(temp) > 20):
+                    messagebox.showinfo("ERROR","The range is between 1 and 20")
                     pass
 
                 #If everything is good update current value
@@ -2886,8 +2901,8 @@ class MainWindow:
                     pass
 
                 #Ensure value is in limited range
-                elif(float(temp) < 0.05 or float(temp) > 1.9):
-                    messagebox.showinfo("ERROR","The range is between 0.05 and 1.9")
+                elif(float(temp) < 1 or float(temp) > 20):
+                    messagebox.showinfo("ERROR","The range is between 1 and 20")
                     pass
 
                 #If everything is good update current value
@@ -3145,8 +3160,8 @@ class MainWindow:
                     pass
 
                 #Ensure value is in limited range
-                elif(float(temp) < 0.05 or float(temp) > 1.9):
-                    messagebox.showinfo("ERROR","The range is between 0.05 and 1.9")
+                elif(float(temp) < 1 or float(temp) > 20):
+                    messagebox.showinfo("ERROR","The range is between 1 and 20")
                     pass
 
                 #If everything is good update current value
@@ -3402,8 +3417,8 @@ class MainWindow:
                     pass
 
                 #Ensure value is in limited range
-                elif(float(temp) < 0.05 or float(temp) > 1.9):
-                    messagebox.showinfo("ERROR","The range is between 0.05 and 1.9")
+                elif(float(temp) < 1 or float(temp) > 20):
+                    messagebox.showinfo("ERROR","The range is between 1 and 20")
                     pass
 
                 #If everything is good update current value
@@ -3796,8 +3811,8 @@ class MainWindow:
                     pass
 
                 #Ensure value is in limited range
-                elif(float(temp) < 0.05 or float(temp) > 1.9):
-                    messagebox.showinfo("ERROR","The range is between 0.05 and 1.9")
+                elif(float(temp) < 1 or float(temp) > 20):
+                    messagebox.showinfo("ERROR","The range is between 1 and 20")
                     pass
 
                 #If everything is good update current value
@@ -4161,8 +4176,8 @@ class MainWindow:
                     pass
 
                 #Ensure value is in limited range
-                elif(float(temp) < 0.05 or float(temp) > 1.9):
-                    messagebox.showinfo("ERROR","The range is between 0.05 and 1.9")
+                elif(float(temp) < 1 or float(temp) > 20):
+                    messagebox.showinfo("ERROR","The range is between 1 and 20")
                     pass
 
                 #If everything is good update current value
@@ -4217,8 +4232,8 @@ class MainWindow:
                     pass
 
                 #Ensure value is in limited range
-                elif(float(temp) < 0.05 or float(temp) > 1.9):
-                    messagebox.showinfo("ERROR","The range is between 0.05 and 1.9")
+                elif(float(temp) < 1 or float(temp) > 20):
+                    messagebox.showinfo("ERROR","The range is between 1 and 20")
                     pass
 
                 #If everything is good update current value
@@ -4420,7 +4435,7 @@ class MainWindow:
         self.master.destroy()
         exit()
 
-            
+
 def test():
     dev = usb.core.find(find_all=True)
     var = ''
