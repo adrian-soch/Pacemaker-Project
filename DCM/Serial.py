@@ -10,7 +10,7 @@ ser.dtr = 0
 ser.open()
 print("Is Serial Port Open:", ser.isOpen())
 
-var = struct.pack('<BBHHHHHHHdddHHdddHddHHH', 69,7,1,30,120, 250,150,10,200,3.5,2,2.4,5,200,2.5,1.9,2.4,10,8,2,20,120,0)  # B for unsigned char, takes an int
+var = struct.pack('<BBHHHHHHHdddHHdddHHdHHH', 69,7,1,30,120,250,150,10,200,3.5,2,2.4,5,200,2.5,1.9,2.4,10,8,2,20,120,0)  # B for unsigned char, takes an int
                                                                                                                                 # d for double, takes a float
                                                                                                                                 # < for little-endian, as programmed on FRDM board thru Simulink
 print("To send (in binary): ", var)
