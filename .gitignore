@@ -147,3 +147,4 @@ Temporary Items
 
 # End of https://www.gitignore.io/api/visualstudiocode
 .vscode/settings.json
+DCM/.vscode/settings.json
