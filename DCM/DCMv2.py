@@ -1531,6 +1531,8 @@ class MainWindow:
         try:
             if (value == "aooConfirm"):
                 if messagebox.askyesno("CONFIRMATION", "Upload these changes?"):
+                    
+                    mode = 1
 
                     #Type Conversions
                     aoo_lowerRateLimitEntry = int(aoo_lowerRateLimitEntry)
@@ -1555,7 +1557,7 @@ class MainWindow:
                         print(checkList[val], echoVarUP[val])
                         if(checkList[val] != echoVarUP[val]):
                             error = 1
-                            #break
+                            break
                     if(error):
                         messagebox.showinfo("Error", "There was an issue updating values")
                     else:
@@ -1573,27 +1575,14 @@ class MainWindow:
                         self.doorLog.config(text= userlog)
                         db.execute("UPDATE "+currentuser+" SET userlog = ?", (userlog, ))
                         db.commit()
-                        mode = 1
+                        
 
 
               
               
             elif (value == "vooConfirm"):
                 if messagebox.askyesno("CONFIRMATION", "Upload these changes?"):
-                    messagebox.showinfo("DONE", "Success")
-                    userlog = "VOO Was Uploaded"
-                    self.aooLog.config(text= userlog)
-                    self.vooLog.config(text= userlog)
-                    self.aaiLog.config(text= userlog)
-                    self.vviLog.config(text= userlog)
-                    self.dooLog.config(text= userlog)
-                    self.aoorLog.config(text= userlog)
-                    self.voorLog.config(text= userlog)
-                    self.aairLog.config(text= userlog)
-                    self.vvirLog.config(text= userlog)
-                    self.doorLog.config(text= userlog)
-                    db.execute("UPDATE "+currentuser+" SET userlog = ?", (userlog, ))
-                    db.commit()
+                    
                     mode = 2
 
                     #Type Conversions
@@ -1608,22 +1597,38 @@ class MainWindow:
                     #Send over Serial
                     ser.write(serialvar)
 
+                    #Read echo Parameters
+                    serialvar = struct.pack('<BBHHHHHHHdddHHdddHHdHHH', startbyte,21,mode, voo_lowerRateLimitEntry,voo_upperRateLimitEntry, 250,150,5,200,3.5,2,2.4,voo_ventricularPulseWidthEntry,200,voo_ventricularAmplitudeEntry, 1.9, 2.4, 10, 8, 2.5, 20, 120, 0)
+                    ser.write(serialvar)
+
+                    echoVarUP = struct.unpack('<HHHHHHHdddHHdddHHdHHHdd', ser.read(100))
+                    checkList = [mode, voo_lowerRateLimitEntry,voo_upperRateLimitEntry, 250,150,5,200,3.5,2,2.4,voo_ventricularPulseWidthEntry,200,voo_ventricularAmplitudeEntry, 1.9, 2.4, 10, 8, 2.5, 20, 120, 0]
+                    error = 0
+                    for val in range(len(checkList)):
+                        print(checkList[val], echoVarUP[val])
+                        if(checkList[val] != echoVarUP[val]):
+                            error = 1
+                            break
+                    if(error):
+                        messagebox.showinfo("Error", "There was an issue updating values")
+                    else:
+                        messagebox.showinfo("DONE", "Success")
+                        userlog = "VOO Was Uploaded"
+                        self.aooLog.config(text= userlog)
+                        self.vooLog.config(text= userlog)
+                        self.aaiLog.config(text= userlog)
+                        self.vviLog.config(text= userlog)
+                        self.dooLog.config(text= userlog)
+                        self.aoorLog.config(text= userlog)
+                        self.voorLog.config(text= userlog)
+                        self.aairLog.config(text= userlog)
+                        self.vvirLog.config(text= userlog)
+                        self.doorLog.config(text= userlog)
+                        db.execute("UPDATE "+currentuser+" SET userlog = ?", (userlog, ))
+                        db.commit()
+
             elif (value == "aaiConfirm"):
                 if messagebox.askyesno("CONFIRMATION", "Upload these changes?"):
-                    messagebox.showinfo("DONE", "Success")
-                    userlog = "AAI Was Uploaded"
-                    self.aooLog.config(text= userlog)
-                    self.vooLog.config(text= userlog)
-                    self.aaiLog.config(text= userlog)
-                    self.vviLog.config(text= userlog)
-                    self.dooLog.config(text= userlog)
-                    self.aoorLog.config(text= userlog)
-                    self.voorLog.config(text= userlog)
-                    self.aairLog.config(text= userlog)
-                    self.vvirLog.config(text= userlog)
-                    self.doorLog.config(text= userlog)
-                    db.execute("UPDATE "+currentuser+" SET userlog = ?", (userlog, ))
-                    db.commit()
                     mode = 3
                     
                     #Type Conversions
@@ -1641,23 +1646,40 @@ class MainWindow:
                     #Send over Serial
                     ser.write(serialvar)
 
+                    #Read echo Parameters
+                    serialvar = struct.pack('<BBHHHHHHHdddHHdddHHdHHH',startbyte, 21, mode,aai_lowerRateLimitEntry,aai_upperRateLimitEntry,aai_PVARPEntry,150,aai_atrialPulseWidthEntry,aai_ARPEntry,aai_atrialAmplitudeEntry, 2, aai_atrialSensitivityEntry,5,200,2.5,1.9,2.4,10,8,2.5,20,120,0)
+                    ser.write(serialvar)
+                
+                    echoVarUP = struct.unpack('<HHHHHHHdddHHdddHHdHHHdd', ser.read(100))
+                    checkList = [mode,aai_lowerRateLimitEntry,aai_upperRateLimitEntry,aai_PVARPEntry,150,aai_atrialPulseWidthEntry,aai_ARPEntry,aai_atrialAmplitudeEntry, 2, aai_atrialSensitivityEntry,5,200,2.5,1.9,2.4,10,8,2.5,20,120,0]
+                    error = 0
+                    for val in range(len(checkList)):
+                        print(checkList[val], echoVarUP[val])
+                        if(checkList[val] != echoVarUP[val]):
+                            error = 1
+                            break
+                    if(error):
+                        messagebox.showinfo("Error", "There was an issue updating values")
+                    else:
+                        messagebox.showinfo("DONE", "Success")
+                        userlog = "AAI Was Uploaded"
+                        self.aooLog.config(text= userlog)
+                        self.vooLog.config(text= userlog)
+                        self.aaiLog.config(text= userlog)
+                        self.vviLog.config(text= userlog)
+                        self.dooLog.config(text= userlog)
+                        self.aoorLog.config(text= userlog)
+                        self.voorLog.config(text= userlog)
+                        self.aairLog.config(text= userlog)
+                        self.vvirLog.config(text= userlog)
+                        self.doorLog.config(text= userlog)
+                        db.execute("UPDATE "+currentuser+" SET userlog = ?", (userlog, ))
+                        db.commit()
+
 
             elif (value == "vviConfirm"):
                 if messagebox.askyesno("CONFIRMATION", "Upload these changes?"):
-                    messagebox.showinfo("DONE", "Success")
-                    userlog = "VVI Was Uploaded"
-                    self.aooLog.config(text= userlog)
-                    self.vooLog.config(text= userlog)
-                    self.aaiLog.config(text= userlog)
-                    self.vviLog.config(text= userlog)
-                    self.dooLog.config(text= userlog)
-                    self.aoorLog.config(text= userlog)
-                    self.voorLog.config(text= userlog)
-                    self.aairLog.config(text= userlog)
-                    self.vvirLog.config(text= userlog)
-                    self.doorLog.config(text= userlog)
-                    db.execute("UPDATE "+currentuser+" SET userlog = ?", (userlog, ))
-                    db.commit()
+                    
                     mode = 4
 
                     #Type Conversions
@@ -1674,23 +1696,40 @@ class MainWindow:
                     #Send over Serial
                     ser.write(serialvar)
 
+                    #Read echo Parameters
+                    serialvar = struct.pack('<BBHHHHHHHdddHHdddHHdHHH',startbyte, 21, mode, vvi_lowerRateLimitEntry, vvi_upperRateLimitEntry, 250,150,5,200,3.5,2,2.4,vvi_ventricularPulseWidthEntry,vvi_VRPEntry,vvi_ventricularAmplitudeEntry,1.9,vvi_ventricularSensitivityEntry,10,8,2.5,20,120,0)
+                    ser.write(serialvar)
+                
+                    echoVarUP = struct.unpack('<HHHHHHHdddHHdddHHdHHHdd', ser.read(100))
+                    checkList = [mode, vvi_lowerRateLimitEntry, vvi_upperRateLimitEntry, 250,150,5,200,3.5,2,2.4,vvi_ventricularPulseWidthEntry,vvi_VRPEntry,vvi_ventricularAmplitudeEntry,1.9,vvi_ventricularSensitivityEntry,10,8,2.5,20,120,0]
+                    error = 0
+                    for val in range(len(checkList)):
+                        print(checkList[val], echoVarUP[val])
+                        if(checkList[val] != echoVarUP[val]):
+                            error = 1
+                            break
+                    if(error):
+                        messagebox.showinfo("Error", "There was an issue updating values")
+                    else:
+                        messagebox.showinfo("DONE", "Success")
+                        userlog = "VVI Was Uploaded"
+                        self.aooLog.config(text= userlog)
+                        self.vooLog.config(text= userlog)
+                        self.aaiLog.config(text= userlog)
+                        self.vviLog.config(text= userlog)
+                        self.dooLog.config(text= userlog)
+                        self.aoorLog.config(text= userlog)
+                        self.voorLog.config(text= userlog)
+                        self.aairLog.config(text= userlog)
+                        self.vvirLog.config(text= userlog)
+                        self.doorLog.config(text= userlog)
+                        db.execute("UPDATE "+currentuser+" SET userlog = ?", (userlog, ))
+                        db.commit()
+
 
             elif (value == "dooConfirm"):
                 if messagebox.askyesno("CONFIRMATION", "Upload these changes?"):
-                    messagebox.showinfo("DONE", "Success")
-                    userlog = "DOO Was Uploaded"
-                    self.aooLog.config(text= userlog)
-                    self.vooLog.config(text= userlog)
-                    self.aaiLog.config(text= userlog)
-                    self.vviLog.config(text= userlog)
-                    self.dooLog.config(text= userlog)
-                    self.aoorLog.config(text= userlog)
-                    self.voorLog.config(text= userlog)
-                    self.aairLog.config(text= userlog)
-                    self.vvirLog.config(text= userlog)
-                    self.doorLog.config(text= userlog)
-                    db.execute("UPDATE "+currentuser+" SET userlog = ?", (userlog, ))
-                    db.commit()
+
                     mode = 5
                     
                     #Type Conversions
@@ -1707,24 +1746,42 @@ class MainWindow:
                     
                     #Send over Serial
                     ser.write(serialvar)
+                   
+                    #Read echo Parameters
+                    serialvar = struct.pack('<BBHHHHHHHdddHHdddHHdHHH', startbyte, 21, mode, doo_lowerRateLimitEntry,doo_upperRateLimitEntry,250,doo_fixedAVDelayEntry,doo_atrialPulseWidthEntry,200,doo_atrialAmplitudeEntry,2,2.4,doo_ventricularPulseWidthEntry,200,doo_ventricularAmplitudeEntry,1.9,2.4,10,8,2.5,20,120,0)
+                    ser.write(serialvar)
+                
+                    echoVarUP = struct.unpack('<HHHHHHHdddHHdddHHdHHHdd', ser.read(100))
+                    checkList = [mode, doo_lowerRateLimitEntry,doo_upperRateLimitEntry,250,doo_fixedAVDelayEntry,doo_atrialPulseWidthEntry,200,doo_atrialAmplitudeEntry,2,2.4,doo_ventricularPulseWidthEntry,200,doo_ventricularAmplitudeEntry,1.9,2.4,10,8,2.5,20,120,0]
+                    error = 0
+                    for val in range(len(checkList)):
+                        print(checkList[val], echoVarUP[val])
+                        if(checkList[val] != echoVarUP[val]):
+                            error = 1
+                            break
+                    if(error):
+                        messagebox.showinfo("Error", "There was an issue updating values")
+                    else:
+                        messagebox.showinfo("DONE", "Success")
+                        userlog = "DOO Was Uploaded"
+                        self.aooLog.config(text= userlog)
+                        self.vooLog.config(text= userlog)
+                        self.aaiLog.config(text= userlog)
+                        self.vviLog.config(text= userlog)
+                        self.dooLog.config(text= userlog)
+                        self.aoorLog.config(text= userlog)
+                        self.voorLog.config(text= userlog)
+                        self.aairLog.config(text= userlog)
+                        self.vvirLog.config(text= userlog)
+                        self.doorLog.config(text= userlog)
+                        db.execute("UPDATE "+currentuser+" SET userlog = ?", (userlog, ))
+                        db.commit()
 
 
             elif (value == "aoorConfirm"):
                 if messagebox.askyesno("CONFIRMATION", "Upload these changes?"):
                     messagebox.showinfo("DONE", "Success")
-                    userlog = "AOOR Was Uploaded"
-                    self.aooLog.config(text= userlog)
-                    self.vooLog.config(text= userlog)
-                    self.aaiLog.config(text= userlog)
-                    self.vviLog.config(text= userlog)
-                    self.dooLog.config(text= userlog)
-                    self.aoorLog.config(text= userlog)
-                    self.voorLog.config(text= userlog)
-                    self.aairLog.config(text= userlog)
-                    self.vvirLog.config(text= userlog)
-                    self.doorLog.config(text= userlog)
-                    db.execute("UPDATE "+currentuser+" SET userlog = ?", (userlog, ))
-                    db.commit()
+
                     mode = 6
 
                     #Type Conversions
@@ -1743,23 +1800,38 @@ class MainWindow:
 
                     #Send over Serial
                     ser.write(serialvar)
+                    
+                    serialvar = struct.pack('<BBHHHHHHHdddHHdddHHdHHH', startbyte, 21, mode, aoor_lowerRateLimitEntry,aoor_upperRateLimitEntry,250,150,5,200,aoor_atrialAmplitudeEntry,2,2.4,aoor_atrialPulseWidthEntry,200,2.5,1.9,2.4,aoor_reactionTimeEntry,aoor_responseFactorEntry,aoor_activityThresholdEntry,aoor_recoveryTimeEntry,aoor_maximumSensorRateEntry,0)
+                    ser.write(serialvar)
+                
+                    echoVarUP = struct.unpack('<HHHHHHHdddHHdddHHdHHHdd', ser.read(100))
+                    checkList = [mode, aoor_lowerRateLimitEntry,aoor_upperRateLimitEntry,250,150,5,200,aoor_atrialAmplitudeEntry,2,2.4,aoor_atrialPulseWidthEntry,200,2.5,1.9,2.4,aoor_reactionTimeEntry,aoor_responseFactorEntry,aoor_activityThresholdEntry,aoor_recoveryTimeEntry,aoor_maximumSensorRateEntry,0]
+                    error = 0
+                    for val in range(len(checkList)):
+                        print(checkList[val], echoVarUP[val])
+                        if(checkList[val] != echoVarUP[val]):
+                            error = 1
+                            break
+                    if(error):
+                        messagebox.showinfo("Error", "There was an issue updating values")
+                    else:
+                        userlog = "AOOR Was Uploaded"
+                        self.aooLog.config(text= userlog)
+                        self.vooLog.config(text= userlog)
+                        self.aaiLog.config(text= userlog)
+                        self.vviLog.config(text= userlog)
+                        self.dooLog.config(text= userlog)
+                        self.aoorLog.config(text= userlog)
+                        self.voorLog.config(text= userlog)
+                        self.aairLog.config(text= userlog)
+                        self.vvirLog.config(text= userlog)
+                        self.doorLog.config(text= userlog)
+                        db.execute("UPDATE "+currentuser+" SET userlog = ?", (userlog, ))
+                        db.commit()
 
             elif (value == "voorConfirm"):
                 if messagebox.askyesno("CONFIRMATION", "Upload these changes?"):
-                    messagebox.showinfo("DONE", "Success")
-                    userlog = "VOOR Was Uploaded"
-                    self.aooLog.config(text= userlog)
-                    self.vooLog.config(text= userlog)
-                    self.aaiLog.config(text= userlog)
-                    self.vviLog.config(text= userlog)
-                    self.dooLog.config(text= userlog)
-                    self.aoorLog.config(text= userlog)
-                    self.voorLog.config(text= userlog)
-                    self.aairLog.config(text= userlog)
-                    self.vvirLog.config(text= userlog)
-                    self.doorLog.config(text= userlog)
-                    db.execute("UPDATE "+currentuser+" SET userlog = ?", (userlog, ))
-                    db.commit()
+                    
                     mode = 7
 
                     #Type Conversions
@@ -1779,22 +1851,40 @@ class MainWindow:
                     #Send over Serial
                     ser.write(serialvar)
 
+                    #Read echo Parameters
+                    serialvar = struct.pack('<BBHHHHHHHdddHHdddHHdHHH', startbyte, 21, mode,voor_lowerRateLimitEntry,voor_upperRateLimitEntry,250,150,5,200,3.5,2,2.4,voor_ventricularPulseWidthEntry,200,voor_ventricularAmplitudeEntry,2,2.4,voor_reactionTimeEntry,voor_responseFactorEntry,voor_activityThresholdEntry,voor_recoveryTimeEntry,voor_maximumSensorRateEntry,0)
+                    ser.write(serialvar)
+                
+                    echoVarUP = struct.unpack('<HHHHHHHdddHHdddHHdHHHdd', ser.read(100))
+                    checkList = [mode,voor_lowerRateLimitEntry,voor_upperRateLimitEntry,250,150,5,200,3.5,2,2.4,voor_ventricularPulseWidthEntry,200,voor_ventricularAmplitudeEntry,2,2.4,voor_reactionTimeEntry,voor_responseFactorEntry,voor_activityThresholdEntry,voor_recoveryTimeEntry,voor_maximumSensorRateEntry,0]
+                    error = 0
+                    for val in range(len(checkList)):
+                        print(checkList[val], echoVarUP[val])
+                        if(checkList[val] != echoVarUP[val]):
+                            error = 1
+                            break
+                    if(error):
+                        messagebox.showinfo("Error", "There was an issue updating values")
+                    else:
+                        messagebox.showinfo("DONE", "Success")
+                        userlog = "VOOR Was Uploaded"
+                        self.aooLog.config(text= userlog)
+                        self.vooLog.config(text= userlog)
+                        self.aaiLog.config(text= userlog)
+                        self.vviLog.config(text= userlog)
+                        self.dooLog.config(text= userlog)
+                        self.aoorLog.config(text= userlog)
+                        self.voorLog.config(text= userlog)
+                        self.aairLog.config(text= userlog)
+                        self.vvirLog.config(text= userlog)
+                        self.doorLog.config(text= userlog)
+                        db.execute("UPDATE "+currentuser+" SET userlog = ?", (userlog, ))
+                        db.commit()
+
+
             elif (value == "aairConfirm"):
                 if messagebox.askyesno("CONFIRMATION", "Upload these changes?"):
-                    messagebox.showinfo("DONE", "Success")
-                    userlog = "AAIR Was Uploaded"
-                    self.aooLog.config(text= userlog)
-                    self.vooLog.config(text= userlog)
-                    self.aaiLog.config(text= userlog)
-                    self.vviLog.config(text= userlog)
-                    self.dooLog.config(text= userlog)
-                    self.aoorLog.config(text= userlog)
-                    self.voorLog.config(text= userlog)
-                    self.aairLog.config(text= userlog)
-                    self.vvirLog.config(text= userlog)
-                    self.doorLog.config(text= userlog)
-                    db.execute("UPDATE "+currentuser+" SET userlog = ?", (userlog, ))
-                    db.commit()
+                    
                     mode = 8
                     
                     #Type Conversions
@@ -1817,23 +1907,42 @@ class MainWindow:
 
                     #Send over Serial
                     ser.write(serialvar)
+
+                    #Read echo Parameters
+                    serialvar = struct.pack('<BBHHHHHHHdddHHdddHHdHHH', startbyte, 21, mode, aair_lowerRateLimitEntry,aair_upperRateLimitEntry,aair_PVARPEntry,250,aair_atrialPulseWidthEntry,aair_ARPEntry,aair_atrialAmplitudeEntry,2,aair_atrialSensitivityEntry,5,200,2.5,1.9,2.4,aair_reactionTimeEntry,aair_responseFactorEntry,aair_activityThresholdEntry, aair_recoveryTimeEntry,aair_maximumSensorRateEntry,0)
+                    ser.write(serialvar)
+                
+                    echoVarUP = struct.unpack('<HHHHHHHdddHHdddHHdHHHdd', ser.read(100))
+                    checkList = [mode, aair_lowerRateLimitEntry,aair_upperRateLimitEntry,aair_PVARPEntry,250,aair_atrialPulseWidthEntry,aair_ARPEntry,aair_atrialAmplitudeEntry,2,aair_atrialSensitivityEntry,5,200,2.5,1.9,2.4,aair_reactionTimeEntry,aair_responseFactorEntry,aair_activityThresholdEntry, aair_recoveryTimeEntry,aair_maximumSensorRateEntry,0]
+                    error = 0
+                    for val in range(len(checkList)):
+                        print(checkList[val], echoVarUP[val])
+                        if(checkList[val] != echoVarUP[val]):
+                            error = 1
+                            break
+                    if(error):
+                        messagebox.showinfo("Error", "There was an issue updating values")
+                    else:
+                        messagebox.showinfo("DONE", "Success")
+                        userlog = "AAIR Was Uploaded"
+                        self.aooLog.config(text= userlog)
+                        self.vooLog.config(text= userlog)
+                        self.aaiLog.config(text= userlog)
+                        self.vviLog.config(text= userlog)
+                        self.dooLog.config(text= userlog)
+                        self.aoorLog.config(text= userlog)
+                        self.voorLog.config(text= userlog)
+                        self.aairLog.config(text= userlog)
+                        self.vvirLog.config(text= userlog)
+                        self.doorLog.config(text= userlog)
+                        db.execute("UPDATE "+currentuser+" SET userlog = ?", (userlog, ))
+                        db.commit()
+
+
                     
             elif (value == "vvirConfirm"):
                 if messagebox.askyesno("CONFIRMATION", "Upload these changes?"):
-                    messagebox.showinfo("DONE", "Success")
-                    userlog = "VVIR Was Uploaded"
-                    self.aooLog.config(text= userlog)
-                    self.vooLog.config(text= userlog)
-                    self.aaiLog.config(text= userlog)
-                    self.vviLog.config(text= userlog)
-                    self.dooLog.config(text= userlog)
-                    self.aoorLog.config(text= userlog)
-                    self.voorLog.config(text= userlog)
-                    self.aairLog.config(text= userlog)
-                    self.vvirLog.config(text= userlog)
-                    self.doorLog.config(text= userlog)
-                    db.execute("UPDATE "+currentuser+" SET userlog = ?", (userlog, ))
-                    db.commit()
+
                     mode = 9
 
                     #Type Conversions
@@ -1855,22 +1964,39 @@ class MainWindow:
                     #Send over Serial
                     ser.write(serialvar)
 
-            elif (value == "doorConfirm"):
-                if messagebox.askyesno("CONFIRMATION", "Upload these changes?"):
-                    messagebox.showinfo("DONE", "Success")
-                    userlog = "DOOR Was Uploaded"
-                    self.aooLog.config(text= userlog)
-                    self.vooLog.config(text= userlog)
-                    self.aaiLog.config(text= userlog)
-                    self.vviLog.config(text= userlog)
-                    self.dooLog.config(text= userlog)
-                    self.aoorLog.config(text= userlog)
-                    self.voorLog.config(text= userlog)
-                    self.aairLog.config(text= userlog)
-                    self.vvirLog.config(text= userlog)
-                    self.doorLog.config(text= userlog)
+                    #Read echo Parameters
+                    serialvar = struct.pack('<BBHHHHHHHdddHHdddHHdHHH', startbyte, 21, mode, vvir_lowerRateLimitEntry,vvir_upperRateLimitEntry,250,150,5,200,3.5,2,2.4,vvir_ventricularPulseWidthEntry,vvir_VRPEntry,vvir_ventricularAmplitudeEntry,1.9,vvir_ventricularSensitivityEntry,vvir_reactionTimeEntry,vvir_responseFactorEntry,vvir_activityThresholdEntry,vvir_recoveryTimeEntry,vvir_maximumSensorRateEntry,0)
+                    ser.write(serialvar)
+                
+                    echoVarUP = struct.unpack('<HHHHHHHdddHHdddHHdHHHdd', ser.read(100))
+                    checkList = [mode, vvir_lowerRateLimitEntry,vvir_upperRateLimitEntry,250,150,5,200,3.5,2,2.4,vvir_ventricularPulseWidthEntry,vvir_VRPEntry,vvir_ventricularAmplitudeEntry,1.9,vvir_ventricularSensitivityEntry,vvir_reactionTimeEntry,vvir_responseFactorEntry,vvir_activityThresholdEntry,vvir_recoveryTimeEntry,vvir_maximumSensorRateEntry,0]
+                    error = 0
+                    for val in range(len(checkList)):
+                        print(checkList[val], echoVarUP[val])
+                        if(checkList[val] != echoVarUP[val]):
+                            error = 1
+                            break
+                    if(error):
+                        messagebox.showinfo("Error", "There was an issue updating values")
+                    else:
+                        messagebox.showinfo("DONE", "Success")
+                        userlog = "VVIR Was Uploaded"
+                        self.aooLog.config(text= userlog)
+                        self.vooLog.config(text= userlog)
+                        self.aaiLog.config(text= userlog)
+                        self.vviLog.config(text= userlog)
+                        self.dooLog.config(text= userlog)
+                        self.aoorLog.config(text= userlog)
+                        self.voorLog.config(text= userlog)
+                        self.aairLog.config(text= userlog)
+                        self.vvirLog.config(text= userlog)
+                        self.doorLog.config(text= userlog)
                     db.execute("UPDATE "+currentuser+" SET userlog = ?", (userlog, ))
                     db.commit()
+
+            elif (value == "doorConfirm"):
+                if messagebox.askyesno("CONFIRMATION", "Upload these changes?"):
+
                     mode = 10
 
                     #Type Conversions
@@ -1892,12 +2018,42 @@ class MainWindow:
                     
                     #Send over Serial
                     ser.write(serialvar)
+
+                    #Read echo Parameters
+                    serialvar = struct.pack('<BBHHHHHHHdddHHdddHHdHHH', startbyte, 21, mode, door_lowerRateLimitEntry,door_upperRateLimitEntry,250,door_fixedAVDelayEntry,door_atrialPulseWidthEntry,200,door_atrialAmplitudeEntry,2,2.4,door_ventricularPulseWidthEntry,200,door_ventricularAmplitudeEntry,1.9,2.4,door_reactionTimeEntry,door_responseFactorEntry,door_activityThresholdEntry,door_recoveryTimeEntry,door_maximumSensorRateEntry,0)
+                    ser.write(serialvar)
                 
-            print("Point 4")
-            time.sleep(1)
-            print("Point 5")
+                    echoVarUP = struct.unpack('<HHHHHHHdddHHdddHHdHHHdd', ser.read(100))
+                    checkList = [mode, door_lowerRateLimitEntry,door_upperRateLimitEntry,250,door_fixedAVDelayEntry,door_atrialPulseWidthEntry,200,door_atrialAmplitudeEntry,2,2.4,door_ventricularPulseWidthEntry,200,door_ventricularAmplitudeEntry,1.9,2.4,door_reactionTimeEntry,door_responseFactorEntry,door_activityThresholdEntry,door_recoveryTimeEntry,door_maximumSensorRateEntry,0]
+                    error = 0
+                    for val in range(len(checkList)):
+                        print(checkList[val], echoVarUP[val])
+                        if(checkList[val] != echoVarUP[val]):
+                            error = 1
+                            break
+                    if(error):
+                        messagebox.showinfo("Error", "There was an issue updating values")
+                    else:
+                        messagebox.showinfo("DONE", "Success")
+                        userlog = "DOOR Was Uploaded"
+                        self.aooLog.config(text= userlog)
+                        self.vooLog.config(text= userlog)
+                        self.aaiLog.config(text= userlog)
+                        self.vviLog.config(text= userlog)
+                        self.dooLog.config(text= userlog)
+                        self.aoorLog.config(text= userlog)
+                        self.voorLog.config(text= userlog)
+                        self.aairLog.config(text= userlog)
+                        self.vvirLog.config(text= userlog)
+                        self.doorLog.config(text= userlog)
+                        db.execute("UPDATE "+currentuser+" SET userlog = ?", (userlog, ))
+                        db.commit()
+                
+            #print("Point 4")
+            #time.sleep(1)
+            #print("Point 5")
             ser.close()
-            print("Point 6")
+            #print("Point 6")
             print("Serial Port Closed")
 
         except Exception as e: print(e)
