@@ -19,6 +19,7 @@ print("Size of string representation is {}.".format(struct.calcsize('<BBB')))
 #var = struct.unpack('<BBB',var)
 print("send1",ser.write(var))   
 
+
 time.sleep(1)
 var = struct.pack('<BBHHHHHHHdddHHdddHHdHHH', 69,21,1,60,120,250,150,10,200,3.5,2,2.4,5,200,2.5,1.9,2.4,10,8,2,20,120,0)
 ser.write(var)
