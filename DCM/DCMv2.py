@@ -15,7 +15,6 @@ import struct
 
 #Serial Details
 portName = "COM6" #Change to our port
-connectionStatus = "Not Connected To Placemaker"
 status = ''
 
 
@@ -1517,7 +1516,6 @@ class MainWindow:
         #State 1
         global mode
         global startbyte
-        global connectionStatus
         global serialtype
         global serialvar
 
@@ -1533,37 +1531,53 @@ class MainWindow:
         try:
             if (value == "aooConfirm"):
                 if messagebox.askyesno("CONFIRMATION", "Upload these changes?"):
-                    messagebox.showinfo("DONE", "Success")
-                    userlog = "AOO Was Uploaded"
-                    self.aooLog.config(text= userlog)
-                    self.vooLog.config(text= userlog)
-                    self.aaiLog.config(text= userlog)
-                    self.vviLog.config(text= userlog)
-                    self.dooLog.config(text= userlog)
-                    self.aoorLog.config(text= userlog)
-                    self.voorLog.config(text= userlog)
-                    self.aairLog.config(text= userlog)
-                    self.vvirLog.config(text= userlog)
-                    self.doorLog.config(text= userlog)
-                    db.execute("UPDATE "+currentuser+" SET userlog = ?", (userlog, ))
-                    db.commit()
-                    mode = 1
 
+                    #Type Conversions
                     aoo_lowerRateLimitEntry = int(aoo_lowerRateLimitEntry)
                     aoo_upperRateLimitEntry = int(aoo_upperRateLimitEntry)
                     aoo_atrialAmplitudeEntry = float(aoo_atrialAmplitudeEntry)
                     aoo_atrialPulseWidthEntry = int(aoo_atrialPulseWidthEntry)
-
+                    print(aoo_lowerRateLimitEntry, aoo_upperRateLimitEntry, aoor_atrialAmplitudeEntry, aoor_atrialPulseWidthEntry)
+                
                     #Binary Representation
-                    serialvar = struct.pack('<BBHHHHHHHdddHHdddHHdHHH', startbyte,7,mode, aoo_lowerRateLimitEntry,aoo_upperRateLimitEntry, 250, 150, aoo_atrialPulseWidthEntry, 200, aoo_atrialAmplitudeEntry, 2, 2.4, 5, 200, 2.5, 1.9, 2.4, 10, 8, 2.5, 20, 120,0)
-
+                    serialvar = struct.pack('<BBHHHHHHHdddHHdddHHdHHH', startbyte,7,mode, aoo_lowerRateLimitEntry,aoo_upperRateLimitEntry, 250, 150, aoo_atrialPulseWidthEntry, 200, aoo_atrialAmplitudeEntry, 2, 2.4, 5, 200, 2.5, 2, 2.4, 10, 8, 2.5, 20, 120,0)
                     #Send over Serial
                     ser.write(serialvar)
-              
-              
+
+                    #Read echo Parameters
+                    serialvar = struct.pack('<BBHHHHHHHdddHHdddHHdHHH', startbyte,21,mode, aoo_lowerRateLimitEntry,aoo_upperRateLimitEntry, 250, 150, aoo_atrialPulseWidthEntry, 200, aoo_atrialAmplitudeEntry, 2, 2.4, 5, 200, 2.5, 2, 2.4, 10, 8, 2.5, 20, 120,0)
+                    ser.write(serialvar)
+                
+                    echoVarUP = struct.unpack('<HHHHHHHdddHHdddHHdHHHdd', ser.read(100))
+                    checkList = [mode, aoo_lowerRateLimitEntry,aoo_upperRateLimitEntry, 250, 150, aoo_atrialPulseWidthEntry, 200, aoo_atrialAmplitudeEntry, 2, 2.4, 5, 200, 2.5, 2, 2.4, 10, 8, 2.5, 20, 120,0]
+                    error = 0
+                    for val in range(len(checkList)):
+                        print(checkList[val], echoVarUP[val])
+                        if(checkList[val] != echoVarUP[val]):
+                            error = 1
+                            #break
+                    if(error):
+                        messagebox.showinfo("Error", "There was an issue updating values")
+                    else:
+                        messagebox.showinfo("DONE", "Success")
+                        userlog = "AOO Was Uploaded"
+                        self.aooLog.config(text= userlog)
+                        self.vooLog.config(text= userlog)
+                        self.aaiLog.config(text= userlog)
+                        self.vviLog.config(text= userlog)
+                        self.dooLog.config(text= userlog)
+                        self.aoorLog.config(text= userlog)
+                        self.voorLog.config(text= userlog)
+                        self.aairLog.config(text= userlog)
+                        self.vvirLog.config(text= userlog)
+                        self.doorLog.config(text= userlog)
+                        db.execute("UPDATE "+currentuser+" SET userlog = ?", (userlog, ))
+                        db.commit()
+                        mode = 1
 
 
-                    
+              
+              
             elif (value == "vooConfirm"):
                 if messagebox.askyesno("CONFIRMATION", "Upload these changes?"):
                     messagebox.showinfo("DONE", "Success")
@@ -1582,6 +1596,7 @@ class MainWindow:
                     db.commit()
                     mode = 2
 
+                    #Type Conversions
                     voo_lowerRateLimitEntry = int(voo_lowerRateLimitEntry)
                     voo_upperRateLimitEntry = int(voo_upperRateLimitEntry)
                     voo_ventricularAmplitudeEntry = float(voo_ventricularAmplitudeEntry)
@@ -1611,6 +1626,7 @@ class MainWindow:
                     db.commit()
                     mode = 3
                     
+                    #Type Conversions
                     aai_lowerRateLimitEntry = int(aai_lowerRateLimitEntry)
                     aai_upperRateLimitEntry = int(aai_upperRateLimitEntry)
                     aai_PVARPEntry = int(aai_PVARPEntry)
@@ -1644,6 +1660,7 @@ class MainWindow:
                     db.commit()
                     mode = 4
 
+                    #Type Conversions
                     vvi_lowerRateLimitEntry = int(vvi_lowerRateLimitEntry)
                     vvi_upperRateLimitEntry = int(vvi_upperRateLimitEntry )
                     vvi_ventricularPulseWidthEntry = int(vvi_ventricularPulseWidthEntry)
@@ -1676,6 +1693,7 @@ class MainWindow:
                     db.commit()
                     mode = 5
                     
+                    #Type Conversions
                     doo_lowerRateLimitEntry = int(doo_lowerRateLimitEntry)
                     doo_upperRateLimitEntry = int(doo_upperRateLimitEntry)
                     doo_fixedAVDelayEntry = int(doo_fixedAVDelayEntry)
@@ -1709,7 +1727,7 @@ class MainWindow:
                     db.commit()
                     mode = 6
 
-
+                    #Type Conversions
                     aoor_lowerRateLimitEntry = int(aoor_lowerRateLimitEntry)
                     aoor_upperRateLimitEntry = int(aoor_upperRateLimitEntry)
                     aoor_atrialPulseWidthEntry = int(aoor_atrialPulseWidthEntry)
@@ -1744,9 +1762,10 @@ class MainWindow:
                     db.commit()
                     mode = 7
 
+                    #Type Conversions
                     voor_lowerRateLimitEntry = int(voor_lowerRateLimitEntry)
                     voor_upperRateLimitEntry = int(voor_upperRateLimitEntry)
-                    voor_ventricularPulseWidthEntr = int(voor_ventricularPulseWidthEntr)
+                    voor_ventricularPulseWidthEntry = int(voor_ventricularPulseWidthEntry)
                     voor_ventricularAmplitudeEntry = float(voor_ventricularAmplitudeEntry)
                     voor_reactionTimeEntry = int(voor_reactionTimeEntry)
                     voor_responseFactorEntry = int(voor_responseFactorEntry)
@@ -1778,8 +1797,23 @@ class MainWindow:
                     db.commit()
                     mode = 8
                     
+                    #Type Conversions
+                    aair_lowerRateLimitEntry = int(aair_lowerRateLimitEntry)
+                    aair_upperRateLimitEntry = int(aair_upperRateLimitEntry)
+                    aair_atrialPulseWidthEntry = int(aair_atrialPulseWidthEntry)
+                    aair_atrialAmplitudeEntry = float(aair_atrialAmplitudeEntry)
+                    aair_PVARPEntry = int(aair_PVARPEntry)
+                    aair_ARPEntry = int(aair_ARPEntry)
+                    aair_atrialSensitivityEntry = float(aair_atrialSensitivityEntry)
+                    aair_reactionTimeEntry = int(aair_reactionTimeEntry)
+                    aair_responseFactorEntry = int(aair_responseFactorEntry)
+                    aair_activityThresholdEntry = float(aair_activityThresholdEntry)
+                    aair_recoveryTimeEntry = int(aair_recoveryTimeEntry)
+                    aair_maximumSensorRateEntry = int(aair_maximumSensorRateEntry)
+
+
                     #Binary Representation
-                    serialvar = struct.pack('<BBHHHHHHHdddHHdddHHdHHH', startbyte, 7, mode, aair_lowerRateLimitEntry,aair_upperRateLimitEntry,aair_PVARPEntry,250,aair_atrialPulseWidthEntry,aair_ARPEntry,aair_atrialAmplitudeEntry,2,aair_atrialSensitivityEntry,5,200,2.5,1.9,2.4,aair_reactionTimeEntry,aair_responseFactorEntry,aair_activityThresholdEntry,aair_reactionTimeEntry,aair_recoveryTimeEntry,aair_maximumSensorRateEntry,0)
+                    serialvar = struct.pack('<BBHHHHHHHdddHHdddHHdHHH', startbyte, 7, mode, aair_lowerRateLimitEntry,aair_upperRateLimitEntry,aair_PVARPEntry,250,aair_atrialPulseWidthEntry,aair_ARPEntry,aair_atrialAmplitudeEntry,2,aair_atrialSensitivityEntry,5,200,2.5,1.9,2.4,aair_reactionTimeEntry,aair_responseFactorEntry,aair_activityThresholdEntry, aair_recoveryTimeEntry,aair_maximumSensorRateEntry,0)
 
                     #Send over Serial
                     ser.write(serialvar)
@@ -1801,6 +1835,19 @@ class MainWindow:
                     db.execute("UPDATE "+currentuser+" SET userlog = ?", (userlog, ))
                     db.commit()
                     mode = 9
+
+                    #Type Conversions
+                    vvir_lowerRateLimitEntry = int(vvir_lowerRateLimitEntry)
+                    vvir_upperRateLimitEntry = int(vvir_upperRateLimitEntry)
+                    vvir_ventricularPulseWidthEntry = int(vvir_ventricularPulseWidthEntry)
+                    vvir_ventricularAmplitudeEntry = float(vvir_ventricularAmplitudeEntry)
+                    vvir_VRPEntry = int(vvir_VRPEntry)
+                    vvir_ventricularSensitivityEntry = float(vvir_ventricularSensitivityEntry)
+                    vvir_reactionTimeEntry = int(vvir_reactionTimeEntry)
+                    vvir_responseFactorEntry = int(vvir_responseFactorEntry)
+                    vvir_activityThresholdEntry = float(vvir_activityThresholdEntry)
+                    vvir_recoveryTimeEntry = int(vvir_recoveryTimeEntry)
+                    vvir_maximumSensorRateEntry = int(vvir_maximumSensorRateEntry)
                     
                     #Binary Representation
                     serialvar = struct.pack('<BBHHHHHHHdddHHdddHHdHHH', startbyte, 7, mode, vvir_lowerRateLimitEntry,vvir_upperRateLimitEntry,250,150,5,200,3.5,2,2.4,vvir_ventricularPulseWidthEntry,vvir_VRPEntry,vvir_ventricularAmplitudeEntry,1.9,vvir_ventricularSensitivityEntry,vvir_reactionTimeEntry,vvir_responseFactorEntry,vvir_activityThresholdEntry,vvir_recoveryTimeEntry,vvir_maximumSensorRateEntry,0)
@@ -1825,6 +1872,20 @@ class MainWindow:
                     db.execute("UPDATE "+currentuser+" SET userlog = ?", (userlog, ))
                     db.commit()
                     mode = 10
+
+                    #Type Conversions
+                    door_lowerRateLimitEntry = int(door_lowerRateLimitEntry)
+                    door_upperRateLimitEntry = int(door_upperRateLimitEntry)
+                    door_fixedAVDelayEntry = int(door_fixedAVDelayEntry)
+                    door_atrialPulseWidthEntry = int(door_atrialPulseWidthEntry)
+                    door_atrialAmplitudeEntry = float(door_atrialAmplitudeEntry)
+                    door_ventricularPulseWidthEntry = int(door_ventricularPulseWidthEntry)
+                    door_ventricularAmplitudeEntry = float(door_ventricularAmplitudeEntry)
+                    door_reactionTimeEntry = int(door_reactionTimeEntry)
+                    door_responseFactorEntry = int(door_responseFactorEntry)
+                    door_activityThresholdEntry = float(door_activityThresholdEntry)
+                    door_recoveryTimeEntry = int(door_recoveryTimeEntry)
+                    door_maximumSensorRateEntry = int(door_maximumSensorRateEntry)
                     
                     #Binary Representation
                     serialvar = struct.pack('<BBHHHHHHHdddHHdddHHdHHH', startbyte, 7, mode, door_lowerRateLimitEntry,door_upperRateLimitEntry,250,door_fixedAVDelayEntry,door_atrialPulseWidthEntry,200,door_atrialAmplitudeEntry,2,2.4,door_ventricularPulseWidthEntry,200,door_ventricularAmplitudeEntry,1.9,2.4,door_reactionTimeEntry,door_responseFactorEntry,door_activityThresholdEntry,door_recoveryTimeEntry,door_maximumSensorRateEntry,0)
@@ -1838,7 +1899,6 @@ class MainWindow:
             ser.close()
             print("Point 6")
             print("Serial Port Closed")
-            connectionStatus = "Transfer Complete, Pacemaker Connected"
 
         except Exception as e: print(e)
         
@@ -4511,5 +4571,4 @@ if __name__ == '__main__':
     #Run USB Connected
     #Thread(target = run).start()
 
-    #DCM Main (can't multithread when using sqlite)
     Thread(target = main).start()

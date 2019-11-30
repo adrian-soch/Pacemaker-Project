@@ -32,27 +32,18 @@ print("Done")
 ser.close()
 print("Serial Port Closed")
 print("read (in decimal): ", struct.unpack('<dHdHddHHHHHHHHHHdHddHdd',values))
-# try:
-#     mode = 1
-#     print("Point 1")
 
-#     serialvar = struct.pack('<B', 1)
 
-#     print("Point 2")
-#     transList = [0] * len(serialvar)
-#     i = 0
-#     while i<len(serialvar):
-#         transList[i] = serialvar[i]
-#         i += 1
-#     print("Point 3")
-#     ser.write(transList)
-#     #ser.write(serialvar)
-#     print("Point 4")
-#     time.sleep(1)
-#     print("Point 5")
-#     ser.close()
-#     print("Point 6")
-#     print("Serial Port Closed")
+serialvar = struct.pack('<BBHHHHHHHdddHHdddHHdHHH', 69,21,1,60,120,250,150,10,200,3.5,2,2.4,5,200,2.5,1.9,2.4,10,8,2,20,120,0)
 
-# except Exception as e: 
-#     print(e)
+#Send over Serial
+ser.write(serialvar)
+
+#Read echo Parameters
+serialvar = struct.pack('<BBHHHHHHHdddHHdddHHdHHH', 69,7,1,60,120,250,150,10,200,3.5,2,2.4,5,200,2.5,1.9,2.4,10,8,2,20,120,0)
+echoVar = ser.read(100)
+echoVarUP = struct.unpack('<dHdHddHHHHHHHHHHdHddHdd',echoVar)
+checkList = [69,7,1,60,120,250,150,10,200,3.5,2,2.4,5,200,2.5,1.9,2.4,10,8,2,20,120,0]
+for val in checklist:
+    if(checkList(val) != echoVarUP(val)):
+        print("error")
