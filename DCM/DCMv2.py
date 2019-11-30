@@ -269,11 +269,11 @@ class AddUserWindow:
                             "aai_lowerRateLimitEntry INTEGER NOT NULL, aai_upperRateLimitEntry INTEGER NOT NULL, aai_atrialAmplitudeEntry REAL NOT NULL, aai_atrialPulseWidthEntry INTEGER NOT NULL, aai_atrialSensitivityEntry REAL NOT NULL, aai_ARPEntry INTEGER NOT NULL, aai_PVARPEntry INTEGER NOT NULL, aai_hysteresisEntry INTEGER NOT NULL, aai_rateSmoothingEntry INTEGER NOT NULL, "
                             "vvi_lowerRateLimitEntry INTEGER NOT NULL, vvi_upperRateLimitEntry INTEGER NOT NULL, vvi_ventricularAmplitudeEntry REAL NOT NULL, vvi_ventricularPulseWidthEntry INTEGER NOT NULL, vvi_ventricularSensitivityEntry REAL NOT NULL, vvi_VRPEntry INTEGER NOT NULL, vvi_hysteresisEntry INTEGER NOT NULL, vvi_rateSmoothingEntry INTEGER NOT NULL, "
                             "doo_lowerRateLimitEntry INTEGER NOT NULL, doo_upperRateLimitEntry INTEGER NOT NULL, doo_atrialAmplitudeEntry REAL NOT NULL, doo_atrialPulseWidthEntry INTEGER NOT NULL, doo_ventricularAmplitudeEntry REAL NOT NULL, doo_ventricularPulseWidthEntry INTEGER NOT NULL, doo_fixedAVDelayEntry INTEGER NOT NULL, "
-                            "aoor_lowerRateLimitEntry INTEGER NOT NULL, aoor_upperRateLimitEntry INTEGER NOT NULL, aoor_atrialAmplitudeEntry REAL NOT NULL, aoor_atrialPulseWidthEntry INTEGER NOT NULL, aoor_maximumSensorRateEntry INTEGER NOT NULL, aoor_activityThresholdEntry TEXT NOT NULL, aoor_reactionTimeEntry INTEGER NOT NULL, aoor_responseFactorEntry INTEGER NOT NULL, aoor_recoveryTimeEntry INTEGER NOT NULL, "
-                            "voor_lowerRateLimitEntry INTEGER NOT NULL, voor_upperRateLimitEntry INTEGER NOT NULL, voor_ventricularAmplitudeEntry REAL NOT NULL, voor_ventricularPulseWidthEntry INTEGER NOT NULL, voor_maximumSensorRateEntry INTEGER NOT NULL, voor_activityThresholdEntry TEXT NOT NULL, voor_reactionTimeEntry INTEGER NOT NULL, voor_responseFactorEntry INTEGER NOT NULL, voor_recoveryTimeEntry INTEGER NOT NULL, "
-                            "aair_lowerRateLimitEntry INTEGER NOT NULL, aair_upperRateLimitEntry INTEGER NOT NULL, aair_atriaAmplitudeEntry REAL NOT NULL, aair_atrialPulseWidthEntry INTEGER NOT NULL, aair_atrialSensitivityEntry REAL NOT NULL, aair_ARPEntry INTEGER NOT NULL, aair_PVARPEntry INTEGER NOT NULL, aair_hysteresisEntry INTEGER NOT NULL, aair_rateSmoothingEntry INTEGER NOT NULL, aair_maximumSensorRateEntry INTEGER NOT NULL, aair_activityThresholdEntry TEXT NOT NULL, aair_reactionTimeEntry INTEGER NOT NULL, aair_responseFactorEntry INTEGER NOT NULL, aair_recoveryTimeEntry INTEGER NOT NULL, "
-                            "vvir_lowerRateLimitEntry INTEGER NOT NULL, vvir_upperRateLimitEntry INTEGER NOT NULL, vvir_ventricularAmplitudeEntry REAL NOT NULL, vvir_ventricularPulseWidthEntry INTEGER NOT NULL, vvir_ventricularSensitivityEntry REAL NOT NULL, vvir_VRPEntry INTEGER NOT NULL, vvir_hysteresisEntry INTEGER NOT NULL, vvir_rateSmoothingEntry INTEGER NOT NULL, vvir_maximumSensorRateEntry INTEGER NOT NULL, vvir_activityThresholdEntry TEXT NOT NULL, vvir_reactionTimeEntry INTEGER NOT NULL, vvir_responseFactorEntry INTEGER NOT NULL, vvir_recoveryTimeEntry INTEGER NOT NULL, "
-                            "door_lowerRateLimitEntry INTEGER NOT NULL, door_upperRateLimitEntry INTEGER NOT NULL, door_atrialAmplitudeEntry REAL NOT NULL, door_atrialPulseWidthEntry INTEGER NOT NULL, door_ventricularAmplitudeEntry REAL NOT NULL, door_ventricularPulseWidthEntry INTEGER NOT NULL, door_maximumSensorRateEntry INTEGER NOT NULL, door_fixedAVDelayEntry INTEGER NOT NULL, door_activityThresholdEntry TEXT NOT NULL, door_reactionTimeEntry INTEGER NOT NULL, door_responseFactorEntry INTEGER NOT NULL, door_recoveryTimeEntry INTEGER NOT NULL)")
+                            "aoor_lowerRateLimitEntry INTEGER NOT NULL, aoor_upperRateLimitEntry INTEGER NOT NULL, aoor_atrialAmplitudeEntry REAL NOT NULL, aoor_atrialPulseWidthEntry INTEGER NOT NULL, aoor_maximumSensorRateEntry INTEGER NOT NULL, aoor_activityThresholdEntry REAL NOT NULL, aoor_reactionTimeEntry INTEGER NOT NULL, aoor_responseFactorEntry INTEGER NOT NULL, aoor_recoveryTimeEntry INTEGER NOT NULL, "
+                            "voor_lowerRateLimitEntry INTEGER NOT NULL, voor_upperRateLimitEntry INTEGER NOT NULL, voor_ventricularAmplitudeEntry REAL NOT NULL, voor_ventricularPulseWidthEntry INTEGER NOT NULL, voor_maximumSensorRateEntry INTEGER NOT NULL, voor_activityThresholdEntry REAL NOT NULL, voor_reactionTimeEntry INTEGER NOT NULL, voor_responseFactorEntry INTEGER NOT NULL, voor_recoveryTimeEntry INTEGER NOT NULL, "
+                            "aair_lowerRateLimitEntry INTEGER NOT NULL, aair_upperRateLimitEntry INTEGER NOT NULL, aair_atriaAmplitudeEntry REAL NOT NULL, aair_atrialPulseWidthEntry INTEGER NOT NULL, aair_atrialSensitivityEntry REAL NOT NULL, aair_ARPEntry INTEGER NOT NULL, aair_PVARPEntry INTEGER NOT NULL, aair_hysteresisEntry INTEGER NOT NULL, aair_rateSmoothingEntry INTEGER NOT NULL, aair_maximumSensorRateEntry INTEGER NOT NULL, aair_activityThresholdEntry REAL NOT NULL, aair_reactionTimeEntry INTEGER NOT NULL, aair_responseFactorEntry INTEGER NOT NULL, aair_recoveryTimeEntry INTEGER NOT NULL, "
+                            "vvir_lowerRateLimitEntry INTEGER NOT NULL, vvir_upperRateLimitEntry INTEGER NOT NULL, vvir_ventricularAmplitudeEntry REAL NOT NULL, vvir_ventricularPulseWidthEntry INTEGER NOT NULL, vvir_ventricularSensitivityEntry REAL NOT NULL, vvir_VRPEntry INTEGER NOT NULL, vvir_hysteresisEntry INTEGER NOT NULL, vvir_rateSmoothingEntry INTEGER NOT NULL, vvir_maximumSensorRateEntry INTEGER NOT NULL, vvir_activityThresholdEntry REAL NOT NULL, vvir_reactionTimeEntry INTEGER NOT NULL, vvir_responseFactorEntry INTEGER NOT NULL, vvir_recoveryTimeEntry INTEGER NOT NULL, "
+                            "door_lowerRateLimitEntry INTEGER NOT NULL, door_upperRateLimitEntry INTEGER NOT NULL, door_atrialAmplitudeEntry REAL NOT NULL, door_atrialPulseWidthEntry INTEGER NOT NULL, door_ventricularAmplitudeEntry REAL NOT NULL, door_ventricularPulseWidthEntry INTEGER NOT NULL, door_maximumSensorRateEntry INTEGER NOT NULL, door_fixedAVDelayEntry INTEGER NOT NULL, door_activityThresholdEntry REAL NOT NULL, door_reactionTimeEntry INTEGER NOT NULL, door_responseFactorEntry INTEGER NOT NULL, door_recoveryTimeEntry INTEGER NOT NULL)")
                         db.execute("INSERT INTO users VALUES(?, ?, ?)", (username, password, counters))
                         db.execute("INSERT INTO "+counters+" VALUES(?, " #log
                             "?,?,?,?, " #aoo
@@ -292,11 +292,11 @@ class AddUserWindow:
                             60, 120, 3.5, 1, 0.75, 250, 250, 0, 0, #aai
                             60, 120, 3.5, 1, 2.5, 320, 0, 0, #vvi
                             60, 120, 3.5, 1, 3.5, 1 ,150, #doo
-                            60, 120, 3.5, 1, 120,"Med",30,8,5, #aoor
-                            60, 120, 3.5, 1, 120,"Med",30,8,5, #voor
-                            60, 120, 3.5, 1, 3.3, 250, 250, 0, 0, 120,"Med",30,8,5, #aair
-                            60, 120, 3.5, 1, 3.3, 320, 0, 0, 120,"Med",30,8,5, #vvir
-                            60, 120, 3.5, 1, 3.5, 1 ,150 ,120,"Med",30,8,5)) #door
+                            60, 120, 3.5, 1, 120,1.5,30,8,5, #aoor
+                            60, 120, 3.5, 1, 120,1.5,30,8,5, #voor
+                            60, 120, 3.5, 1, 3.3, 250, 250, 0, 0, 120,1.5,30,8,5, #aair
+                            60, 120, 3.5, 1, 3.3, 320, 0, 0, 120,1.5,30,8,5, #vvir
+                            60, 120, 3.5, 1, 3.5, 1 ,150 ,120,1.5,30,8,5)) #door
                         messagebox.showinfo("SUCCESS", "User Added")
                         self.quitButton.focus()
 
@@ -843,9 +843,7 @@ class MainWindow:
         self.aoorAtrialAmplitudeEntry = tk.Spinbox(self.aoor,from_=0.0,to=7.0,format="%.1f",increment=0.1)
         self.aoorAtrialPulseWidthEntry = tk.Spinbox(self.aoor,from_=1,to=20,format="%.2f",increment=0.1)
         self.aoorMaximumSensorRateEntry = tk.Spinbox(self.aoor,from_=50,to=175,increment=5)
-        self.aoorActivityThresholdEntry = ttk.Combobox(self.aoor)
-        self.aoorActivityThresholdEntry['values']= ("V-Low", "Low", "Med-Low", "Med", "Med-High", "High","V-High")
-        self.aoorActivityThresholdEntry.current(3)
+        self.aoorActivityThresholdEntry = tk.Spinbox(self.aoor,from_=0.5,to=7.0,format="%.1f",increment=0.1)
         self.aoorReactionTimeEntry = tk.Spinbox(self.aoor,from_=10,to=50,increment=10)
         self.aoorResponseFactorEntry = tk.Spinbox(self.aoor,from_=1,to=16,increment=1)
         self.aoorRecoveryTimeEntry = tk.Spinbox(self.aoor,from_=2,to=16,increment=1)
@@ -937,9 +935,7 @@ class MainWindow:
         self.voorVentricularAmplitudeEntry = tk.Spinbox(self.voor,from_=0.5,to=7.0,format="%.1f",increment=0.1)
         self.voorVentricularPulseWidthEntry = tk.Spinbox(self.voor,from_=1,to=20,format="%.2f",increment=0.1)
         self.voorMaximumSensorRateEntry = tk.Spinbox(self.voor,from_=50,to=175,increment=5)
-        self.voorActivityThresholdEntry = ttk.Combobox(self.voor)
-        self.voorActivityThresholdEntry['values']= ("V-Low", "Low", "Med-Low", "Med", "Med-High", "High","V-High")
-        self.voorActivityThresholdEntry.current(3)
+        self.voorActivityThresholdEntry = tk.Spinbox(self.voor,from_=0.5,to=7.0,format="%.1f",increment=0.1)
         self.voorReactionTimeEntry = tk.Spinbox(self.voor,from_=10,to=50,increment=10)
         self.voorResponseFactorEntry = tk.Spinbox(self.voor,from_=1,to=16,increment=1)
         self.voorRecoveryTimeEntry = tk.Spinbox(self.voor,from_=2,to=16,increment=1)
@@ -1041,9 +1037,7 @@ class MainWindow:
         self.aairHysteresisEntry = tk.Spinbox(self.aair,from_=0,to=25,increment=5)
         self.aairRateSmoothingEntry = tk.Spinbox(self.aair,from_=0,to=25,increment=3)
         self.aairMaximumSensorRateEntry = tk.Spinbox(self.aair,from_=50,to=175,increment=5)
-        self.aairActivityThresholdEntry = ttk.Combobox(self.aair)
-        self.aairActivityThresholdEntry['values']= ("V-Low", "Low", "Med-Low", "Med", "Med-High", "High","V-High")
-        self.aairActivityThresholdEntry.current(3)
+        self.aairActivityThresholdEntry = tk.Spinbox(self.aair,from_=0.5,to=7.0,format="%.1f",increment=0.1)
         self.aairReactionTimeEntry = tk.Spinbox(self.aair,from_=10,to=50,increment=10)
         self.aairResponseFactorEntry = tk.Spinbox(self.aair,from_=1,to=16,increment=1)
         self.aairRecoveryTimeEntry = tk.Spinbox(self.aair,from_=2,to=16,increment=1)
@@ -1178,9 +1172,7 @@ class MainWindow:
         self.vvirHysteresisEntry = tk.Spinbox(self.vvir,from_=0,to=25,increment=5)
         self.vvirRateSmoothingEntry = tk.Spinbox(self.vvir,from_=0,to=25,increment=3)
         self.vvirMaximumSensorRateEntry = tk.Spinbox(self.vvir,from_=50,to=175,increment=5)
-        self.vvirActivityThresholdEntry = ttk.Combobox(self.vvir)
-        self.vvirActivityThresholdEntry['values']= ("V-Low", "Low", "Med-Low", "Med", "Med-High", "High","V-High")
-        self.vvirActivityThresholdEntry.current(3)
+        self.vvirActivityThresholdEntry = tk.Spinbox(self.vvir,from_=0.5,to=7.0,format="%.1f",increment=0.1)
         self.vvirReactionTimeEntry = tk.Spinbox(self.vvir,from_=10,to=50,increment=10)
         self.vvirResponseFactorEntry = tk.Spinbox(self.vvir,from_=1,to=16,increment=1)
         self.vvirRecoveryTimeEntry = tk.Spinbox(self.vvir,from_=2,to=16,increment=1)
@@ -1306,9 +1298,7 @@ class MainWindow:
         self.doorVentricularPulseWidthEntry = tk.Spinbox(self.door,from_=1,to=20,format="%.2f",increment=0.1)
         self.doorFixedAVDelayEntry = tk.Spinbox(self.door,from_=70,to=300,increment=10)
         self.doorMaximumSensorRateEntry = tk.Spinbox(self.door,from_=50,to=175,increment=5)
-        self.doorActivityThresholdEntry = ttk.Combobox(self.door)
-        self.doorActivityThresholdEntry['values']= ("V-Low", "Low", "Med-Low", "Med", "Med-High", "High","V-High")
-        self.doorActivityThresholdEntry.current(3)
+        self.doorActivityThresholdEntry = tk.Spinbox(self.door,from_=0.5,to=7.0,format="%.1f",increment=0.1)
         self.doorReactionTimeEntry = tk.Spinbox(self.door,from_=10,to=50,increment=10)
         self.doorResponseFactorEntry = tk.Spinbox(self.door,from_=1,to=16,increment=1)
         self.doorRecoveryTimeEntry = tk.Spinbox(self.door,from_=2,to=16,increment=1)
@@ -1558,23 +1548,20 @@ class MainWindow:
                     db.execute("UPDATE "+currentuser+" SET userlog = ?", (userlog, ))
                     db.commit()
                     mode = 1
-                    print("Point 1")
+
                     aoo_lowerRateLimitEntry = int(aoo_lowerRateLimitEntry)
-                    #print(aoo_lowerRateLimitEntry, type(aoo_lowerRateLimitEntry))
                     aoo_upperRateLimitEntry = int(aoo_upperRateLimitEntry)
-                    #print(aoo_upperRateLimitEntry, type(aoo_upperRateLimitEntry))
                     aoo_atrialAmplitudeEntry = float(aoo_atrialAmplitudeEntry)
-                    #print(aoo_atrialAmplitudeEntry, type(aoo_atrialAmplitudeEntry))
                     aoo_atrialPulseWidthEntry = int(aoo_atrialPulseWidthEntry)
-                    #print(aoo_atrialPulseWidthEntry, type(aoo_atrialPulseWidthEntry))
-                    serialvar = struct.pack('<BBHHHHHHHdddHHdddHHdHHH', startbyte,7,mode, aoo_lowerRateLimitEntry,aoo_upperRateLimitEntry, 250, 150, aoo_atrialPulseWidthEntry, 200, aoo_atrialAmplitudeEntry, 2, 2.4, 5, 200, 2.5, 1.9, 2.4, 10, 8, 2, 20, 120,0)
-                    #serialvar2 = struct.pack('<BBHHHHHHHdddHHdddHHdHHH', 69,7,1,30,120,250,150,10,200,3.5,2,2.4,5,200,2.5,1.9,2.4,10,8,2,20,120,0) 
-                    print("Point 2")
+
+                    #Binary Representation
+                    serialvar = struct.pack('<BBHHHHHHHdddHHdddHHdHHH', startbyte,7,mode, aoo_lowerRateLimitEntry,aoo_upperRateLimitEntry, 250, 150, aoo_atrialPulseWidthEntry, 200, aoo_atrialAmplitudeEntry, 2, 2.4, 5, 200, 2.5, 1.9, 2.4, 10, 8, 2.5, 20, 120,13)
+
                     #Send over Serial
                     ser.write(serialvar)
-                    print("To send (in binary): ", serialvar)
-                    print("send1",ser.write(serialvar))   
-                    print("Point 3")
+              
+              
+
 
                     
             elif (value == "vooConfirm"):
@@ -1594,19 +1581,17 @@ class MainWindow:
                     db.execute("UPDATE "+currentuser+" SET userlog = ?", (userlog, ))
                     db.commit()
                     mode = 2
-                    print("Point 1")
+
                     voo_lowerRateLimitEntry = int(voo_lowerRateLimitEntry)
                     voo_upperRateLimitEntry = int(voo_upperRateLimitEntry)
                     voo_ventricularAmplitudeEntry = float(voo_ventricularAmplitudeEntry)
                     voo_ventricularPulseWidthEntry = int(voo_ventricularPulseWidthEntry)
-                    #PLS CHECK THIS IT IS 100% WRONG
-                    serialvar = struct.pack('<BBHHHHHHHdddHHdddHHdHHH', startbyte,7,mode, voo_lowerRateLimitEntry,voo_upperRateLimitEntry, 250,150,0,200,0,2,2.4,voo_ventricularPulseWidthEntry,200,voo_ventricularAmplitudeEntry, 1.9, 2.4, 10, 9, 2, 20, 120, 0)
-                    print("Point 2")
-                    print("To send (in binary): ", serialvar)
-                    print("send1",ser.write(serialvar))   
+                    
+                    #Binary Representation
+                    serialvar = struct.pack('<BBHHHHHHHdddHHdddHHdHHH', startbyte,7,mode, voo_lowerRateLimitEntry,voo_upperRateLimitEntry, 250,150,5,200,3.5,2,2.4,voo_ventricularPulseWidthEntry,200,voo_ventricularAmplitudeEntry, 1.9, 2.4, 10, 8, 2.5, 20, 120, 13)
+
                     #Send over Serial
                     ser.write(serialvar)
-                    print("Point 3")
 
             elif (value == "aaiConfirm"):
                 if messagebox.askyesno("CONFIRMATION", "Upload these changes?"):
@@ -1626,8 +1611,16 @@ class MainWindow:
                     db.commit()
                     mode = 3
                     
+                    aai_lowerRateLimitEntry = int(aai_lowerRateLimitEntry)
+                    aai_upperRateLimitEntry = int(aai_upperRateLimitEntry)
+                    aai_PVARPEntry = int(aai_PVARPEntry)
+                    aai_atrialPulseWidthEntry = int(aai_atrialPulseWidthEntry)
+                    aai_ARPEntry = int(aai_ARPEntry)
+                    aai_atrialAmplitudeEntry = float(aai_atrialAmplitudeEntry)
+                    aai_atrialSensitivityEntry = float (aai_atrialSensitivityEntry)
+
                     #Binary Representation
-                    serialvar = struct.pack('<BBHHHHHHHdddHHdddHHdHHH',startbyte, 7, mode,aai_lowerRateLimitEntry,aai_upperRateLimitEntry,aai_PVARPEntry,0,aai_atrialPulseWidthEntry,aai_ARPEntry,aai_atrialAmplitudeEntry, 0, aai_atrialSensitivityEntry,0,0,0,0,0,0,0,0,0,0,0)
+                    serialvar = struct.pack('<BBHHHHHHHdddHHdddHHdHHH',startbyte, 7, mode,aai_lowerRateLimitEntry,aai_upperRateLimitEntry,aai_PVARPEntry,150,aai_atrialPulseWidthEntry,aai_ARPEntry,aai_atrialAmplitudeEntry, 2, aai_atrialSensitivityEntry,5,200,2.5,1.9,2.4,10,8,2.5,20,120,13)
                     
                     #Send over Serial
                     ser.write(serialvar)
@@ -1650,7 +1643,17 @@ class MainWindow:
                     db.execute("UPDATE "+currentuser+" SET userlog = ?", (userlog, ))
                     db.commit()
                     mode = 4
-                    serialvar = struct.pack('<BBHHHHHHHdddHHdddHHdHHH', startbyte, 7, mode, vvi_lowerRateLimitEntry, vvi_upperRateLimitEntry, 0,0,0,0,0,0,0,voo_ventricularPulseWidthEntry,vvi_VRPEntry,voo_ventricularAmplitudeEntry,0,vvi_ventricularSensitivityEntry,0,0,0,0,0,0)
+
+                    vvi_lowerRateLimitEntry = int(vvi_lowerRateLimitEntry)
+                    vvi_upperRateLimitEntry = int(vvi_upperRateLimitEntry )
+                    vvi_ventricularPulseWidthEntry = int(vvi_ventricularPulseWidthEntry)
+                    vvi_VRPEntry = int(vvi_VRPEntry)
+                    vvi_ventricularAmplitudeEntry = float(vvi_ventricularAmplitudeEntry)
+                    vvi_ventricularSensitivityEntry = float(vvi_ventricularSensitivityEntry)
+
+                    #Binary Representation
+                    serialvar = struct.pack('<BBHHHHHHHdddHHdddHHdHHH', startbyte, 7, mode, vvi_lowerRateLimitEntry, vvi_upperRateLimitEntry, 250,150,5,200,3.5,2,2.4,vvi_ventricularPulseWidthEntry,vvi_VRPEntry,vvi_ventricularAmplitudeEntry,1.9,vvi_ventricularSensitivityEntry,10,8,2.5,20,120,13)
+                    
                     #Send over Serial
                     ser.write(serialvar)
 
@@ -1673,8 +1676,16 @@ class MainWindow:
                     db.commit()
                     mode = 5
                     
+                    doo_lowerRateLimitEntry = int(doo_lowerRateLimitEntry)
+                    doo_upperRateLimitEntry = int(doo_upperRateLimitEntry)
+                    doo_fixedAVDelayEntry = int(doo_fixedAVDelayEntry)
+                    doo_atrialPulseWidthEntry = int(doo_atrialPulseWidthEntry)
+                    doo_atrialAmplitudeEntry = float(doo_atrialAmplitudeEntry)
+                    doo_ventricularPulseWidthEntry = int(doo_ventricularPulseWidthEntry)
+                    doo_ventricularAmplitudeEntry = float(doo_ventricularAmplitudeEntry)
+
                     #Binary Representation
-                    serialvar = struct.pack('<BBHHHHHHHdddHHdddHHdHHH', startbyte, 7, mode, doo_lowerRateLimitEntry,doo_upperRateLimitEntry,4,doo_fixedAVDelayEntry,doo_atrialPulseWidthEntry,7,doo_atrialAmplitudeEntry,9,10,doo_ventricularPulseWidthEntry,12,doo_ventricularAmplitudeEntry,14,15,16,17,18,19,20,21)         
+                    serialvar = struct.pack('<BBHHHHHHHdddHHdddHHdHHH', startbyte, 7, mode, doo_lowerRateLimitEntry,doo_upperRateLimitEntry,250,doo_fixedAVDelayEntry,doo_atrialPulseWidthEntry,200,doo_atrialAmplitudeEntry,2,2.4,doo_ventricularPulseWidthEntry,200,doo_ventricularAmplitudeEntry,1.9,2.4,10,8,2.5,20,120,13)         
                     
                     #Send over Serial
                     ser.write(serialvar)
@@ -1699,7 +1710,7 @@ class MainWindow:
                     mode = 6
                     
                     #Binary Representation
-                    serialvar = struct.pack('<BBHHHHHHHdddHHdddHHdHHH', startbyte, 7, mode, aoor_lowerRateLimitEntry,aoor_upperRateLimitEntry,0,0,0,0,aoor_atrialAmplitudeEntry,0,0,aoor_atrialPulseWidthEntry,0,0,0,0,aoor_reactionTimeEntry,aoor_responseFactorEntry,aoor_activityThresholdEntry,aoor_recoveryTimeEntry,aoor_maximumSensorRateEntry,0)
+                    serialvar = struct.pack('<BBHHHHHHHdddHHdddHHdHHH', startbyte, 7, mode, aoor_lowerRateLimitEntry,aoor_upperRateLimitEntry,250,150,5,200,aoor_atrialAmplitudeEntry,2,2.4,aoor_atrialPulseWidthEntry,200,2.5,1.9,2.4,aoor_reactionTimeEntry,aoor_responseFactorEntry,aoor_activityThresholdEntry,aoor_recoveryTimeEntry,aoor_maximumSensorRateEntry,13)
 
                     #Send over Serial
                     ser.write(serialvar)
@@ -1723,7 +1734,7 @@ class MainWindow:
                     mode = 7
                     
                     #Binary Representation
-                    serialvar = struct.pack('<BBHHHHHHHdddHHdddHHdHHH', startbyte, 7, mode,voor_lowerRateLimitEntry,voor_upperRateLimitEntry,0,0,0,0,0,0,0,voor_ventricularPulseWidthEntry,12,voor_ventricularAmplitudeEntry,0,0,voor_reactionTimeEntry,voor_responseFactorEntry,voor_activityThresholdEntry,voor_recoveryTimeEntry,voor_maximumSensorRateEntry,0)
+                    serialvar = struct.pack('<BBHHHHHHHdddHHdddHHdHHH', startbyte, 7, mode,voor_lowerRateLimitEntry,voor_upperRateLimitEntry,250,150,5,200,3.5,2,2.4,voor_ventricularPulseWidthEntry,200,voor_ventricularAmplitudeEntry,2,2.4,voor_reactionTimeEntry,voor_responseFactorEntry,voor_activityThresholdEntry,voor_recoveryTimeEntry,voor_maximumSensorRateEntry,13)
 
                     #Send over Serial
                     ser.write(serialvar)
@@ -1747,21 +1758,8 @@ class MainWindow:
                     mode = 8
                     
                     #Binary Representation
-                    serialvar = struct.pack('<BBHHHHHHHdddHHdddHHdHHH', startbyte, 7, mode, aair_lowerRateLimitEntry,aair_upperRateLimitEntry,aair_PVARPEntry,0,aair_atrialPulseWidthEntry,aair_ARPEntry,aair_atrialAmplitudeEntry,0,aair_atrialSensitivityEntry,0,0,0,0,0,aair_reactionTimeEntry,aair_responseFactorEntry,aair_activityThresholdEntry,aair_reactionTimeEntry,aair_recoveryTimeEntry,aair_maximumSensorRateEntry,0)
+                    serialvar = struct.pack('<BBHHHHHHHdddHHdddHHdHHH', startbyte, 7, mode, aair_lowerRateLimitEntry,aair_upperRateLimitEntry,aair_PVARPEntry,250,aair_atrialPulseWidthEntry,aair_ARPEntry,aair_atrialAmplitudeEntry,2,aair_atrialSensitivityEntry,5,200,2.5,1.9,2.4,aair_reactionTimeEntry,aair_responseFactorEntry,aair_activityThresholdEntry,aair_reactionTimeEntry,aair_recoveryTimeEntry,aair_maximumSensorRateEntry,13)
 
-                    # , 
-                    # , 
-                    # , 
-                    # , 
-                    # , 
-                    # , 
-                    # , 
-                    # , 
-                    # , 
-                    # , 
-                    # , 
-                    # 
-                    
                     #Send over Serial
                     ser.write(serialvar)
                     
@@ -1784,7 +1782,7 @@ class MainWindow:
                     mode = 9
                     
                     #Binary Representation
-                    serialvar = struct.pack('<BBHHHHHHHdddHHdddHHdHHH', startbyte, 7, mode, vvir_lowerRateLimitEntry,vvir_upperRateLimitEntry,4,5,6,7,8,9,10,vvir_ventricularPulseWidthEntry,vvir_VRPEntry,vvir_ventricularAmplitudeEntry,14,vvir_ventricularSensitivityEntry,vvir_reactionTimeEntry,vvir_responseFactorEntry,vvir_activityThresholdEntry,vvir_recoveryTimeEntry,vvir_maximumSensorRateEntry,21)
+                    serialvar = struct.pack('<BBHHHHHHHdddHHdddHHdHHH', startbyte, 7, mode, vvir_lowerRateLimitEntry,vvir_upperRateLimitEntry,250,150,5,200,3.5,2,2.4,vvir_ventricularPulseWidthEntry,vvir_VRPEntry,vvir_ventricularAmplitudeEntry,1.9,vvir_ventricularSensitivityEntry,vvir_reactionTimeEntry,vvir_responseFactorEntry,vvir_activityThresholdEntry,vvir_recoveryTimeEntry,vvir_maximumSensorRateEntry,13)
                     
                     #Send over Serial
                     ser.write(serialvar)
@@ -1808,7 +1806,7 @@ class MainWindow:
                     mode = 10
                     
                     #Binary Representation
-                    serialvar = struct.pack('<BBHHHHHHHdddHHdddHHdHHH', startbyte, 7, mode, door_lowerRateLimitEntry,door_upperRateLimitEntry,4,door_fixedAVDelayEntry,door_atrialPulseWidthEntry,7,door_atrialAmplitudeEntry    ,9,10,door_ventricularPulseWidthEntry,12,door_ventricularAmplitudeEntry,14,15,door_reactionTimeEntry,door_responseFactorEntry,door_activityThresholdEntry,door_recoveryTimeEntry,door_maximumSensorRateEntry,21)
+                    serialvar = struct.pack('<BBHHHHHHHdddHHdddHHdHHH', startbyte, 7, mode, door_lowerRateLimitEntry,door_upperRateLimitEntry,250,door_fixedAVDelayEntry,door_atrialPulseWidthEntry,200,door_atrialAmplitudeEntry,2,2.4,door_ventricularPulseWidthEntry,200,door_ventricularAmplitudeEntry,1.9,2.4,door_reactionTimeEntry,door_responseFactorEntry,door_activityThresholdEntry,door_recoveryTimeEntry,door_maximumSensorRateEntry,13)
                     
                     #Send over Serial
                     ser.write(serialvar)
@@ -2951,9 +2949,14 @@ class MainWindow:
             temp = self.aoorActivityThresholdEntry.get()
             #Try/access to sanitize user input and ask for confirmation if there are no errors
             try:
-                str(temp)
-                if(str(temp) != "V-Low" and str(temp) != "Low" and str(temp) != "Med-Low" and str(temp) != "Med" and str(temp) != "Med-High" and str(temp) != "High" and str(temp) != "V-High"):
-                    messagebox.showinfo("ERROR","The range is between V-Low and V-High")
+                float(temp)
+                if (temp == '' or float(temp)<0):
+                    messagebox.showinfo("ERROR","Please enter a valid value")
+                    pass
+
+                #Ensure value is in limited range
+                elif(float(temp) < 1 or float(temp) > 20):
+                    messagebox.showinfo("ERROR","The range is between 1 and 20")
                     pass
 
                 #If everything is good update current value
@@ -3210,9 +3213,14 @@ class MainWindow:
             temp = self.voorActivityThresholdEntry.get()
             #Try/access to sanitize user input and ask for confirmation if there are no errors
             try:
-                str(temp)
-                if(str(temp) != "V-Low" and str(temp) != "Low" and str(temp) != "Med-Low" and str(temp) != "Med" and str(temp) != "Med-High" and str(temp) != "High" and str(temp) != "V-High"):
-                    messagebox.showinfo("ERROR","The range is between V-Low and V-High")
+                float(temp)
+                if (temp == '' or float(temp)<0):
+                    messagebox.showinfo("ERROR","Please enter a valid value")
+                    pass
+
+                #Ensure value is in limited range
+                elif(float(temp) < 1 or float(temp) > 20):
+                    messagebox.showinfo("ERROR","The range is between 1 and 20")
                     pass
 
                 #If everything is good update current value
@@ -3602,9 +3610,14 @@ class MainWindow:
             temp = self.aairActivityThresholdEntry.get()
             #Try/access to sanitize user input and ask for confirmation if there are no errors
             try:
-                str(temp)
-                if(str(temp) != "V-Low" and str(temp) != "Low" and str(temp) != "Med-Low" and str(temp) != "Med" and str(temp) != "Med-High" and str(temp) != "High" and str(temp) != "V-High"):
-                    messagebox.showinfo("ERROR","The range is between V-Low and V-High")
+                float(temp)
+                if (temp == '' or float(temp)<0):
+                    messagebox.showinfo("ERROR","Please enter a valid value")
+                    pass
+
+                #Ensure value is in limited range
+                elif(float(temp) < 1 or float(temp) > 20):
+                    messagebox.showinfo("ERROR","The range is between 1 and 20")
                     pass
 
                 #If everything is good update current value
@@ -3968,9 +3981,14 @@ class MainWindow:
             temp = self.vvirActivityThresholdEntry.get()
             #Try/access to sanitize user input and ask for confirmation if there are no errors
             try:
-                str(temp)
-                if(str(temp) != "V-Low" and str(temp) != "Low" and str(temp) != "Med-Low" and str(temp) != "Med" and str(temp) != "Med-High" and str(temp) != "High" and str(temp) != "V-High"):
-                    messagebox.showinfo("ERROR","The range is between V-Low and V-High")
+                float(temp)
+                if (temp == '' or float(temp)<0):
+                    messagebox.showinfo("ERROR","Please enter a valid value")
+                    pass
+
+                #Ensure value is in limited range
+                elif(float(temp) < 1 or float(temp) > 20):
+                    messagebox.showinfo("ERROR","The range is between 1 and 20")
                     pass
 
                 #If everything is good update current value
@@ -4310,9 +4328,14 @@ class MainWindow:
             temp = self.doorActivityThresholdEntry.get()
             #Try/access to sanitize user input and ask for confirmation if there are no errors
             try:
-                str(temp)
-                if(str(temp) != "V-Low" and str(temp) != "Low" and str(temp) != "Med-Low" and str(temp) != "Med" and str(temp) != "Med-High" and str(temp) != "High" and str(temp) != "V-High"):
-                    messagebox.showinfo("ERROR","The range is between V-Low and V-High")
+                float(temp)
+                if (temp == '' or float(temp)<0):
+                    messagebox.showinfo("ERROR","Please enter a valid value")
+                    pass
+
+                #Ensure value is in limited range
+                elif(float(temp) < 1 or float(temp) > 20):
+                    messagebox.showinfo("ERROR","The range is between 1 and 20")
                     pass
 
                 #If everything is good update current value
