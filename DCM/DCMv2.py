@@ -18,7 +18,6 @@ portName = "COM6" #Change to our port
 status = ''
 
 
-
 #Creating sqlite3 database
 db = sqlite3.connect("DCM.sqlite", detect_types= sqlite3.PARSE_DECLTYPES, check_same_thread=False)
 
@@ -31,7 +30,6 @@ currentuser = ''
 #State 1
 mode = 0
 startbyte = 69
-serialtype = 0
 serialvar = ''
 
 #Initializing all global variables with "0"
@@ -1516,7 +1514,6 @@ class MainWindow:
         #State 1
         global mode
         global startbyte
-        global serialtype
         global serialvar
 
         #Start Serial Component
@@ -1550,6 +1547,7 @@ class MainWindow:
                     serialvar = struct.pack('<BBHHHHHHHdddHHdddHHdHHH', startbyte,21,mode, aoo_lowerRateLimitEntry,aoo_upperRateLimitEntry, 250, 150, aoo_atrialPulseWidthEntry, 200, aoo_atrialAmplitudeEntry, 2, 2.4, 5, 200, 2.5, 2, 2.4, 10, 8, 2.5, 20, 120,0)
                     ser.write(serialvar)
                 
+                    #Echo Paramters Back To Ensure Connectivity
                     echoVarUP = struct.unpack('<HHHHHHHdddHHdddHHdHHHdd', ser.read(100))
                     checkList = [mode, aoo_lowerRateLimitEntry,aoo_upperRateLimitEntry, 250, 150, aoo_atrialPulseWidthEntry, 200, aoo_atrialAmplitudeEntry, 2, 2.4, 5, 200, 2.5, 2, 2.4, 10, 8, 2.5, 20, 120,0]
                     error = 0
@@ -1576,9 +1574,6 @@ class MainWindow:
                         db.execute("UPDATE "+currentuser+" SET userlog = ?", (userlog, ))
                         db.commit()
                         
-
-
-              
               
             elif (value == "vooConfirm"):
                 if messagebox.askyesno("CONFIRMATION", "Upload these changes?"):
@@ -1601,6 +1596,7 @@ class MainWindow:
                     serialvar = struct.pack('<BBHHHHHHHdddHHdddHHdHHH', startbyte,21,mode, voo_lowerRateLimitEntry,voo_upperRateLimitEntry, 250,150,5,200,3.5,2,2.4,voo_ventricularPulseWidthEntry,200,voo_ventricularAmplitudeEntry, 1.9, 2.4, 10, 8, 2.5, 20, 120, 0)
                     ser.write(serialvar)
 
+                    #Echo Paramters Back To Ensure Connectivity
                     echoVarUP = struct.unpack('<HHHHHHHdddHHdddHHdHHHdd', ser.read(100))
                     checkList = [mode, voo_lowerRateLimitEntry,voo_upperRateLimitEntry, 250,150,5,200,3.5,2,2.4,voo_ventricularPulseWidthEntry,200,voo_ventricularAmplitudeEntry, 1.9, 2.4, 10, 8, 2.5, 20, 120, 0]
                     error = 0
@@ -1650,6 +1646,7 @@ class MainWindow:
                     serialvar = struct.pack('<BBHHHHHHHdddHHdddHHdHHH',startbyte, 21, mode,aai_lowerRateLimitEntry,aai_upperRateLimitEntry,aai_PVARPEntry,150,aai_atrialPulseWidthEntry,aai_ARPEntry,aai_atrialAmplitudeEntry, 2, aai_atrialSensitivityEntry,5,200,2.5,1.9,2.4,10,8,2.5,20,120,0)
                     ser.write(serialvar)
                 
+                    #Echo Paramters Back To Ensure Connectivity
                     echoVarUP = struct.unpack('<HHHHHHHdddHHdddHHdHHHdd', ser.read(100))
                     checkList = [mode,aai_lowerRateLimitEntry,aai_upperRateLimitEntry,aai_PVARPEntry,150,aai_atrialPulseWidthEntry,aai_ARPEntry,aai_atrialAmplitudeEntry, 2, aai_atrialSensitivityEntry,5,200,2.5,1.9,2.4,10,8,2.5,20,120,0]
                     error = 0
@@ -1700,6 +1697,7 @@ class MainWindow:
                     serialvar = struct.pack('<BBHHHHHHHdddHHdddHHdHHH',startbyte, 21, mode, vvi_lowerRateLimitEntry, vvi_upperRateLimitEntry, 250,150,5,200,3.5,2,2.4,vvi_ventricularPulseWidthEntry,vvi_VRPEntry,vvi_ventricularAmplitudeEntry,1.9,vvi_ventricularSensitivityEntry,10,8,2.5,20,120,0)
                     ser.write(serialvar)
                 
+                    #Echo Paramters Back To Ensure Connectivity
                     echoVarUP = struct.unpack('<HHHHHHHdddHHdddHHdHHHdd', ser.read(100))
                     checkList = [mode, vvi_lowerRateLimitEntry, vvi_upperRateLimitEntry, 250,150,5,200,3.5,2,2.4,vvi_ventricularPulseWidthEntry,vvi_VRPEntry,vvi_ventricularAmplitudeEntry,1.9,vvi_ventricularSensitivityEntry,10,8,2.5,20,120,0]
                     error = 0
@@ -1751,6 +1749,7 @@ class MainWindow:
                     serialvar = struct.pack('<BBHHHHHHHdddHHdddHHdHHH', startbyte, 21, mode, doo_lowerRateLimitEntry,doo_upperRateLimitEntry,250,doo_fixedAVDelayEntry,doo_atrialPulseWidthEntry,200,doo_atrialAmplitudeEntry,2,2.4,doo_ventricularPulseWidthEntry,200,doo_ventricularAmplitudeEntry,1.9,2.4,10,8,2.5,20,120,0)
                     ser.write(serialvar)
                 
+                    #Echo Paramters Back To Ensure Connectivity
                     echoVarUP = struct.unpack('<HHHHHHHdddHHdddHHdHHHdd', ser.read(100))
                     checkList = [mode, doo_lowerRateLimitEntry,doo_upperRateLimitEntry,250,doo_fixedAVDelayEntry,doo_atrialPulseWidthEntry,200,doo_atrialAmplitudeEntry,2,2.4,doo_ventricularPulseWidthEntry,200,doo_ventricularAmplitudeEntry,1.9,2.4,10,8,2.5,20,120,0]
                     error = 0
@@ -1801,9 +1800,7 @@ class MainWindow:
                     #Send over Serial
                     ser.write(serialvar)
                     
-                    serialvar = struct.pack('<BBHHHHHHHdddHHdddHHdHHH', startbyte, 21, mode, aoor_lowerRateLimitEntry,aoor_upperRateLimitEntry,250,150,5,200,aoor_atrialAmplitudeEntry,2,2.4,aoor_atrialPulseWidthEntry,200,2.5,1.9,2.4,aoor_reactionTimeEntry,aoor_responseFactorEntry,aoor_activityThresholdEntry,aoor_recoveryTimeEntry,aoor_maximumSensorRateEntry,0)
-                    ser.write(serialvar)
-                
+                    #Echo Paramters Back To Ensure Connectivity
                     echoVarUP = struct.unpack('<HHHHHHHdddHHdddHHdHHHdd', ser.read(100))
                     checkList = [mode, aoor_lowerRateLimitEntry,aoor_upperRateLimitEntry,250,150,5,200,aoor_atrialAmplitudeEntry,2,2.4,aoor_atrialPulseWidthEntry,200,2.5,1.9,2.4,aoor_reactionTimeEntry,aoor_responseFactorEntry,aoor_activityThresholdEntry,aoor_recoveryTimeEntry,aoor_maximumSensorRateEntry,0]
                     error = 0
@@ -1855,6 +1852,7 @@ class MainWindow:
                     serialvar = struct.pack('<BBHHHHHHHdddHHdddHHdHHH', startbyte, 21, mode,voor_lowerRateLimitEntry,voor_upperRateLimitEntry,250,150,5,200,3.5,2,2.4,voor_ventricularPulseWidthEntry,200,voor_ventricularAmplitudeEntry,2,2.4,voor_reactionTimeEntry,voor_responseFactorEntry,voor_activityThresholdEntry,voor_recoveryTimeEntry,voor_maximumSensorRateEntry,0)
                     ser.write(serialvar)
                 
+                    #Echo Paramters Back To Ensure Connectivity
                     echoVarUP = struct.unpack('<HHHHHHHdddHHdddHHdHHHdd', ser.read(100))
                     checkList = [mode,voor_lowerRateLimitEntry,voor_upperRateLimitEntry,250,150,5,200,3.5,2,2.4,voor_ventricularPulseWidthEntry,200,voor_ventricularAmplitudeEntry,2,2.4,voor_reactionTimeEntry,voor_responseFactorEntry,voor_activityThresholdEntry,voor_recoveryTimeEntry,voor_maximumSensorRateEntry,0]
                     error = 0
@@ -1912,6 +1910,7 @@ class MainWindow:
                     serialvar = struct.pack('<BBHHHHHHHdddHHdddHHdHHH', startbyte, 21, mode, aair_lowerRateLimitEntry,aair_upperRateLimitEntry,aair_PVARPEntry,250,aair_atrialPulseWidthEntry,aair_ARPEntry,aair_atrialAmplitudeEntry,2,aair_atrialSensitivityEntry,5,200,2.5,1.9,2.4,aair_reactionTimeEntry,aair_responseFactorEntry,aair_activityThresholdEntry, aair_recoveryTimeEntry,aair_maximumSensorRateEntry,0)
                     ser.write(serialvar)
                 
+                    #Echo Paramters Back To Ensure Connectivity
                     echoVarUP = struct.unpack('<HHHHHHHdddHHdddHHdHHHdd', ser.read(100))
                     checkList = [mode, aair_lowerRateLimitEntry,aair_upperRateLimitEntry,aair_PVARPEntry,250,aair_atrialPulseWidthEntry,aair_ARPEntry,aair_atrialAmplitudeEntry,2,aair_atrialSensitivityEntry,5,200,2.5,1.9,2.4,aair_reactionTimeEntry,aair_responseFactorEntry,aair_activityThresholdEntry, aair_recoveryTimeEntry,aair_maximumSensorRateEntry,0]
                     error = 0
@@ -1968,6 +1967,7 @@ class MainWindow:
                     serialvar = struct.pack('<BBHHHHHHHdddHHdddHHdHHH', startbyte, 21, mode, vvir_lowerRateLimitEntry,vvir_upperRateLimitEntry,250,150,5,200,3.5,2,2.4,vvir_ventricularPulseWidthEntry,vvir_VRPEntry,vvir_ventricularAmplitudeEntry,1.9,vvir_ventricularSensitivityEntry,vvir_reactionTimeEntry,vvir_responseFactorEntry,vvir_activityThresholdEntry,vvir_recoveryTimeEntry,vvir_maximumSensorRateEntry,0)
                     ser.write(serialvar)
                 
+                    #Echo Paramters Back To Ensure Connectivity
                     echoVarUP = struct.unpack('<HHHHHHHdddHHdddHHdHHHdd', ser.read(100))
                     checkList = [mode, vvir_lowerRateLimitEntry,vvir_upperRateLimitEntry,250,150,5,200,3.5,2,2.4,vvir_ventricularPulseWidthEntry,vvir_VRPEntry,vvir_ventricularAmplitudeEntry,1.9,vvir_ventricularSensitivityEntry,vvir_reactionTimeEntry,vvir_responseFactorEntry,vvir_activityThresholdEntry,vvir_recoveryTimeEntry,vvir_maximumSensorRateEntry,0]
                     error = 0
@@ -2023,6 +2023,7 @@ class MainWindow:
                     serialvar = struct.pack('<BBHHHHHHHdddHHdddHHdHHH', startbyte, 21, mode, door_lowerRateLimitEntry,door_upperRateLimitEntry,250,door_fixedAVDelayEntry,door_atrialPulseWidthEntry,200,door_atrialAmplitudeEntry,2,2.4,door_ventricularPulseWidthEntry,200,door_ventricularAmplitudeEntry,1.9,2.4,door_reactionTimeEntry,door_responseFactorEntry,door_activityThresholdEntry,door_recoveryTimeEntry,door_maximumSensorRateEntry,0)
                     ser.write(serialvar)
                 
+                    #Echo Paramters Back To Ensure Connectivity
                     echoVarUP = struct.unpack('<HHHHHHHdddHHdddHHdHHHdd', ser.read(100))
                     checkList = [mode, door_lowerRateLimitEntry,door_upperRateLimitEntry,250,door_fixedAVDelayEntry,door_atrialPulseWidthEntry,200,door_atrialAmplitudeEntry,2,2.4,door_ventricularPulseWidthEntry,200,door_ventricularAmplitudeEntry,1.9,2.4,door_reactionTimeEntry,door_responseFactorEntry,door_activityThresholdEntry,door_recoveryTimeEntry,door_maximumSensorRateEntry,0]
                     error = 0
@@ -2049,11 +2050,8 @@ class MainWindow:
                         db.execute("UPDATE "+currentuser+" SET userlog = ?", (userlog, ))
                         db.commit()
                 
-            #print("Point 4")
-            #time.sleep(1)
-            #print("Point 5")
+            #Close Serial
             ser.close()
-            #print("Point 6")
             print("Serial Port Closed")
 
         except Exception as e: print(e)
