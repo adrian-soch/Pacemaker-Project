@@ -4700,13 +4700,13 @@ def test():
     for cfg in dev:
         if (cfg.idVendor == 4966):
             var = cfg.idVendor
-    return var
+    return str(var)
 
 def run():
     global status
     while(1):
         if (len(test()) > 0):
-            status = test()
+            status = "Pacemaker is Connected"
         else:
             status = "Not Connected"
         print(status)
@@ -4723,6 +4723,6 @@ def main():
 if __name__ == '__main__':
     
     #Run USB Connected
-    #Thread(target = run).start()
+    Thread(target = run).start()
 
     Thread(target = main).start()
