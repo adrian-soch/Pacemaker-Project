@@ -1557,9 +1557,9 @@ class MainWindow:
                             error = 1
                             break
                     if(error):
-                        messagebox.showinfo("Error", "There was an issue updating values")
+                        messagebox.showinfo("Error", "There was an issue updating values (e.g Board Is Not Connected)")
                     else:
-                        messagebox.showinfo("DONE", "Success")
+                        messagebox.showinfo("DONE", "Success - Board Is Connected")
                         userlog = "AOO Was Uploaded"
                         self.aooLog.config(text= userlog)
                         self.vooLog.config(text= userlog)
@@ -1606,9 +1606,9 @@ class MainWindow:
                             error = 1
                             break
                     if(error):
-                        messagebox.showinfo("Error", "There was an issue updating values")
+                        messagebox.showinfo("Error", "There was an issue updating values (e.g Board Is Not Connected)")
                     else:
-                        messagebox.showinfo("DONE", "Success")
+                        messagebox.showinfo("DONE", "Success - Board Is Connected")
                         userlog = "VOO Was Uploaded"
                         self.aooLog.config(text= userlog)
                         self.vooLog.config(text= userlog)
@@ -1656,9 +1656,9 @@ class MainWindow:
                             error = 1
                             break
                     if(error):
-                        messagebox.showinfo("Error", "There was an issue updating values")
+                        messagebox.showinfo("Error", "There was an issue updating values (e.g Board Is Not Connected)")
                     else:
-                        messagebox.showinfo("DONE", "Success")
+                        messagebox.showinfo("DONE", "Success - Board Is Connected")
                         userlog = "AAI Was Uploaded"
                         self.aooLog.config(text= userlog)
                         self.vooLog.config(text= userlog)
@@ -1707,9 +1707,9 @@ class MainWindow:
                             error = 1
                             break
                     if(error):
-                        messagebox.showinfo("Error", "There was an issue updating values")
+                        messagebox.showinfo("Error", "There was an issue updating values (e.g Board Is Not Connected)")
                     else:
-                        messagebox.showinfo("DONE", "Success")
+                        messagebox.showinfo("DONE", "Success - Board Is Connected")
                         userlog = "VVI Was Uploaded"
                         self.aooLog.config(text= userlog)
                         self.vooLog.config(text= userlog)
@@ -1759,9 +1759,9 @@ class MainWindow:
                             error = 1
                             break
                     if(error):
-                        messagebox.showinfo("Error", "There was an issue updating values")
+                        messagebox.showinfo("Error", "There was an issue updating values (e.g Board Is Not Connected)")
                     else:
-                        messagebox.showinfo("DONE", "Success")
+                        messagebox.showinfo("DONE", "Success - Board Is Connected")
                         userlog = "DOO Was Uploaded"
                         self.aooLog.config(text= userlog)
                         self.vooLog.config(text= userlog)
@@ -1779,7 +1779,7 @@ class MainWindow:
 
             elif (value == "aoorConfirm"):
                 if messagebox.askyesno("CONFIRMATION", "Upload these changes?"):
-                    messagebox.showinfo("DONE", "Success")
+                    messagebox.showinfo("DONE", "Success - Board Is Connected")
 
                     mode = 6
 
@@ -1810,7 +1810,7 @@ class MainWindow:
                             error = 1
                             break
                     if(error):
-                        messagebox.showinfo("Error", "There was an issue updating values")
+                        messagebox.showinfo("Error", "There was an issue updating values (e.g Board Is Not Connected)")
                     else:
                         userlog = "AOOR Was Uploaded"
                         self.aooLog.config(text= userlog)
@@ -1862,9 +1862,9 @@ class MainWindow:
                             error = 1
                             break
                     if(error):
-                        messagebox.showinfo("Error", "There was an issue updating values")
+                        messagebox.showinfo("Error", "There was an issue updating values (e.g Board Is Not Connected)")
                     else:
-                        messagebox.showinfo("DONE", "Success")
+                        messagebox.showinfo("DONE", "Success - Board Is Connected")
                         userlog = "VOOR Was Uploaded"
                         self.aooLog.config(text= userlog)
                         self.vooLog.config(text= userlog)
@@ -1920,9 +1920,9 @@ class MainWindow:
                             error = 1
                             break
                     if(error):
-                        messagebox.showinfo("Error", "There was an issue updating values")
+                        messagebox.showinfo("Error", "There was an issue updating values (e.g Board Is Not Connected)")
                     else:
-                        messagebox.showinfo("DONE", "Success")
+                        messagebox.showinfo("DONE", "Success - Board Is Connected")
                         userlog = "AAIR Was Uploaded"
                         self.aooLog.config(text= userlog)
                         self.vooLog.config(text= userlog)
@@ -1977,9 +1977,9 @@ class MainWindow:
                             error = 1
                             break
                     if(error):
-                        messagebox.showinfo("Error", "There was an issue updating values")
+                        messagebox.showinfo("Error", "There was an issue updating values (e.g Board Is Not Connected)")
                     else:
-                        messagebox.showinfo("DONE", "Success")
+                        messagebox.showinfo("DONE", "Success - Board Is Connected")
                         userlog = "VVIR Was Uploaded"
                         self.aooLog.config(text= userlog)
                         self.vooLog.config(text= userlog)
@@ -2033,9 +2033,9 @@ class MainWindow:
                             error = 1
                             break
                     if(error):
-                        messagebox.showinfo("Error", "There was an issue updating values")
+                        messagebox.showinfo("Error", "There was an issue updating values (e.g Board Is Not Connected)")
                     else:
-                        messagebox.showinfo("DONE", "Success")
+                        messagebox.showinfo("DONE", "Success - Board Is Connected")
                         userlog = "DOOR Was Uploaded"
                         self.aooLog.config(text= userlog)
                         self.vooLog.config(text= userlog)
@@ -4700,13 +4700,13 @@ def test():
     for cfg in dev:
         if (cfg.idVendor == 4966):
             var = cfg.idVendor
-    return var
+    return str(var)
 
 def run():
     global status
     while(1):
         if (len(test()) > 0):
-            status = test()
+            status = "Pacemaker is Connected"
         else:
             status = "Not Connected"
         print(status)
@@ -4723,6 +4723,6 @@ def main():
 if __name__ == '__main__':
     
     #Run USB Connected
-    #Thread(target = run).start()
+    Thread(target = run).start()
 
     Thread(target = main).start()
