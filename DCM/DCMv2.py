@@ -4705,6 +4705,7 @@ def test():
 def run():
     global status
     while(1):
+        time.sleep(0.5)
         if (len(test()) > 0):
             status = "Pacemaker is Connected"
         else:
